@@ -59,5 +59,6 @@ class VectorAssetResponse(BaseModel):
     vector_type: str
     feature_count: int
     crs: str
+    native_crs: Optional[str] = "EPSG:32645"
     geojson: Dict[str, Any]
 

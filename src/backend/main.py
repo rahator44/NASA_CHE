@@ -6,6 +6,7 @@ Provides high-throughput, structured scientific data services for the Jamuna Riv
 flood-change detection, riverbank migration, and explainable AI application.
 """
 
+import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,7 +14,9 @@ from fastapi.responses import JSONResponse
 from src.backend.config import settings
 from src.backend.database.database import init_db
 from src.backend.api.v1.router import api_v1_router
-from src.backend.api.v1.endpoints.system import router as system_router
+from src.backend.schemas.common import HealthResponse
+
+logger = logging.getLogger("src.backend.main")
 
 
 @asynccontextmanager
@@ -48,21 +51,39 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global error handler
+
+# Global sanitized error handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
+    logger.error(
+        "Unhandled server error processing %s %s: %s",
+        request.method,
+        request.url.path,
+        exc,
+        exc_info=True,
+    )
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={
             "error": "InternalServerError",
-            "detail": str(exc),
+            "detail": "An internal server error occurred while processing the request.",
             "code": 500,
             "path": str(request.url.path),
         },
     )
 
+
 # Root-level health endpoint
-app.include_router(system_router)
+@app.get("/health", response_model=HealthResponse, tags=["System"])
+def root_health():
+    """Root health check endpoint for the Earth Pulse API."""
+    return HealthResponse(
+        status="healthy",
+        service="EarthPulse-SAR Scientific API",
+        version=settings.PROJECT_VERSION,
+        study_area="Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)",
+    )
+
 
 # Versioned API routes under /api/v1
 app.include_router(api_v1_router, prefix=settings.API_V1_STR)
@@ -71,4 +92,3 @@ app.include_router(api_v1_router, prefix=settings.API_V1_STR)
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("src.backend.main:app", host="127.0.0.1", port=8000, reload=False)
-

@@ -29,5 +29,8 @@ def get_report(report_id: str):
 @router.get("/regions/{region_id}/statistics", response_model=RegionStatisticsResponse, tags=["Reports"])
 def get_region_statistics(region_id: str):
     """Retrieves high-level aggregated statistics combining flood areas, riverbank displacement, and ML metrics."""
-    return ReportService.get_region_statistics(region_id)
+    try:
+        return ReportService.get_region_statistics(region_id)
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=f"Statistics unavailable for region '{region_id}': {e}")
 

@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 from src.backend.config import settings
+from src.backend import contracts
 
 REPORT_CATALOG: Dict[str, Dict[str, str]] = {
     "phase1_alignment": {
@@ -159,28 +160,39 @@ class ReportService:
 
     @staticmethod
     def get_region_statistics(region_id: str) -> Dict[str, Any]:
+        if region_id != contracts.STUDY_AREA_ID:
+            raise ValueError(
+                f"Region '{region_id}' not found or data not available. "
+                f"Registered study areas: ['{contracts.STUDY_AREA_ID}']"
+            )
+
         return {
             "region_id": region_id,
-            "summary_timestamp": "2026-11-04T00:00:00Z",
+            "summary_timestamp": "2026-11-05T00:00:00Z",
             "flood_statistics": {
-                "pre_monsoon_water_ha": 8733.20,
-                "monsoon_crest_water_ha": 15185.44,
-                "net_water_expansion_ha": 5814.32,
-                "persistent_water_ha": 8719.12,
-                "newly_inundated_candidate_ha": 6452.24,
-                "receded_water_ha": 14.08,
+                "pre_monsoon_water_ha": contracts.VALID_JUNE_WATER_HA,
+                "monsoon_crest_water_ha": contracts.VALID_JULY_WATER_HA,
+                "net_water_expansion_ha": contracts.NET_VALID_DOMAIN_CHANGE_HA,
+                "persistent_water_ha": contracts.PERSISTENT_WATER_HA,
+                "newly_inundated_candidate_ha": contracts.NEWLY_INUNDATED_CANDIDATE_HA,
+                "receded_water_ha": contracts.RECEDED_WATER_HA,
+                "whole_epoch_unmasked_delta_ha": contracts.WHOLE_EPOCH_UNMASKED_DELTA_HA,
+                "asymmetric_exclusions_gap_ha": contracts.ASYMMETRIC_EXCLUSIONS_GAP_HA,
             },
             "riverbank_statistics": {
-                "mean_west_displacement_m": 130.00,
-                "mean_east_displacement_m": 160.66,
-                "mean_channel_width_change_m": 290.66,
+                "mean_west_displacement_m": round(contracts.DISPLACEMENT_EMPIRICAL_STATS["west_bank"]["mean_m"], 2),
+                "mean_east_displacement_m": round(contracts.DISPLACEMENT_EMPIRICAL_STATS["east_bank"]["mean_m"], 2),
+                "mean_channel_width_change_m": round(contracts.DISPLACEMENT_EMPIRICAL_STATS["channel_width"]["mean_m"], 2),
                 "detection_threshold_range_m": "35-85m",
-                "audited_valid_transects": 122,
+                "audited_valid_transects": contracts.VALID_LOCAL_MIGRATION_COUNT,
+                "total_evaluated_transects": contracts.TOTAL_EVALUATED_TRANSECTS,
+                "outside_valid_transects": contracts.OUTSIDE_VALID_LOCAL_COUNT,
             },
             "model_statistics": {
-                "model_identifier": "phase7a_rf_jamuna_v1",
-                "model_status": "RETAINED_AS_PROBABILITY_LAYER",
-                "optimal_threshold": 0.35,
+                "model_identifier": contracts.MODEL_ID_JAMUNA_V1,
+                "model_status": contracts.MODEL_STATUS,
+                "optimal_threshold": contracts.MODEL_DECISION_THRESHOLD,
+                "test_roc_auc": contracts.MODEL_TEST_ROC_AUC,
                 "test_f1_score": 0.6026,
                 "test_recall": 0.9214,
                 "test_precision": 0.4477,

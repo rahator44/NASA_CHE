@@ -1,0 +1,74 @@
+{
+  "phase": "Phase 8.4",
+  "project_name": "EarthPulse-SAR",
+  "study_area": "Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)",
+  "audit_date": "2026-11-05T23:55:00Z",
+  "purpose": "Source-backed backend data contract correction, statistical alignment, and regression testing following independent code review.",
+  "invariants_verified": {
+    "raw_archives_preserved": true,
+    "model_artifact_sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+    "model_artifact_path": "models/phase7a/phase7a_random_forest_model.joblib",
+    "model_status": "RETAINED_AS_PROBABILITY_LAYER",
+    "test_baseline": "330 passed, 0 failed, 0 warnings"
+  },
+  "authoritative_corrections": {
+    "flood_transitions_common_valid_domain": {
+      "persistent_water_cells": 216595,
+      "persistent_water_ha": 8663.80,
+      "newly_inundated_candidate_cells": 146992,
+      "newly_inundated_candidate_ha": 5879.68,
+      "receded_water_cells": 1634,
+      "receded_water_ha": 65.36,
+      "net_valid_domain_change_ha": 5814.32,
+      "whole_epoch_unmasked_delta_ha": 6452.24,
+      "asymmetric_exclusions_gap_ha": 637.92
+    },
+    "riverbank_transect_audit": {
+      "total_evaluated_transects": 154,
+      "valid_local_migration_count": 122,
+      "outside_valid_local_count": 32,
+      "ambiguous_edge_effect_count": 23,
+      "anabranch_activation_count": 5,
+      "major_channel_expansion_count": 4,
+      "transect_field_name": "chainage_m",
+      "spatial_bootstrap_95ci_median_west_m": [20.0, 80.0],
+      "spatial_bootstrap_95ci_median_east_m": [20.0, 150.0],
+      "spatial_bootstrap_95ci_median_width_m": [120.0, 320.0],
+      "provisional_detection_scenarios_m": {
+        "cut_bank_minimum_resolvable_m": 35.0,
+        "nominal_unconsolidated_bank_m": 60.0,
+        "char_fringe_submergence_m": 85.0
+      }
+    },
+    "phase6_1_general_erosion_zones": {
+      "zone_2_external_bank_expansion_ha": 2194.00,
+      "zone_3_internal_char_submergence_ha": 2321.00,
+      "zone_4_apparent_contraction_accretion_ha": 41.48,
+      "zone_6_disconnected_floodplain_ha": 1364.68
+    },
+    "raster_service": {
+      "channel_change_zones_palette_classes": 12,
+      "dynamic_crs_extraction_verified": true,
+      "nodata_transparent_alpha_verified": true,
+      "tile_rendering_server_logging": true
+    },
+    "vector_service": {
+      "reprojected_crs": "EPSG:4326",
+      "native_crs_preserved": "EPSG:32645"
+    },
+    "model_diagnostics": {
+      "calibration_status": "UNCALIBRATED",
+      "test_roc_auc": 0.6810,
+      "optimal_threshold": 0.35,
+      "decision_margin_interpretation": "Distance from uncalibrated symmetric classification boundary 0.5, distinct from operational 0.35 threshold."
+    },
+    "system_and_jobs": {
+      "tuple_import_fixed": true,
+      "streaming_sha256_dataset_verification": true,
+      "missing_file_marks_checksum_unverified": true,
+      "global_exception_handler_sanitized": true,
+      "clean_route_mounts": ["/health", "/api/v1/system/status", "/api/v1/system/capabilities"]
+    }
+  },
+  "issue_register_path": "data/outputs/phase8_4/issue_resolution_register.csv"
+}

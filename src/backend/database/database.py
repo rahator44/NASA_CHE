@@ -128,7 +128,7 @@ def _seed_precomputed_analysis_runs(conn: sqlite3.Connection) -> None:
             "2024-11-02T13:46:40Z",
             json.dumps({"methodology": "Dual-AND Otsu with Common-Valid-Domain accounting"}),
             json.dumps({"transitions_raster": "data/processed/phase5/phase5_flood_transitions.tif", "clusters_geojson": "data/outputs/phase5/maps/phase5_major_inundation_clusters.geojson"}),
-            json.dumps({"persistent_water_ha": 8719.12, "newly_inundated_ha": 6452.24, "receded_water_ha": 14.08, "net_change_ha": 6438.16})
+            json.dumps({"persistent_water_ha": 8663.80, "newly_inundated_ha": 5879.68, "receded_water_ha": 65.36, "net_change_ha": 5814.32, "whole_epoch_delta_ha": 6452.24})
         ),
         (
             "run_phase6_riverbank_migration",
@@ -137,9 +137,9 @@ def _seed_precomputed_analysis_runs(conn: sqlite3.Connection) -> None:
             "COMPLETED",
             "2024-11-02T15:18:00Z",
             "2024-11-02T15:18:45Z",
-            json.dumps({"transect_spacing_m": 200, "total_transects": 175, "valid_transects": 134, "ambiguous_transects": 41}),
+            json.dumps({"transect_spacing_m": 200, "total_transects": 154, "valid_transects": 122, "outside_valid_transects": 32}),
             json.dumps({"transects_geojson": "data/outputs/phase6_1/maps/phase6_1_riverbank_transects.geojson", "zones_raster": "data/processed/phase6_1/phase6_1_channel_change_zones.tif"}),
-            json.dumps({"mean_west_displacement_m": 37.2, "mean_east_displacement_m": 28.4, "mean_width_change_m": 65.6, "detection_range_m": "35-85m"})
+            json.dumps({"mean_west_displacement_m": 126.39, "mean_east_displacement_m": 157.38, "mean_width_change_m": 283.77, "detection_range_m": "35-85m"})
         ),
         (
             "run_phase7a_random_forest",
@@ -150,7 +150,7 @@ def _seed_precomputed_analysis_runs(conn: sqlite3.Connection) -> None:
             "2024-11-03T22:25:10Z",
             json.dumps({"n_estimators": 40, "max_depth": 6, "threshold": 0.35, "status": "RETAINED_AS_PROBABILITY_LAYER"}),
             json.dumps({"model_joblib": "models/phase7a/phase7a_random_forest_model.joblib", "water_prob_july": "data/processed/phase7a/phase7a_july16_water_probability.tif"}),
-            json.dumps({"test_accuracy": 0.5178, "test_recall": 0.9214, "test_precision": 0.4477, "roc_auc": 0.7816})
+            json.dumps({"test_accuracy": 0.5178, "test_recall": 0.9214, "test_precision": 0.4477, "roc_auc": 0.6810})
         ),
         (
             "run_phase7b_explainability",

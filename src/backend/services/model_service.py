@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 import pandas as pd
 from src.backend.config import settings
+from src.backend import contracts
 
 
 class ModelService:
@@ -47,8 +48,11 @@ class ModelService:
                 return m
         return None
 
-    @staticmethod
-    def get_metrics(model_id: str) -> Optional[Dict[str, Any]]:
+    @classmethod
+    def get_metrics(cls, model_id: str) -> Optional[Dict[str, Any]]:
+        if not cls.get_model(model_id):
+            return None
+
         report_path = settings.METADATA_DIR / "phase7a_model_report.json"
         if not report_path.exists():
             return None
@@ -63,12 +67,12 @@ class ModelService:
             "model_id": model_id,
             "evaluation_dataset": "Held-Out Spatial/Temporal Test Split (N=6,124)",
             "total_test_samples": 6124,
-            "decision_threshold": 0.35,
+            "decision_threshold": contracts.MODEL_DECISION_THRESHOLD,
             "accuracy": test_m.get("accuracy", 0.5178),
             "precision": test_m.get("precision", 0.4477),
             "recall": test_m.get("recall", 0.9214),
             "f1_score": test_m.get("f1_score", 0.6026),
-            "roc_auc": test_m.get("roc_auc", 0.6810),
+            "roc_auc": contracts.MODEL_TEST_ROC_AUC,
             "confusion_matrix": {
                 "tp": cm.get("tp", 2239),
                 "tn": cm.get("tn", 932),
@@ -81,8 +85,11 @@ class ModelService:
             },
         }
 
-    @staticmethod
-    def get_features(model_id: str) -> Optional[Dict[str, Any]]:
+    @classmethod
+    def get_features(cls, model_id: str) -> Optional[Dict[str, Any]]:
+        if not cls.get_model(model_id):
+            return None
+
         report_path = settings.METADATA_DIR / "phase7a_model_report.json"
         if not report_path.exists():
             return None
@@ -113,8 +120,11 @@ class ModelService:
             },
         }
 
-    @staticmethod
-    def get_explanations(model_id: str) -> Optional[Dict[str, Any]]:
+    @classmethod
+    def get_explanations(cls, model_id: str) -> Optional[Dict[str, Any]]:
+        if not cls.get_model(model_id):
+            return None
+
         global_csv = settings.OUTPUTS_DIR / "phase7b/shap/phase7b_global_shap_importance.csv"
         grouped_csv = settings.OUTPUTS_DIR / "phase7b/shap/phase7b_grouped_feature_attribution.csv"
         local_csv = settings.OUTPUTS_DIR / "phase7b/local_explanations/phase7b_local_prediction_explanations.csv"
@@ -187,8 +197,11 @@ class ModelService:
             "representative_local_cases": local_cases,
         }
 
-    @staticmethod
-    def get_diagnostics(model_id: str) -> Optional[Dict[str, Any]]:
+    @classmethod
+    def get_diagnostics(cls, model_id: str) -> Optional[Dict[str, Any]]:
+        if not cls.get_model(model_id):
+            return None
+
         calib_csv = settings.OUTPUTS_DIR / "phase7b/diagnostics/phase7b_probability_diagnostics.csv"
         df_cal = pd.read_csv(calib_csv)
         bins_data = df_cal.to_dict(orient="records")
@@ -199,11 +212,7 @@ class ModelService:
             "brier_score": 0.2270,
             "expected_calibration_error": 0.0959,
             "calibration_bins": bins_data,
-            "decision_margin_interpretation": (
-                "The metric |P - 0.5| represents an empirical decision margin (distance to threshold boundary), "
-                "not a calibrated posterior probability of true physical water presence. Leaf purity incentives "
-                "in unpruned Gini trees polarize probability distributions toward extreme values."
-            ),
+            "decision_margin_interpretation": contracts.DECISION_MARGIN_INTERPRETATION,
             "false_positive_analysis": {
                 "total_fp_test_samples": 2762,
                 "june_fp_count": 1918,
@@ -217,9 +226,5 @@ class ModelService:
                     "produces low microwave return mimicking calm open water."
                 ),
             },
-            "epistemological_disclaimer": (
-                "The specular scattering mechanism is a physically supported hypothesis consistent with "
-                "electromagnetic theory, not an in-situ proven causal fact, due to the absence of synchronous "
-                "field dielectric probe measurements during Sentinel-1 overpasses."
-            ),
+            "epistemological_disclaimer": contracts.EPISTEMOLOGICAL_DISCLAIMER,
         }

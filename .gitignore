@@ -71,6 +71,8 @@ logs/
 *.bak
 *.swp
 *.local_backup
+*.pre_phase8_4_backup
+*.backup
 *.db.local*
 
 # Staging directories

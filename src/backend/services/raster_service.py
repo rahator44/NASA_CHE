@@ -5,6 +5,7 @@ NASA Space Apps Challenge 2026: Dancing with the SARs
 
 import io
 import math
+import logging
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 import numpy as np
@@ -12,6 +13,9 @@ from PIL import Image
 from osgeo import gdal, osr
 
 gdal.UseExceptions()
+osr.UseExceptions()
+
+logger = logging.getLogger(__name__)
 
 from src.backend.config import settings
 
@@ -79,16 +83,22 @@ RASTER_CATALOG: Dict[str, Dict[str, Any]] = {
         "relative_path": "data/processed/phase6_1/phase6_1_channel_change_zones.tif",
         "layer_name": "Phase 6.1 Riverbank Channel Change Zones",
         "layer_type": "categorical",
-        "description": "Riverbank change zones: 1=Expansion Candidate, 2=Char Submergence, 3=Contraction, 4=Disconnected Floodplain",
+        "description": "Riverbank change zones: 12-class geomorphic codebook (Classes 0-10, 255)",
         "region_id": "jamuna_sirajganj",
         "analysis_id": "run_phase6_riverbank_migration",
         "palette": {
-            1: [227, 26, 28, 240],     # Expansion (Red)
-            2: [31, 120, 180, 240],    # Char Submergence (Blue)
-            3: [51, 160, 44, 240],     # Contraction (Green)
-            4: [255, 127, 0, 200],    # Floodplain (Orange)
-            0: [0, 0, 0, 0],
-            255: [0, 0, 0, 0],
+            0: [0, 0, 0, 0],          # 0: Persistent Mainland Non-Water (Transparent)
+            1: [8, 48, 107, 240],     # 1: Persistent Channel Water (Deep Navy Blue)
+            2: [227, 26, 28, 240],    # 2: External Bank Expansion / Erosion Candidate (Bright Red)
+            3: [251, 154, 153, 240],  # 3: Internal Char Submergence Candidate (Soft Pink / Coral)
+            4: [51, 160, 44, 240],    # 4: Apparent Channel Contraction / Accretion (Forest Green)
+            5: [178, 223, 138, 200],  # 5: Persistent Internal Char Islands (Pale Olive Green)
+            6: [31, 120, 180, 240],   # 6: Disconnected Floodplain Inundation (Medium Blue)
+            7: [166, 206, 227, 180],  # 7: Indeterminate Noise Floor (Powder Blue)
+            8: [253, 191, 111, 220],  # 8: Persistent Floodplain Water Bodies (Soft Orange)
+            9: [255, 127, 0, 220],    # 9: Receded Floodplain Water (Vivid Orange)
+            10: [255, 255, 153, 220], # 10: Persistent Char Water Depressions (Pale Yellow)
+            255: [0, 0, 0, 0],        # 255: Source NoData / Border (Transparent)
         }
     },
 
@@ -268,6 +278,16 @@ class RasterService:
         w, h = ds.RasterXSize, ds.RasterYSize
         band = ds.GetRasterBand(1)
 
+        sref = ds.GetSpatialRef()
+        crs_str = "EPSG:32645"
+        if sref:
+            code = sref.GetAuthorityCode(None)
+            auth = sref.GetAuthorityName(None) or "EPSG"
+            if code:
+                crs_str = f"{auth}:{code}"
+            else:
+                crs_str = sref.GetName() or "EPSG:32645"
+
         return {
             "asset_id": resolved_id,
             "driver": ds.GetDriver().GetDescription(),
@@ -276,7 +296,7 @@ class RasterService:
             "count": ds.RasterCount,
             "dtype": gdal.GetDataTypeName(band.DataType),
             "nodata": band.GetNoDataValue(),
-            "crs": "EPSG:32645",
+            "crs": crs_str,
             "transform": [float(x) for x in gt],
             "bounds": {
                 "minx": float(gt[0]),
@@ -375,7 +395,8 @@ class RasterService:
             buf = io.BytesIO()
             img.save(buf, format="PNG")
             return buf.getvalue()
-        except Exception:
+        except Exception as e:
+            logger.error("Tile rendering failed for %s at %d/%d/%d: %s", asset_id, z, x, y, e, exc_info=True)
             return blank_png
 
     @staticmethod
@@ -388,9 +409,9 @@ class RasterService:
             for val, color in palette.items():
                 rgba[arr == val] = color
         else:
-            # Continuous rendering
+            # Continuous rendering: ensure NoData sentinel <= -9990.0 and non-finites are masked out (alpha = 0)
             cmap_type = info.get("colormap", "blues")
-            valid = np.isfinite(arr)
+            valid = np.isfinite(arr) & (arr > -9990.0)
 
             if cmap_type == "blues":
                 # Probability [0.0, 1.0]
@@ -410,7 +431,10 @@ class RasterService:
                 rgba[valid, 2] = gray[valid]
                 rgba[valid, 3] = 240
             else:
-                norm = np.clip((arr - np.nanmin(arr)) / (np.nanmax(arr) - np.nanmin(arr) + 1e-6), 0.0, 1.0)
+                valid_vals = arr[valid]
+                min_v = np.nanmin(valid_vals) if len(valid_vals) > 0 else 0.0
+                max_v = np.nanmax(valid_vals) if len(valid_vals) > 0 else 1.0
+                norm = np.clip((arr - min_v) / (max_v - min_v + 1e-6), 0.0, 1.0)
                 gray = (norm * 255).astype(np.uint8)
                 rgba[valid, 0] = gray[valid]
                 rgba[valid, 1] = gray[valid]

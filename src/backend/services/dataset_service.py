@@ -48,6 +48,13 @@ class DatasetService:
             if quality_status and item.get("quality_status", "").lower() != quality_status.lower():
                 continue
 
+            rel_path = item.get("relative_path") or item.get("source_path") or ""
+            full_path = settings.PROJECT_ROOT_DIR / rel_path if rel_path else None
+            file_exists = full_path.exists() if full_path else False
+
+            q_status = item.get("quality_status", "VERIFIED") if file_exists else "FILE_MISSING"
+            chk_verified = bool(item.get("checksum_verified", True)) if file_exists else False
+
             results.append({
                 "dataset_id": item["dataset_id"],
                 "region_id": item.get("region_id", "jamuna_sirajganj"),
@@ -59,11 +66,11 @@ class DatasetService:
                 "polarization": item.get("polarization", "VV+VH"),
                 "spatial_resolution_m": float(item.get("spatial_resolution_m", 20.0)),
                 "crs": item.get("crs", "EPSG:32645"),
-                "quality_status": item.get("quality_status", "VERIFIED"),
-                "checksum_verified": bool(item.get("checksum_verified", True)),
+                "quality_status": q_status,
+                "checksum_verified": chk_verified,
                 "sha256": item.get("sha256"),
                 "file_format": item.get("file_format", "GeoTIFF"),
-                "relative_path": item.get("relative_path") or item.get("source_path", ""),
+                "relative_path": rel_path,
             })
 
         return results
@@ -74,6 +81,13 @@ class DatasetService:
         for item in raw_list:
             did = item.get("dataset_id", "")
             if did == dataset_id or dataset_id in did:
+                rel_path = item.get("relative_path") or item.get("source_path") or ""
+                full_path = settings.PROJECT_ROOT_DIR / rel_path if rel_path else None
+                file_exists = full_path.exists() if full_path else False
+
+                q_status = item.get("quality_status", "VERIFIED") if file_exists else "FILE_MISSING"
+                chk_verified = bool(item.get("checksum_verified", True)) if file_exists else False
+
                 return {
                     "dataset_id": item["dataset_id"],
                     "region_id": item.get("region_id", "jamuna_sirajganj"),
@@ -85,10 +99,10 @@ class DatasetService:
                     "polarization": item.get("polarization", "VV+VH"),
                     "spatial_resolution_m": float(item.get("spatial_resolution_m", 20.0)),
                     "crs": item.get("crs", "EPSG:32645"),
-                    "quality_status": item.get("quality_status", "VERIFIED"),
-                    "checksum_verified": bool(item.get("checksum_verified", True)),
+                    "quality_status": q_status,
+                    "checksum_verified": chk_verified,
                     "sha256": item.get("sha256"),
                     "file_format": item.get("file_format", "GeoTIFF"),
-                    "relative_path": item.get("relative_path") or item.get("source_path", ""),
+                    "relative_path": rel_path,
                 }
         return None

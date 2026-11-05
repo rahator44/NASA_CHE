@@ -24,9 +24,13 @@ class FloodSummaryResponse(BaseModel):
     region_id: str
     methodology: Union[str, Dict[str, Any]]
     pre_monsoon_epoch: EpochWaterArea
-    monsoon_crest_epoch: EpochWaterArea
+    flood_observation_epoch: EpochWaterArea
+    monsoon_crest_epoch: Optional[EpochWaterArea] = None  # Preserved for backward compatibility
     net_candidate_water_change_ha: float
     net_candidate_water_change_km2: float
+    whole_epoch_unmasked_delta_ha: Optional[float] = None
+    whole_epoch_unmasked_delta_km2: Optional[float] = None
+    asymmetric_exclusions_gap_ha: Optional[float] = None
     accounting_note: str
 
 

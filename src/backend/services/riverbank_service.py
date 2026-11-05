@@ -8,54 +8,80 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 import pandas as pd
 from src.backend.config import settings
+from src.backend import contracts
 
 
 class RiverbankService:
     @staticmethod
-    def get_riverbank_summary(region_id: str) -> Dict[str, Any]:
-        report_path = settings.METADATA_DIR / "phase6_2_uncertainty_audit.json"
-        with open(report_path, "r") as f:
-            meta = json.load(f)
+    def _validate_region(region_id: str) -> None:
+        if region_id != contracts.STUDY_AREA_ID:
+            raise ValueError(
+                f"Region '{region_id}' not found or data not available. "
+                f"Authoritative registered study areas: ['{contracts.STUDY_AREA_ID}']"
+            )
+
+    @classmethod
+    def get_riverbank_summary(cls, region_id: str) -> Dict[str, Any]:
+        cls._validate_region(region_id)
 
         return {
             "region_id": region_id,
-            "total_transects_evaluated": 175,
-            "valid_transects_count": 122,
-            "ambiguous_transects_count": 53,
-            "valid_transect_fraction_pct": 69.71,
-            "mean_west_displacement_m": 130.00,
-            "mean_east_displacement_m": 160.66,
-            "mean_channel_width_change_m": 290.66,
+            "total_transects_evaluated": contracts.TOTAL_EVALUATED_TRANSECTS,  # 154
+            "valid_transects_count": contracts.VALID_LOCAL_MIGRATION_COUNT,    # 122
+            "ambiguous_transects_count": contracts.OUTSIDE_VALID_LOCAL_COUNT,  # 32
+            "outside_valid_transects_count": contracts.OUTSIDE_VALID_LOCAL_COUNT,  # 32
+            "valid_transect_fraction_pct": round(
+                contracts.VALID_LOCAL_MIGRATION_COUNT / contracts.TOTAL_EVALUATED_TRANSECTS * 100.0, 2
+            ),
+            "mean_west_displacement_m": round(contracts.DISPLACEMENT_EMPIRICAL_STATS["west_bank"]["mean_m"], 2),
+            "mean_east_displacement_m": round(contracts.DISPLACEMENT_EMPIRICAL_STATS["east_bank"]["mean_m"], 2),
+            "mean_channel_width_change_m": round(contracts.DISPLACEMENT_EMPIRICAL_STATS["channel_width"]["mean_m"], 2),
             "provisional_detection_range_m": "35-85m",
+            "provisional_detection_scenarios_m": contracts.PROVISIONAL_SCENARIO_THRESHOLDS_M,
             "morphological_behavior": "Lateral channel expansion and char submergence under monsoon high-stage discharge",
             "scientific_readiness_status": "PROVISIONAL_MONSOON_FLOOD_STAGE_EFFECT_NOT_LONG_TERM_EROSION",
             "hydrodynamic_caveat": (
-                "Displacements reflect waterline shifts between pre-monsoon low flow (June 10) and monsoon peak "
-                "discharge (July 16). They must not be conflated with permanent subaerial cut-bank erosion rates."
+                "Displacements reflect waterline shifts between pre-monsoon low flow (June 10) and monsoon flood "
+                "observation (July 16). They must not be conflated with permanent subaerial cut-bank erosion rates."
             ),
         }
 
-    @staticmethod
-    def get_transects(region_id: str, limit: int = 200, only_valid: bool = False) -> Dict[str, Any]:
-        csv_path = settings.OUTPUTS_DIR / "phase6/statistics/phase6_transect_displacement_summary.csv"
+    @classmethod
+    def get_transects(cls, region_id: str, limit: int = 200, only_valid: bool = False) -> Dict[str, Any]:
+        cls._validate_region(region_id)
+
+        csv_path = settings.OUTPUTS_DIR / "phase6_1/statistics/phase6_1_transect_displacement_audit.csv"
         if not csv_path.exists():
             return {"region_id": region_id, "total_count": 0, "valid_count": 0, "ambiguous_count": 0, "transects": []}
 
         df = pd.read_csv(csv_path)
-        if only_valid and "is_valid" in df.columns:
-            df = df[df["is_valid"] == True]
+        total_eval = len(df)
+        valid_count = int((df["confidence_status"] == "VALID_LOCAL_MIGRATION").sum())
+        outside_count = total_eval - valid_count
+
+        if only_valid:
+            df = df[df["confidence_status"] == "VALID_LOCAL_MIGRATION"]
 
         items = []
         for _, row in df.head(limit).iterrows():
-            is_val = bool(row.get("is_valid", True))
+            is_val = (row["confidence_status"] == "VALID_LOCAL_MIGRATION")
+            chainage = float(row["chainage_m"]) if pd.notnull(row.get("chainage_m")) else 0.0
+
+            # Compute origin and terminus coordinates along transect row
+            c_y = float(row.get("center_utm_y", 0.0))
+            rb_x = float(row.get("right_bank_june_x", 0.0)) if pd.notnull(row.get("right_bank_june_x")) else 770000.0
+            lb_x = float(row.get("left_bank_june_x", 0.0)) if pd.notnull(row.get("left_bank_june_x")) else 780000.0
+
             items.append({
                 "transect_id": int(row.get("transect_id", 0)),
-                "station_m": float(row.get("station_m", 0.0)),
-                "origin_utm": [float(row.get("origin_x", 0.0)), float(row.get("origin_y", 0.0))],
-                "terminus_utm": [float(row.get("terminus_x", 0.0)), float(row.get("terminus_y", 0.0))],
-                "bearing_deg": float(row.get("bearing_deg", 90.0)),
+                "chainage_m": chainage,
+                "station_m": chainage,  # Preserved for backward compatibility
+                "origin_utm": [rb_x, c_y],
+                "terminus_utm": [lb_x, c_y],
+                "bearing_deg": 90.0,
                 "is_valid": is_val,
-                "ambiguity_flag": str(row.get("ambiguity_reason", "")) if not is_val else None,
+                "ambiguity_flag": str(row.get("confidence_status", "")) if not is_val else None,
+                "audit_category": str(row.get("confidence_status", "")),
                 "west_bank_displacement_m": float(row.get("right_bank_displacement_m", 0.0)) if pd.notnull(row.get("right_bank_displacement_m")) else None,
                 "east_bank_displacement_m": float(row.get("left_bank_displacement_m", 0.0)) if pd.notnull(row.get("left_bank_displacement_m")) else None,
                 "channel_width_june_m": float(row.get("channel_width_june_m", 0.0)) if pd.notnull(row.get("channel_width_june_m")) else None,
@@ -66,83 +92,61 @@ class RiverbankService:
         return {
             "region_id": region_id,
             "total_count": len(df),
-            "valid_count": 122,
-            "ambiguous_count": 53,
+            "valid_count": valid_count,
+            "ambiguous_count": outside_count,
+            "outside_valid_count": outside_count,
             "transects": items,
         }
 
-    @staticmethod
-    def get_displacement_stats(region_id: str) -> Dict[str, Any]:
-        csv_path = settings.OUTPUTS_DIR / "phase6_2/statistics/phase6_2_bank_displacement_statistics.csv"
-        df = pd.read_csv(csv_path)
+    @classmethod
+    def get_displacement_stats(cls, region_id: str) -> Dict[str, Any]:
+        cls._validate_region(region_id)
 
-        def _extract(name: str):
-            row = df[df["target_feature"].str.contains(name, case=False, na=False)].iloc[0]
-            return {
-                "mean_m": float(row["mean_displacement_m"]),
-                "std_m": float(row["std_dev_m"]),
-                "median_m": float(row["median_displacement_m"]),
-                "iqr_m": float(row["iqr_m"]),
-                "p10_m": float(row["p10_m"]),
-                "p90_m": float(row["p90_m"]),
-                "min_m": float(row["min_m"]),
-                "max_m": float(row["max_m"]),
-                "bootstrap_ci_95": [float(row["p10_m"]), float(row["p90_m"])],
-            }
+        west = dict(contracts.DISPLACEMENT_EMPIRICAL_STATS["west_bank"])
+        west["bootstrap_ci_95"] = contracts.SPATIAL_BOOTSTRAP_CI_95["median"]["west_bank_ci_m"]
+        west["bootstrap_ci_95_mean"] = contracts.SPATIAL_BOOTSTRAP_CI_95["mean"]["west_bank_ci_m"]
+
+        east = dict(contracts.DISPLACEMENT_EMPIRICAL_STATS["east_bank"])
+        east["bootstrap_ci_95"] = contracts.SPATIAL_BOOTSTRAP_CI_95["median"]["east_bank_ci_m"]
+        east["bootstrap_ci_95_mean"] = contracts.SPATIAL_BOOTSTRAP_CI_95["mean"]["east_bank_ci_m"]
+
+        width = dict(contracts.DISPLACEMENT_EMPIRICAL_STATS["channel_width"])
+        width["bootstrap_ci_95"] = contracts.SPATIAL_BOOTSTRAP_CI_95["median"]["channel_width_ci_m"]
+        width["bootstrap_ci_95_mean"] = contracts.SPATIAL_BOOTSTRAP_CI_95["mean"]["channel_width_ci_m"]
 
         return {
             "region_id": region_id,
-            "west_bank_expansion_stats": _extract("Right Bank"),
-            "east_bank_expansion_stats": _extract("Left Bank"),
-            "net_channel_width_change_stats": _extract("Channel Width"),
-            "detection_threshold_m": 53.92,
+            "west_bank_expansion_stats": west,
+            "east_bank_expansion_stats": east,
+            "net_channel_width_change_stats": width,
+            "detection_threshold_m": 60.0,
+            "provisional_scenario_thresholds_m": contracts.PROVISIONAL_SCENARIO_THRESHOLDS_M,
             "unfiltered_vs_filtered_note": (
-                "Statistics derived from 122 audited valid transects. Confirms P90 displacement values of 440 m "
-                "(West / Mainland) and 400 m (East / Chars). All ambiguous and multithreaded transects excluded."
+                "Statistics derived from 122 audited valid transects. 95% spatial block bootstrap confidence "
+                "intervals capture spatial autocorrelation across the reach: West median CI [20.0, 80.0] m, "
+                "East median CI [20.0, 150.0] m, and Net Channel Width median CI [120.0, 320.0] m. "
+                "P10/P90 are empirical sample percentiles (West P90=440 m, East P90=400 m, Width P90=760 m), "
+                "not bootstrap intervals."
             ),
         }
 
-    @staticmethod
-    def get_erosion_candidates(region_id: str) -> Dict[str, Any]:
+    @classmethod
+    def get_erosion_candidates(cls, region_id: str) -> Dict[str, Any]:
+        cls._validate_region(region_id)
+
         return {
             "region_id": region_id,
-            "candidate_zones": [
-                {
-                    "zone_type": "External Right-Bank Expansion Candidate",
-                    "area_ha": 412.8,
-                    "area_km2": 4.13,
-                    "mean_displacement_m": 130.0,
-                    "geomorphic_classification": "Mainland Riverbank Recession / Inundated Lowland Cut-Bank",
-                    "certainty_level": "MODERATE_STAGE_SENSITIVE",
-                    "description": "Apparent westward retreat along unprotected reaches south of Kazipur.",
-                },
-                {
-                    "zone_type": "Internal Char Margin Submergence",
-                    "area_ha": 2840.4,
-                    "area_km2": 28.40,
-                    "mean_displacement_m": 160.7,
-                    "geomorphic_classification": "Hydrodynamic Inundation of Sandbar Margins",
-                    "certainty_level": "HYDROLOGICAL_FLOOD_STAGE_RESPONSE",
-                    "description": "Submergence of low-relief braid bars under monsoon crest flow.",
-                },
-                {
-                    "zone_type": "Apparent Channel Contraction / Accretion",
-                    "area_ha": 18.2,
-                    "area_km2": 0.18,
-                    "mean_displacement_m": -20.0,
-                    "geomorphic_classification": "Local Emergence / Ephemeral Sediment Splays",
-                    "certainty_level": "LOCALIZED_ANOMALY",
-                    "description": "Minor emergent sand splays or mixed-pixel artifacts.",
-                },
-            ],
+            "candidate_zones": contracts.PHASE6_1_GENERAL_ZONES,
             "bre_embankment_influence_note": (
                 "Brahmaputra Right Embankment (BRE) structural influence is documented as an unverified geomorphic "
                 "hypothesis; independent structural stability surveys are required to determine structural retreat."
             ),
         }
 
-    @staticmethod
-    def get_riverbank_uncertainty(region_id: str) -> Dict[str, Any]:
+    @classmethod
+    def get_riverbank_uncertainty(cls, region_id: str) -> Dict[str, Any]:
+        cls._validate_region(region_id)
+
         return {
             "region_id": region_id,
             "quadrature_uncertainty_budget": {
@@ -152,12 +156,12 @@ class RiverbankService:
                 "combined_two_epoch_rms_m": 29.86,
             },
             "total_displacement_uncertainty_m": 29.86,
-            "minimum_resolvable_displacement_m": 53.92,
+            "minimum_resolvable_displacement_m": 35.0,
+            "provisional_scenario_thresholds_m": contracts.PROVISIONAL_SCENARIO_THRESHOLDS_M,
             "spatial_autocorrelation_decorrelation_length_m": 800.0,
             "scientific_caveats": [
-                "Provisional detection range spans 35 m (steep cut-banks) to 85 m (low-gradient char fringes)",
+                "Provisional detection range spans 35 m (steep cut-banks) to 85 m (low-gradient char fringes), with 60 m nominal",
                 "Displacements reflect short-term flood stage response, not annual net sediment flux",
-                "Ambiguous transects with multiple channel threads must not be interpreted as simple bank migration",
+                "Ambiguous transects with multiple channel threads (32 transects) are segregated from simple bank migration",
             ],
         }
-

@@ -24,7 +24,7 @@ def get_health():
     )
 
 
-@router.get("/api/v1/system/status", response_model=SystemStatusResponse, tags=["System"])
+@router.get("/system/status", response_model=SystemStatusResponse, tags=["System"])
 def get_system_status():
     """Returns current environment hardware, software versions, and SQLite database status."""
     import numpy as np
@@ -62,7 +62,7 @@ def get_system_status():
     )
 
 
-@router.get("/api/v1/system/capabilities", response_model=SystemCapabilitiesResponse, tags=["System"])
+@router.get("/system/capabilities", response_model=SystemCapabilitiesResponse, tags=["System"])
 def get_system_capabilities():
     """Enumerates core capabilities, supported sensors, and scientific baselines."""
     return SystemCapabilitiesResponse(
@@ -90,7 +90,6 @@ def get_system_capabilities():
         scientific_baselines={
             "primary_operational_flood_baseline": "Adaptive Lee 5x5 Dual-AND Otsu (VV & VH)",
             "secondary_auxiliary_probability_layer": "Pure-NumPy Random Forest (tau* = 0.35, status: RETAINED_AS_PROBABILITY_LAYER)",
-            "primary_riverbank_analysis": "Automated 200m Normal Transects on Filtered SAR Channel Belts (Valid: 122, Ambiguous: 53)",
+            "primary_riverbank_analysis": "Automated 200m Normal Transects on Filtered SAR Channel Belts (Total: 154, Valid: 122, Outside Valid-Local: 32)",
         },
     )
-
