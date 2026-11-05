@@ -73,9 +73,11 @@ class FloodClustersResponse(BaseModel):
 
 class FloodUncertaintyResponse(BaseModel):
     region_id: str
-    radar_shadow_exclusion_ha: float
-    layover_exclusion_ha: float
-    water_lookalike_exclusion_ha: float
+    total_indeterminate_cells: int
     total_indeterminate_ha: float
+    total_indeterminate_km2: float
+    percentage_of_aoi: float
+    noise_floor_definition: str
+    subdivision_note: str
     classification_confidence: Dict[str, str]
     quality_standards: List[str]

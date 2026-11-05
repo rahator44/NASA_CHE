@@ -1,0 +1,38 @@
+metric_id,scientific_domain,contract_parameter,authoritative_source,contract_value,recalculated_value,absolute_difference,tolerance,verification_status
+SCI-01,Study Area Grid,AOI Total Grid Cells,configs/regions/jamuna_sirajganj.yaml,1010039,1010039,0,0,EXACT_MATCH
+SCI-02,Study Area Grid,AOI Total Area (km2),configs/regions/jamuna_sirajganj.yaml,404.0156,404.0156,0.0,1e-4,EXACT_MATCH
+SCI-03,Flood Engine,Common Valid Domain Cells,phase5_flood_transitions.tif,993736,993736,0,0,EXACT_MATCH
+SCI-04,Flood Engine,Common Valid Domain Area (ha),phase5_inundation_area_summary.csv,39749.44,39749.44,0.0,1e-2,EXACT_MATCH
+SCI-05,Flood Engine,Persistent Water Cells,phase5_flood_transitions.tif,216595,216595,0,0,EXACT_MATCH
+SCI-06,Flood Engine,Persistent Water Area (ha),phase5_inundation_area_summary.csv,8663.80,8663.80,0.0,1e-2,EXACT_MATCH
+SCI-07,Flood Engine,Newly Inundated Cells,phase5_flood_transitions.tif,146992,146992,0,0,EXACT_MATCH
+SCI-08,Flood Engine,Newly Inundated Area (ha),phase5_inundation_area_summary.csv,5879.68,5879.68,0.0,1e-2,EXACT_MATCH
+SCI-09,Flood Engine,Receded Water Cells,phase5_flood_transitions.tif,1634,1634,0,0,EXACT_MATCH
+SCI-10,Flood Engine,Receded Water Area (ha),phase5_inundation_area_summary.csv,65.36,65.36,0.0,1e-2,EXACT_MATCH
+SCI-11,Flood Engine,Persistent Non-Water Cells,phase5_flood_transitions.tif,628515,628515,0,0,EXACT_MATCH
+SCI-12,Flood Engine,Persistent Non-Water Area (ha),phase5_inundation_area_summary.csv,25140.60,25140.60,0.0,1e-2,EXACT_MATCH
+SCI-13,Flood Engine,Net Valid Domain Change (ha),phase5_flood_change_report.json,5814.32,5814.32,0.0,1e-2,EXACT_MATCH
+SCI-14,Flood Engine,Whole-Epoch Unmasked Delta (ha),phase3a_classification_report.json,6452.24,6452.24,0.0,1e-2,EXACT_MATCH
+SCI-15,Flood Engine,Asymmetric Exclusions Gap (ha),phase5_flood_change_report.json,637.92,637.92,0.0,1e-2,EXACT_MATCH
+SCI-16,Flood Uncertainty,Indeterminate Transition Noise Floor (cells),phase5_flood_transitions.tif,16242,16242,0,0,EXACT_MATCH
+SCI-17,Flood Uncertainty,Indeterminate Area (ha),phase5_flood_change_report.json,649.68,649.68,0.0,1e-2,EXACT_MATCH
+SCI-18,Riverbank Geomorphology,Total Evaluated Transects,phase6_1_transect_displacement_audit.csv,154,154,0,0,EXACT_MATCH
+SCI-19,Riverbank Geomorphology,Audited Valid Transects Count,phase6_1_transect_displacement_audit.csv,122,122,0,0,EXACT_MATCH
+SCI-20,Riverbank Geomorphology,Outside Valid / Ambiguous Transects,phase6_1_transect_displacement_audit.csv,32,32,0,0,EXACT_MATCH
+SCI-21,Riverbank Geomorphology,West Bank Mean Displacement (m),phase6_1_transect_displacement_audit.csv,130.00,130.00,0.0,1e-2,EXACT_MATCH
+SCI-22,Riverbank Geomorphology,East Bank Mean Displacement (m),phase6_1_transect_displacement_audit.csv,160.66,160.66,0.0,1e-2,EXACT_MATCH
+SCI-23,Riverbank Geomorphology,Net Channel Width Mean Expansion (m),phase6_1_transect_displacement_audit.csv,290.66,290.66,0.0,1e-2,EXACT_MATCH
+SCI-24,Riverbank Geomorphology,West Bank Median Displacement (m),phase6_1_transect_displacement_audit.csv,40.0,40.0,0.0,1e-1,EXACT_MATCH
+SCI-25,Riverbank Geomorphology,East Bank Median Displacement (m),phase6_1_transect_displacement_audit.csv,90.0,90.0,0.0,1e-1,EXACT_MATCH
+SCI-26,Riverbank Geomorphology,Net Channel Width Median Expansion (m),phase6_1_transect_displacement_audit.csv,180.0,180.0,0.0,1e-1,EXACT_MATCH
+SCI-27,Riverbank Geomorphology,Combined Two-Epoch Quadrature RMS (m),phase6_2_uncertainty_audit.json,29.86,29.86,0.0,1e-2,EXACT_MATCH
+SCI-28,Random Forest ML,Held-Out Test Sample Count (N),phase7a_training_samples.csv,6124,6124,0,0,EXACT_MATCH
+SCI-29,Random Forest ML,Held-Out True Positives (TP at tau*=0.35),phase7a_training_samples.csv,2239,2239,0,0,EXACT_MATCH
+SCI-30,Random Forest ML,Held-Out True Negatives (TN at tau*=0.35),phase7a_training_samples.csv,932,932,0,0,EXACT_MATCH
+SCI-31,Random Forest ML,Held-Out False Positives (FP at tau*=0.35),phase7a_training_samples.csv,2762,2762,0,0,EXACT_MATCH
+SCI-32,Random Forest ML,Held-Out False Negatives (FN at tau*=0.35),phase7a_training_samples.csv,191,191,0,0,EXACT_MATCH
+SCI-33,Random Forest ML,Held-Out Test Precision (tau*=0.35),phase7a_training_samples.csv,0.4477,0.447709,9e-6,1e-4,EXACT_MATCH
+SCI-34,Random Forest ML,Held-Out Test Recall (tau*=0.35),phase7a_training_samples.csv,0.9214,0.921399,1e-6,1e-4,EXACT_MATCH
+SCI-35,Explainable AI,Ensemble Root Additivity Max Residual,phase7b1_integrity_audit.json,1e-8,4.2e-8,3.2e-8,1e-5,WITHIN_TOLERANCE
+SCI-36,Explainable AI,Background Baseline Centered Residual,test_phase8_7_scientific_corrections,1e-7,5.7e-8,4.3e-8,1e-5,WITHIN_TOLERANCE
+SCI-37,Model Artifact,Model Artifact SHA-256 Checksum,models/model_registry.json,85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad,85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad,0,0,EXACT_MATCH

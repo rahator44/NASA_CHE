@@ -44,7 +44,7 @@ acquisitions:
   july16:
     acquisition_id: s1a_iw_grd_20240716
     date: "2024-07-16"
-    season: peak_monsoon_flood
+    season: mid_monsoon_flood_observation
     sensor_id: sentinel1
     raw_archive: data/raw/sentinel1/S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.zip
     aligned_raster: data/processed/aligned/july16_aligned.tif

@@ -30,7 +30,10 @@ class RegionService:
     def _format_summary(cfg: Dict[str, Any]) -> Dict[str, Any]:
         grid = cfg.get("grid", {})
         acqs = cfg.get("acquisitions", {})
-        acq_dates = [f"{info.get('date', '')} ({k})" for k, info in acqs.items()]
+        acq_dates = [
+            f"{info.get('date', '')} ({info.get('season', k)})"
+            for k, info in acqs.items()
+        ]
 
         return {
             "region_id": cfg.get("region_id", ""),
@@ -46,7 +49,7 @@ class RegionService:
             ],
             "available_acquisitions": acq_dates or [
                 "2024-06-10 (pre_monsoon_low_flow)",
-                "2024-07-16 (peak_monsoon_flood)",
+                "2024-07-16 (mid_monsoon_flood_observation)",
             ],
             "available_analysis_modules": [
                 "flood_change_detection",

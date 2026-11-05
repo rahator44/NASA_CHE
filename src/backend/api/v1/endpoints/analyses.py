@@ -93,6 +93,11 @@ def list_analyses():
 @router.get("/regions/{region_id}/analyses", response_model=AnalysisListResponse, tags=["Analyses"])
 def get_region_analyses(region_id: str):
     """Lists analyses applicable to the specified region."""
+    if region_id != "jamuna_sirajganj":
+        raise HTTPException(
+            status_code=404,
+            detail=f"Region '{region_id}' not found. Authoritative registered study areas: ['jamuna_sirajganj']"
+        )
     return AnalysisListResponse(total_analyses=len(ANALYSIS_CATALOGUE), analyses=ANALYSIS_CATALOGUE)
 
 
@@ -108,6 +113,11 @@ def get_analysis_summary(analysis_id: str):
 @router.get("/regions/{region_id}/results", response_model=ResultListResponse, tags=["Analyses"])
 def list_region_results(region_id: str):
     """Lists all completed analysis run results stored in the SQLite catalog."""
+    if region_id != "jamuna_sirajganj":
+        raise HTTPException(
+            status_code=404,
+            detail=f"Region '{region_id}' not found. Authoritative registered study areas: ['jamuna_sirajganj']"
+        )
     with get_db_connection() as conn:
         cursor = conn.cursor()
         cursor.execute("""

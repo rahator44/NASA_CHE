@@ -13,6 +13,45 @@ import numpy as np
 import pandas as pd
 from scipy.stats import pearsonr, spearmanr
 
+# Authoritative 6-feature SAR order defined in configs/features/sar_features.yaml
+AUTHORITATIVE_FEATURE_ORDER: List[str] = [
+    "vv_db",
+    "vh_db",
+    "vv_minus_vh_db",
+    "cross_pol_ratio",
+    "texture_vv",
+    "texture_vh",
+]
+
+
+def validate_feature_schema(
+    feature_names: List[str],
+    expected_features: Optional[List[str]] = None,
+) -> None:
+    """
+    Validates that input features match the authoritative SAR feature schema.
+    Raises ValueError for missing, unexpected, or incorrectly ordered features.
+    """
+    expected = expected_features or AUTHORITATIVE_FEATURE_ORDER
+    if len(feature_names) != len(expected):
+        raise ValueError(
+            f"Feature count mismatch: expected {len(expected)} features, got {len(feature_names)}. "
+            f"Expected features: {expected}, got: {feature_names}"
+        )
+    missing = set(expected) - set(feature_names)
+    unexpected = set(feature_names) - set(expected)
+    if missing or unexpected:
+        err_msgs = []
+        if missing:
+            err_msgs.append(f"Missing required features: {sorted(missing)}")
+        if unexpected:
+            err_msgs.append(f"Unexpected features found: {sorted(unexpected)}")
+        raise ValueError(f"{'; '.join(err_msgs)}. Expected: {expected}")
+    if feature_names != expected:
+        raise ValueError(
+            f"Incorrect feature ordering. Expected: {expected}, but received: {feature_names}"
+        )
+
 
 def audit_explainability_environment() -> Dict[str, Any]:
     """
@@ -59,16 +98,34 @@ class TreePathExplainer:
     Satisfies exact efficiency/additivity along the observed decision path:
         phi_0 + sum_{j=1}^D phi_j(x) = f(x) = P(Class=1 | x)
 
-    Scientific Distinction (Phase 7B.1 Audit):
+    Scientific Distinction (Phase 7B.1 Audit & Phase 8.7 Formulation):
         Tree-path attribution computes the telescoping sum of marginal probability shifts along
         the single branch traversed by sample x. While strictly additive, it differs from exact
         coalition-averaged Shapley values (which average over all 2^D feature subsets and permutations)
         because node testing order induces path dependency.
+        
+        Background-baseline mode centers Saabas tree-path contributions against the verified background
+        mean attribution vector:
+            Base_bg = E_bg[P(x)]
+            phi_j^bg(x) = phi_j^root(x) - E_bg[phi_j^root]
+        guaranteeing exact additivity: Base_bg + sum(phi_j^bg(x)) = P(x).
     """
 
-    def __init__(self, model: Any, background_X: Optional[np.ndarray] = None, feature_names: Optional[List[str]] = None):
+    def __init__(
+        self,
+        model: Any,
+        background_X: Optional[np.ndarray] = None,
+        feature_names: Optional[List[str]] = None,
+        validate_features: bool = False,
+    ):
         self.model = model
-        self.feature_names = feature_names or ["vv_db", "vh_db", "cross_pol_ratio", "vv_minus_vh_db", "texture_vv", "texture_vh"]
+        if feature_names is None:
+            self.feature_names = list(AUTHORITATIVE_FEATURE_ORDER)
+        else:
+            if validate_features or (len(feature_names) == len(AUTHORITATIVE_FEATURE_ORDER) and set(feature_names) == set(AUTHORITATIVE_FEATURE_ORDER)):
+                validate_feature_schema(feature_names)
+            self.feature_names = list(feature_names)
+
         self.n_features = len(self.feature_names)
 
         # Baseline 1: Ensemble root probability baseline (exact telescoping property)
@@ -76,12 +133,30 @@ class TreePathExplainer:
         self.root_base_value = float(np.mean(root_probs))
         self.base_value = self.root_base_value
 
-        # Baseline 2: Background dataset empirical baseline
+        # Baseline 2: Background dataset empirical baseline (background-centered formulation)
+        self.background_base_value: Optional[float] = None
+        self.background_mean_attributions: Optional[np.ndarray] = None
         if background_X is not None and len(background_X) > 0:
-            bg_f32 = np.asarray(background_X, dtype=np.float32)
-            probs = self.model.predict_proba(bg_f32)[:, 1]
-            self.background_base_value = float(np.mean(probs))
-            self.base_value = self.background_base_value
+            self.set_background(background_X)
+
+    def set_background(self, background_X: np.ndarray) -> None:
+        """
+        Sets the verified background dataset and precomputes mean tree-path feature attributions
+        and empirical background mean prediction probability for background-centered explanations.
+        """
+        bg_f32 = np.asarray(background_X, dtype=np.float32)
+        if bg_f32.ndim != 2 or bg_f32.shape[1] != self.n_features:
+            raise ValueError(f"Background dataset must have shape (N, {self.n_features}), got {bg_f32.shape}")
+
+        n_bg = len(bg_f32)
+        accum_attrs = np.zeros(self.n_features, dtype=np.float64)
+        for x in bg_f32:
+            _, attr = self._explain_instance_raw(x)
+            accum_attrs += attr
+
+        self.background_mean_attributions = accum_attrs / n_bg
+        self.background_base_value = self.root_base_value + float(np.sum(self.background_mean_attributions))
+        self.base_value = self.background_base_value
 
     def _explain_tree(self, tree: Any, x: np.ndarray) -> Tuple[float, np.ndarray]:
         """
@@ -108,18 +183,8 @@ class TreePathExplainer:
 
         return base_val, attr
 
-    def explain_instance(self, x: np.ndarray, baseline_mode: str = "ensemble_root") -> Dict[str, Any]:
-        """
-        Computes additive feature attributions for a single instance x.
-        Ensures x is cast to np.float32 matching model inference representation.
-        Supports both baseline definitions:
-          - 'ensemble_root': Mean root probability across ensemble trees (exact telescoping property)
-          - 'background': Empirical background dataset mean prediction probability
-        """
-        x_infer = np.asarray(x, dtype=np.float32).ravel()
-        if len(x_infer) != self.n_features:
-            raise ValueError(f"Expected {self.n_features} features, got {len(x_infer)}")
-
+    def _explain_instance_raw(self, x_infer: np.ndarray) -> Tuple[float, np.ndarray]:
+        """Traverses all ensemble trees for instance x_infer, returning mean root base and mean attributions."""
         n_trees = len(self.model.estimators_)
         accum_attr = np.zeros(self.n_features, dtype=np.float64)
         accum_base = 0.0
@@ -129,29 +194,53 @@ class TreePathExplainer:
             accum_base += b
             accum_attr += a
 
-        if baseline_mode == "background" and hasattr(self, "background_base_value"):
-            mean_base = self.background_base_value
-        else:
-            mean_base = accum_base / n_trees
+        return accum_base / n_trees, accum_attr / n_trees
 
-        mean_attr = accum_attr / n_trees
+    def explain_instance(self, x: np.ndarray, baseline_mode: str = "ensemble_root") -> Dict[str, Any]:
+        """
+        Computes additive feature attributions for a single instance x.
+        Ensures x is cast to np.float32 matching model inference representation.
+        Supports both baseline definitions:
+          - 'ensemble_root': Mean root probability across ensemble trees (exact telescoping property)
+          - 'background': Background-centered tree-path contributions using verified background dataset
+        """
+        x_infer = np.asarray(x, dtype=np.float32).ravel()
+        if len(x_infer) != self.n_features:
+            raise ValueError(f"Expected {self.n_features} features, got {len(x_infer)}")
+
+        mean_base_root, mean_attr_root = self._explain_instance_raw(x_infer)
         pred_prob = float(self.model.predict_proba(x_infer.reshape(1, -1))[0, 1])
 
+        if baseline_mode == "background":
+            if self.background_base_value is None or self.background_mean_attributions is None:
+                raise ValueError(
+                    "Baseline mode 'background' requested, but no background dataset was provided. "
+                    "Initialize TreePathExplainer with background_X or call set_background(X)."
+                )
+            base_val = self.background_base_value
+            attr_arr = mean_attr_root - self.background_mean_attributions
+        elif baseline_mode == "ensemble_root":
+            base_val = mean_base_root
+            attr_arr = mean_attr_root
+        else:
+            raise ValueError(f"Unsupported baseline_mode '{baseline_mode}'. Must be 'ensemble_root' or 'background'.")
+
         # Exact additivity check
-        sum_attr = float(np.sum(mean_attr))
-        additivity_diff = abs((mean_base + sum_attr) - pred_prob)
+        sum_attr = float(np.sum(attr_arr))
+        additivity_diff = abs((base_val + sum_attr) - pred_prob)
 
         return {
-            "base_value": float(mean_base),
+            "base_value": float(base_val),
             "prediction_probability": pred_prob,
-            "attributions": {name: float(mean_attr[i]) for i, name in enumerate(self.feature_names)},
-            "attributions_array": mean_attr,
+            "attributions": {name: float(attr_arr[i]) for i, name in enumerate(self.feature_names)},
+            "attributions_array": attr_arr,
             "sum_attributions": sum_attr,
             "additivity_error": additivity_diff,
             "is_additive": bool(additivity_diff < 1e-5),
+            "baseline_mode": baseline_mode,
         }
 
-    def explain_dataset(self, X: np.ndarray) -> Dict[str, Any]:
+    def explain_dataset(self, X: np.ndarray, baseline_mode: str = "ensemble_root") -> Dict[str, Any]:
         """
         Computes attributions across an entire batch of instances.
         Returns matrix of attributions of shape (N, D).
@@ -166,7 +255,7 @@ class TreePathExplainer:
         preds = np.zeros(N, dtype=np.float64)
 
         for i in range(N):
-            res = self.explain_instance(X_arr[i])
+            res = self.explain_instance(X_arr[i], baseline_mode=baseline_mode)
             phi_matrix[i, :] = res["attributions_array"]
             base_vals[i] = res["base_value"]
             preds[i] = res["prediction_probability"]
@@ -181,6 +270,15 @@ class TreePathExplainer:
             "mean_signed_shap": mean_signed_importance,
         }).sort_values("mean_abs_shap", ascending=False).reset_index(drop=True)
         importance_df["rank"] = range(1, len(importance_df) + 1)
+
+        return {
+            "shap_values": phi_matrix,
+            "base_values": base_vals,
+            "prediction_probabilities": preds,
+            "importance_ranking": importance_df,
+            "global_base_value": float(np.mean(base_vals)),
+            "baseline_mode": baseline_mode,
+        }
 
         return {
             "shap_values": phi_matrix,

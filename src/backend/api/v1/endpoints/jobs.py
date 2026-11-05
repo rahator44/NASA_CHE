@@ -23,6 +23,12 @@ def create_job(req: JobCreateRequest):
             detail=f"Action '{req.job_type}' is not permitted. Allowlisted actions: {list(ALLOWLISTED_JOB_TYPES.keys())}"
         )
 
+    if req.region_id and req.region_id != "jamuna_sirajganj":
+        raise HTTPException(
+            status_code=404,
+            detail=f"Region '{req.region_id}' not found. Authoritative registered study areas: ['jamuna_sirajganj']"
+        )
+
     try:
         job = JobService.create_and_execute_job(
             job_type=req.job_type,

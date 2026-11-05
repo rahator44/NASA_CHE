@@ -1,0 +1,48 @@
+endpoint,http_method,parameters,expected_status,observed_status,content_type,verification_details,status
+/,GET,,200,200,application/json,Root API identification and documentation links verified,VERIFIED_PASS
+/health,GET,,200,200,application/json,Root system health and study area metadata verified,VERIFIED_PASS
+/api/v1/analyses,GET,,200,200,application/json,Full 5-module analysis catalogue retrieved,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/analyses,GET,,200,200,application/json,Region-specific analyses list verified,VERIFIED_PASS
+/api/v1/regions/invalid_region/analyses,GET,,404,404,application/json,Explicit 404 with authoritative study areas verified,VERIFIED_PASS
+/api/v1/analyses/flood_change_detection/summary,GET,,200,200,application/json,Detailed analysis definition and methodology retrieved,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/results,GET,,200,200,application/json,SQLite-catalogued completed analysis runs retrieved,VERIFIED_PASS
+/api/v1/regions/invalid_region/results,GET,,404,404,application/json,Explicit 404 with authoritative study areas verified,VERIFIED_PASS
+/api/v1/regions,GET,,200,200,application/json,List registered study regions verified,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj,GET,,200,200,application/json,Full region detail bounding box and CRS EPSG:32645 verified,VERIFIED_PASS
+/api/v1/regions/invalid_region,GET,,404,404,application/json,Explicit 404 with authoritative study areas verified,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/summary,GET,,200,200,application/json,High-level study area summary verified,VERIFIED_PASS
+/api/v1/datasets,GET,,200,200,application/json,Registered dataset inventory retrieved,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/datasets,GET,,200,200,application/json,Region datasets inventory retrieved,VERIFIED_PASS
+/api/v1/regions/invalid_region/datasets,GET,,404,404,application/json,Explicit 404 with authoritative study areas verified,VERIFIED_PASS
+/api/v1/rasters,GET,,200,200,application/json,Raster asset catalog retrieved with bounding boxes,VERIFIED_PASS
+/api/v1/rasters,GET,region_id=jamuna_sirajganj,200,200,application/json,Filtered raster assets retrieved,VERIFIED_PASS
+/api/v1/rasters,GET,region_id=invalid_region,404,404,application/json,Explicit 404 with authoritative study areas verified,VERIFIED_PASS
+/api/v1/rasters/phase5_flood_transitions/metadata,GET,,200,200,application/json,GeoTIFF driver dimensions 1405x1393 verified,VERIFIED_PASS
+/api/v1/rasters/phase5_flood_transitions/statistics,GET,,200,200,application/json,Categorical band statistics retrieved,VERIFIED_PASS
+/api/v1/tiles/phase5_flood_transitions/10/766/437.png,GET,,200,200,image/png,256x256 RGBA Web Mercator map tile rendered,VERIFIED_PASS
+/api/v1/tiles/phase5_flood_transitions/10/0/0.png,GET,,200,200,image/png,Out-of-bounds tile returns empty transparent PNG,VERIFIED_PASS
+/api/v1/tiles/nonexistent_layer/10/766/437.png,GET,,404,404,application/json,Explicit 404 for unknown raster layer verified,VERIFIED_PASS
+/api/v1/vectors,GET,,200,200,application/json,Vector catalog retrieved,VERIFIED_PASS
+/api/v1/vectors,GET,region_id=invalid_region,404,404,application/json,Explicit 404 with authoritative study areas verified,VERIFIED_PASS
+/api/v1/vectors/phase6_riverbank_transects,GET,,200,200,application/json,154 transects reprojected to EPSG:4326 verified,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/flood/summary,GET,,200,200,application/json,Net change 5814.32 ha whole-epoch delta 6452.24 ha verified,VERIFIED_PASS
+/api/v1/regions/invalid_region/flood/summary,GET,,404,404,application/json,Explicit 404 with authoritative study areas verified,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/flood/transitions,GET,,200,200,application/json,Common valid domain 993736 cells 4 transition classes verified,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/flood/clusters,GET,limit=15,200,200,application/json,Major contiguous inundation clusters retrieved,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/flood/uncertainty,GET,,200,200,application/json,Indeterminate count 16242 cells (649.68 ha) verified,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/riverbank/summary,GET,,200,200,application/json,154 transects 122 valid mean west 130m east 160.66m width 290.66m verified,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/riverbank/transects,GET,limit=200,200,200,application/json,154 orthogonal transects retrieved,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/riverbank/displacement,GET,,200,200,application/json,Empirical percentiles and spatial bootstrap CI verified,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/riverbank/erosion-candidates,GET,,200,200,application/json,Channel change zones codebook retrieved,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/riverbank/uncertainty,GET,,200,200,application/json,Quadrature uncertainty 29.86m detection range 35-85m verified,VERIFIED_PASS
+/api/v1/models,GET,,200,200,application/json,Registered Random Forest auxiliary model retrieved,VERIFIED_PASS
+/api/v1/models/phase7a_rf_jamuna_v1/metrics,GET,,200,200,application/json,Spatial held-out test (N=6124) TP=2239 TN=932 FP=2762 FN=191 verified,VERIFIED_PASS
+/api/v1/models/phase7a_rf_jamuna_v1/features,GET,,200,200,application/json,Authoritative 6-feature schema and rankings verified,VERIFIED_PASS
+/api/v1/models/phase7a_rf_jamuna_v1/explanations,GET,,200,200,application/json,Saabas tree-path attributions and grouped features verified,VERIFIED_PASS
+/api/v1/models/phase7a_rf_jamuna_v1/diagnostics,GET,,200,200,application/json,Uncalibrated Brier 0.2270 ECE 0.0959 2762 FP verified,VERIFIED_PASS
+/api/v1/reports,GET,,200,200,application/json,Scientific report catalog retrieved,VERIFIED_PASS
+/api/v1/regions/jamuna_sirajganj/statistics,GET,,200,200,application/json,Aggregated cross-phase metrics retrieved,VERIFIED_PASS
+/api/v1/jobs,POST,job_type=audit_environment,201,201,application/json,Allowlisted audit executed synchronously with 100% progress,VERIFIED_PASS
+/api/v1/jobs,POST,job_type=arbitrary_command,400,400,application/json,Unpermitted action blocked with explicit allowlist error,VERIFIED_PASS
+/api/v1/jobs,POST,region_id=invalid_region,404,404,application/json,Explicit 404 for unknown job region verified,VERIFIED_PASS
+/api/v1/jobs,GET,limit=50,200,200,application/json,Job ledger records retrieved from SQLite,VERIFIED_PASS

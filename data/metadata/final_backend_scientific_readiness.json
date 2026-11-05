@@ -1,0 +1,112 @@
+{
+  "system_name": "EarthPulse-SAR",
+  "project_title": "Earth Pulse: Dancing with the SARs",
+  "challenge": "NASA Space Apps Challenge 2026",
+  "audit_phase": "Phase 8.7 to 8.9 Consolidated Final Review",
+  "audit_timestamp_utc": "2026-11-06T02:55:00Z",
+  "study_area": {
+    "region_id": "jamuna_sirajganj",
+    "name": "Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)",
+    "crs": "EPSG:32645",
+    "pixel_spacing_m": 20.0,
+    "total_aoi_cells": 1010039,
+    "total_aoi_area_km2": 404.0156
+  },
+  "temporal_observations": {
+    "baseline": {
+      "acquisition_id": "s1a_iw_grd_20240610",
+      "date": "2024-06-10T12:05:08Z",
+      "label": "pre_monsoon_low_flow"
+    },
+    "flood_observation": {
+      "acquisition_id": "s1a_iw_grd_20240716",
+      "date": "2024-07-16T12:05:07Z",
+      "label": "mid_monsoon_flood_observation"
+    }
+  },
+  "scientific_accounting": {
+    "common_valid_domain_cells": 993736,
+    "common_valid_domain_area_ha": 39749.44,
+    "persistent_water_ha": 8663.80,
+    "newly_inundated_candidate_ha": 5879.68,
+    "receded_water_ha": 65.36,
+    "persistent_non_water_ha": 25140.60,
+    "net_candidate_water_change_ha": 5814.32,
+    "whole_epoch_unmasked_delta_ha": 6452.24,
+    "asymmetric_exclusions_gap_ha": 637.92,
+    "indeterminate_noise_floor_cells": 16242,
+    "indeterminate_noise_floor_ha": 649.68
+  },
+  "riverbank_geomorphology": {
+    "total_transects_evaluated": 154,
+    "audited_valid_transects": 122,
+    "ambiguous_outside_valid_transects": 32,
+    "mean_west_displacement_m": 130.00,
+    "mean_east_displacement_m": 160.66,
+    "mean_channel_width_expansion_m": 290.66,
+    "median_west_displacement_m": 40.0,
+    "median_east_displacement_m": 90.0,
+    "median_channel_width_expansion_m": 180.0,
+    "quadrature_rms_uncertainty_m": 29.86,
+    "detection_range_m": "35-85m",
+    "scientific_status": "PROVISIONAL_MONSOON_FLOOD_STAGE_EFFECT_NOT_LONG_TERM_EROSION"
+  },
+  "random_forest_model": {
+    "model_id": "phase7a_rf_jamuna_v1",
+    "architecture": "Pure-NumPy Fast Vectorized Random Forest Classifier",
+    "status": "RETAINED_AS_PROBABILITY_LAYER",
+    "primary_baseline_reference": "Adaptive Lee 5x5 Dual-AND Otsu (VV & VH)",
+    "artifact_sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+    "n_estimators": 40,
+    "max_depth": 6,
+    "optimal_threshold": 0.35,
+    "evaluation_scope": "Spatial-block held-out evaluation across June and July 2024 observations (N=6,124)",
+    "temporal_generalization_status": "UNVERIFIED (Evaluation partitioned spatially across June 10 and July 16, 2024; temporal generalization to unseen acquisition dates remains unverified)",
+    "held_out_confusion_matrix": {
+      "tp": 2239,
+      "tn": 932,
+      "fp": 2762,
+      "fn": 191
+    },
+    "metrics": {
+      "accuracy": 0.5178,
+      "precision": 0.4477,
+      "recall": 0.9214,
+      "f1_score": 0.6026,
+      "roc_auc": 0.6810
+    },
+    "calibration": {
+      "status": "UNCALIBRATED",
+      "brier_score": 0.2270,
+      "expected_calibration_error": 0.0959
+    }
+  },
+  "explainability_engine": {
+    "engine": "Native Pure-NumPy TreePathExplainer (Exact Lundberg/Saabas Formulation)",
+    "authoritative_feature_order": [
+      "vv_db",
+      "vh_db",
+      "vv_minus_vh_db",
+      "cross_pol_ratio",
+      "texture_vv",
+      "texture_vh"
+    ],
+    "ensemble_root_additivity_max_residual": "< 1e-7",
+    "background_centered_additivity_max_residual": "< 1e-7",
+    "third_party_shap_dependency": "ISOLATED_AND_MOCKED (Native Pure-NumPy tree-path used for exact additivity)"
+  },
+  "test_suite_summary": {
+    "total_tests_executed": 362,
+    "passed": 362,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "total_duration_seconds": 41.37,
+    "log_file": "data/outputs/backend_final_review/test_results.txt"
+  },
+  "backend_readiness_verdict": {
+    "status": "OFFICIALLY_READINESS_APPROVED",
+    "code_review_package": "/home/orr/NewVolume1/EarthPulse-Upload-Ready/NASA_CHE_FINAL_BACKEND_REVIEW.zip",
+    "reproducibility": "100% Fully Reproducible via Local Deterministic Pure-Python / GDAL Stack"
+  }
+}

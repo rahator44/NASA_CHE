@@ -160,11 +160,21 @@ class TestPhase7BExplainabilitySuite:
         assert "calibration_gap" in df_cal.columns
 
     def test_12_missing_shap_dependency_handling(self):
-        """12. Verifies that missing 3rd-party shap package is cleanly caught and reported as BLOCKED."""
-        env_audit = audit_explainability_environment()
-        assert env_audit["shap_available"] is False
-        assert env_audit["shap_status"] == "BLOCKED_DEPENDENCY_MISSING"
-        assert "BLOCKED" in env_audit["shap_status"]
+        """12. Verifies that missing 3rd-party shap package is cleanly caught and reported as BLOCKED (mocked for environment portability)."""
+        import builtins
+        from unittest import mock
+        orig_import = builtins.__import__
+
+        def mock_import(name, *args, **kwargs):
+            if name == "shap":
+                raise ImportError("No module named 'shap'")
+            return orig_import(name, *args, **kwargs)
+
+        with mock.patch("builtins.__import__", side_effect=mock_import):
+            env_audit = audit_explainability_environment()
+            assert env_audit["shap_available"] is False
+            assert env_audit["shap_status"] == "BLOCKED_DEPENDENCY_MISSING"
+            assert "BLOCKED" in env_audit["shap_status"]
 
     def test_13_multi_region_explanation_configuration(self):
         """13. Verifies that explainability buffer accepts arbitrary region identifiers."""

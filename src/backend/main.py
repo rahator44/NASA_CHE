@@ -74,6 +74,18 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 
 # Root-level health endpoint
+@app.get("/", tags=["System"])
+def root():
+    """Root endpoint returning API service identification and navigation links."""
+    return {
+        "title": settings.PROJECT_NAME,
+        "version": settings.PROJECT_VERSION,
+        "docs_url": "/docs",
+        "api_v1_prefix": settings.API_V1_STR,
+        "study_area": "Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)",
+    }
+
+
 @app.get("/health", response_model=HealthResponse, tags=["System"])
 def root_health():
     """Root health check endpoint for the Earth Pulse API."""

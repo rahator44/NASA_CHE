@@ -268,7 +268,7 @@ def test_04_explainability_float32_precision_and_additivity_guarantee():
     """
     model_path = settings.PROJECT_ROOT_DIR / "models/phase7a/phase7a_random_forest_model.joblib"
     rf = RandomForestClassifier.load(model_path)
-    feature_cols = ["vv_db", "vh_db", "cross_pol_ratio", "vv_minus_vh_db", "texture_vv", "texture_vh"]
+    feature_cols = ["vv_db", "vh_db", "vv_minus_vh_db", "cross_pol_ratio", "texture_vv", "texture_vh"]
     explainer = TreePathExplainer(rf, feature_names=feature_cols)
 
     # Test 1: Held-out samples from test split

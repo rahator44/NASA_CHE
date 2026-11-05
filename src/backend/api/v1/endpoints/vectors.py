@@ -14,6 +14,11 @@ router = APIRouter()
 @router.get("/vectors", tags=["Vectors"])
 def list_vectors(region_id: Optional[str] = Query(None, description="Filter by region")):
     """Lists safe vector assets available in the catalog with standard EPSG:4326 reprojection."""
+    if region_id and region_id != "jamuna_sirajganj":
+        raise HTTPException(
+            status_code=404,
+            detail=f"Region '{region_id}' not found. Authoritative registered study areas: ['jamuna_sirajganj']"
+        )
     return VectorService.list_vector_assets(region_id=region_id)
 
 

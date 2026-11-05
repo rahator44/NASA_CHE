@@ -26,6 +26,8 @@ class ModelInfoResponse(BaseModel):
 class ModelMetricsResponse(BaseModel):
     model_id: str
     evaluation_dataset: str
+    temporal_generalization_status: Optional[str] = None
+    operational_status_note: Optional[str] = None
     total_test_samples: int
     decision_threshold: float
     accuracy: float

@@ -41,6 +41,25 @@ class ModelService:
         return models
 
     @classmethod
+    def load_model(cls, model_id: str):
+        """Loads a registered model artifact with strict path traversal prevention."""
+        from src.ml.random_forest import RandomForestClassifier
+        model_info = cls.get_model(model_id)
+        if not model_info:
+            raise ValueError(f"Model '{model_id}' is not registered in model catalog.")
+
+        rel_path = model_info["artifact_path"]
+        trusted_dir = (settings.PROJECT_ROOT_DIR / "models/phase7a").resolve()
+        artifact_path = (settings.PROJECT_ROOT_DIR / rel_path).resolve()
+
+        if not str(artifact_path).startswith(str(trusted_dir)) or not artifact_path.exists():
+            raise ValueError(
+                f"Security violation or file missing: artifact path {artifact_path} is outside trusted directory {trusted_dir}."
+            )
+
+        return RandomForestClassifier.load(str(artifact_path))
+
+    @classmethod
     def get_model(cls, model_id: str) -> Optional[Dict[str, Any]]:
         models = cls.list_models()
         for m in models:
@@ -65,7 +84,16 @@ class ModelService:
 
         return {
             "model_id": model_id,
-            "evaluation_dataset": "Held-Out Spatial/Temporal Test Split (N=6,124)",
+            "evaluation_dataset": "Spatial-block held-out evaluation across June and July 2024 observations (N=6,124)",
+            "temporal_generalization_status": (
+                "UNVERIFIED (Evaluation partitioned spatially across June 10 and July 16, 2024; "
+                "temporal generalization to unseen acquisition dates remains unverified)."
+            ),
+            "operational_status_note": (
+                "Model is retained strictly as an auxiliary candidate water probability layer. "
+                "Due to low held-out test precision (0.4477) on saturated alluvial sediments, "
+                "the deterministic Adaptive Lee 5x5 Dual-AND Otsu engine remains the authoritative primary baseline."
+            ),
             "total_test_samples": 6124,
             "decision_threshold": contracts.MODEL_DECISION_THRESHOLD,
             "accuracy": test_m.get("accuracy", 0.5178),

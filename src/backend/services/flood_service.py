@@ -171,10 +171,18 @@ class FloodService:
 
         return {
             "region_id": region_id,
-            "radar_shadow_exclusion_ha": 12.8,
-            "layover_exclusion_ha": 8.4,
-            "water_lookalike_exclusion_ha": 628.48,
-            "total_indeterminate_ha": 649.68,
+            "total_indeterminate_cells": contracts.INDETERMINATE_CELLS,
+            "total_indeterminate_ha": contracts.INDETERMINATE_HA,
+            "total_indeterminate_km2": contracts.INDETERMINATE_KM2,
+            "percentage_of_aoi": round(contracts.INDETERMINATE_CELLS / contracts.AOI_TOTAL_CELLS * 100, 4),
+            "noise_floor_definition": (
+                "Empirical indeterminate noise-floor mask (Phase 5) isolating pixels near the dual-pol "
+                "bimodal classification threshold boundary where cross-polarization separation is ambiguous."
+            ),
+            "subdivision_note": (
+                "No speculative topographic shadow/layover subdivisions are asserted; the Jamuna "
+                "braid-belt is low-relief alluvial terrain where relief-induced shadow/layover is physically negligible."
+            ),
             "classification_confidence": {
                 "deep_channel_water": "HIGH (coincident VV/VH backscatter < -18 dB)",
                 "floodplain_anabranch": "HIGH (coincident VV/VH backscatter < -16 dB)",

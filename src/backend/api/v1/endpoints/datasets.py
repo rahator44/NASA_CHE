@@ -20,6 +20,11 @@ def list_datasets(
     quality_status: Optional[str] = Query(None, description="Filter by quality status (e.g. VERIFIED)"),
 ):
     """Retrieves safe registered dataset inventory with optional metadata filters."""
+    if region_id and region_id != "jamuna_sirajganj":
+        raise HTTPException(
+            status_code=404,
+            detail=f"Region '{region_id}' not found. Authoritative registered study areas: ['jamuna_sirajganj']"
+        )
     datasets = DatasetService.list_datasets(
         region_id=region_id,
         sensor=sensor,
@@ -42,6 +47,11 @@ def get_dataset(dataset_id: str):
 @router.get("/regions/{region_id}/datasets", response_model=DatasetListResponse, tags=["Datasets"])
 def get_region_datasets(region_id: str):
     """Retrieves all registered datasets associated with a specific region."""
+    if region_id and region_id != "jamuna_sirajganj":
+        raise HTTPException(
+            status_code=404,
+            detail=f"Region '{region_id}' not found. Authoritative registered study areas: ['jamuna_sirajganj']"
+        )
     datasets = DatasetService.list_datasets(region_id=region_id)
     return DatasetListResponse(total_datasets=len(datasets), datasets=datasets)
 

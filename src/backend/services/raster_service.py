@@ -426,6 +426,7 @@ class RasterService:
                 return blank_png
 
             arr = out_ds.ReadAsArray()
+            out_ds = None
             rgba = cls._colorize_array(arr, info)
             img = Image.fromarray(rgba, mode="RGBA")
             buf = io.BytesIO()
