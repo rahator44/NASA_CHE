@@ -36,3 +36,4 @@ SCI-34,Random Forest ML,Held-Out Test Recall (tau*=0.35),phase7a_training_sample
 SCI-35,Explainable AI,Ensemble Root Additivity Max Residual,phase7b1_integrity_audit.json,1e-8,4.2e-8,3.2e-8,1e-5,WITHIN_TOLERANCE
 SCI-36,Explainable AI,Background Baseline Centered Residual,test_phase8_7_scientific_corrections,1e-7,5.7e-8,4.3e-8,1e-5,WITHIN_TOLERANCE
 SCI-37,Model Artifact,Model Artifact SHA-256 Checksum,models/model_registry.json,85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad,85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad,0,0,EXACT_MATCH
+

@@ -133,60 +133,8 @@ class JobService:
 
         elif job_type == "verify_dataset_integrity":
             from src.backend.services.dataset_service import DatasetService
-            manifest = DatasetService._load_manifest()
-            total_count = len(manifest)
-            verified_count = 0
-            all_valid = True
-            details = []
-
-            for d in manifest:
-                did = d.get("dataset_id", "")
-                rel_path = d.get("relative_path") or d.get("source_path") or ""
-                exp_sha = d.get("sha256", "")
-                full_path = settings.PROJECT_ROOT_DIR / rel_path if rel_path else None
-
-                if not full_path or not full_path.exists():
-                    all_valid = False
-                    details.append({
-                        "dataset_id": did,
-                        "path": rel_path,
-                        "status": "FILE_MISSING",
-                        "valid": False,
-                    })
-                else:
-                    # Compute actual SHA-256
-                    hasher = hashlib.sha256()
-                    with open(full_path, "rb") as f:
-                        while chunk := f.read(1048576):
-                            hasher.update(chunk)
-                    actual_sha = hasher.hexdigest()
-
-                    if exp_sha and actual_sha.lower() != exp_sha.lower():
-                        all_valid = False
-                        details.append({
-                            "dataset_id": did,
-                            "path": rel_path,
-                            "status": "HASH_MISMATCH",
-                            "expected_sha": exp_sha,
-                            "actual_sha": actual_sha,
-                            "valid": False,
-                        })
-                    else:
-                        verified_count += 1
-                        details.append({
-                            "dataset_id": did,
-                            "path": rel_path,
-                            "status": "VERIFIED_INTACT",
-                            "sha256": actual_sha,
-                            "valid": True,
-                        })
-
-            return {
-                "verified_count": verified_count,
-                "total_count": total_count,
-                "all_valid": all_valid,
-                "details": details,
-            }, {"manifest": "dataset_manifest.json"}
+            res = DatasetService.verify_all_datasets(force=True)
+            return res, {"manifest": "dataset_manifest.json"}
 
         elif job_type == "generate_flood_summary":
             from src.backend.services.flood_service import FloodService

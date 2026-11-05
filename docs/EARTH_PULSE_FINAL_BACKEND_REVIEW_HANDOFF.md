@@ -35,7 +35,7 @@ EarthPulse-SAR/
 ├── data/
 │   ├── metadata/             # JSON reports, SQLite ledger, dataset manifests
 │   │   ├── dataset_manifest.json
-│   │   ├── earth_pulse_jobs.db
+│   │   ├── earth_pulse_jobs.db (Runtime auto-initialized, git-ignored)
 │   │   ├── final_backend_scientific_readiness.json
 │   │   └── phase*_report.json
 │   └── outputs/              # Authoritative CSV tables, audit results, and GeoJSON
@@ -67,7 +67,7 @@ EarthPulse-SAR/
 │   └── ml/                   # Machine learning and explainability engines
 │       ├── explainability.py # TreePathExplainer (Exact Saabas formulation)
 │       └── random_forest.py  # Pure-NumPy DecisionTree & RandomForest
-├── tests/                    # 31 comprehensive test suites (362 tests)
+├── tests/                    # 31 comprehensive test suites (365 tests, 100% pass, 0 skips)
 │   ├── test_phase8_7_scientific_corrections.py
 │   ├── test_phase8_9_independent_scientific_audit.py
 │   └── ...
@@ -157,3 +157,4 @@ For quick reference, the reviewer should prioritize inspecting:
 5. `src/ml/explainability.py` — Exact Pure-NumPy tree-path attribution implementation.
 6. `src/backend/contracts.py` — Immutable source-of-truth constants.
 7. `tests/test_phase8_7_scientific_corrections.py` & `tests/test_phase8_9_independent_scientific_audit.py` — Targeted verification tests.
+

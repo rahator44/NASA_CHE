@@ -26,7 +26,7 @@ from scripts.run_phase6_riverbank_migration import (
     create_study_aoi_raster_mask,
 )
 
-PROJECT_ROOT = Path("/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 METADATA_PATH = PROJECT_ROOT / "data/metadata/phase6_riverbank_migration_report.json"
 ZONES_TIF = PROJECT_ROOT / "data/processed/phase6/phase6_channel_change_zones.tif"
 EXT_BANK_TIF = PROJECT_ROOT / "data/processed/phase6/phase6_external_bank_erosion_candidate.tif"

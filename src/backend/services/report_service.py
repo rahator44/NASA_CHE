@@ -171,7 +171,8 @@ class ReportService:
             "summary_timestamp": "2026-11-05T00:00:00Z",
             "flood_statistics": {
                 "pre_monsoon_water_ha": contracts.VALID_JUNE_WATER_HA,
-                "monsoon_crest_water_ha": contracts.VALID_JULY_WATER_HA,
+                "monsoon_flood_observation_water_ha": contracts.VALID_JULY_WATER_HA,
+                "monsoon_crest_water_ha": contracts.VALID_JULY_WATER_HA,  # Preserved for backward compatibility
                 "net_water_expansion_ha": contracts.NET_VALID_DOMAIN_CHANGE_HA,
                 "persistent_water_ha": contracts.PERSISTENT_WATER_HA,
                 "newly_inundated_candidate_ha": contracts.NEWLY_INUNDATED_CANDIDATE_HA,

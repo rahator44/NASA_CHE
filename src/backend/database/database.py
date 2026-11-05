@@ -5,32 +5,46 @@ NASA Space Apps Challenge 2026: Dancing with the SARs
 
 import sqlite3
 import json
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from src.backend.config import settings
 
 
-def get_db_connection() -> sqlite3.Connection:
-    """Provides a SQLite database connection with row factory enabled, auto-initializing schema if needed."""
+class ClosingConnection(sqlite3.Connection):
+    """SQLite connection subclass that automatically closes when exited as a context manager."""
+    def __enter__(self):
+        super().__enter__()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        try:
+            super().__exit__(exc_type, exc_val, exc_tb)
+        finally:
+            self.close()
+
+
+def get_db_connection() -> ClosingConnection:
+    """Provides a SQLite database connection with row factory enabled, auto-initializing schema if needed, and closing on context exit."""
     settings.SQLITE_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    db_exists = settings.SQLITE_DB_PATH.exists()
-    conn = sqlite3.connect(str(settings.SQLITE_DB_PATH), timeout=20.0)
+    conn = sqlite3.connect(str(settings.SQLITE_DB_PATH), timeout=20.0, factory=ClosingConnection)
     conn.row_factory = sqlite3.Row
-    
-    # Check if table exists
-    cursor = conn.cursor()
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='jobs'")
-    if not cursor.fetchone():
-        _create_tables_and_seed(conn)
-        
+    # Ensure tables exist and precomputed analysis_runs are up-to-date
+    _create_tables_and_seed(conn)
     return conn
 
 
 def init_db() -> None:
     """Explicitly initializes SQLite schema for jobs, analysis runs, and system provenance."""
-    with sqlite3.connect(str(settings.SQLITE_DB_PATH), timeout=20.0) as conn:
-        _create_tables_and_seed(conn)
+    with get_db_connection() as conn:
+        pass
+    # Ensure packaged registered datasets have an initial cryptographic verification ledger entry
+    try:
+        from src.backend.services.dataset_service import DatasetService
+        DatasetService.verify_all_datasets(force=False)
+    except Exception:
+        pass
 
 
 def _create_tables_and_seed(conn: sqlite3.Connection) -> None:
@@ -65,6 +79,18 @@ def _create_tables_and_seed(conn: sqlite3.Connection) -> None:
             parameters TEXT,
             outputs TEXT,
             metadata TEXT
+        )
+    """)
+
+    # Cryptographic dataset verifications ledger
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS dataset_verifications (
+            dataset_id TEXT PRIMARY KEY,
+            verified_sha256 TEXT NOT NULL,
+            file_mtime REAL NOT NULL,
+            file_size INTEGER NOT NULL,
+            verified_at TEXT NOT NULL,
+            status TEXT NOT NULL
         )
     """)
     conn.commit()

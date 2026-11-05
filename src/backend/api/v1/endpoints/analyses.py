@@ -18,7 +18,7 @@ ANALYSIS_CATALOGUE = [
         "category": "Hydrological Hazard",
         "description": "Multi-temporal surface water transition mapping over the common valid domain using Adaptive Lee 5x5 Dual-AND Otsu.",
         "methodology": "Dual-AND polarization thresholding with spatial exclusion of radar shadow, layover, and ambiguous speckle noise.",
-        "scientific_basis": "Empirical histogram bimodal Otsu thresholding calibrated separately on pre-monsoon and monsoon crest scenes.",
+        "scientific_basis": "Empirical histogram bimodal Otsu thresholding calibrated separately on pre-monsoon low flow and mid-monsoon flood observation scenes.",
         "input_requirements": ["Sentinel-1 June 10 aligned", "Sentinel-1 July 16 aligned", "Quality masks"],
         "outputs_generated": ["phase5_flood_transitions.tif", "phase5_newly_inundated_candidate.tif", "phase5_cluster_statistics.csv"],
         "scientific_limitations": [

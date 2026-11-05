@@ -380,24 +380,23 @@ class RasterService:
 
     @classmethod
     def render_tile(cls, asset_id: str, z: int, x: int, y: int) -> bytes:
-        blank_png = cls._blank_png_tile()
         lookup = cls._lookup_asset(asset_id)
         if not lookup:
-            return blank_png
+            raise ValueError(f"Raster asset '{asset_id}' not found in catalog.")
         resolved_id, info = lookup
 
         full_path = settings.PROJECT_ROOT_DIR / info["relative_path"]
         if not full_path.exists():
-            return blank_png
+            raise FileNotFoundError(f"Raster asset file for '{asset_id}' not found at {full_path}")
 
         minx, miny, maxx, maxy = cls.tile_to_3857_bounds(z, x, y)
         tile_bounds = (minx, miny, maxx, maxy)
 
-        # Quick bbox intersection check
+        # Quick bbox intersection check: legitimate out-of-bounds tiles return transparent PNG
         meta = cls._read_quick_metadata(full_path)
         r_minx, r_miny, r_maxx, r_maxy = meta["bounds_epsg3857"]
         if maxx < r_minx or minx > r_maxx or maxy < r_miny or miny > r_maxy:
-            return blank_png
+            return cls._blank_png_tile()
 
         # Select resampling: nearest neighbor for categorical, bilinear for continuous
         is_categorical = info.get("layer_type") == "categorical"
@@ -407,24 +406,24 @@ class RasterService:
         if use_aoi_mask:
             cls._ensure_aoi_geojson_vsi()
 
+        warp_kwargs: Dict[str, Any] = {
+            "format": "MEM",
+            "width": 256,
+            "height": 256,
+            "outputBounds": tile_bounds,
+            "dstSRS": "EPSG:3857",
+            "resampleAlg": resample_alg,
+        }
+        if use_aoi_mask:
+            warp_kwargs["cutlineDSName"] = STUDY_AREA_AOI_GEOJSON_VSI
+            warp_kwargs["dstNodata"] = 255.0 if is_categorical else -9999.0
+
+        options = gdal.WarpOptions(**warp_kwargs)
+        out_ds = gdal.Warp("", str(full_path), options=options)
+        if not out_ds:
+            raise RuntimeError(f"GDAL Warp failed to produce in-memory tile dataset for {asset_id} at z={z}, x={x}, y={y}")
+
         try:
-            warp_kwargs: Dict[str, Any] = {
-                "format": "MEM",
-                "width": 256,
-                "height": 256,
-                "outputBounds": tile_bounds,
-                "dstSRS": "EPSG:3857",
-                "resampleAlg": resample_alg,
-            }
-            if use_aoi_mask:
-                warp_kwargs["cutlineDSName"] = STUDY_AREA_AOI_GEOJSON_VSI
-                warp_kwargs["dstNodata"] = 255.0 if is_categorical else -9999.0
-
-            options = gdal.WarpOptions(**warp_kwargs)
-            out_ds = gdal.Warp("", str(full_path), options=options)
-            if not out_ds:
-                return blank_png
-
             arr = out_ds.ReadAsArray()
             out_ds = None
             rgba = cls._colorize_array(arr, info)
@@ -433,8 +432,8 @@ class RasterService:
             img.save(buf, format="PNG")
             return buf.getvalue()
         except Exception as e:
-            logger.error("Tile rendering failed for %s at %d/%d/%d: %s", asset_id, z, x, y, e, exc_info=True)
-            return blank_png
+            logger.error("Tile colorization/encoding failed for %s at %d/%d/%d: %s", asset_id, z, x, y, e, exc_info=True)
+            raise RuntimeError(f"Tile encoding failed for {asset_id}: {e}")
 
     @staticmethod
     def _colorize_array(arr: np.ndarray, info: Dict[str, Any]) -> np.ndarray:

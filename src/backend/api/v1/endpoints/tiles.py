@@ -36,5 +36,10 @@ def get_map_tile(
         raise HTTPException(status_code=404, detail=f"Raster asset '{asset_id}' not found in catalog.")
 
     resolved_id, _ = lookup
-    png_bytes = RasterService.render_tile(resolved_id, z, x, y)
+    try:
+        png_bytes = RasterService.render_tile(resolved_id, z, x, y)
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Tile rendering failed for '{asset_id}': {e}")
     return Response(content=png_bytes, media_type="image/png")

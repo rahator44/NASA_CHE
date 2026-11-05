@@ -52,7 +52,7 @@
     "acquisition_calendar_year": {
       "authoritative_year": 2024,
       "pre_monsoon_acquisition": "2024-06-10T12:05:08Z",
-      "peak_monsoon_acquisition": "2024-07-16T12:05:07Z",
+      "monsoon_flood_observation_acquisition": "2024-07-16T12:05:07Z",
       "colloquial_references_corrected": "Historical prompt mentions of 2026 reconciled to 2024 satellite capture"
     },
     "baseline_spatial_agreement": {

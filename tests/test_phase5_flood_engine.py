@@ -14,7 +14,7 @@ from osgeo import gdal
 
 from scripts.run_phase5_flood_engine import create_study_aoi_raster_mask
 
-PROJECT_ROOT = Path("/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 METADATA_PATH = PROJECT_ROOT / "data/metadata/phase5_flood_change_report.json"
 TRANSITION_TIF = PROJECT_ROOT / "data/processed/phase5/phase5_flood_transitions.tif"
 NEW_INUNDATION_TIF = PROJECT_ROOT / "data/processed/phase5/phase5_newly_inundated_candidate.tif"

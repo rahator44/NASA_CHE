@@ -29,24 +29,17 @@ from src.backend import contracts
 class TestPhase87ScientificCorrections(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.project_root = "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR"
-        cls.model_path = os.path.join(
-            cls.project_root, "models/phase7a/phase7a_random_forest_model.joblib"
-        )
-        cls.samples_path = os.path.join(
-            cls.project_root, "data/outputs/phase7a/statistics/phase7a_training_samples.csv"
-        )
-        if os.path.exists(cls.model_path):
-            cls.model = RandomForestClassifier.load(cls.model_path)
-        else:
-            cls.model = None
-
-        if os.path.exists(cls.samples_path):
-            cls.df = pd.read_csv(cls.samples_path)
-            cls.test_df = cls.df[cls.df["split"] == "test"].copy()
-        else:
-            cls.df = None
-            cls.test_df = None
+        from pathlib import Path
+        cls.project_root = Path(__file__).resolve().parent.parent
+        cls.model_path = cls.project_root / "models/phase7a/phase7a_random_forest_model.joblib"
+        cls.samples_path = cls.project_root / "data/outputs/phase7a/statistics/phase7a_training_samples.csv"
+        
+        assert cls.model_path.exists(), f"Required model file not found at {cls.model_path}"
+        assert cls.samples_path.exists(), f"Required samples file not found at {cls.samples_path}"
+        
+        cls.model = RandomForestClassifier.load(str(cls.model_path))
+        cls.df = pd.read_csv(cls.samples_path)
+        cls.test_df = cls.df[cls.df["split"] == "test"].copy()
 
     def test_01_feature_schema_validation(self):
         """Feature schema validation strictly enforces the 6 authoritative features and order."""
@@ -87,9 +80,6 @@ class TestPhase87ScientificCorrections(unittest.TestCase):
 
     def test_02_held_out_test_confusion_matrix(self):
         """Frozen RF model matches authoritative confusion matrix on held-out test split (N=6,124)."""
-        if self.model is None or self.test_df is None:
-            self.skipTest("Model or samples not found")
-
         X_test = self.test_df[AUTHORITATIVE_FEATURE_ORDER].values
         y_test = self.test_df["label"].values
         self.assertEqual(len(X_test), 6124)
@@ -109,9 +99,6 @@ class TestPhase87ScientificCorrections(unittest.TestCase):
 
     def test_03_ensemble_root_additivity_on_test_samples(self):
         """Ensemble root mode satisfies exact additivity (|residual| < 1e-5) across >= 100 test samples."""
-        if self.model is None or self.test_df is None:
-            self.skipTest("Model or samples not found")
-
         explainer = TreePathExplainer(self.model, feature_names=AUTHORITATIVE_FEATURE_ORDER)
         X_test = self.test_df[AUTHORITATIVE_FEATURE_ORDER].values[:120]
 
@@ -128,9 +115,6 @@ class TestPhase87ScientificCorrections(unittest.TestCase):
 
     def test_04_background_baseline_additivity_mathematical_correction(self):
         """Background baseline mode satisfies exact additivity (|residual| < 1e-5) across >= 100 test samples."""
-        if self.model is None or self.test_df is None:
-            self.skipTest("Model or samples not found")
-
         train_df = self.df[self.df["split"] == "train"].copy()
         bg_samples = train_df[AUTHORITATIVE_FEATURE_ORDER].values[:50]
 
@@ -154,9 +138,6 @@ class TestPhase87ScientificCorrections(unittest.TestCase):
 
     def test_05_background_mode_requires_background_data(self):
         """Calling baseline_mode='background' without setting background data raises ValueError."""
-        if self.model is None:
-            self.skipTest("Model not found")
-
         explainer = TreePathExplainer(self.model, feature_names=AUTHORITATIVE_FEATURE_ORDER)
         sample = np.array([-15.0, -22.0, 7.0, 0.68, 120.0, 80.0])
         with self.assertRaises(ValueError) as ctx:
@@ -165,9 +146,6 @@ class TestPhase87ScientificCorrections(unittest.TestCase):
 
     def test_06_split_threshold_and_nextafter_boundary_additivity(self):
         """Boundary split threshold and np.nextafter cases satisfy exact additivity."""
-        if self.model is None or self.test_df is None:
-            self.skipTest("Model or samples not found")
-
         train_df = self.df[self.df["split"] == "train"].copy()
         bg_samples = train_df[AUTHORITATIVE_FEATURE_ORDER].values[:30]
         explainer = TreePathExplainer(

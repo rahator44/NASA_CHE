@@ -7,17 +7,27 @@ Covers:
 - Independent scientific recalculations directly from raw CSV/rasters
 - Negative-control mutation tests
 - Model path traversal security checks
+- Strict dataset ID matching and cryptographic verification invalidation
+- Real GDAL Web Mercator tile rendering, boundary masking, palette purity & error observability
 """
 
 import os
+import io
+import time
+import tempfile
 import unittest
+from pathlib import Path
 import numpy as np
 import pandas as pd
+from PIL import Image
 from fastapi.testclient import TestClient
 
 from src.backend.main import app
 from src.backend import contracts
 from src.backend.services.model_service import ModelService
+from src.backend.services.dataset_service import DatasetService
+from src.backend.services.raster_service import RasterService, RASTER_CATALOG
+from src.backend.database.database import get_db_connection
 from src.ml.random_forest import RandomForestClassifier
 from src.ml.explainability import (
     TreePathExplainer,
@@ -25,26 +35,31 @@ from src.ml.explainability import (
     AUTHORITATIVE_FEATURE_ORDER,
 )
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
 
 class TestPhase89IndependentScientificAudit(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.client = TestClient(app)
-        cls.project_root = "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR"
-        cls.model_path = os.path.join(
-            cls.project_root, "models/phase7a/phase7a_random_forest_model.joblib"
+        cls.project_root = PROJECT_ROOT
+        cls.model_path = cls.project_root / "models/phase7a/phase7a_random_forest_model.joblib"
+        cls.transects_csv = (
+            cls.project_root
+            / "data/outputs/phase6_1/statistics/phase6_1_transect_displacement_audit.csv"
         )
-        cls.transects_csv = os.path.join(
-            cls.project_root,
-            "data/outputs/phase6_1/statistics/phase6_1_transect_displacement_audit.csv",
-        )
-        cls.samples_csv = os.path.join(
-            cls.project_root,
-            "data/outputs/phase7a/statistics/phase7a_training_samples.csv",
+        cls.samples_csv = (
+            cls.project_root
+            / "data/outputs/phase7a/statistics/phase7a_training_samples.csv"
         )
 
+        # Assert local existence of required files directly (never silently skip!)
+        assert cls.model_path.exists(), f"Model artifact missing at {cls.model_path}"
+        assert cls.transects_csv.exists(), f"Transects CSV missing at {cls.transects_csv}"
+        assert cls.samples_csv.exists(), f"Samples CSV missing at {cls.samples_csv}"
+
     # =========================================================================
-    # 1. End-to-End API Integration Tests (Task 14)
+    # 1. End-to-End API Integration Tests
     # =========================================================================
 
     def test_01_api_health_and_root(self):
@@ -243,14 +258,12 @@ class TestPhase89IndependentScientificAudit(unittest.TestCase):
         self.assertEqual(job_data["progress_pct"], 100.0)
 
     # =========================================================================
-    # 2. Independent Scientific Recalculations from Raw CSVs (Task 15)
+    # 2. Independent Scientific Recalculations from Raw CSVs
     # =========================================================================
 
     def test_11_independent_recalculation_riverbank_statistics(self):
         """Independent recalculation of riverbank statistics from raw audit CSV matches exactly."""
-        if not os.path.exists(self.transects_csv):
-            self.skipTest("Transect audit CSV not found")
-
+        self.assertTrue(self.transects_csv.exists(), "Transect audit CSV not found")
         df = pd.read_csv(self.transects_csv)
         self.assertEqual(len(df), 154)
 
@@ -277,10 +290,10 @@ class TestPhase89IndependentScientificAudit(unittest.TestCase):
 
     def test_12_independent_recalculation_model_metrics(self):
         """Independent recalculation of RF confusion matrix from raw training samples CSV matches exactly."""
-        if not os.path.exists(self.samples_csv) or not os.path.exists(self.model_path):
-            self.skipTest("Samples CSV or model not found")
+        self.assertTrue(self.samples_csv.exists(), "Samples CSV missing")
+        self.assertTrue(self.model_path.exists(), "Model artifact missing")
 
-        model = RandomForestClassifier.load(self.model_path)
+        model = RandomForestClassifier.load(str(self.model_path))
         df = pd.read_csv(self.samples_csv)
         test_df = df[df["split"] == "test"].copy()
         self.assertEqual(len(test_df), 6124)
@@ -311,20 +324,47 @@ class TestPhase89IndependentScientificAudit(unittest.TestCase):
     # =========================================================================
 
     def test_13_negative_control_feature_perturbation_detection(self):
-        """Perturbing feature values breaks expected prediction consistency (negative-control test)."""
-        if not os.path.exists(self.model_path):
-            self.skipTest("Model not found")
+        """Negative control: model discriminates genuine water vs dry land test samples and detects perturbations."""
+        self.assertTrue(self.model_path.exists(), "Model artifact missing")
+        self.assertTrue(self.samples_csv.exists(), "Samples CSV missing")
 
-        model = RandomForestClassifier.load(self.model_path)
-        sample = np.array([-15.0, -22.0, 7.0, 0.68, 120.0, 80.0])
-        orig_p = model.predict_proba(sample.reshape(1, -1))[0, 1]
+        model = RandomForestClassifier.load(str(self.model_path))
+        df = pd.read_csv(self.samples_csv)
+        test_df = df[df["split"] == "test"].copy()
+        self.assertGreater(len(test_df), 0)
 
-        # Mutate VV backscatter by +20 dB (strong dry land return)
-        mutated_sample = sample.copy()
-        mutated_sample[0] = +5.0  # High backscatter
-        mutated_p = model.predict_proba(mutated_sample.reshape(1, -1))[0, 1]
+        # Genuine held-out water samples (label == 1) and dry land samples (label == 0)
+        water_df = test_df[test_df["label"] == 1]
+        land_df = test_df[test_df["label"] == 0]
 
-        # Water probability must drop significantly under high radar backscatter
+        self.assertGreater(len(water_df), 0)
+        self.assertGreater(len(land_df), 0)
+
+        water_samples = water_df[AUTHORITATIVE_FEATURE_ORDER].values
+        land_samples = land_df[AUTHORITATIVE_FEATURE_ORDER].values
+
+        # Predict probability across test samples
+        p_water = model.predict_proba(water_samples)[:, 1]
+        p_land = model.predict_proba(land_samples)[:, 1]
+
+        # Water samples have significantly higher mean candidate water probability than land
+        self.assertGreater(float(np.mean(p_water)), float(np.mean(p_land)))
+        # Over 90% of water samples exceed the optimal threshold 0.35 (demonstrating 0.9214 recall)
+        self.assertGreater(float(np.mean(p_water >= 0.35)), 0.90)
+
+        # Perturbation test: take a genuine water test sample and perturb its features with dry land values
+        water_sample = water_df.iloc[10][AUTHORITATIVE_FEATURE_ORDER].values.astype(float)
+        orig_p = float(model.predict_proba(water_sample.reshape(1, -1))[0, 1])
+
+        land_sample = land_df.iloc[10][AUTHORITATIVE_FEATURE_ORDER].values.astype(float)
+
+        # Replace radar backscatter features with land return
+        mutated_sample = water_sample.copy()
+        mutated_sample[0] = land_sample[0]
+        mutated_sample[1] = land_sample[1]
+        mutated_p = float(model.predict_proba(mutated_sample.reshape(1, -1))[0, 1])
+
+        # Water probability drops significantly toward dry land probability
         self.assertLess(mutated_p, orig_p)
         self.assertNotEqual(round(orig_p, 4), round(mutated_p, 4))
 
@@ -333,6 +373,133 @@ class TestPhase89IndependentScientificAudit(unittest.TestCase):
         with self.assertRaises(ValueError) as ctx:
             ModelService.load_model("nonexistent_model")
         self.assertIn("not registered", str(ctx.exception))
+
+        # Explicit path traversal tests via ModelService.validate_model_path
+        traversal_attempts = [
+            Path("../../etc/passwd"),
+            Path("/tmp/malicious_model.joblib"),
+            self.project_root / "models/phase7a/../../etc/shadow",
+            Path("/etc/hosts"),
+        ]
+        for bad_path in traversal_attempts:
+            with self.assertRaises(ValueError) as ctx2:
+                ModelService.validate_model_path(bad_path)
+            self.assertIn("Security violation", str(ctx2.exception))
+
+    # =========================================================================
+    # 4. Strict Dataset ID Validation & Cryptographic Ledger Tests
+    # =========================================================================
+
+    def test_15_dataset_exact_id_and_checksum_integrity(self):
+        """Dataset service enforces exact dataset IDs and detects checksum mismatches & modifications."""
+        # Exact ID lookup succeeds
+        res_exact = self.client.get("/api/v1/datasets/s1a_iw_grd_20240610_aligned")
+        self.assertEqual(res_exact.status_code, 200)
+        data_exact = res_exact.json()
+        self.assertEqual(data_exact["dataset_id"], "s1a_iw_grd_20240610_aligned")
+        self.assertTrue(data_exact["checksum_verified"])
+        self.assertEqual(data_exact["quality_status"], "VERIFIED")
+
+        # Partial substring lookup must return 404 (exact match required)
+        res_partial = self.client.get("/api/v1/datasets/s1a")
+        self.assertEqual(res_partial.status_code, 404)
+        res_partial2 = self.client.get("/api/v1/datasets/20240610")
+        self.assertEqual(res_partial2.status_code, 404)
+
+        # Test checksum verification under file modification and mismatch
+        with tempfile.NamedTemporaryFile(suffix=".tif", delete=False) as tmp:
+            tmp.write(b"EarthPulseTestContentOriginal")
+            tmp_path = Path(tmp.name)
+
+        try:
+            fake_item = {
+                "dataset_id": "test_mismatch_dataset",
+                "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            }
+            # Manually insert verification with CHECKSUM_MISMATCH
+            stat = tmp_path.stat()
+            with get_db_connection() as conn:
+                conn.execute("""
+                    INSERT OR REPLACE INTO dataset_verifications
+                    (dataset_id, verified_sha256, file_mtime, file_size, verified_at, status)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                """, ("test_mismatch_dataset", "badhash", stat.st_mtime, stat.st_size, "2026-01-01T00:00:00Z", "CHECKSUM_MISMATCH"))
+                conn.commit()
+
+            verified, qstatus = DatasetService._get_verification_status("test_mismatch_dataset", fake_item, tmp_path)
+            self.assertFalse(verified)
+            self.assertEqual(qstatus, "CHECKSUM_MISMATCH")
+
+            # Now modify file st_mtime -> status must become UNVERIFIED_MODIFIED
+            time.sleep(0.02)
+            tmp_path.write_bytes(b"EarthPulseTestContentModifiedData")
+
+            verified_mod, qstatus_mod = DatasetService._get_verification_status("test_mismatch_dataset", fake_item, tmp_path)
+            self.assertFalse(verified_mod)
+            self.assertEqual(qstatus_mod, "UNVERIFIED_MODIFIED")
+        finally:
+            if tmp_path.exists():
+                tmp_path.unlink()
+            with get_db_connection() as conn:
+                conn.execute("DELETE FROM dataset_verifications WHERE dataset_id = ?", ("test_mismatch_dataset",))
+                conn.commit()
+
+    # =========================================================================
+    # 5. Real GDAL Tile Integration & Failure Observability Tests
+    # =========================================================================
+
+    def test_16_real_gdal_tile_rendering_and_palette_integrity(self):
+        """GDAL Web Mercator tile rendering correctly handles cutline boundaries and preserves discrete palettes."""
+        # 1. Tile 11/1533/878 intersects AOI cutline boundary for phase5_flood_transitions
+        res_boundary = self.client.get("/api/v1/tiles/phase5_flood_transitions/11/1533/878.png")
+        self.assertEqual(res_boundary.status_code, 200)
+        img_boundary = Image.open(io.BytesIO(res_boundary.content))
+        self.assertEqual(img_boundary.size, (256, 256))
+        arr_boundary = np.array(img_boundary)
+        alphas = arr_boundary[:, :, 3]
+
+        # Pixels inside cutline have alpha > 0, pixels outside cutline have alpha == 0
+        inside_count = int(np.sum(alphas > 0))
+        outside_count = int(np.sum(alphas == 0))
+        self.assertGreater(inside_count, 1000)
+        self.assertGreater(outside_count, 1000)
+        self.assertEqual(inside_count + outside_count, 256 * 256)
+
+        # 2. Out-of-bounds tile (11/1530/878) outside AOI returns 100% transparent PNG
+        res_oob = self.client.get("/api/v1/tiles/phase5_flood_transitions/11/1530/878.png")
+        self.assertEqual(res_oob.status_code, 200)
+        img_oob = Image.open(io.BytesIO(res_oob.content))
+        arr_oob = np.array(img_oob)
+        self.assertTrue(np.all(arr_oob[:, :, 3] == 0))
+
+        # 3. Categorical color integrity: unique RGBA colors match authoritative palette
+        palette_colors = set(tuple(c) for c in RASTER_CATALOG["phase5_flood_transitions"]["palette"].values())
+        unique_pixels = set(tuple(p) for p in arr_boundary.reshape(-1, 4))
+        for px in unique_pixels:
+            self.assertIn(px, palette_colors, f"Color {px} not in authoritative palette!")
+
+    def test_17_tile_failure_observability(self):
+        """Tile renderer does not silently mask internal errors or missing files as blank PNGs."""
+        # 1. Non-existent asset ID raises ValueError from RasterService and 404 from endpoint
+        with self.assertRaises(ValueError):
+            RasterService.render_tile("completely_bogus_asset_123", 11, 1533, 878)
+        res_404_asset = self.client.get("/api/v1/tiles/completely_bogus_asset_123/11/1533/878.png")
+        self.assertEqual(res_404_asset.status_code, 404)
+
+        # 2. Valid asset entry pointing to missing file raises FileNotFoundError from RasterService and 404 from endpoint
+        RASTER_CATALOG["test_missing_raster_asset"] = {
+            "relative_path": "data/processed/nonexistent_folder/missing.tif",
+            "layer_name": "Test Missing",
+            "layer_type": "categorical",
+            "palette": {0: [0, 0, 0, 0]},
+        }
+        try:
+            with self.assertRaises(FileNotFoundError):
+                RasterService.render_tile("test_missing_raster_asset", 11, 1533, 878)
+            res_404_missing = self.client.get("/api/v1/tiles/test_missing_raster_asset/11/1533/878.png")
+            self.assertEqual(res_404_missing.status_code, 404)
+        finally:
+            RASTER_CATALOG.pop("test_missing_raster_asset", None)
 
 
 if __name__ == "__main__":

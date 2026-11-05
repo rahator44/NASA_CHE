@@ -74,6 +74,8 @@ logs/
 *.pre_phase8_4_backup
 *.backup
 *.db.local*
+*.db
+data/metadata/*.db
 
 # Staging directories
 EarthPulse-SAR-Scientific-Data/
@@ -84,7 +86,6 @@ EarthPulse-SAR-Scientific-Data/
 !models/phase7a/phase7a_random_forest_model.joblib
 !data/metadata/
 !data/metadata/*.json
-!data/metadata/*.db
 !data/outputs/**
 !data/outputs/**/*.csv
 !data/outputs/**/*.json

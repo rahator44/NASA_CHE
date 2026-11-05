@@ -114,7 +114,7 @@ class TestPhase7B1IntegritySuite:
         x_test = np.array([0.2, 0.8])
         rf_dummy = RandomForestClassifier(n_estimators=1)
         rf_dummy.estimators_ = [t1]
-        explainer = TreePathExplainer(rf_dummy, feature_names=["f0", "f1"])
+        explainer = TreePathExplainer(rf_dummy, feature_names=["f0", "f1"], allow_custom_schema=True)
         saabas_res = explainer.explain_instance(x_test)
         
         base_exact, shap_exact = compute_exact_tree_shapley(t1, x_test, n_features=2)
@@ -137,7 +137,7 @@ class TestPhase7B1IntegritySuite:
         rf_wrap = RandomForestClassifier(n_estimators=1)
         rf_wrap.estimators_ = [t]
         
-        explainer = TreePathExplainer(rf_wrap, feature_names=["f0", "f1"])
+        explainer = TreePathExplainer(rf_wrap, feature_names=["f0", "f1"], allow_custom_schema=True)
         x = np.array([0.2, 0.2])
         res = explainer.explain_instance(x)
         
@@ -174,7 +174,7 @@ class TestPhase7B1IntegritySuite:
         rf_wrap = RandomForestClassifier(n_estimators=1)
         rf_wrap.estimators_ = [t]
         
-        explainer = TreePathExplainer(rf_wrap, feature_names=["f0", "f1"])
+        explainer = TreePathExplainer(rf_wrap, feature_names=["f0", "f1"], allow_custom_schema=True)
         x = np.array([0.2, 10.0])
         res = explainer.explain_instance(x)
         

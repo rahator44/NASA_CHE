@@ -41,6 +41,17 @@ class ModelService:
         return models
 
     @classmethod
+    def validate_model_path(cls, path: Path) -> Path:
+        """Ensures a model path resolves strictly within the trusted models/phase7a directory."""
+        trusted_dir = (settings.PROJECT_ROOT_DIR / "models/phase7a").resolve()
+        resolved = Path(path).resolve()
+        if not str(resolved).startswith(str(trusted_dir)):
+            raise ValueError(
+                f"Security violation: path {resolved} is outside trusted directory {trusted_dir}."
+            )
+        return resolved
+
+    @classmethod
     def load_model(cls, model_id: str):
         """Loads a registered model artifact with strict path traversal prevention."""
         from src.ml.random_forest import RandomForestClassifier
@@ -49,13 +60,10 @@ class ModelService:
             raise ValueError(f"Model '{model_id}' is not registered in model catalog.")
 
         rel_path = model_info["artifact_path"]
-        trusted_dir = (settings.PROJECT_ROOT_DIR / "models/phase7a").resolve()
-        artifact_path = (settings.PROJECT_ROOT_DIR / rel_path).resolve()
+        artifact_path = cls.validate_model_path(settings.PROJECT_ROOT_DIR / rel_path)
 
-        if not str(artifact_path).startswith(str(trusted_dir)) or not artifact_path.exists():
-            raise ValueError(
-                f"Security violation or file missing: artifact path {artifact_path} is outside trusted directory {trusted_dir}."
-            )
+        if not artifact_path.exists():
+            raise FileNotFoundError(f"Model artifact file missing at {artifact_path}.")
 
         return RandomForestClassifier.load(str(artifact_path))
 

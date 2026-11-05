@@ -116,15 +116,20 @@ class TreePathExplainer:
         model: Any,
         background_X: Optional[np.ndarray] = None,
         feature_names: Optional[List[str]] = None,
-        validate_features: bool = False,
+        validate_features: bool = True,
+        allow_custom_schema: bool = False,
     ):
         self.model = model
         if feature_names is None:
             self.feature_names = list(AUTHORITATIVE_FEATURE_ORDER)
         else:
-            if validate_features or (len(feature_names) == len(AUTHORITATIVE_FEATURE_ORDER) and set(feature_names) == set(AUTHORITATIVE_FEATURE_ORDER)):
+            if allow_custom_schema:
+                # Explicit separated custom-schema mode for small-tree scientific test fixtures
+                self.feature_names = list(feature_names)
+            else:
+                # Enforce authoritative 6-feature SAR schema
                 validate_feature_schema(feature_names)
-            self.feature_names = list(feature_names)
+                self.feature_names = list(feature_names)
 
         self.n_features = len(self.feature_names)
 

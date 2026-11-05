@@ -46,3 +46,8 @@ endpoint,http_method,parameters,expected_status,observed_status,content_type,ver
 /api/v1/jobs,POST,job_type=arbitrary_command,400,400,application/json,Unpermitted action blocked with explicit allowlist error,VERIFIED_PASS
 /api/v1/jobs,POST,region_id=invalid_region,404,404,application/json,Explicit 404 for unknown job region verified,VERIFIED_PASS
 /api/v1/jobs,GET,limit=50,200,200,application/json,Job ledger records retrieved from SQLite,VERIFIED_PASS
+/api/v1/datasets/s1a_iw_grd_20240610_aligned,GET,,200,200,application/json,Exact dataset ID lookup verified with SHA-256 and quality status VERIFIED,VERIFIED_PASS
+/api/v1/datasets/s1a,GET,,404,404,application/json,Partial substring dataset ID rejected with explicit 404,VERIFIED_PASS
+/api/v1/tiles/phase5_flood_transitions/11/1533/878.png,GET,,200,200,image/png,Cutline intersecting tile rendered with 16732 non-zero alpha and 48804 zero alpha pixels,VERIFIED_PASS
+/api/v1/tiles/phase5_flood_transitions/11/1530/878.png,GET,,200,200,image/png,Out-of-AOI tile rendered as 100% transparent PNG with 200 OK,VERIFIED_PASS
+
