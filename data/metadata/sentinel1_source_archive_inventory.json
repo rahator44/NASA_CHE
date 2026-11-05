@@ -1,0 +1,331 @@
+{
+  "sentinel1_archives": [
+    {
+      "archive_name": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.zip",
+      "relative_path": "data/raw/sentinel1/S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.zip",
+      "sha256": "91b2b46e6682bfd678371e51f625dbf35b10bd68ca970c1369a385cbfa4e6dbc",
+      "acquisition_date": "2024-06-10T12:05:08",
+      "mission": "Sentinel-1A",
+      "instrument": "C-SAR",
+      "mode": "IW",
+      "product_type": "GRDH",
+      "polarization": "VV+VH",
+      "orbit_pass": "Ascending",
+      "file_size_bytes": 1739698625,
+      "internal_file_count": 26,
+      "manifest": [
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE-report-20240610T144125.pdf",
+          "size_bytes": 15663,
+          "compressed_bytes": 15663
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/calibration/calibration-s1a-iw-grd-vh-20240610t120508-20240610t120533-054261-06999f-002.xml",
+          "size_bytes": 1017967,
+          "compressed_bytes": 1017967
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/calibration/calibration-s1a-iw-grd-vv-20240610t120508-20240610t120533-054261-06999f-001.xml",
+          "size_bytes": 1017967,
+          "compressed_bytes": 1017967
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/calibration/noise-s1a-iw-grd-vh-20240610t120508-20240610t120533-054261-06999f-002.xml",
+          "size_bytes": 414951,
+          "compressed_bytes": 414951
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/calibration/noise-s1a-iw-grd-vv-20240610t120508-20240610t120533-054261-06999f-001.xml",
+          "size_bytes": 414951,
+          "compressed_bytes": 414951
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/rfi/rfi-s1a-iw-grd-vh-20240610t120508-20240610t120533-054261-06999f-002.xml",
+          "size_bytes": 47853,
+          "compressed_bytes": 47853
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/rfi/rfi-s1a-iw-grd-vv-20240610t120508-20240610t120533-054261-06999f-001.xml",
+          "size_bytes": 47856,
+          "compressed_bytes": 47856
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/s1a-iw-grd-vh-20240610t120508-20240610t120533-054261-06999f-002.xml",
+          "size_bytes": 1821638,
+          "compressed_bytes": 1821638
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/s1a-iw-grd-vv-20240610t120508-20240610t120533-054261-06999f-001.xml",
+          "size_bytes": 1821676,
+          "compressed_bytes": 1821676
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/manifest.safe",
+          "size_bytes": 24534,
+          "compressed_bytes": 24534
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/measurement/s1a-iw-grd-vh-20240610t120508-20240610t120533-054261-06999f-002.tiff",
+          "size_bytes": 866116592,
+          "compressed_bytes": 866116592
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/measurement/s1a-iw-grd-vv-20240610t120508-20240610t120533-054261-06999f-001.tiff",
+          "size_bytes": 866116592,
+          "compressed_bytes": 866116592
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/preview/icons/logo.png",
+          "size_bytes": 95280,
+          "compressed_bytes": 95280
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/preview/map-overlay.kml",
+          "size_bytes": 1018,
+          "compressed_bytes": 1018
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/preview/product-preview.html",
+          "size_bytes": 3673,
+          "compressed_bytes": 3673
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/preview/quick-look.png",
+          "size_bytes": 349657,
+          "compressed_bytes": 349657
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/preview/thumbnail.png",
+          "size_bytes": 117928,
+          "compressed_bytes": 117928
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/support/s1-level-1-calibration.xsd",
+          "size_bytes": 6427,
+          "compressed_bytes": 6427
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/support/s1-level-1-measurement.xsd",
+          "size_bytes": 471,
+          "compressed_bytes": 471
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/support/s1-level-1-noise.xsd",
+          "size_bytes": 7290,
+          "compressed_bytes": 7290
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/support/s1-level-1-product.xsd",
+          "size_bytes": 149999,
+          "compressed_bytes": 149999
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/support/s1-level-1-quicklook.xsd",
+          "size_bytes": 469,
+          "compressed_bytes": 469
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/support/s1-level-1-rfi.xsd",
+          "size_bytes": 16595,
+          "compressed_bytes": 16595
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/support/s1-map-overlay.xsd",
+          "size_bytes": 450,
+          "compressed_bytes": 450
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/support/s1-object-types.xsd",
+          "size_bytes": 61720,
+          "compressed_bytes": 61720
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/support/s1-product-preview.xsd",
+          "size_bytes": 440,
+          "compressed_bytes": 440
+        }
+      ]
+    },
+    {
+      "archive_name": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.zip",
+      "relative_path": "data/raw/sentinel1/S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.zip",
+      "sha256": "1b71d31b3bb9fe83426d5f832158fa6a0b0bdab935053dd1662743c35d358ab4",
+      "acquisition_date": "2024-07-16T12:05:07",
+      "mission": "Sentinel-1A",
+      "instrument": "C-SAR",
+      "mode": "IW",
+      "product_type": "GRDH",
+      "polarization": "VV+VH",
+      "orbit_pass": "Ascending",
+      "file_size_bytes": 1038705942,
+      "internal_file_count": 33,
+      "manifest": [
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/",
+          "size_bytes": 0,
+          "compressed_bytes": 0
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE-report-20240716T144116.pdf",
+          "size_bytes": 15669,
+          "compressed_bytes": 12984
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/",
+          "size_bytes": 0,
+          "compressed_bytes": 0
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/calibration/",
+          "size_bytes": 0,
+          "compressed_bytes": 0
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/calibration/calibration-s1a-iw-grd-vh-20240716t120507-20240716t120532-054786-06abd2-002.xml",
+          "size_bytes": 1017967,
+          "compressed_bytes": 194210
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/calibration/calibration-s1a-iw-grd-vv-20240716t120507-20240716t120532-054786-06abd2-001.xml",
+          "size_bytes": 1017967,
+          "compressed_bytes": 194210
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/calibration/noise-s1a-iw-grd-vh-20240716t120507-20240716t120532-054786-06abd2-002.xml",
+          "size_bytes": 427310,
+          "compressed_bytes": 105224
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/calibration/noise-s1a-iw-grd-vv-20240716t120507-20240716t120532-054786-06abd2-001.xml",
+          "size_bytes": 427310,
+          "compressed_bytes": 105928
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/rfi/",
+          "size_bytes": 0,
+          "compressed_bytes": 0
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/rfi/rfi-s1a-iw-grd-vh-20240716t120507-20240716t120532-054786-06abd2-002.xml",
+          "size_bytes": 47854,
+          "compressed_bytes": 3766
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/rfi/rfi-s1a-iw-grd-vv-20240716t120507-20240716t120532-054786-06abd2-001.xml",
+          "size_bytes": 47855,
+          "compressed_bytes": 3587
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/s1a-iw-grd-vh-20240716t120507-20240716t120532-054786-06abd2-002.xml",
+          "size_bytes": 1821783,
+          "compressed_bytes": 530334
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/s1a-iw-grd-vv-20240716t120507-20240716t120532-054786-06abd2-001.xml",
+          "size_bytes": 1821808,
+          "compressed_bytes": 532149
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/manifest.safe",
+          "size_bytes": 24534,
+          "compressed_bytes": 3823
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/measurement/",
+          "size_bytes": 0,
+          "compressed_bytes": 0
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/measurement/s1a-iw-grd-vh-20240716t120507-20240716t120532-054786-06abd2-002.tiff",
+          "size_bytes": 866235282,
+          "compressed_bytes": 476648148
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/measurement/s1a-iw-grd-vv-20240716t120507-20240716t120532-054786-06abd2-001.tiff",
+          "size_bytes": 866235282,
+          "compressed_bytes": 559870050
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/preview/",
+          "size_bytes": 0,
+          "compressed_bytes": 0
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/preview/icons/",
+          "size_bytes": 0,
+          "compressed_bytes": 0
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/preview/icons/logo.png",
+          "size_bytes": 95280,
+          "compressed_bytes": 95280
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/preview/map-overlay.kml",
+          "size_bytes": 1018,
+          "compressed_bytes": 418
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/preview/product-preview.html",
+          "size_bytes": 3673,
+          "compressed_bytes": 738
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/preview/quick-look.png",
+          "size_bytes": 362103,
+          "compressed_bytes": 362103
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/",
+          "size_bytes": 0,
+          "compressed_bytes": 0
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/s1-level-1-calibration.xsd",
+          "size_bytes": 6427,
+          "compressed_bytes": 1325
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/s1-level-1-measurement.xsd",
+          "size_bytes": 471,
+          "compressed_bytes": 303
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/s1-level-1-noise.xsd",
+          "size_bytes": 7290,
+          "compressed_bytes": 1388
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/s1-level-1-product.xsd",
+          "size_bytes": 149999,
+          "compressed_bytes": 18948
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/s1-level-1-quicklook.xsd",
+          "size_bytes": 469,
+          "compressed_bytes": 304
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/s1-level-1-rfi.xsd",
+          "size_bytes": 16595,
+          "compressed_bytes": 2248
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/s1-map-overlay.xsd",
+          "size_bytes": 450,
+          "compressed_bytes": 278
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/s1-object-types.xsd",
+          "size_bytes": 62179,
+          "compressed_bytes": 6487
+        },
+        {
+          "filename": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/support/s1-product-preview.xsd",
+          "size_bytes": 440,
+          "compressed_bytes": 275
+        }
+      ]
+    }
+  ]
+}

@@ -68,61 +68,74 @@ class TreePathExplainer:
 
     def __init__(self, model: Any, background_X: Optional[np.ndarray] = None, feature_names: Optional[List[str]] = None):
         self.model = model
-        self.feature_names = feature_names or ["vv_db", "vh_db", "vv_minus_vh_db", "cross_pol_ratio", "texture_vv", "texture_vh"]
+        self.feature_names = feature_names or ["vv_db", "vh_db", "cross_pol_ratio", "vv_minus_vh_db", "texture_vv", "texture_vh"]
         self.n_features = len(self.feature_names)
 
-        # Compute global base value phi_0 across background samples or tree roots
+        # Baseline 1: Ensemble root probability baseline (exact telescoping property)
+        root_probs = [float(t.root.prob) for t in self.model.estimators_]
+        self.root_base_value = float(np.mean(root_probs))
+        self.base_value = self.root_base_value
+
+        # Baseline 2: Background dataset empirical baseline
         if background_X is not None and len(background_X) > 0:
-            probs = self.model.predict_proba(background_X)[:, 1]
-            self.base_value = float(np.mean(probs))
-        else:
-            # Fallback to mean root probability across ensemble trees
-            root_probs = [t.root.prob for t in self.model.estimators_]
-            self.base_value = float(np.mean(root_probs))
+            bg_f32 = np.asarray(background_X, dtype=np.float32)
+            probs = self.model.predict_proba(bg_f32)[:, 1]
+            self.background_base_value = float(np.mean(probs))
+            self.base_value = self.background_base_value
 
     def _explain_tree(self, tree: Any, x: np.ndarray) -> Tuple[float, np.ndarray]:
         """
         Traverses a single decision tree, accumulating incremental probability changes per feature.
+        Uses float32 inference representation for feature values to ensure exact branch agreement with
+        RandomForestClassifier.predict_proba.
         """
+        x_infer = np.asarray(x, dtype=np.float32).ravel()
         attr = np.zeros(self.n_features, dtype=np.float64)
         node = tree.root
-        base_val = node.prob
+        base_val = float(node.prob)
 
         while not node.is_leaf:
             f_idx = node.feature
             thresh = node.threshold
-            prev_prob = node.prob
+            prev_prob = float(node.prob)
 
-            if x[f_idx] <= thresh:
+            if x_infer[f_idx] <= thresh:
                 node = node.left
             else:
                 node = node.right
 
-            attr[f_idx] += (node.prob - prev_prob)
+            attr[f_idx] += (float(node.prob) - prev_prob)
 
         return base_val, attr
 
-    def explain_instance(self, x: np.ndarray) -> Dict[str, Any]:
+    def explain_instance(self, x: np.ndarray, baseline_mode: str = "ensemble_root") -> Dict[str, Any]:
         """
         Computes additive feature attributions for a single instance x.
-        Returns base_value, prediction, and attributions per feature.
+        Ensures x is cast to np.float32 matching model inference representation.
+        Supports both baseline definitions:
+          - 'ensemble_root': Mean root probability across ensemble trees (exact telescoping property)
+          - 'background': Empirical background dataset mean prediction probability
         """
-        x_arr = np.asarray(x, dtype=np.float64).ravel()
-        if len(x_arr) != self.n_features:
-            raise ValueError(f"Expected {self.n_features} features, got {len(x_arr)}")
+        x_infer = np.asarray(x, dtype=np.float32).ravel()
+        if len(x_infer) != self.n_features:
+            raise ValueError(f"Expected {self.n_features} features, got {len(x_infer)}")
 
         n_trees = len(self.model.estimators_)
         accum_attr = np.zeros(self.n_features, dtype=np.float64)
         accum_base = 0.0
 
         for tree in self.model.estimators_:
-            b, a = self._explain_tree(tree, x_arr)
+            b, a = self._explain_tree(tree, x_infer)
             accum_base += b
             accum_attr += a
 
-        mean_base = accum_base / n_trees
+        if baseline_mode == "background" and hasattr(self, "background_base_value"):
+            mean_base = self.background_base_value
+        else:
+            mean_base = accum_base / n_trees
+
         mean_attr = accum_attr / n_trees
-        pred_prob = float(self.model.predict_proba(x_arr.reshape(1, -1))[0, 1])
+        pred_prob = float(self.model.predict_proba(x_infer.reshape(1, -1))[0, 1])
 
         # Exact additivity check
         sum_attr = float(np.sum(mean_attr))
@@ -135,7 +148,7 @@ class TreePathExplainer:
             "attributions_array": mean_attr,
             "sum_attributions": sum_attr,
             "additivity_error": additivity_diff,
-            "is_additive": bool(additivity_diff < 1e-4),
+            "is_additive": bool(additivity_diff < 1e-5),
         }
 
     def explain_dataset(self, X: np.ndarray) -> Dict[str, Any]:

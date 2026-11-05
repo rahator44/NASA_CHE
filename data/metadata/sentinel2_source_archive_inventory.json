@@ -1,0 +1,984 @@
+{
+  "sentinel2_archives": [
+    {
+      "archive_name": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE.zip",
+      "relative_path": "data/reference/optical/sentinel2/June_2024/S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE.zip",
+      "sha256": "e4d9ecd24029af5f370fb994c4676370ea5a2a208995edc625feb4db34b53192",
+      "acquisition_date": "2024-06-07T04:37:11",
+      "mission": "Sentinel-2A",
+      "instrument": "MSI",
+      "processing_level": "Level-2A (BOA)",
+      "tile_id": "T45RYH",
+      "relative_orbit": "R033",
+      "file_size_bytes": 1107390958,
+      "internal_file_count": 95,
+      "manifest": [
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/DATASTRIP/DS_2APS_20240607T091101_S20240607T044444/MTD_DS.xml",
+          "size_bytes": 17823902,
+          "compressed_bytes": 17823902
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/DATASTRIP/DS_2APS_20240607T091101_S20240607T044444/QI_DATA/FORMAT_CORRECTNESS.xml",
+          "size_bytes": 3969,
+          "compressed_bytes": 3969
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/DATASTRIP/DS_2APS_20240607T091101_S20240607T044444/QI_DATA/GENERAL_QUALITY.xml",
+          "size_bytes": 5716,
+          "compressed_bytes": 5716
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/DATASTRIP/DS_2APS_20240607T091101_S20240607T044444/QI_DATA/GEOMETRIC_QUALITY.xml",
+          "size_bytes": 8122,
+          "compressed_bytes": 8122
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/DATASTRIP/DS_2APS_20240607T091101_S20240607T044444/QI_DATA/RADIOMETRIC_QUALITY.xml",
+          "size_bytes": 7069,
+          "compressed_bytes": 7069
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/DATASTRIP/DS_2APS_20240607T091101_S20240607T044444/QI_DATA/SENSOR_QUALITY.xml",
+          "size_bytes": 4384,
+          "compressed_bytes": 4384
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/AUX_DATA/AUX_CAMSFO",
+          "size_bytes": 2970,
+          "compressed_bytes": 2970
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/AUX_DATA/AUX_ECMWFT",
+          "size_bytes": 1620,
+          "compressed_bytes": 1620
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R10m/T45RYH_20240607T043711_AOT_10m.jp2",
+          "size_bytes": 179756,
+          "compressed_bytes": 179756
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R10m/T45RYH_20240607T043711_B02_10m.jp2",
+          "size_bytes": 114445346,
+          "compressed_bytes": 114445346
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R10m/T45RYH_20240607T043711_B03_10m.jp2",
+          "size_bytes": 112963564,
+          "compressed_bytes": 112963564
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R10m/T45RYH_20240607T043711_B04_10m.jp2",
+          "size_bytes": 114991007,
+          "compressed_bytes": 114991007
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R10m/T45RYH_20240607T043711_B08_10m.jp2",
+          "size_bytes": 127165293,
+          "compressed_bytes": 127165293
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R10m/T45RYH_20240607T043711_TCI_10m.jp2",
+          "size_bytes": 135130324,
+          "compressed_bytes": 135130324
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R10m/T45RYH_20240607T043711_WVP_10m.jp2",
+          "size_bytes": 46523171,
+          "compressed_bytes": 46523171
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_AOT_20m.jp2",
+          "size_bytes": 211989,
+          "compressed_bytes": 211989
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B01_20m.jp2",
+          "size_bytes": 22215038,
+          "compressed_bytes": 22215038
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B02_20m.jp2",
+          "size_bytes": 33015739,
+          "compressed_bytes": 33015739
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B03_20m.jp2",
+          "size_bytes": 32887644,
+          "compressed_bytes": 32887644
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B04_20m.jp2",
+          "size_bytes": 33339998,
+          "compressed_bytes": 33339998
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B05_20m.jp2",
+          "size_bytes": 33124365,
+          "compressed_bytes": 33124365
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B06_20m.jp2",
+          "size_bytes": 33647186,
+          "compressed_bytes": 33647186
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B07_20m.jp2",
+          "size_bytes": 33487371,
+          "compressed_bytes": 33487371
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B11_20m.jp2",
+          "size_bytes": 33342275,
+          "compressed_bytes": 33342275
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B12_20m.jp2",
+          "size_bytes": 33107515,
+          "compressed_bytes": 33107515
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_B8A_20m.jp2",
+          "size_bytes": 33727079,
+          "compressed_bytes": 33727079
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_SCL_20m.jp2",
+          "size_bytes": 2991869,
+          "compressed_bytes": 2991869
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_TCI_20m.jp2",
+          "size_bytes": 33744961,
+          "compressed_bytes": 33744961
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R20m/T45RYH_20240607T043711_WVP_20m.jp2",
+          "size_bytes": 15663210,
+          "compressed_bytes": 15663210
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_AOT_60m.jp2",
+          "size_bytes": 66397,
+          "compressed_bytes": 66397
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B01_60m.jp2",
+          "size_bytes": 3768767,
+          "compressed_bytes": 3768767
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B02_60m.jp2",
+          "size_bytes": 3761508,
+          "compressed_bytes": 3761508
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B03_60m.jp2",
+          "size_bytes": 3769931,
+          "compressed_bytes": 3769931
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B04_60m.jp2",
+          "size_bytes": 3766588,
+          "compressed_bytes": 3766588
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B05_60m.jp2",
+          "size_bytes": 3758981,
+          "compressed_bytes": 3758981
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B06_60m.jp2",
+          "size_bytes": 3756360,
+          "compressed_bytes": 3756360
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B07_60m.jp2",
+          "size_bytes": 3747056,
+          "compressed_bytes": 3747056
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B09_60m.jp2",
+          "size_bytes": 3758770,
+          "compressed_bytes": 3758770
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B11_60m.jp2",
+          "size_bytes": 3741347,
+          "compressed_bytes": 3741347
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B12_60m.jp2",
+          "size_bytes": 3754410,
+          "compressed_bytes": 3754410
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_B8A_60m.jp2",
+          "size_bytes": 3739681,
+          "compressed_bytes": 3739681
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_SCL_60m.jp2",
+          "size_bytes": 796966,
+          "compressed_bytes": 796966
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_TCI_60m.jp2",
+          "size_bytes": 3729578,
+          "compressed_bytes": 3729578
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/IMG_DATA/R60m/T45RYH_20240607T043711_WVP_60m.jp2",
+          "size_bytes": 2642738,
+          "compressed_bytes": 2642738
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/MTD_TL.xml",
+          "size_bytes": 465719,
+          "compressed_bytes": 465719
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/FORMAT_CORRECTNESS.xml",
+          "size_bytes": 7924,
+          "compressed_bytes": 7924
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/GENERAL_QUALITY.xml",
+          "size_bytes": 4040,
+          "compressed_bytes": 4040
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/GEOMETRIC_QUALITY.xml",
+          "size_bytes": 4888,
+          "compressed_bytes": 4888
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/L2A_QUALITY.xml",
+          "size_bytes": 7766,
+          "compressed_bytes": 7766
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_CLASSI_B00.jp2",
+          "size_bytes": 83854,
+          "compressed_bytes": 83854
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_CLDPRB_20m.jp2",
+          "size_bytes": 10570460,
+          "compressed_bytes": 10570460
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_CLDPRB_60m.jp2",
+          "size_bytes": 2083145,
+          "compressed_bytes": 2083145
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B01.jp2",
+          "size_bytes": 19221,
+          "compressed_bytes": 19221
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B02.jp2",
+          "size_bytes": 85039,
+          "compressed_bytes": 85039
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B03.jp2",
+          "size_bytes": 84881,
+          "compressed_bytes": 84881
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B04.jp2",
+          "size_bytes": 84958,
+          "compressed_bytes": 84958
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B05.jp2",
+          "size_bytes": 35325,
+          "compressed_bytes": 35325
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B06.jp2",
+          "size_bytes": 35294,
+          "compressed_bytes": 35294
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B07.jp2",
+          "size_bytes": 35177,
+          "compressed_bytes": 35177
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B08.jp2",
+          "size_bytes": 85000,
+          "compressed_bytes": 85000
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B09.jp2",
+          "size_bytes": 19201,
+          "compressed_bytes": 19201
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B10.jp2",
+          "size_bytes": 19157,
+          "compressed_bytes": 19157
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B11.jp2",
+          "size_bytes": 35376,
+          "compressed_bytes": 35376
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B12.jp2",
+          "size_bytes": 35328,
+          "compressed_bytes": 35328
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_DETFOO_B8A.jp2",
+          "size_bytes": 35198,
+          "compressed_bytes": 35198
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B01.jp2",
+          "size_bytes": 14813,
+          "compressed_bytes": 14813
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B02.jp2",
+          "size_bytes": 57508,
+          "compressed_bytes": 57508
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B03.jp2",
+          "size_bytes": 58261,
+          "compressed_bytes": 58261
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B04.jp2",
+          "size_bytes": 60157,
+          "compressed_bytes": 60157
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B05.jp2",
+          "size_bytes": 15583,
+          "compressed_bytes": 15583
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B06.jp2",
+          "size_bytes": 15959,
+          "compressed_bytes": 15959
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B07.jp2",
+          "size_bytes": 15981,
+          "compressed_bytes": 15981
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B08.jp2",
+          "size_bytes": 69521,
+          "compressed_bytes": 69521
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B09.jp2",
+          "size_bytes": 14764,
+          "compressed_bytes": 14764
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B10.jp2",
+          "size_bytes": 20090,
+          "compressed_bytes": 20090
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B11.jp2",
+          "size_bytes": 26571,
+          "compressed_bytes": 26571
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B12.jp2",
+          "size_bytes": 26541,
+          "compressed_bytes": 26541
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_QUALIT_B8A.jp2",
+          "size_bytes": 18062,
+          "compressed_bytes": 18062
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_SNWPRB_20m.jp2",
+          "size_bytes": 205919,
+          "compressed_bytes": 205919
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/MSK_SNWPRB_60m.jp2",
+          "size_bytes": 56479,
+          "compressed_bytes": 56479
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/SENSOR_QUALITY.xml",
+          "size_bytes": 3275,
+          "compressed_bytes": 3275
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/GRANULE/L2A_T45RYH_A046791_20240607T044444/QI_DATA/T45RYH_20240607T043711_PVI.jp2",
+          "size_bytes": 166315,
+          "compressed_bytes": 166315
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/HTML/UserProduct_index.html",
+          "size_bytes": 8563,
+          "compressed_bytes": 8563
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/HTML/UserProduct_index.xsl",
+          "size_bytes": 10034,
+          "compressed_bytes": 10034
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/HTML/banner_1.png",
+          "size_bytes": 42377,
+          "compressed_bytes": 42377
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/HTML/banner_2.png",
+          "size_bytes": 58643,
+          "compressed_bytes": 58643
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/HTML/banner_3.png",
+          "size_bytes": 44797,
+          "compressed_bytes": 44797
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/HTML/star_bg.jpg",
+          "size_bytes": 1890,
+          "compressed_bytes": 1890
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/INSPIRE.xml",
+          "size_bytes": 18829,
+          "compressed_bytes": 18829
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/MTD_MSIL2A.xml",
+          "size_bytes": 55030,
+          "compressed_bytes": 55030
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101-ql.jpg",
+          "size_bytes": 39100,
+          "compressed_bytes": 39100
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/manifest.safe",
+          "size_bytes": 69091,
+          "compressed_bytes": 69091
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/rep_info/S2_PDI_Level-2A_Datastrip_Metadata.xsd",
+          "size_bytes": 1370,
+          "compressed_bytes": 1370
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/rep_info/S2_PDI_Level-2A_Tile_Metadata.xsd",
+          "size_bytes": 929,
+          "compressed_bytes": 929
+        },
+        {
+          "filename": "S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE/rep_info/S2_User_Product_Level-2A_Metadata.xsd",
+          "size_bytes": 1039,
+          "compressed_bytes": 1039
+        }
+      ]
+    },
+    {
+      "archive_name": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE.zip",
+      "relative_path": "data/reference/optical/sentinel2/July_2024/S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE.zip",
+      "sha256": "705d2d667e5fe7693e8b5a818eb4ba232baed7bac4be9403645eb2d4437bead4",
+      "acquisition_date": "2024-07-17T04:37:01",
+      "mission": "Sentinel-2A",
+      "instrument": "MSI",
+      "processing_level": "Level-2A (BOA)",
+      "tile_id": "T45RYH",
+      "relative_orbit": "R033",
+      "file_size_bytes": 1134551476,
+      "internal_file_count": 95,
+      "manifest": [
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/DATASTRIP/DS_2APS_20240717T145054_S20240717T044924/MTD_DS.xml",
+          "size_bytes": 10125854,
+          "compressed_bytes": 10125854
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/DATASTRIP/DS_2APS_20240717T145054_S20240717T044924/QI_DATA/FORMAT_CORRECTNESS.xml",
+          "size_bytes": 3970,
+          "compressed_bytes": 3970
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/DATASTRIP/DS_2APS_20240717T145054_S20240717T044924/QI_DATA/GENERAL_QUALITY.xml",
+          "size_bytes": 5717,
+          "compressed_bytes": 5717
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/DATASTRIP/DS_2APS_20240717T145054_S20240717T044924/QI_DATA/GEOMETRIC_QUALITY.xml",
+          "size_bytes": 8122,
+          "compressed_bytes": 8122
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/DATASTRIP/DS_2APS_20240717T145054_S20240717T044924/QI_DATA/RADIOMETRIC_QUALITY.xml",
+          "size_bytes": 7067,
+          "compressed_bytes": 7067
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/DATASTRIP/DS_2APS_20240717T145054_S20240717T044924/QI_DATA/SENSOR_QUALITY.xml",
+          "size_bytes": 4382,
+          "compressed_bytes": 4382
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/AUX_DATA/AUX_CAMSFO",
+          "size_bytes": 2970,
+          "compressed_bytes": 2970
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/AUX_DATA/AUX_ECMWFT",
+          "size_bytes": 1620,
+          "compressed_bytes": 1620
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R10m/T45RYH_20240717T043701_AOT_10m.jp2",
+          "size_bytes": 750362,
+          "compressed_bytes": 750362
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R10m/T45RYH_20240717T043701_B02_10m.jp2",
+          "size_bytes": 126181175,
+          "compressed_bytes": 126181175
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R10m/T45RYH_20240717T043701_B03_10m.jp2",
+          "size_bytes": 124718014,
+          "compressed_bytes": 124718014
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R10m/T45RYH_20240717T043701_B04_10m.jp2",
+          "size_bytes": 124196699,
+          "compressed_bytes": 124196699
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R10m/T45RYH_20240717T043701_B08_10m.jp2",
+          "size_bytes": 129528581,
+          "compressed_bytes": 129528581
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R10m/T45RYH_20240717T043701_TCI_10m.jp2",
+          "size_bytes": 135291152,
+          "compressed_bytes": 135291152
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R10m/T45RYH_20240717T043701_WVP_10m.jp2",
+          "size_bytes": 40929426,
+          "compressed_bytes": 40929426
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_AOT_20m.jp2",
+          "size_bytes": 554779,
+          "compressed_bytes": 554779
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B01_20m.jp2",
+          "size_bytes": 24273889,
+          "compressed_bytes": 24273889
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B02_20m.jp2",
+          "size_bytes": 33416686,
+          "compressed_bytes": 33416686
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B03_20m.jp2",
+          "size_bytes": 33495872,
+          "compressed_bytes": 33495872
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B04_20m.jp2",
+          "size_bytes": 33505516,
+          "compressed_bytes": 33505516
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B05_20m.jp2",
+          "size_bytes": 33057715,
+          "compressed_bytes": 33057715
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B06_20m.jp2",
+          "size_bytes": 33732924,
+          "compressed_bytes": 33732924
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B07_20m.jp2",
+          "size_bytes": 33669824,
+          "compressed_bytes": 33669824
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B11_20m.jp2",
+          "size_bytes": 32825066,
+          "compressed_bytes": 32825066
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B12_20m.jp2",
+          "size_bytes": 32532900,
+          "compressed_bytes": 32532900
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_B8A_20m.jp2",
+          "size_bytes": 33748656,
+          "compressed_bytes": 33748656
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_SCL_20m.jp2",
+          "size_bytes": 4648707,
+          "compressed_bytes": 4648707
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_TCI_20m.jp2",
+          "size_bytes": 33875476,
+          "compressed_bytes": 33875476
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R20m/T45RYH_20240717T043701_WVP_20m.jp2",
+          "size_bytes": 13956287,
+          "compressed_bytes": 13956287
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_AOT_60m.jp2",
+          "size_bytes": 176503,
+          "compressed_bytes": 176503
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B01_60m.jp2",
+          "size_bytes": 3739568,
+          "compressed_bytes": 3739568
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B02_60m.jp2",
+          "size_bytes": 3746928,
+          "compressed_bytes": 3746928
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B03_60m.jp2",
+          "size_bytes": 3748830,
+          "compressed_bytes": 3748830
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B04_60m.jp2",
+          "size_bytes": 3745468,
+          "compressed_bytes": 3745468
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B05_60m.jp2",
+          "size_bytes": 3744046,
+          "compressed_bytes": 3744046
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B06_60m.jp2",
+          "size_bytes": 3750763,
+          "compressed_bytes": 3750763
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B07_60m.jp2",
+          "size_bytes": 3734286,
+          "compressed_bytes": 3734286
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B09_60m.jp2",
+          "size_bytes": 3747577,
+          "compressed_bytes": 3747577
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B11_60m.jp2",
+          "size_bytes": 3742750,
+          "compressed_bytes": 3742750
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B12_60m.jp2",
+          "size_bytes": 3757322,
+          "compressed_bytes": 3757322
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_B8A_60m.jp2",
+          "size_bytes": 3730928,
+          "compressed_bytes": 3730928
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_SCL_60m.jp2",
+          "size_bytes": 1031220,
+          "compressed_bytes": 1031220
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_TCI_60m.jp2",
+          "size_bytes": 3752051,
+          "compressed_bytes": 3752051
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/IMG_DATA/R60m/T45RYH_20240717T043701_WVP_60m.jp2",
+          "size_bytes": 2365986,
+          "compressed_bytes": 2365986
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/MTD_TL.xml",
+          "size_bytes": 466266,
+          "compressed_bytes": 466266
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/FORMAT_CORRECTNESS.xml",
+          "size_bytes": 7929,
+          "compressed_bytes": 7929
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/GENERAL_QUALITY.xml",
+          "size_bytes": 4041,
+          "compressed_bytes": 4041
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/GEOMETRIC_QUALITY.xml",
+          "size_bytes": 4890,
+          "compressed_bytes": 4890
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/L2A_QUALITY.xml",
+          "size_bytes": 7768,
+          "compressed_bytes": 7768
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_CLASSI_B00.jp2",
+          "size_bytes": 119698,
+          "compressed_bytes": 119698
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_CLDPRB_20m.jp2",
+          "size_bytes": 12370098,
+          "compressed_bytes": 12370098
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_CLDPRB_60m.jp2",
+          "size_bytes": 2279622,
+          "compressed_bytes": 2279622
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B01.jp2",
+          "size_bytes": 18692,
+          "compressed_bytes": 18692
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B02.jp2",
+          "size_bytes": 82911,
+          "compressed_bytes": 82911
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B03.jp2",
+          "size_bytes": 82862,
+          "compressed_bytes": 82862
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B04.jp2",
+          "size_bytes": 82923,
+          "compressed_bytes": 82923
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B05.jp2",
+          "size_bytes": 34263,
+          "compressed_bytes": 34263
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B06.jp2",
+          "size_bytes": 34314,
+          "compressed_bytes": 34314
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B07.jp2",
+          "size_bytes": 34185,
+          "compressed_bytes": 34185
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B08.jp2",
+          "size_bytes": 82987,
+          "compressed_bytes": 82987
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B09.jp2",
+          "size_bytes": 18755,
+          "compressed_bytes": 18755
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B10.jp2",
+          "size_bytes": 18778,
+          "compressed_bytes": 18778
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B11.jp2",
+          "size_bytes": 34323,
+          "compressed_bytes": 34323
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B12.jp2",
+          "size_bytes": 34159,
+          "compressed_bytes": 34159
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_DETFOO_B8A.jp2",
+          "size_bytes": 34279,
+          "compressed_bytes": 34279
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B01.jp2",
+          "size_bytes": 14820,
+          "compressed_bytes": 14820
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B02.jp2",
+          "size_bytes": 58629,
+          "compressed_bytes": 58629
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B03.jp2",
+          "size_bytes": 59669,
+          "compressed_bytes": 59669
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B04.jp2",
+          "size_bytes": 61188,
+          "compressed_bytes": 61188
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B05.jp2",
+          "size_bytes": 15064,
+          "compressed_bytes": 15064
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B06.jp2",
+          "size_bytes": 15547,
+          "compressed_bytes": 15547
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B07.jp2",
+          "size_bytes": 16214,
+          "compressed_bytes": 16214
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B08.jp2",
+          "size_bytes": 64089,
+          "compressed_bytes": 64089
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B09.jp2",
+          "size_bytes": 14764,
+          "compressed_bytes": 14764
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B10.jp2",
+          "size_bytes": 20061,
+          "compressed_bytes": 20061
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B11.jp2",
+          "size_bytes": 26453,
+          "compressed_bytes": 26453
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B12.jp2",
+          "size_bytes": 26512,
+          "compressed_bytes": 26512
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_QUALIT_B8A.jp2",
+          "size_bytes": 18679,
+          "compressed_bytes": 18679
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_SNWPRB_20m.jp2",
+          "size_bytes": 131640,
+          "compressed_bytes": 131640
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/MSK_SNWPRB_60m.jp2",
+          "size_bytes": 27735,
+          "compressed_bytes": 27735
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/SENSOR_QUALITY.xml",
+          "size_bytes": 3275,
+          "compressed_bytes": 3275
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/GRANULE/L2A_T45RYH_A047363_20240717T044924/QI_DATA/T45RYH_20240717T043701_PVI.jp2",
+          "size_bytes": 165634,
+          "compressed_bytes": 165634
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/HTML/UserProduct_index.html",
+          "size_bytes": 8560,
+          "compressed_bytes": 8560
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/HTML/UserProduct_index.xsl",
+          "size_bytes": 10034,
+          "compressed_bytes": 10034
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/HTML/banner_1.png",
+          "size_bytes": 42377,
+          "compressed_bytes": 42377
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/HTML/banner_2.png",
+          "size_bytes": 58643,
+          "compressed_bytes": 58643
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/HTML/banner_3.png",
+          "size_bytes": 44797,
+          "compressed_bytes": 44797
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/HTML/star_bg.jpg",
+          "size_bytes": 1890,
+          "compressed_bytes": 1890
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/INSPIRE.xml",
+          "size_bytes": 18826,
+          "compressed_bytes": 18826
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/MTD_MSIL2A.xml",
+          "size_bytes": 54835,
+          "compressed_bytes": 54835
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054-ql.jpg",
+          "size_bytes": 46749,
+          "compressed_bytes": 46749
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/manifest.safe",
+          "size_bytes": 69091,
+          "compressed_bytes": 69091
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/rep_info/S2_PDI_Level-2A_Datastrip_Metadata.xsd",
+          "size_bytes": 1370,
+          "compressed_bytes": 1370
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/rep_info/S2_PDI_Level-2A_Tile_Metadata.xsd",
+          "size_bytes": 929,
+          "compressed_bytes": 929
+        },
+        {
+          "filename": "S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE/rep_info/S2_User_Product_Level-2A_Metadata.xsd",
+          "size_bytes": 1039,
+          "compressed_bytes": 1039
+        }
+      ]
+    }
+  ]
+}

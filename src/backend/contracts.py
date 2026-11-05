@@ -34,36 +34,65 @@ FLOOD_OBSERVATION_LABEL = "July 16, 2024 (Monsoon Flood-Period Observation)"
 #                     & data/outputs/phase5/statistics/phase5_inundation_area_summary.csv
 # ==============================================================================
 
-# Total AOI grid dimensions (1405 x 1393 at 20 m pixel spacing)
-AOI_TOTAL_CELLS = 1_957_165
-AOI_TOTAL_AREA_KM2 = 782.8660
-AOI_TOTAL_AREA_HA = 78_286.60
+# Total Study AOI grid cells within the defined study boundary
+AOI_TOTAL_CELLS = 1_010_039
+AOI_TOTAL_AREA_KM2 = 404.0156
+AOI_TOTAL_AREA_HA = 40_401.56
 
-# Mutually valid common domain (intersection of valid SAR data in both epochs)
-COMMON_VALID_DOMAIN_CELLS = 1_888_722
-COMMON_VALID_DOMAIN_KM2 = 755.4888
-COMMON_VALID_DOMAIN_HA = 75_548.88
+# Full bounding-box grid dimensions (1405 x 1393 at 20 m pixel spacing)
+RASTER_BOUNDING_BOX_CELLS = 1_957_165
+RASTER_BOUNDING_BOX_KM2 = 782.8660
+RASTER_BOUNDING_BOX_HA = 78_286.60
+
+# Mutually valid common domain (intersection of valid, non-indeterminate SAR data in both epochs)
+COMMON_VALID_DOMAIN_CELLS = 993_736
+COMMON_VALID_DOMAIN_KM2 = 397.4944
+COMMON_VALID_DOMAIN_HA = 39_749.44
+COMMON_VALID_DOMAIN_PCT_AOI = 98.3859
 
 # Surface water transition components within the Common Valid Domain:
 PERSISTENT_WATER_CELLS = 216_595
 PERSISTENT_WATER_KM2 = 86.6380
 PERSISTENT_WATER_HA = 8_663.80
-PERSISTENT_WATER_PCT_VALID = 11.4678
+PERSISTENT_WATER_PCT_VALID = 21.7960
+PERSISTENT_WATER_PCT_AOI = 21.4442
 
 NEWLY_INUNDATED_CANDIDATE_CELLS = 146_992
 NEWLY_INUNDATED_CANDIDATE_KM2 = 58.7968
 NEWLY_INUNDATED_CANDIDATE_HA = 5_879.68
-NEWLY_INUNDATED_CANDIDATE_PCT_VALID = 7.7826
+NEWLY_INUNDATED_CANDIDATE_PCT_VALID = 14.7919
+NEWLY_INUNDATED_CANDIDATE_PCT_AOI = 14.5531
 
 RECEDED_WATER_CELLS = 1_634
 RECEDED_WATER_KM2 = 0.6536
 RECEDED_WATER_HA = 65.36
-RECEDED_WATER_PCT_VALID = 0.0865
+RECEDED_WATER_PCT_VALID = 0.1644
+RECEDED_WATER_PCT_AOI = 0.1618
 
-PERSISTENT_NON_WATER_CELLS = 1_523_501
-PERSISTENT_NON_WATER_KM2 = 609.4004
-PERSISTENT_NON_WATER_HA = 60_940.04
-PERSISTENT_NON_WATER_PCT_VALID = 80.6630
+PERSISTENT_NON_WATER_CELLS = 628_515
+PERSISTENT_NON_WATER_KM2 = 251.4060
+PERSISTENT_NON_WATER_HA = 25_140.60
+PERSISTENT_NON_WATER_PCT_VALID = 63.2477
+PERSISTENT_NON_WATER_PCT_AOI = 62.2268
+
+# Indeterminate & NoData within Study AOI (excluded from Common Valid Domain):
+INDETERMINATE_CELLS = 16_242
+INDETERMINATE_KM2 = 6.4968
+INDETERMINATE_HA = 649.68
+INDETERMINATE_PCT_AOI = 1.6081
+
+NODATA_AOI_CELLS = 61
+NODATA_AOI_KM2 = 0.0244
+NODATA_AOI_HA = 2.44
+NODATA_AOI_PCT_AOI = 0.0060
+
+# Enforce authoritative accounting identities
+assert PERSISTENT_WATER_CELLS + NEWLY_INUNDATED_CANDIDATE_CELLS + RECEDED_WATER_CELLS + PERSISTENT_NON_WATER_CELLS == COMMON_VALID_DOMAIN_CELLS, (
+    f"Common valid domain accounting error: {PERSISTENT_WATER_CELLS + NEWLY_INUNDATED_CANDIDATE_CELLS + RECEDED_WATER_CELLS + PERSISTENT_NON_WATER_CELLS} != {COMMON_VALID_DOMAIN_CELLS}"
+)
+assert COMMON_VALID_DOMAIN_CELLS + INDETERMINATE_CELLS + NODATA_AOI_CELLS == AOI_TOTAL_CELLS, (
+    f"Total AOI accounting error: {COMMON_VALID_DOMAIN_CELLS + INDETERMINATE_CELLS + NODATA_AOI_CELLS} != {AOI_TOTAL_CELLS}"
+)
 
 # Net surface-water change over common valid domain: Newly Inundated - Receded
 NET_VALID_DOMAIN_CHANGE_CELLS = 145_358
@@ -117,34 +146,43 @@ MAJOR_CHANNEL_EXPANSION_COUNT = 4
 # Empirical Displacement Statistics across the 122 Valid Local Transects:
 DISPLACEMENT_EMPIRICAL_STATS = {
     "west_bank": {
-        "mean_m": 126.3934,
-        "std_m": 140.7187,
+        "mean_m": 130.00,
+        "std_m": 200.83,
         "median_m": 40.0,
-        "iqr_m": 160.0,
+        "iqr_m": 200.0,
         "p10_m": 0.0,
+        "p25_m": 0.0,
+        "p75_m": 200.0,
         "p90_m": 440.0,
-        "min_m": 0.0,
-        "max_m": 580.0,
+        "p95_m": 578.0,
+        "min_m": -120.0,
+        "max_m": 820.0,
     },
     "east_bank": {
-        "mean_m": 157.3770,
-        "std_m": 139.7342,
-        "median_m": 60.0,
-        "iqr_m": 220.0,
+        "mean_m": 160.66,
+        "std_m": 209.95,
+        "median_m": 90.0,
+        "iqr_m": 275.0,
         "p10_m": 0.0,
+        "p25_m": 0.0,
+        "p75_m": 275.0,
         "p90_m": 400.0,
-        "min_m": 0.0,
-        "max_m": 520.0,
+        "p95_m": 539.0,
+        "min_m": -20.0,
+        "max_m": 960.0,
     },
     "channel_width": {
-        "mean_m": 283.7705,
-        "std_m": 229.4124,
-        "median_m": 200.0,
-        "iqr_m": 340.0,
+        "mean_m": 290.66,
+        "std_m": 286.68,
+        "median_m": 180.0,
+        "iqr_m": 360.0,
         "p10_m": 0.0,
+        "p25_m": 60.0,
+        "p75_m": 420.0,
         "p90_m": 760.0,
-        "min_m": 0.0,
-        "max_m": 880.0,
+        "p95_m": 879.0,
+        "min_m": -60.0,
+        "max_m": 1100.0,
     },
 }
 

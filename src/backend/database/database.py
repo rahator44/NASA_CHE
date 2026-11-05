@@ -139,7 +139,7 @@ def _seed_precomputed_analysis_runs(conn: sqlite3.Connection) -> None:
             "2024-11-02T15:18:45Z",
             json.dumps({"transect_spacing_m": 200, "total_transects": 154, "valid_transects": 122, "outside_valid_transects": 32}),
             json.dumps({"transects_geojson": "data/outputs/phase6_1/maps/phase6_1_riverbank_transects.geojson", "zones_raster": "data/processed/phase6_1/phase6_1_channel_change_zones.tif"}),
-            json.dumps({"mean_west_displacement_m": 126.39, "mean_east_displacement_m": 157.38, "mean_width_change_m": 283.77, "detection_range_m": "35-85m"})
+            json.dumps({"mean_west_displacement_m": 130.00, "mean_east_displacement_m": 160.66, "mean_width_change_m": 290.66, "median_west_displacement_m": 40.0, "median_east_displacement_m": 90.0, "median_width_change_m": 180.0, "detection_range_m": "35-85m"})
         ),
         (
             "run_phase7a_random_forest",

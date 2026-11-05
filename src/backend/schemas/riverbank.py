@@ -17,6 +17,9 @@ class RiverbankSummaryResponse(BaseModel):
     mean_west_displacement_m: float
     mean_east_displacement_m: float
     mean_channel_width_change_m: float
+    median_west_displacement_m: Optional[float] = None
+    median_east_displacement_m: Optional[float] = None
+    median_channel_width_change_m: Optional[float] = None
     provisional_detection_range_m: str
     provisional_detection_scenarios_m: Optional[Dict[str, float]] = None
     morphological_behavior: str
@@ -56,7 +59,10 @@ class DisplacementStats(BaseModel):
     median_m: float
     iqr_m: float
     p10_m: float
+    p25_m: Optional[float] = None
+    p75_m: Optional[float] = None
     p90_m: float
+    p95_m: Optional[float] = None
     min_m: float
     max_m: float
     bootstrap_ci_95: List[float]  # Authoritative 95% spatial block bootstrap interval

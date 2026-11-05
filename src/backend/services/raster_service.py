@@ -19,15 +19,30 @@ logger = logging.getLogger(__name__)
 
 from src.backend.config import settings
 
+# Study Area Polygon (EPSG:4326) for AOI-masked tile rendering
+STUDY_AREA_AOI_WKT = "POLYGON((89.55 24.58, 89.75 24.58, 89.75 24.76, 89.55 24.76, 89.55 24.58))"
+STUDY_AREA_AOI_GEOJSON_VSI = "/vsimem/study_area_aoi.geojson"
+STUDY_AREA_AOI_GEOJSON_STR = """{
+  "type": "FeatureCollection",
+  "features": [{
+    "type": "Feature",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [[[89.55, 24.58], [89.75, 24.58], [89.75, 24.76], [89.55, 24.76], [89.55, 24.58]]]
+    }
+  }]
+}"""
+
 
 # Pre-registered safe raster asset catalog
 RASTER_CATALOG: Dict[str, Dict[str, Any]] = {
-    # Phase 5: Flood Change Products
+    # Phase 5: Flood Change Products (with authoritative Study AOI masking)
     "phase5_flood_transitions": {
         "relative_path": "data/processed/phase5/phase5_flood_transitions.tif",
         "layer_name": "Phase 5 Flood Transitions (Categorical)",
         "layer_type": "categorical",
-        "description": "Multitemporal flood transition classes: 1=Persistent Water, 2=Newly Inundated, 3=Receded, 4=Persistent Non-Water",
+        "aoi_masking": True,
+        "description": "Multitemporal flood transition classes within Study AOI: 1=Persistent Water, 2=Newly Inundated, 3=Receded Water, 4=Persistent Non-Water, 5=Indeterminate Noise Floor, 6/255=NoData",
         "region_id": "jamuna_sirajganj",
         "analysis_id": "run_phase5_flood_change",
         "palette": {
@@ -35,14 +50,17 @@ RASTER_CATALOG: Dict[str, Dict[str, Any]] = {
             2: [65, 182, 196, 240],   # Newly Inundated (Cyan)
             3: [254, 153, 41, 240],   # Receded Water (Orange)
             4: [200, 200, 200, 40],   # Persistent Non-Water (Light gray semi-transparent)
-            255: [0, 0, 0, 0],        # NoData (Transparent)
+            5: [166, 206, 227, 180],  # Indeterminate Noise Floor (Powder Blue)
+            6: [0, 0, 0, 0],          # NoData within AOI (Transparent)
+            255: [0, 0, 0, 0],        # Outside Study AOI / Border NoData (Transparent)
         }
     },
     "phase5_newly_inundated": {
         "relative_path": "data/processed/phase5/phase5_newly_inundated_candidate.tif",
         "layer_name": "Phase 5 Newly Inundated Candidate Water",
         "layer_type": "categorical",
-        "description": "Binary mask of newly inundated flood candidate pixels (1=Newly Inundated)",
+        "aoi_masking": True,
+        "description": "Binary mask of newly inundated flood candidate pixels within Study AOI (1=Newly Inundated)",
         "region_id": "jamuna_sirajganj",
         "analysis_id": "run_phase5_flood_change",
         "palette": {
@@ -55,7 +73,8 @@ RASTER_CATALOG: Dict[str, Dict[str, Any]] = {
         "relative_path": "data/processed/phase5/phase5_persistent_water.tif",
         "layer_name": "Phase 5 Persistent Water Mask",
         "layer_type": "categorical",
-        "description": "Binary mask of persistent water present in both June and July",
+        "aoi_masking": True,
+        "description": "Binary mask of persistent water present in both June and July within Study AOI",
         "region_id": "jamuna_sirajganj",
         "analysis_id": "run_phase5_flood_change",
         "palette": {
@@ -68,7 +87,8 @@ RASTER_CATALOG: Dict[str, Dict[str, Any]] = {
         "relative_path": "data/processed/phase5/phase5_receded_water.tif",
         "layer_name": "Phase 5 Receded Water Mask",
         "layer_type": "categorical",
-        "description": "Binary mask of water receded between June and July",
+        "aoi_masking": True,
+        "description": "Binary mask of water receded between June and July within Study AOI",
         "region_id": "jamuna_sirajganj",
         "analysis_id": "run_phase5_flood_change",
         "palette": {
@@ -83,6 +103,7 @@ RASTER_CATALOG: Dict[str, Dict[str, Any]] = {
         "relative_path": "data/processed/phase6_1/phase6_1_channel_change_zones.tif",
         "layer_name": "Phase 6.1 Riverbank Channel Change Zones",
         "layer_type": "categorical",
+        "aoi_masking": True,
         "description": "Riverbank change zones: 12-class geomorphic codebook (Classes 0-10, 255)",
         "region_id": "jamuna_sirajganj",
         "analysis_id": "run_phase6_riverbank_migration",
@@ -342,6 +363,12 @@ class RasterService:
         return {"asset_id": resolved_id, "bands": band_stats}
 
     @staticmethod
+    def _ensure_aoi_geojson_vsi() -> None:
+        """Ensure the authoritative Study AOI GeoJSON geometry is available in GDAL /vsimem."""
+        if not gdal.VSIStatL(STUDY_AREA_AOI_GEOJSON_VSI):
+            gdal.FileFromMemBuffer(STUDY_AREA_AOI_GEOJSON_VSI, STUDY_AREA_AOI_GEOJSON_STR.encode("utf-8"))
+
+    @staticmethod
     def tile_to_3857_bounds(z: int, x: int, y: int) -> Tuple[float, float, float, float]:
         origin_shift = 20037508.342789244
         res = 20037508.342789244 * 2.0 / (256.0 * (2 ** z))
@@ -375,16 +402,25 @@ class RasterService:
         # Select resampling: nearest neighbor for categorical, bilinear for continuous
         is_categorical = info.get("layer_type") == "categorical"
         resample_alg = gdal.GRA_NearestNeighbour if is_categorical else gdal.GRA_Bilinear
+        use_aoi_mask = bool(info.get("aoi_masking"))
+
+        if use_aoi_mask:
+            cls._ensure_aoi_geojson_vsi()
 
         try:
-            options = gdal.WarpOptions(
-                format="MEM",
-                width=256,
-                height=256,
-                outputBounds=tile_bounds,
-                dstSRS="EPSG:3857",
-                resampleAlg=resample_alg,
-            )
+            warp_kwargs: Dict[str, Any] = {
+                "format": "MEM",
+                "width": 256,
+                "height": 256,
+                "outputBounds": tile_bounds,
+                "dstSRS": "EPSG:3857",
+                "resampleAlg": resample_alg,
+            }
+            if use_aoi_mask:
+                warp_kwargs["cutlineDSName"] = STUDY_AREA_AOI_GEOJSON_VSI
+                warp_kwargs["dstNodata"] = 255.0 if is_categorical else -9999.0
+
+            options = gdal.WarpOptions(**warp_kwargs)
             out_ds = gdal.Warp("", str(full_path), options=options)
             if not out_ds:
                 return blank_png

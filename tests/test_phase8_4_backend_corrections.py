@@ -28,9 +28,9 @@ def test_01_common_valid_domain_flood_transitions(client):
     data = response.json()
 
     assert data["region_id"] == "jamuna_sirajganj"
-    assert data["common_valid_domain_cells"] == 1_888_722
-    assert data["common_valid_domain_ha"] == 75_548.88
-    assert data["common_valid_domain_km2"] == 755.4888
+    assert data["common_valid_domain_cells"] == 993_736
+    assert data["common_valid_domain_ha"] == 39_749.44
+    assert data["common_valid_domain_km2"] == 397.4944
     assert data["net_inundation_balance_ha"] == 5_814.32
 
     transitions = {t["class_id"]: t for t in data["transitions"]}
@@ -39,25 +39,25 @@ def test_01_common_valid_domain_flood_transitions(client):
     assert transitions[1]["pixel_count"] == 216_595
     assert transitions[1]["area_ha"] == 8_663.80
     assert transitions[1]["area_km2"] == 86.6380
-    assert abs(transitions[1]["percentage_of_valid_domain"] - 11.4678) < 0.01
+    assert abs(transitions[1]["percentage_of_valid_domain"] - 21.7960) < 0.01
 
     # Class 2: Newly Inundated Candidate
     assert transitions[2]["pixel_count"] == 146_992
     assert transitions[2]["area_ha"] == 5_879.68
     assert transitions[2]["area_km2"] == 58.7968
-    assert abs(transitions[2]["percentage_of_valid_domain"] - 7.7826) < 0.01
+    assert abs(transitions[2]["percentage_of_valid_domain"] - 14.7919) < 0.01
 
     # Class 3: Receded Water
     assert transitions[3]["pixel_count"] == 1_634
     assert transitions[3]["area_ha"] == 65.36
     assert transitions[3]["area_km2"] == 0.6536
-    assert abs(transitions[3]["percentage_of_valid_domain"] - 0.0865) < 0.01
+    assert abs(transitions[3]["percentage_of_valid_domain"] - 0.1644) < 0.01
 
     # Class 4: Persistent Non-Water
-    assert transitions[4]["pixel_count"] == 1_523_501
-    assert transitions[4]["area_ha"] == 60_940.04
-    assert transitions[4]["area_km2"] == 609.4004
-    assert abs(transitions[4]["percentage_of_valid_domain"] - 80.6630) < 0.01
+    assert transitions[4]["pixel_count"] == 628_515
+    assert transitions[4]["area_ha"] == 25_140.60
+    assert transitions[4]["area_km2"] == 251.4060
+    assert abs(transitions[4]["percentage_of_valid_domain"] - 63.2477) < 0.01
 
 
 # ==============================================================================

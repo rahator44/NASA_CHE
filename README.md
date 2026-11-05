@@ -3,8 +3,8 @@
 
 **Study Area:** Jamuna River reach (Kazipur / Sirajganj, Bangladesh)  
 **Sensors:** Sentinel-1 C-band SAR (IW GRDH VV/VH), Sentinel-2 MSI Optical Level-2A  
-**Architecture:** Scientific Python, NumPy-accelerated tree explainability, FastAPI asynchronous microservices, GDAL/Rasterio geospatial processing  
-**Test Baseline:** 315 passing tests, 0 warnings (Phases 1–8.1)
+**Architecture:** Scientific Python, NumPy-accelerated tree explainability, FastAPI synchronous backend services, GDAL/Rasterio geospatial processing  
+**Test Baseline:** 337 passing tests, 0 warnings (Phases 1–8.6)
 
 ---
 
@@ -15,13 +15,13 @@ Earth Pulse is an automated, reproducible satellite radar and optical remote-sen
 The system addresses the extreme cloud-cover bottleneck typical of South Asian monsoon events by pairing all-weather, day-and-night Synthetic Aperture Radar (SAR) backscatter analysis ($\sigma^0_{\text{VV}}$, $\sigma^0_{\text{VH}}$) with physics-informed water classification, machine learning, and explainable AI.
 
 ### Key Capabilities
-- **End-to-End SAR Ingestion & Preprocessing (Phases 1–2B):** Radiometric calibration, SNAP-aligned Lee speckle filtering (7×7 window), and coregistered multi-temporal difference analysis between pre-flood (June 10, 2024) and peak-flood (July 16, 2024) acquisitions.
+- **End-to-End SAR Ingestion & Preprocessing (Phases 1–2B):** Radiometric calibration, SNAP-aligned Lee speckle filtering (5×5 window), and coregistered multi-temporal difference analysis between pre-flood (June 10, 2024) and mid-monsoon flood-period (July 16, 2024) acquisitions.
 - **Physics-Informed Water Classification (Phase 3A):** Bimodal thresholding (Otsu & Kittler-Illingworth) on SAR backscatter with cross-polarization ratio ($\text{VH}/\text{VV}$) masking to eliminate false positives in urban and bare agricultural soils.
 - **Rigorous Flood Change Engine (Phases 3B & 5):** Spatial-temporal change detection isolating newly inundated land, permanent water bodies, and dry land with continuous mass-balance accounting ($A_{\text{total}} = A_{\text{perm}} + A_{\text{flood}} + A_{\text{dry}}$).
 - **Independent Optical Validation (Phases 4A–4D.1):** High-resolution Sentinel-2 MSI optical reference validation utilizing MNDWI, NDWI, and Scene Classification Layer (SCL) cloud masks.
-- **Riverbank Displacement & Channel Migration (Phases 6–6.2):** High-precision vector shoreline extraction, normal transect spacing (100 m), and sub-pixel displacement calculation with uncertainty bounds separating true morphological erosion from transient flood submergence.
-- **Extensible Machine Learning & Explainability (Phases 7A–7B.1):** Dual-polarization Random Forest classification with NumPy-native tree path attribution (exact feature contributions obeying local accuracy and null efficiency without external black-box approximations).
-- **Production REST API & Asynchronous Services (Phases 8–8.1):** FastAPI scientific backend featuring 44 documented endpoints, SQLite job queue with background workers, OpenAPI/Swagger interactive documentation, health monitoring, and structured error boundaries.
+- **Riverbank Displacement & Channel Migration (Phases 6–6.2):** High-precision vector shoreline extraction, normal transect spacing (200 m across 154 evaluated transects), and sub-pixel displacement calculation with uncertainty bounds separating true morphological erosion from transient flood submergence.
+- **Extensible Machine Learning & Explainability (Phases 7A–7B.1):** Dual-polarization Random Forest classification with Saabas-style tree-path feature attribution implemented in pure NumPy (local additive feature contributions decomposed at float32 inference precision, without external black-box dependencies).
+- **Production REST API & Synchronous Services (Phases 8–8.1):** FastAPI scientific backend featuring 44 documented endpoints, SQLite job ledger with synchronous execution, OpenAPI/Swagger interactive documentation, health monitoring, and structured error boundaries.
 
 ---
 
@@ -35,11 +35,11 @@ $ python3 -m pytest -q -p no:cacheprovider tests/
 ........................................................................ [ 45%]
 ........................................................................ [ 68%]
 ........................................................................ [ 91%]
-...........................                                              [100%]
-315 passed in 15.48s
+.................................................                        [100%]
+337 passed in 38.92s
 ```
 
-All 315 tests pass with zero warnings and zero deprecation notices under Python 3.10+.
+All 337 tests pass with zero warnings and zero deprecation notices under Python 3.10+.
 
 ---
 
@@ -60,7 +60,7 @@ EarthPulse-SAR/
 │   │   ├── phase5/            # Final flood change spatial accounts
 │   │   ├── phase6/            # Channel bank migration transects and erosion rates
 │   │   ├── phase7a/           # Random Forest probability maps and confusion matrices
-│   │   ├── phase7b/           # SHAP and NumPy tree attribution explainability rasters
+│   │   ├── phase7b/           # Saabas-style tree attribution explainability rasters
 │   │   ├── phase8_1/          # Handoff manifests and API route registers
 │   │   └── phase8_3/          # GitHub and Google Drive file transfer inventories
 │   ├── raw/                   # [Google Drive] Original Sentinel-1 GRD SAFE archives
@@ -75,7 +75,7 @@ EarthPulse-SAR/
 │   ├── backend/               # FastAPI microservices, routers, job workers, schemas
 │   ├── core/                  # Raster I/O, coregistration, coordinate transformations
 │   └── ml/                    # Random Forest, feature engineering, tree explainability
-├── tests/                     # 315 unit, integration, and mathematical verification tests
+├── tests/                     # 337 unit, integration, and mathematical verification tests
 ├── tools/                     # Data restoration, Drive staging, and verification tools
 │   ├── restore_earthpulse_data.py
 │   └── stage_earthpulse_drive_data.py
