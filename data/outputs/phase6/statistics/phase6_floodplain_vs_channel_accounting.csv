@@ -1,0 +1,7 @@
+component,cells,area_km2,area_ha,pct_new_inundation
+External Bank Expansion (Riverbank Migration),54850,21.94,2194.0,37.31
+  - West Bank (Right Bank / Embankment),6716,2.6864,268.64,4.57
+  - East Bank (Left Bank / Braids),48134,19.2536,1925.36,32.75
+Internal Char Submergence / Scour,58025,23.21,2321.0,39.47
+Disconnected Floodplain Inundation,34117,13.6468,1364.68,23.21
+Total Phase 5 Newly Inundated Candidate Area,146992,58.7968,5879.68,100.0

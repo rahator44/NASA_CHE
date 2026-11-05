@@ -1,0 +1,13 @@
+threshold_m,threshold_description,target_feature,valid_transect_count,exceeding_count,exceeding_percentage,sub_threshold_count,sub_threshold_percentage,scientific_interpretation
+35.0,"Optimistic (Consolidated Bank, 1.75 px)",Right Bank (West / Mainland),122,68,55.74,54,44.26,55.74% of transects exceed 35.0 m. 
+35.0,"Optimistic (Consolidated Bank, 1.75 px)",Left Bank (East / Chars),122,75,61.48,47,38.52,61.48% of transects exceed 35.0 m. 
+35.0,"Optimistic (Consolidated Bank, 1.75 px)",Channel Width Expansion,122,106,86.89,16,13.11,86.89% of transects exceed 35.0 m. 
+50.0,Legacy Nominal Baseline (2.5 px),Right Bank (West / Mainland),122,52,42.62,70,57.38,42.62% of transects exceed 50.0 m. Remaining 57.4% are indistinguishable from sensor/processing noise.
+50.0,Legacy Nominal Baseline (2.5 px),Left Bank (East / Chars),122,69,56.56,53,43.44,56.56% of transects exceed 50.0 m. 
+50.0,Legacy Nominal Baseline (2.5 px),Channel Width Expansion,122,100,81.97,22,18.03,81.97% of transects exceed 50.0 m. 
+60.0,"Central Realistic (Typical Bank, 3.0 px)",Right Bank (West / Mainland),122,43,35.25,79,64.75,35.25% of transects exceed 60.0 m. Remaining 64.8% are indistinguishable from sensor/processing noise.
+60.0,"Central Realistic (Typical Bank, 3.0 px)",Left Bank (East / Chars),122,64,52.46,58,47.54,52.46% of transects exceed 60.0 m. 
+60.0,"Central Realistic (Typical Bank, 3.0 px)",Channel Width Expansion,122,90,73.77,32,26.23,73.77% of transects exceed 60.0 m. 
+85.0,"Conservative (Low-Gradient Char, 4.25 px)",Right Bank (West / Mainland),122,38,31.15,84,68.85,31.15% of transects exceed 85.0 m. Remaining 68.8% are indistinguishable from sensor/processing noise.
+85.0,"Conservative (Low-Gradient Char, 4.25 px)",Left Bank (East / Chars),122,61,50.0,61,50.0,50.0% of transects exceed 85.0 m. 
+85.0,"Conservative (Low-Gradient Char, 4.25 px)",Channel Width Expansion,122,85,69.67,37,30.33,69.67% of transects exceed 85.0 m. 

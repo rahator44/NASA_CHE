@@ -1,0 +1,15 @@
+evaluation_epoch,method_configuration,filename,evaluated_pixels,true_positive,false_positive,true_negative,false_negative,precision,recall,f1_score,iou,specificity,balanced_accuracy
+June (dt=3d),Lee 5x5 Dual-AND (Primary),june10_lee_5x5_otsu_dual_and_qc.tif,541242,98808,68382,280658,93394,0.591,0.5141,0.5499,0.3792,0.8041,0.6591
+June (dt=3d),Lee 3x3 Dual-AND,june10_lee_3x3_otsu_dual_and_qc.tif,541242,99255,69044,279996,92947,0.5898,0.5164,0.5507,0.3799,0.8022,0.6593
+June (dt=3d),Unfiltered Dual-AND,june10_unfiltered_otsu_dual_and_qc.tif,541242,94669,65728,283312,97533,0.5902,0.4925,0.537,0.367,0.8117,0.6521
+June (dt=3d),Lee 5x5 2D Otsu Bivariate,june10_lee_5x5_otsu_2d_qc.tif,525259,100706,70250,270222,84081,0.5891,0.545,0.5662,0.3949,0.7937,0.6693
+June (dt=3d),Lee 5x5 VV-only Otsu,june10_lee_5x5_otsu_vv_qc.tif,553588,111981,79699,274093,87815,0.5842,0.5605,0.5721,0.4007,0.7747,0.6676
+June (dt=3d),Lee 5x5 VH-only Otsu,june10_lee_5x5_otsu_vh_qc.tif,541249,101393,71034,278007,90815,0.588,0.5275,0.5561,0.3852,0.7965,0.662
+June (dt=3d),Lee 5x5 Dual-OR,june10_lee_5x5_otsu_dual_or_qc.tif,541242,106987,77619,271421,85215,0.5795,0.5566,0.5679,0.3965,0.7776,0.6671
+July (dt=1d),Lee 5x5 Dual-AND (Primary),july16_lee_5x5_otsu_dual_and_qc.tif,119478,38454,40309,29974,10741,0.4882,0.7817,0.601,0.4296,0.4265,0.6041
+July (dt=1d),Lee 3x3 Dual-AND,july16_lee_3x3_otsu_dual_and_qc.tif,119478,38443,40317,29966,10752,0.4881,0.7814,0.6009,0.4295,0.4264,0.6039
+July (dt=1d),Unfiltered Dual-AND,july16_unfiltered_otsu_dual_and_qc.tif,119478,38119,40178,30105,11076,0.4869,0.7749,0.598,0.4265,0.4283,0.6016
+July (dt=1d),Lee 5x5 2D Otsu Bivariate,july16_lee_5x5_otsu_2d_qc.tif,113601,38740,40735,25864,8262,0.4874,0.8242,0.6126,0.4415,0.3884,0.6063
+July (dt=1d),Lee 5x5 VV-only Otsu,july16_lee_5x5_otsu_vv_qc.tif,119503,39010,41638,28659,10196,0.4837,0.7928,0.6008,0.4294,0.4077,0.6002
+July (dt=1d),Lee 5x5 VH-only Otsu,july16_lee_5x5_otsu_vh_qc.tif,119478,40227,42711,27572,8968,0.485,0.8177,0.6089,0.4377,0.3923,0.605
+July (dt=1d),Lee 5x5 Dual-OR,july16_lee_5x5_otsu_dual_or_qc.tif,119478,40773,44026,26257,8422,0.4808,0.8288,0.6086,0.4374,0.3736,0.6012

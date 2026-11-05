@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "project": "NASA Space Apps Challenge 2026 — Dancing with the SARs",
+  "phase": "4B.1: Reference Ingestion Scientific Corrections and Acquisition Readiness",
+  "timestamp": "2026-11-01T05:42:00Z",
+  "status": "SCIENTIFIC_CORRECTIONS_APPLIED",
+  "test_suite_status": {
+    "phase4b1_tests_passed": 12,
+    "total_repository_tests_passed": 144,
+    "failures": 0,
+    "execution_time_seconds": 14.92
+  },
+  "scientific_corrections": {
+    "sentinel2_scl_correction": {
+      "issue": "SCL class 2 was previously described as Cast Shadow / cloud shadow and potentially conflated with water or cloud shadows.",
+      "correction": "SCL class 2 is explicitly classified as Dark Area Pixels (uncertain dark-area observation, NOT cloud shadow, NOT water). Class 3 is specifically Cloud Shadows. Class 0 is true NoData (value 255). Classes 7-10 are Cloud/Cirrus (value 254). Class 1 is Saturated/Defective (value 251). Class 11 is Snow/Ice (value 250). Clear classes 4, 5, 6 are preserved.",
+      "implementation": "SCLMaskResult object implemented with dedicated boolean masks (dark_area_mask, cloud_shadow_mask, etc.) while unpacking as (clear_mask, uncertain_mask) for backward compatibility."
+    },
+    "sentinel2_reflectance_scaling": {
+      "issue": "BOA_ADD_OFFSET was previously hardcoded or defaulted without dynamic per-band parsing or baseline verification.",
+      "correction": "Implemented validate_sentinel2_scaling_metadata. Processing Baseline is read from metadata. Baseline >= 04.00 requires explicit per-band offsets (e.g. B03, B08, B11, B12). Baseline < 04.00 defaults offsets to 0.0 unless specified. Inconsistent or missing metadata triggers validation failure.",
+      "implementation": "parse_and_validate_s2_scaling_metadata integrated into ingestion and validation pipelines."
+    },
+    "landsat_resolution_and_radsat": {
+      "issue": "Resampling 30m Landsat reflective bands to the 20m SAR grid risked misinterpreting upsampled pixels as genuine 20m optical ground truth.",
+      "correction": "Preserved native 30m resolution metadata. Resampling is explicitly documented as introducing point spread function smoothing and spatial covariance without generating 20m optical ground information. QA_RADSAT saturation in B3, B5, and B6 is incorporated into quality masking. Added aggregate_validation_to_blocks for 60m common support comparison.",
+      "implementation": "mask_landsat_qa_pixel updated with qa_radsat_array; spatial_support dictionary added to outputs."
+    },
+    "copernicus_dem_terminology": {
+      "issue": "Copernicus GLO-30 was previously described as a DEM without documenting canopy/building surface artifacts.",
+      "correction": "Accurately reclassified as a Digital Surface Model (DSM). Documented that elevations include forest canopy, char vegetation (3-15m), and structures, which create artificial dams across floodplains. Emphasized that HAND calculation is a future task requiring hydrologic conditioning and a calibrated drainage network.",
+      "implementation": "dataset_type updated to Copernicus_GLO-30_DSM with explicit canopy bias and hydrological limitation warnings."
+    },
+    "hydrological_datum_safety": {
+      "issue": "Generic 0-60m range check risked rejecting legitimate observations, and PWD/EGM2008 conversion lacked explicit protection.",
+      "correction": "Replaced hardcoded bounds check with configurable station-specific plausibility warnings (plausibility_range). Raw gauge observations are preserved unaltered. PWD and EGM2008 elevations are explicitly protected from conflation or unverified conversion without surveyed benchmark parameters.",
+      "implementation": "validate_hydrological_csv updated with plausibility_range and DATUM_INCOMPATIBILITY_PROTECTION."
+    }
+  },
+  "acquisition_readiness": {
+    "manual_guide": "docs/PHASE4B_MANUAL_DATA_ACQUISITION_GUIDE.md",
+    "required_modalities": [
+      "Sentinel-2 MSI Level-2A (Tile T45RXE)",
+      "Landsat 8/9 Level-2 Surface Reflectance (Path 138 / Row 043)",
+      "BWDB / FFWC River Stage CSV (Stations SW46.9, SW46.9A)",
+      "Copernicus GLO-30 DSM (Tile N24_E089)"
+    ],
+    "current_status": "BLOCKED_PENDING_MANUAL_DOWNLOAD"
+  },
+  "next_recommended_milestone": "Phase 5A: Terrain Conditioning and Drainage Network Modeling (HAND Engine)"
+}

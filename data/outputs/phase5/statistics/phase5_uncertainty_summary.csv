@@ -1,0 +1,7 @@
+Error_Source,Impact,Severity
+Temporal Baseline (36 days),"River morphology shift, char migration, stage change between June 10 and July 16.",Moderate
+Speckle Filter Window (Lee 5x5),Suppresses speckle noise; may slightly blur sub-pixel channels <20m.,Low
+Instrument Noise Floor (Cat 2),"16,105 pixels in June pegged to -28 dB floor; excluded from change engine.",Rigidly Managed
+Flooded Vegetation Double-Bounce,Canopy interaction can attenuate or scatter signal; SCL 4 quarantined in validation.,Documented Limitation
+Wind Surface Roughening,Strong monsoon gusts can increase open water backscatter; mitigated by dual-pol AND.,Managed by Dual-Pol
+Optical Reference Occlusion,July S2 optical reference has 84.97% cloud occlusion; designated PARTIALLY_EVALUABLE.,Explicit Constraint

@@ -1,0 +1,7 @@
+evaluation_dataset,model,precision,recall,f1_score,iou,specificity,balanced_accuracy,accuracy,roc_auc,pr_auc,brier_score,tp,fp,tn,fn,total_samples
+Held-Out Test (June 10),Random Forest (Trained),0.4506,0.8963,0.5997,0.4283,0.3068,0.6016,0.5356,0.6981,0.5662,0.2189,1573,1918,849,182,4522
+Held-Out Test (June 10),Lee 5x5 Dual-AND Otsu (Baseline),0.6102,0.3943,0.4791,0.315,0.8403,0.6173,0.6672,,,,692,442,2325,1063,4522
+Held-Out Test (July 16),Random Forest (Trained),0.4411,0.9867,0.6096,0.4384,0.0895,0.5381,0.4675,0.6343,0.507,0.25,666,844,83,9,1602
+Held-Out Test (July 16),Lee 5x5 Dual-AND Otsu (Baseline),0.5081,0.7852,0.617,0.4461,0.4466,0.6159,0.5893,,,,530,513,414,145,1602
+Held-Out Test (Combined),Random Forest (Trained),0.4477,0.9214,0.6026,0.4312,0.2523,0.5869,0.5178,0.681,0.549,0.227,2239,2762,932,191,6124
+Held-Out Test (Combined),Lee 5x5 Dual-AND Otsu (Baseline),0.5613,0.5029,0.5305,0.361,0.7415,0.6222,0.6468,,,,1222,955,2739,1208,6124

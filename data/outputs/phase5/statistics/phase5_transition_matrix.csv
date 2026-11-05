@@ -1,0 +1,7 @@
+Transition_State,Class_Code,Cells,Area_km2,Area_ha,Pct_Valid_Domain,Pct_Total_AOI
+Persistent Water (June Wat -> July Wat),1,216595,86.638,8663.8,21.796,21.4442
+Newly Inundated Candidate (June NonWat -> July Wat),2,146992,58.7968,5879.68,14.7919,14.5531
+Receded Water (June Wat -> July NonWat),3,1634,0.6536,65.36,0.1644,0.1618
+Persistent Non-Water (June NonWat -> July NonWat),4,628515,251.406,25140.6,63.2477,62.2268
+Indeterminate / Noise Floor,5,16242,6.4968,649.68,,1.6081
+NoData / Invalid,6,61,0.0244,2.44,,0.006

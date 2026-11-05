@@ -1,0 +1,3 @@
+Acquisition_Epoch,AOI_Total_Cells,Evaluated_Cells_Strict,Evaluated_Coverage_Strict_Pct,Evaluated_Cells_Secondary,Evaluated_Coverage_Secondary_Pct,Excluded_Cloud_Pure_Cells,Excluded_Unclassified_Cells,Excluded_Cloud_Shadow_Cells,Excluded_Dark_Area_Cells,Excluded_Vegetation_Cells_Strict,Excluded_SAR_Indeterminate_Cells,Usability_Status
+"June 07, 2024",1010039,541242,53.59,551055,54.56,365193,78082,3356,0,9813,16105,READY
+"July 17, 2024",1010039,119478,11.83,149693,14.82,842741,15478,1912,190,30215,145,PARTIALLY_EVALUABLE

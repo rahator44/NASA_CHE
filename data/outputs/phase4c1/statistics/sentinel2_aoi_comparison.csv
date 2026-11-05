@@ -1,0 +1,17 @@
+Metric,"June 07, 2024","July 17, 2024"
+Acquisition Date,2024-06-07T04:37:11Z,2024-07-17T04:37:01Z
+Paired SAR Date,2024-06-10,2024-07-16
+Temporal Gap (days),3,1
+Processing Baseline,05.10,05.10
+AOI Swath Coverage (%),100.0,100.0
+AOI Usable Clear Pixels,563408,149718
+AOI Usable Clear (%),55.78,14.82
+AOI Clear Water Pixels,256636,99131
+AOI Clear Water (km²),102.6544,39.6524
+AOI Clear Land (km²),122.7088,20.2348
+"AOI Pure Cloud Cover (Classes 8-10, %)",36.16,83.44
+"AOI Unclassified (Class 7, %)",7.73,1.53
+AOI Combined Cloud & Unclassified (%),43.89,84.97
+AOI Cloud Shadow (%),0.33,0.19
+AOI Dark Area Pixels (%),0.0,0.02
+Validation Status,READY,PARTIALLY_USABLE

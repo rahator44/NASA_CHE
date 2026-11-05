@@ -1,0 +1,518 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "phase": "Phase 6.2: Displacement Uncertainty, Statistical Confidence & Final Scientific Readiness Audit",
+  "timestamp_utc": "2026-11-02T09:18:32.797293+00:00",
+  "phase6_1_uncertainty_audit": {
+    "calculated_rms_m": 26.757,
+    "reported_rms_m": 26.96,
+    "arithmetic_discrepancy_m": 0.203,
+    "calculated_mdd_m": 53.514,
+    "reported_mdd_m": 53.92
+  },
+  "defensible_uncertainty_model": {
+    "single_epoch_quantization_m": 5.77,
+    "two_epoch_quantization_m": 8.16,
+    "models": {
+      "optimistic_consolidated_bank": {
+        "sigma_delta_m": 16.6,
+        "threshold_95_k196_m": 32.54,
+        "threshold_95_k2_m": 33.21,
+        "operational_threshold_m": 35.0,
+        "description": "Steep consolidated western cut-bank; high backscatter contrast; POEORB alignment"
+      },
+      "central_typical_bank": {
+        "sigma_delta_m": 29.86,
+        "threshold_95_k196_m": 58.53,
+        "threshold_95_k2_m": 59.72,
+        "operational_threshold_m": 60.0,
+        "description": "Typical braided channel margin; standard land-water mixed pixel boundary"
+      },
+      "conservative_shallow_char": {
+        "sigma_delta_m": 43.77,
+        "threshold_95_k196_m": 85.79,
+        "threshold_95_k2_m": 87.54,
+        "operational_threshold_m": 85.0,
+        "description": "Low-gradient char margin; saturated sandbar fringe; stage-induced boundary migration"
+      }
+    },
+    "provisional_threshold_range_m": [
+      35.0,
+      60.0,
+      85.0
+    ]
+  },
+  "valid_transect_statistics": [
+    {
+      "target_feature": "Right Bank (West / Mainland)",
+      "column_name": "right_bank_displacement_m",
+      "transect_count": 122,
+      "mean_displacement_m": 130.0,
+      "median_displacement_m": 40.0,
+      "std_dev_m": 200.83,
+      "min_m": -120.0,
+      "max_m": 820.0,
+      "p10_m": 0.0,
+      "p25_m": 0.0,
+      "p75_m": 200.0,
+      "p90_m": 440.0,
+      "p95_m": 578.0,
+      "iqr_m": 200.0,
+      "clarification_notes": "Recalculated directly from audited 122 valid transects. Confirms exact empirical P90 values: 440 m (Right) and 400 m (Left)."
+    },
+    {
+      "target_feature": "Left Bank (East / Chars)",
+      "column_name": "left_bank_displacement_m",
+      "transect_count": 122,
+      "mean_displacement_m": 160.66,
+      "median_displacement_m": 90.0,
+      "std_dev_m": 209.95,
+      "min_m": -20.0,
+      "max_m": 960.0,
+      "p10_m": 0.0,
+      "p25_m": 0.0,
+      "p75_m": 275.0,
+      "p90_m": 400.0,
+      "p95_m": 539.0,
+      "iqr_m": 275.0,
+      "clarification_notes": "Recalculated directly from audited 122 valid transects. Confirms exact empirical P90 values: 440 m (Right) and 400 m (Left)."
+    },
+    {
+      "target_feature": "Channel Width Expansion",
+      "column_name": "channel_width_expansion_m",
+      "transect_count": 122,
+      "mean_displacement_m": 290.66,
+      "median_displacement_m": 180.0,
+      "std_dev_m": 286.68,
+      "min_m": -60.0,
+      "max_m": 1100.0,
+      "p10_m": 0.0,
+      "p25_m": 60.0,
+      "p75_m": 420.0,
+      "p90_m": 760.0,
+      "p95_m": 879.0,
+      "iqr_m": 360.0,
+      "clarification_notes": "Recalculated directly from audited 122 valid transects. Confirms exact empirical P90 values: 440 m (Right) and 400 m (Left)."
+    }
+  ],
+  "threshold_exceedance_summary": [
+    {
+      "threshold_m": 35.0,
+      "threshold_description": "Optimistic (Consolidated Bank, 1.75 px)",
+      "target_feature": "Right Bank (West / Mainland)",
+      "valid_transect_count": 122,
+      "exceeding_count": 68,
+      "exceeding_percentage": 55.74,
+      "sub_threshold_count": 54,
+      "sub_threshold_percentage": 44.26,
+      "scientific_interpretation": "55.74% of transects exceed 35.0 m. "
+    },
+    {
+      "threshold_m": 35.0,
+      "threshold_description": "Optimistic (Consolidated Bank, 1.75 px)",
+      "target_feature": "Left Bank (East / Chars)",
+      "valid_transect_count": 122,
+      "exceeding_count": 75,
+      "exceeding_percentage": 61.48,
+      "sub_threshold_count": 47,
+      "sub_threshold_percentage": 38.52,
+      "scientific_interpretation": "61.48% of transects exceed 35.0 m. "
+    },
+    {
+      "threshold_m": 35.0,
+      "threshold_description": "Optimistic (Consolidated Bank, 1.75 px)",
+      "target_feature": "Channel Width Expansion",
+      "valid_transect_count": 122,
+      "exceeding_count": 106,
+      "exceeding_percentage": 86.89,
+      "sub_threshold_count": 16,
+      "sub_threshold_percentage": 13.11,
+      "scientific_interpretation": "86.89% of transects exceed 35.0 m. "
+    },
+    {
+      "threshold_m": 50.0,
+      "threshold_description": "Legacy Nominal Baseline (2.5 px)",
+      "target_feature": "Right Bank (West / Mainland)",
+      "valid_transect_count": 122,
+      "exceeding_count": 52,
+      "exceeding_percentage": 42.62,
+      "sub_threshold_count": 70,
+      "sub_threshold_percentage": 57.38,
+      "scientific_interpretation": "42.62% of transects exceed 50.0 m. Remaining 57.4% are indistinguishable from sensor/processing noise."
+    },
+    {
+      "threshold_m": 50.0,
+      "threshold_description": "Legacy Nominal Baseline (2.5 px)",
+      "target_feature": "Left Bank (East / Chars)",
+      "valid_transect_count": 122,
+      "exceeding_count": 69,
+      "exceeding_percentage": 56.56,
+      "sub_threshold_count": 53,
+      "sub_threshold_percentage": 43.44,
+      "scientific_interpretation": "56.56% of transects exceed 50.0 m. "
+    },
+    {
+      "threshold_m": 50.0,
+      "threshold_description": "Legacy Nominal Baseline (2.5 px)",
+      "target_feature": "Channel Width Expansion",
+      "valid_transect_count": 122,
+      "exceeding_count": 100,
+      "exceeding_percentage": 81.97,
+      "sub_threshold_count": 22,
+      "sub_threshold_percentage": 18.03,
+      "scientific_interpretation": "81.97% of transects exceed 50.0 m. "
+    },
+    {
+      "threshold_m": 60.0,
+      "threshold_description": "Central Realistic (Typical Bank, 3.0 px)",
+      "target_feature": "Right Bank (West / Mainland)",
+      "valid_transect_count": 122,
+      "exceeding_count": 43,
+      "exceeding_percentage": 35.25,
+      "sub_threshold_count": 79,
+      "sub_threshold_percentage": 64.75,
+      "scientific_interpretation": "35.25% of transects exceed 60.0 m. Remaining 64.8% are indistinguishable from sensor/processing noise."
+    },
+    {
+      "threshold_m": 60.0,
+      "threshold_description": "Central Realistic (Typical Bank, 3.0 px)",
+      "target_feature": "Left Bank (East / Chars)",
+      "valid_transect_count": 122,
+      "exceeding_count": 64,
+      "exceeding_percentage": 52.46,
+      "sub_threshold_count": 58,
+      "sub_threshold_percentage": 47.54,
+      "scientific_interpretation": "52.46% of transects exceed 60.0 m. "
+    },
+    {
+      "threshold_m": 60.0,
+      "threshold_description": "Central Realistic (Typical Bank, 3.0 px)",
+      "target_feature": "Channel Width Expansion",
+      "valid_transect_count": 122,
+      "exceeding_count": 90,
+      "exceeding_percentage": 73.77,
+      "sub_threshold_count": 32,
+      "sub_threshold_percentage": 26.23,
+      "scientific_interpretation": "73.77% of transects exceed 60.0 m. "
+    },
+    {
+      "threshold_m": 85.0,
+      "threshold_description": "Conservative (Low-Gradient Char, 4.25 px)",
+      "target_feature": "Right Bank (West / Mainland)",
+      "valid_transect_count": 122,
+      "exceeding_count": 38,
+      "exceeding_percentage": 31.15,
+      "sub_threshold_count": 84,
+      "sub_threshold_percentage": 68.85,
+      "scientific_interpretation": "31.15% of transects exceed 85.0 m. Remaining 68.8% are indistinguishable from sensor/processing noise."
+    },
+    {
+      "threshold_m": 85.0,
+      "threshold_description": "Conservative (Low-Gradient Char, 4.25 px)",
+      "target_feature": "Left Bank (East / Chars)",
+      "valid_transect_count": 122,
+      "exceeding_count": 61,
+      "exceeding_percentage": 50.0,
+      "sub_threshold_count": 61,
+      "sub_threshold_percentage": 50.0,
+      "scientific_interpretation": "50.0% of transects exceed 85.0 m. "
+    },
+    {
+      "threshold_m": 85.0,
+      "threshold_description": "Conservative (Low-Gradient Char, 4.25 px)",
+      "target_feature": "Channel Width Expansion",
+      "valid_transect_count": 122,
+      "exceeding_count": 85,
+      "exceeding_percentage": 69.67,
+      "sub_threshold_count": 37,
+      "sub_threshold_percentage": 30.33,
+      "scientific_interpretation": "69.67% of transects exceed 85.0 m. "
+    }
+  ],
+  "spatial_block_bootstrap": [
+    {
+      "target_feature": "Right Bank (West / Mainland)",
+      "statistic": "Median Displacement",
+      "point_estimate_m": 40.0,
+      "bootstrap_mean_m": 34.69,
+      "bootstrap_se_m": 19.17,
+      "ci_95_lower_m": 20.0,
+      "ci_95_upper_m": 80.0,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.766,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Right Bank (West / Mainland)",
+      "statistic": "Mean Displacement",
+      "point_estimate_m": 130.0,
+      "bootstrap_mean_m": 126.18,
+      "bootstrap_se_m": 36.97,
+      "ci_95_lower_m": 59.83,
+      "ci_95_upper_m": 203.28,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.766,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Right Bank (West / Mainland)",
+      "statistic": "90th Percentile (P90)",
+      "point_estimate_m": 440.0,
+      "bootstrap_mean_m": 434.6,
+      "bootstrap_se_m": 103.59,
+      "ci_95_lower_m": 189.95,
+      "ci_95_upper_m": 598.0,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.766,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Right Bank (West / Mainland)",
+      "statistic": "95th Percentile (P95)",
+      "point_estimate_m": 578.0,
+      "bootstrap_mean_m": 551.9,
+      "bootstrap_se_m": 88.82,
+      "ci_95_lower_m": 398.95,
+      "ci_95_upper_m": 700.0,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.766,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Left Bank (East / Chars)",
+      "statistic": "Median Displacement",
+      "point_estimate_m": 90.0,
+      "bootstrap_mean_m": 83.85,
+      "bootstrap_se_m": 35.73,
+      "ci_95_lower_m": 20.0,
+      "ci_95_upper_m": 150.0,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.728,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Left Bank (East / Chars)",
+      "statistic": "Mean Displacement",
+      "point_estimate_m": 160.66,
+      "bootstrap_mean_m": 157.67,
+      "bootstrap_se_m": 30.76,
+      "ci_95_lower_m": 101.96,
+      "ci_95_upper_m": 222.8,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.728,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Left Bank (East / Chars)",
+      "statistic": "90th Percentile (P90)",
+      "point_estimate_m": 400.0,
+      "bootstrap_mean_m": 415.66,
+      "bootstrap_se_m": 93.23,
+      "ci_95_lower_m": 280.0,
+      "ci_95_upper_m": 540.0,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.728,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Left Bank (East / Chars)",
+      "statistic": "95th Percentile (P95)",
+      "point_estimate_m": 539.0,
+      "bootstrap_mean_m": 589.07,
+      "bootstrap_se_m": 178.21,
+      "ci_95_lower_m": 360.0,
+      "ci_95_upper_m": 860.0,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.728,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Channel Width Expansion",
+      "statistic": "Median Displacement",
+      "point_estimate_m": 180.0,
+      "bootstrap_mean_m": 199.06,
+      "bootstrap_se_m": 52.82,
+      "ci_95_lower_m": 120.0,
+      "ci_95_upper_m": 320.0,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.767,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Channel Width Expansion",
+      "statistic": "Mean Displacement",
+      "point_estimate_m": 290.66,
+      "bootstrap_mean_m": 283.85,
+      "bootstrap_se_m": 47.28,
+      "ci_95_lower_m": 194.42,
+      "ci_95_upper_m": 378.04,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.767,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Channel Width Expansion",
+      "statistic": "90th Percentile (P90)",
+      "point_estimate_m": 760.0,
+      "bootstrap_mean_m": 692.11,
+      "bootstrap_se_m": 127.8,
+      "ci_95_lower_m": 420.0,
+      "ci_95_upper_m": 880.0,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.767,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    },
+    {
+      "target_feature": "Channel Width Expansion",
+      "statistic": "95th Percentile (P95)",
+      "point_estimate_m": 879.0,
+      "bootstrap_mean_m": 842.93,
+      "bootstrap_se_m": 113.8,
+      "ci_95_lower_m": 540.0,
+      "ci_95_upper_m": 1060.0,
+      "block_size_transects": 6,
+      "block_length_km": 1.2,
+      "lag1_autocorrelation_r": 0.767,
+      "bootstrap_iterations": 2000,
+      "random_seed": 42
+    }
+  ],
+  "sampling_sensitivity_audit": [
+    {
+      "sampling_interval_m": 100.0,
+      "transect_count": 307,
+      "reported_right_median_m": 40.0,
+      "reported_right_mean_m": 418.63,
+      "reported_right_max_m": 5660.0,
+      "reported_left_median_m": 140.0,
+      "reported_left_mean_m": 428.53,
+      "reported_left_max_m": 3580.0,
+      "boundary_quality_filtering": "UNFILTERED (Included northern boundary entry artifacts & anabranches)",
+      "physical_channel_branches_matched": "Outer boundaries of all active water bodies, regardless of branch count",
+      "audit_verdict": "SENSITIVITY_LIMITATION_CONFIRMED",
+      "scientific_critique": "High density captures fine spatial variations but includes unclassified northern boundary artifacts. Median stability reflects modal 2-pixel raster jump, not physical measurement invariance."
+    },
+    {
+      "sampling_interval_m": 200.0,
+      "transect_count": 154,
+      "reported_right_median_m": 40.0,
+      "reported_right_mean_m": 406.62,
+      "reported_right_max_m": 5660.0,
+      "reported_left_median_m": 140.0,
+      "reported_left_mean_m": 432.08,
+      "reported_left_max_m": 3580.0,
+      "boundary_quality_filtering": "Audited in Phase 6.1 (122 Valid, 23 Boundary, 5 Anabranch, 4 Corridor Expansion)",
+      "physical_channel_branches_matched": "Baseline reach model. Validated downstream orientation (West=Right, East=Left)",
+      "audit_verdict": "PRIMARY_OPERATIONAL_BASELINE",
+      "scientific_critique": "Optimal balance between along-reach sampling density (200 m) and spatial autocorrelation length scale. Validated core median is 40 m (Right) and 90 m (Left)."
+    },
+    {
+      "sampling_interval_m": 500.0,
+      "transect_count": 62,
+      "reported_right_median_m": 40.0,
+      "reported_right_mean_m": 417.42,
+      "reported_right_max_m": 5660.0,
+      "reported_left_median_m": 160.0,
+      "reported_left_mean_m": 453.23,
+      "reported_left_max_m": 3480.0,
+      "boundary_quality_filtering": "UNFILTERED (Included boundary artifacts)",
+      "physical_channel_branches_matched": "Coarse sampling; skips localized bank scallops and embayments (<500 m)",
+      "audit_verdict": "COARSE_SPATIAL_UNDERSAMPLING",
+      "scientific_critique": "Skips localized cut-bank failure nodes. Left bank median shifts upward to 160 m as intermediate lower-displacement transects are omitted."
+    },
+    {
+      "sampling_interval_m": 1000.0,
+      "transect_count": 31,
+      "reported_right_median_m": 40.0,
+      "reported_right_mean_m": 370.32,
+      "reported_right_max_m": 4420.0,
+      "reported_left_median_m": 160.0,
+      "reported_left_mean_m": 442.58,
+      "reported_left_max_m": 3360.0,
+      "boundary_quality_filtering": "UNFILTERED (Coarse grid stepped over extreme northern rows)",
+      "physical_channel_branches_matched": "Highly aliased; misses multiple secondary braid bifurcations",
+      "audit_verdict": "SEVERE_SPATIAL_ALIASING",
+      "scientific_critique": "Maximum displacement artificially dropped from 5,660 m to 4,420 m simply because coarse 1 km grid stepped over peak anomaly rows. Proves sampling density strongly alters extreme tail detection."
+    }
+  ],
+  "scientific_readiness": [
+    {
+      "use_case_id": "UC-01",
+      "application_domain": "Scientific Project Demonstration",
+      "readiness_status": "READY_WITH_LIMITATIONS",
+      "applicability_scope": "Demonstrating end-to-end automated SAR processing, multi-temporal flood classification, and transect displacement mechanics for NASA Space Apps Challenge.",
+      "operational_conditions_and_limitations": "Must present explicit sensor uncertainty bounds (35-85 m) and caveats that single-event radar detects water margin changes rather than cadastral property boundaries.",
+      "prohibited_actions": "Do not claim unverified operational flood protection decisions or field-survey accuracy."
+    },
+    {
+      "use_case_id": "UC-02",
+      "application_domain": "Relative Channel-Margin Comparison",
+      "readiness_status": "READY_WITH_LIMITATIONS",
+      "applicability_scope": "Evaluating macro-scale asymmetry between the western consolidated margin and eastern braided flood corridor along the 31 km reach.",
+      "operational_conditions_and_limitations": "Valid for reach-aggregated statistics (West median 40 m vs East median 90 m). Local comparisons must exceed the 60 m central detection threshold.",
+      "prohibited_actions": "Do not attribute western bank stability to the Brahmaputra Right Embankment without external engineering GIS layers (retain BRE as UNVERIFIED_HYPOTHESIS)."
+    },
+    {
+      "use_case_id": "UC-03",
+      "application_domain": "Candidate Erosion / Accretion Mapping",
+      "readiness_status": "READY_WITH_LIMITATIONS",
+      "applicability_scope": "Spatial screening and hazard zonal mapping to identify candidate reach segments experiencing rapid channel-margin expansion or char submergence.",
+      "operational_conditions_and_limitations": "Must adhere strictly to standardized terminology: 'Candidate Bank Expansion / Submergence', 'Apparent Channel Contraction', and 'Disconnected Floodplain Inundation'.",
+      "prohibited_actions": "Do not claim confirmed permanent cut-bank erosion or sediment deposition without stage-discharge normalization and high-resolution optical/LiDAR ground truthing."
+    },
+    {
+      "use_case_id": "UC-04",
+      "application_domain": "Quantitative Displacement Reporting",
+      "readiness_status": "READY_WITH_LIMITATIONS",
+      "applicability_scope": "Reporting numerical lateral boundary shifts along vetted transects for fluvial geomorphology research.",
+      "operational_conditions_and_limitations": "Restricted strictly to the 122 VALID_LOCAL_MIGRATION transects. Values below 50-60 m must be explicitly noted as within sensor/processing noise.",
+      "prohibited_actions": "Do not report unfiltered displacements from the 32 ambiguous/anomalous transects (northern boundary entry asymmetry or eastern secondary anabranch activation)."
+    },
+    {
+      "use_case_id": "UC-05",
+      "application_domain": "Long-Term Geomorphic Erosion-Rate Estimation",
+      "readiness_status": "BLOCKED",
+      "applicability_scope": "Estimating annualized or multi-year riverbank erosion rates (m/year) or decadal sediment transport budgets.",
+      "operational_conditions_and_limitations": "STRICTLY BLOCKED: Only two acquisition dates (June 10 and July 16, 2024; 36-day flood rise) are available in the project repository.",
+      "prohibited_actions": "Extrapolating a 36-day seasonal flood rise into annual erosion rates violates fundamental fluvial geomorphic principles. Multi-year time series and dry-season low-flow baselines are mandatory prerequisites."
+    }
+  ],
+  "scientific_standards_enforced": {
+    "terminology": "Candidate Bank Expansion / Submergence; Apparent Channel Contraction; Candidate Accretion",
+    "bre_embankment_claim": "UNVERIFIED_HYPOTHESIS (Retained; no external engineering GIS layer)",
+    "july16_crest_claim": "FLOOD_PERIOD_OBSERVATION (Retained; daily hydrographs unverified)",
+    "long_term_erosion_rates": "BLOCKED (Single 36-day flood rise cannot be annualized)"
+  },
+  "deliverables": {
+    "statistics_csv": [
+      "data/outputs/phase6_2/statistics/phase6_2_uncertainty_budget.csv",
+      "data/outputs/phase6_2/statistics/phase6_2_bank_displacement_statistics.csv",
+      "data/outputs/phase6_2/statistics/phase6_2_spatial_bootstrap_intervals.csv",
+      "data/outputs/phase6_2/statistics/phase6_2_detection_threshold_assessment.csv",
+      "data/outputs/phase6_2/statistics/phase6_2_sampling_sensitivity_audit.csv",
+      "data/outputs/phase6_2/statistics/phase6_2_scientific_readiness.csv"
+    ],
+    "metadata_json": "data/metadata/phase6_2_uncertainty_audit.json"
+  }
+}

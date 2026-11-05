@@ -1,0 +1,72 @@
+# Earth Pulse Region Configuration: Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)
+# Study Area for NASA Space Apps Challenge 2026 - Dancing with the SARs
+
+region_id: jamuna_sirajganj
+region_name: Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)
+country: Bangladesh
+administrative_districts:
+  - Kazipur
+  - Sirajganj
+
+aoi:
+  wkt: "POLYGON((89.55 24.58, 89.75 24.58, 89.75 24.76, 89.55 24.76, 89.55 24.58))"
+  bbox: [89.55, 24.58, 89.75, 24.76]
+  area_km2: 404.0156
+
+grid:
+  crs: "EPSG:32645"
+  pixel_spacing_m: 20.0
+  raster_width: 1405
+  raster_height: 1393
+  origin_x: 757960.0
+  origin_y: 2740940.0
+  block_size_px: 50
+  block_size_km: 1.0
+  valid_aoi_cells: 1010039
+
+acquisitions:
+  june10:
+    acquisition_id: s1a_iw_grd_20240610
+    date: "2024-06-10"
+    season: pre_monsoon_low_flow
+    sensor_id: sentinel1
+    raw_archive: data/raw/sentinel1/S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.zip
+    aligned_raster: data/processed/aligned/june10_aligned.tif
+    sar_filtered_lee_5x5: data/processed/phase2b/lee_5x5/june10_lee_5x5.tif
+    sar_quality_mask: data/processed/phase2b/quality_mask/june10_quality_mask.tif
+    optical_reference:
+      dataset_id: s2a_msil2a_20240607_t45ryh
+      date: "2024-06-07"
+      delta_days: -3
+      resampled_scl: data/processed/reference/optical/sentinel2/june_2024/s2_june07_aligned_scl.tif
+    deterministic_otsu_baseline: data/processed/phase3a_qc/candidate_masks/june10_lee_5x5_otsu_dual_and_qc.tif
+
+  july16:
+    acquisition_id: s1a_iw_grd_20240716
+    date: "2024-07-16"
+    season: peak_monsoon_flood
+    sensor_id: sentinel1
+    raw_archive: data/raw/sentinel1/S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.zip
+    aligned_raster: data/processed/aligned/july16_aligned.tif
+    sar_filtered_lee_5x5: data/processed/phase2b/lee_5x5/july16_lee_5x5.tif
+    sar_quality_mask: data/processed/phase2b/quality_mask/july16_quality_mask.tif
+    optical_reference:
+      dataset_id: s2a_msil2a_20240717_t45ryh
+      date: "2024-07-17"
+      delta_days: +1
+      resampled_scl: data/processed/reference/optical/sentinel2/july_2024/s2_july17_aligned_scl.tif
+    deterministic_otsu_baseline: data/processed/phase3a_qc/candidate_masks/july16_lee_5x5_otsu_dual_and_qc.tif
+
+reference_labels:
+  source: sentinel2_scl
+  water_class_values: [6]
+  non_water_class_values: [5]
+  excluded_class_values: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11]
+
+sampling_strategy:
+  target_samples_per_block_per_class: 100
+  spatial_block_size_px: 50
+  train_split_ratio: 0.60
+  val_split_ratio: 0.20
+  test_split_ratio: 0.20
+  random_seed: 42

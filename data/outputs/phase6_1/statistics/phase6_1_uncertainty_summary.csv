@@ -1,0 +1,7 @@
+error_source,standard_uncertainty_m,notes
+Pixel Discretization (20 m Grid),14.14,Quantization uncertainty of +/- 0.5 pixels on each epoch: sqrt(10^2 + 10^2)
+Co-Registration & Orbit Accuracy,4.0,Sentinel-1 IW POE orbit alignment precision (approx. 0.2 pixels)
+SAR Water Edge Mixels & Speckle,20.0,Mixed pixel ambiguity and speckle edge fluctuation along land-water boundary
+Centerline Smoothing & Transect Angle,10.0,Geometric projection error from minor angular deviation from true bank normal
+Combined Standard Uncertainty (RMS),26.96,Quadratic sum: sqrt(14.14^2 + 4^2 + 20^2 + 10^2)
+"Minimum Detectable Displacement (MDD, k=2, 95% Conf)",53.92,Displacements below approx. 50 m (2.5 pixels) are within sensor/raster noise envelope

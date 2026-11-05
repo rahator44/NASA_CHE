@@ -1,0 +1,5 @@
+Evaluation_Epoch,Mode,Temporal_Gap_Days,True_Positive_px,False_Positive_px,True_Negative_px,False_Negative_px,Total_Evaluated_px,Evaluated_Area_km2,AOI_Coverage_Pct
+June 10 SAR vs June 07 Optical,Primary Strict (SCL 6 vs 5),3,98808,68382,280658,93394,541242,216.4968,53.59
+June 10 SAR vs June 07 Optical,Secondary (SCL 6 vs 4+5),3,98808,68382,290471,93394,551055,220.422,54.56
+July 16 SAR vs July 17 Optical,Primary Strict (SCL 6 vs 5),1,38454,40309,29974,10741,119478,47.7912,11.83
+July 16 SAR vs July 17 Optical,Secondary (SCL 6 vs 4+5),1,38454,40309,60189,10741,149693,59.8772,14.82

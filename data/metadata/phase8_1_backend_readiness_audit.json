@@ -1,0 +1,235 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "phase": "Phase 8.1: Final Backend Readiness, Full-System Integrity & Independent Handoff Audit",
+  "audit_date": "2026-11-04",
+  "audit_timestamp_utc": "2026-11-03T19:07:00Z",
+  "auditor_role": "Principal Software Architect, Geospatial Systems Auditor, SAR Remote-Sensing Scientist & Software QA Lead",
+  "audit_verdict": {
+    "overall_readiness_for_review": "READY_WITH_LIMITATIONS",
+    "summary": "The scientific core, machine-learning models, explainability engines, and backend API are fully operational, mathematically verified, and pass 100% of automated tests (315/315). The system is ready for independent external code review. Identified limitations are non-blocking architectural refinements (duplicate OpenAPI route definitions, missing root requirements.txt, and large uncompressed vector payloads).",
+    "readiness_domains": {
+      "scientific_processing_integrity": "READY",
+      "machine_learning_integrity": "READY",
+      "explainability_integrity": "READY",
+      "backend_api_correctness": "READY_WITH_LIMITATIONS",
+      "raster_and_vector_services": "READY_WITH_LIMITATIONS",
+      "database_and_job_management": "READY_WITH_LIMITATIONS",
+      "security_and_access_control": "READY_WITH_LIMITATIONS",
+      "multi_region_extensibility": "READY",
+      "overall_backend_readiness": "READY_WITH_LIMITATIONS"
+    }
+  },
+  "test_suite_verification": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider tests/",
+    "total_collected": 315,
+    "total_passed": 315,
+    "total_failed": 0,
+    "total_skipped": 0,
+    "total_warnings": 0,
+    "execution_duration_seconds": 15.20,
+    "test_files_count": 25,
+    "total_assertions_count": 1155,
+    "file_existence_assertions": 36,
+    "numerical_and_behavioral_assertions": 1119,
+    "test_meaningfulness_verdict": "VERIFIED_HIGH_QUALITY"
+  },
+  "runtime_environment": {
+    "python_version": "3.14.8",
+    "gcc_version": "GCC 16.2.0",
+    "packages": {
+      "fastapi": "0.142.2",
+      "starlette": "1.9.0",
+      "pydantic": "2.13.5",
+      "uvicorn": "0.53.0",
+      "gdal": "3.13.3",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pandas": "2.3.3",
+      "pillow": "12.3.0",
+      "joblib": "1.5.3",
+      "matplotlib": "3.10.9",
+      "pytest": "9.1.1"
+    },
+    "blocked_packages_confirmed_uninstalled": [
+      "rasterio",
+      "geopandas",
+      "shapely",
+      "shap",
+      "sklearn",
+      "scikit-learn"
+    ]
+  },
+  "api_route_audit": {
+    "total_openapi_paths": 43,
+    "total_method_path_pairs": 44,
+    "functional_endpoint_groups": 12,
+    "status_200_201_success_rate_pct": 100.0,
+    "duplicate_routes_detected": [
+      {
+        "path": "/api/v1/api/v1/system/status",
+        "method": "GET",
+        "cause": "Double prefix mount between main.py and system.py",
+        "severity": "MEDIUM",
+        "blocks_release": false
+      },
+      {
+        "path": "/api/v1/api/v1/system/capabilities",
+        "method": "GET",
+        "cause": "Double prefix mount between main.py and system.py",
+        "severity": "MEDIUM",
+        "blocks_release": false
+      },
+      {
+        "path": "/api/v1/health",
+        "method": "GET",
+        "cause": "Alias of root /health endpoint",
+        "severity": "LOW",
+        "blocks_release": false
+      }
+    ]
+  },
+  "scientific_data_reconciliation": {
+    "phase5_flood_inundation": {
+      "newly_inundated_candidate_km2": 58.7968,
+      "receded_water_km2": 0.6536,
+      "net_common_domain_expansion_km2": 58.1432,
+      "whole_epoch_candidate_water_difference_km2": 64.5224,
+      "persistent_water_km2": 86.6380,
+      "reconciliation_status": "EXACT_MATCH_CONFIRMED"
+    },
+    "phase6_riverbank_migration": {
+      "total_transects": 175,
+      "valid_transects_audited": 122,
+      "ambiguous_transects_excluded": 53,
+      "mean_west_displacement_m": 130.0,
+      "mean_east_displacement_m": 160.66,
+      "mean_net_width_change_m": 290.66,
+      "external_right_bank_expansion_ha": 412.8,
+      "char_margin_submergence_ha": 2840.4,
+      "apparent_channel_contraction_ha": 18.2,
+      "provisional_detection_range_m": "35-85m",
+      "quadrature_uncertainty_m": 29.86,
+      "minimum_resolvable_displacement_m": 53.92,
+      "reconciliation_status": "EXACT_MATCH_CONFIRMED"
+    },
+    "phase7_machine_learning": {
+      "model_id": "phase7a_rf_jamuna_v1",
+      "model_status": "RETAINED_AS_PROBABILITY_LAYER",
+      "optimal_threshold": 0.35,
+      "sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+      "sha256_match": true,
+      "held_out_accuracy": 0.5178,
+      "held_out_precision": 0.4477,
+      "held_out_recall": 0.9214,
+      "held_out_f1": 0.6026,
+      "held_out_roc_auc": 0.6810,
+      "reconciliation_status": "EXACT_MATCH_CONFIRMED"
+    },
+    "phase7b_explainability": {
+      "scientific_formulation": "TREE_PATH_ATTRIBUTION_SAABAS",
+      "global_base_value_training_background": 0.4905,
+      "ensemble_root_base_value": 0.4995,
+      "prior_typo_disambiguated": 0.3905,
+      "calibration_status": "UNCALIBRATED",
+      "brier_score": 0.2270,
+      "expected_calibration_error": 0.0959,
+      "rank1_feature": "vv_db",
+      "rank2_feature": "vh_db",
+      "reconciliation_status": "EXACT_MATCH_CONFIRMED"
+    },
+    "acquisition_dates": {
+      "sentinel1_june10": "2024-06-10T12:05:08Z",
+      "sentinel1_july16": "2024-07-16T12:05:07Z",
+      "sentinel2_june07": "2024-06-07T04:37:11Z",
+      "sentinel2_july17": "2024-07-17T04:37:01Z",
+      "reconciliation_status": "YEAR_2024_CONFIRMED"
+    }
+  },
+  "tile_and_vector_service_audit": {
+    "raster_assets_registered": 12,
+    "raster_assets_verified": 12,
+    "tile_rendering_mean_latency_ms": 30.44,
+    "tile_rendering_min_latency_ms": 15.64,
+    "tile_rendering_max_latency_ms": 84.82,
+    "vector_assets_registered": 4,
+    "vector_assets_verified": 4,
+    "vector_payload_warnings": [
+      {
+        "asset_id": "newly_inundated_candidate",
+        "size_kb": 4291.4,
+        "feature_count": 6725,
+        "latency_ms": 76.67,
+        "recommendation": "GZip compression and geometry simplification in Phase 9"
+      },
+      {
+        "asset_id": "phase5_inundation_clusters",
+        "size_kb": 1982.3,
+        "feature_count": 1177,
+        "latency_ms": 42.46,
+        "recommendation": "Vector tiling or client-side clustering in Phase 9"
+      }
+    ]
+  },
+  "database_and_jobs_audit": {
+    "engine": "SQLite3",
+    "db_file": "data/metadata/earth_pulse_jobs.db",
+    "jobs_table_rows": 21,
+    "analysis_runs_table_rows": 9,
+    "shell_command_execution_blocked": true,
+    "allowlisted_job_actions_count": 5,
+    "concurrency_state": "SYNCHRONOUS_EXECUTION"
+  },
+  "security_audit": {
+    "service_classification": "LOCAL_SCIENTIFIC_DEMONSTRATION_SERVICE",
+    "path_traversal_test_count": 6,
+    "path_traversal_blocked_count": 6,
+    "hardcoded_secrets_detected": 0,
+    "dot_env_files_detected": 0,
+    "cors_allowed_origins": [
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+      "http://localhost:5173",
+      "http://127.0.0.1:5173"
+    ]
+  },
+  "handoff_and_zip_profile": {
+    "total_project_files": 637,
+    "total_project_size_bytes": 6092789182,
+    "total_project_size_mb": 5810.51,
+    "total_project_size_gb": 5.67,
+    "raw_satellite_archives_mb": 2649.69,
+    "optical_reference_archives_mb": 2700.00,
+    "cache_and_temp_files_to_exclude_mb": 2.44,
+    "recommended_review_package": {
+      "included_files_count": 535,
+      "size_mb": 372.48,
+      "components": [
+        "src/backend/ (FastAPI application and services)",
+        "src/ml/ (Pure-NumPy Random Forest & Explainability)",
+        "src/core/ (Config loaders and dataset manifests)",
+        "scripts/ (Scientific processing and validation scripts)",
+        "tests/ (Complete 315-test automated test suite)",
+        "configs/ (YAML configurations)",
+        "docs/ (Scientific reports and audit logs)",
+        "data/metadata/ (Structured JSON reports and SQLite db)",
+        "models/ (Pre-trained Random Forest model joblib)",
+        "data/processed/ (Operational GeoTIFF rasters for tile engine)",
+        "data/outputs/ (Vector GeoJSONs and CSV tables)"
+      ],
+      "excluded_components": [
+        "data/raw/ (2.59 GB Sentinel-1 raw ZIP archives - listed with SHA-256)",
+        "data/reference/optical/ (2.70 GB raw Sentinel-2 SAFE folders - extracts retained in data/processed)",
+        "data/intermediate/ (46 MB transient rasters)",
+        ".pytest_cache/ & __pycache__/ (2.44 MB bytecode caches)"
+      ]
+    }
+  },
+  "issue_register_summary": {
+    "total_issues": 8,
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 3,
+    "low_count": 5,
+    "blocking_count": 0
+  }
+}

@@ -1,0 +1,396 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "phase": "Phase 5: Final SAR Flood-Change Engine & Inundation Area Accounting",
+  "timestamp": "2026-11-02T07:46:47.054213+00:00",
+  "primary_sar_method": {
+    "speckle_filter": "Lee 5x5 Adaptive Speckle Filter",
+    "thresholding": "VV/VH Dual-Polarization AND Logic (Otsu Bivariate)",
+    "pixel_support": "20.0 m spacing (0.0004 km2 / cell)",
+    "crs": "EPSG:32645 (UTM Zone 45N)",
+    "june_source_mask": "data/processed/phase3a_qc/candidate_masks/june10_lee_5x5_otsu_dual_and_qc.tif",
+    "july_source_mask": "data/processed/phase3a_qc/candidate_masks/july16_lee_5x5_otsu_dual_and_qc.tif"
+  },
+  "epoch_statistics": {
+    "june10_baseline": {
+      "candidate_water_pixels": 218330,
+      "candidate_water_area_km2": 87.332,
+      "candidate_water_area_ha": 8733.2,
+      "candidate_water_pct": 21.616,
+      "candidate_non_water_pixels": 775543,
+      "candidate_non_water_area_km2": 310.2172,
+      "indeterminate_pixels": 16105,
+      "indeterminate_area_km2": 6.442,
+      "nodata_pixels": 61,
+      "nodata_area_km2": 0.0244
+    },
+    "july16_flood_peak": {
+      "candidate_water_pixels": 379636,
+      "candidate_water_area_km2": 151.8544,
+      "candidate_water_area_ha": 15185.44,
+      "candidate_water_pct": 37.5863,
+      "candidate_non_water_pixels": 630208,
+      "candidate_non_water_area_km2": 252.0832,
+      "indeterminate_pixels": 145,
+      "indeterminate_area_km2": 0.058,
+      "nodata_pixels": 50,
+      "nodata_area_km2": 0.02
+    },
+    "whole_epoch_unmasked_change": {
+      "net_candidate_water_area_change_pixels": 161306,
+      "net_candidate_water_area_change_km2": 64.5224,
+      "net_candidate_water_area_change_ha": 6452.24,
+      "note": "Net whole-epoch difference in unmasked candidate water (+64.5224 km2) before common-domain exclusion."
+    }
+  },
+  "transition_accounting": {
+    "aoi_total_cells": 1010039,
+    "aoi_total_area_km2": 404.0156,
+    "valid_transition_cells": 993736,
+    "valid_transition_area_km2": 397.4944,
+    "valid_transition_area_ha": 39749.44,
+    "valid_transition_coverage_pct": 98.3859,
+    "persistent_water": {
+      "cells": 216595,
+      "area_km2": 86.638,
+      "area_ha": 8663.8,
+      "pct_total_aoi": 21.4442,
+      "pct_valid_domain": 21.796
+    },
+    "newly_inundated_candidate": {
+      "cells": 146992,
+      "area_km2": 58.7968,
+      "area_ha": 5879.68,
+      "pct_total_aoi": 14.5531,
+      "pct_valid_domain": 14.7919
+    },
+    "receded_water": {
+      "cells": 1634,
+      "area_km2": 0.6536,
+      "area_ha": 65.36,
+      "pct_total_aoi": 0.1618,
+      "pct_valid_domain": 0.1644
+    },
+    "persistent_non_water": {
+      "cells": 628515,
+      "area_km2": 251.406,
+      "area_ha": 25140.6,
+      "pct_total_aoi": 62.2268,
+      "pct_valid_domain": 63.2477
+    },
+    "indeterminate_noise_floor": {
+      "cells": 16242,
+      "area_km2": 6.4968,
+      "area_ha": 649.68,
+      "pct_total_aoi": 1.6081
+    },
+    "nodata_invalid": {
+      "cells": 61,
+      "area_km2": 0.0244,
+      "area_ha": 2.44,
+      "pct_total_aoi": 0.006
+    },
+    "net_change_reconciliation": {
+      "gross_candidate_inundation_km2": 58.7968,
+      "gross_candidate_recession_km2": 0.6536,
+      "net_candidate_water_area_change_pixels": 145358,
+      "net_candidate_water_area_change_km2": 58.1432,
+      "net_candidate_water_area_change_ha": 5814.32,
+      "valid_june_water_pixels": 218229,
+      "valid_june_water_km2": 87.2916,
+      "valid_july_water_pixels": 363587,
+      "valid_july_water_km2": 145.4348,
+      "mathematical_identity_holds": true
+    }
+  },
+  "flood_cluster_analysis": {
+    "total_clusters_identified": 3934,
+    "total_inundated_pixels": 146992,
+    "total_inundated_area_km2": 58.7968,
+    "major_clusters_count_gte_1ha": 306,
+    "major_clusters_area_km2": 55.0828,
+    "major_clusters_pct_of_inundation": 93.68,
+    "top_10_clusters": [
+      {
+        "rank": 1,
+        "cluster_id": 713,
+        "pixel_count": 15950,
+        "area_ha": 638.0,
+        "area_km2": 6.38,
+        "pct_of_new_inundation": 10.8509,
+        "pct_of_study_aoi": 1.5791,
+        "centroid_utm45n": [
+          774475.52,
+          2735465.98
+        ],
+        "centroid_wgs84": [
+          89.712994,
+          24.709198
+        ],
+        "bbox_utm45n": [
+          772615.65,
+          2733339.18,
+          776795.65,
+          2737799.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      },
+      {
+        "rank": 2,
+        "cluster_id": 1067,
+        "pixel_count": 7106,
+        "area_ha": 284.24,
+        "area_km2": 2.8424,
+        "pct_of_new_inundation": 4.8343,
+        "pct_of_study_aoi": 0.7035,
+        "centroid_utm45n": [
+          768483.83,
+          2733319.55
+        ],
+        "centroid_wgs84": [
+          89.653411,
+          24.690892
+        ],
+        "bbox_utm45n": [
+          767355.65,
+          2731159.18,
+          769595.65,
+          2736239.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      },
+      {
+        "rank": 3,
+        "cluster_id": 2991,
+        "pixel_count": 6377,
+        "area_ha": 255.08,
+        "area_km2": 2.5508,
+        "pct_of_new_inundation": 4.3383,
+        "pct_of_study_aoi": 0.6314,
+        "centroid_utm45n": [
+          774197.49,
+          2724428.99
+        ],
+        "centroid_wgs84": [
+          89.708098,
+          24.609679
+        ],
+        "bbox_utm45n": [
+          773235.65,
+          2722859.18,
+          775515.65,
+          2726519.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      },
+      {
+        "rank": 4,
+        "cluster_id": 263,
+        "pixel_count": 5762,
+        "area_ha": 230.48,
+        "area_km2": 2.3048,
+        "pct_of_new_inundation": 3.9199,
+        "pct_of_study_aoi": 0.5705,
+        "centroid_utm45n": [
+          774614.5,
+          2738536.14
+        ],
+        "centroid_wgs84": [
+          89.714968,
+          24.736869
+        ],
+        "bbox_utm45n": [
+          772775.65,
+          2737099.18,
+          776155.65,
+          2739799.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      },
+      {
+        "rank": 5,
+        "cluster_id": 7,
+        "pixel_count": 5700,
+        "area_ha": 228.0,
+        "area_km2": 2.28,
+        "pct_of_new_inundation": 3.8778,
+        "pct_of_study_aoi": 0.5643,
+        "centroid_utm45n": [
+          773110.18,
+          2740329.22
+        ],
+        "centroid_wgs84": [
+          89.700459,
+          24.753314
+        ],
+        "bbox_utm45n": [
+          770895.65,
+          2739379.18,
+          774775.65,
+          2741079.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      },
+      {
+        "rank": 6,
+        "cluster_id": 139,
+        "pixel_count": 4885,
+        "area_ha": 195.4,
+        "area_km2": 1.954,
+        "pct_of_new_inundation": 3.3233,
+        "pct_of_study_aoi": 0.4836,
+        "centroid_utm45n": [
+          770095.54,
+          2739680.81
+        ],
+        "centroid_wgs84": [
+          89.670551,
+          24.747998
+        ],
+        "bbox_utm45n": [
+          768435.65,
+          2738979.18,
+          771935.65,
+          2740399.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      },
+      {
+        "rank": 7,
+        "cluster_id": 3534,
+        "pixel_count": 4387,
+        "area_ha": 175.48,
+        "area_km2": 1.7548,
+        "pct_of_new_inundation": 2.9845,
+        "pct_of_study_aoi": 0.4343,
+        "centroid_utm45n": [
+          777227.59,
+          2722257.97
+        ],
+        "centroid_wgs84": [
+          89.737571,
+          24.589552
+        ],
+        "bbox_utm45n": [
+          775975.65,
+          2721179.18,
+          778495.65,
+          2723559.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      },
+      {
+        "rank": 8,
+        "cluster_id": 2850,
+        "pixel_count": 3979,
+        "area_ha": 159.16,
+        "area_km2": 1.5916,
+        "pct_of_new_inundation": 2.707,
+        "pct_of_study_aoi": 0.3939,
+        "centroid_utm45n": [
+          777805.68,
+          2726249.47
+        ],
+        "centroid_wgs84": [
+          89.744061,
+          24.625456
+        ],
+        "bbox_utm45n": [
+          777075.65,
+          2724459.18,
+          778415.65,
+          2727319.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      },
+      {
+        "rank": 9,
+        "cluster_id": 3155,
+        "pixel_count": 3024,
+        "area_ha": 120.96,
+        "area_km2": 1.2096,
+        "pct_of_new_inundation": 2.0573,
+        "pct_of_study_aoi": 0.2994,
+        "centroid_utm45n": [
+          770629.46,
+          2724401.46
+        ],
+        "centroid_wgs84": [
+          89.672883,
+          24.61006
+        ],
+        "bbox_utm45n": [
+          769795.65,
+          2722659.18,
+          771355.65,
+          2725659.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      },
+      {
+        "rank": 10,
+        "cluster_id": 358,
+        "pixel_count": 2958,
+        "area_ha": 118.32,
+        "area_km2": 1.1832,
+        "pct_of_new_inundation": 2.0124,
+        "pct_of_study_aoi": 0.2929,
+        "centroid_utm45n": [
+          770322.93,
+          2738609.37
+        ],
+        "centroid_wgs84": [
+          89.672591,
+          24.738292
+        ],
+        "bbox_utm45n": [
+          769335.65,
+          2737999.18,
+          771315.65,
+          2739279.18
+        ],
+        "connectivity_rule": "8-connectivity",
+        "is_major_cluster": true
+      }
+    ]
+  },
+  "reconciliation_findings": {
+    "net_candidate_water_area_change_identity": "Newly Inundated (58.7968 km2) - Receded (0.6536 km2) == Net Change (+58.1432 km2)",
+    "whole_epoch_vs_common_domain_gap_km2": 6.3792,
+    "explanation": "The earlier reported +64.5224 km2 is the net whole-epoch unmasked candidate water difference (July water 151.8544 km2 minus June water 87.3320 km2). Within the common valid comparison domain, jointly excluding pixels that were indeterminate or NoData in either date yields a valid June water extent of 87.2916 km2 (218,229 px) and valid July water extent of 145.4348 km2 (363,587 px). The resulting net candidate water expansion is strictly +58.1432 km2 (145,358 px), exactly equal to Newly Inundated Candidate (58.7968 km2) minus Receded Water (0.6536 km2)."
+  },
+  "output_files": {
+    "processed_rasters": [
+      "data/processed/phase5/phase5_flood_transitions.tif",
+      "data/processed/phase5/phase5_newly_inundated_candidate.tif",
+      "data/processed/phase5/phase5_receded_water.tif",
+      "data/processed/phase5/phase5_persistent_water.tif",
+      "data/processed/phase5/phase5_persistent_non_water.tif",
+      "data/processed/phase5/phase5_indeterminate_mask.tif"
+    ],
+    "geojson": [
+      "data/processed/phase5/phase5_major_inundation_clusters.geojson",
+      "data/outputs/phase5/maps/phase5_major_inundation_clusters.geojson"
+    ],
+    "maps": [
+      "data/outputs/phase5/maps/phase5_flood_transitions_map.png",
+      "data/outputs/phase5/maps/phase5_inundation_cluster_map.png"
+    ],
+    "statistics": [
+      "data/outputs/phase5/statistics/phase5_transition_matrix.csv",
+      "data/outputs/phase5/statistics/phase5_inundation_area_summary.csv",
+      "data/outputs/phase5/statistics/phase5_epoch_water_area.csv",
+      "data/outputs/phase5/statistics/phase5_cluster_statistics.csv",
+      "data/outputs/phase5/statistics/phase5_uncertainty_summary.csv",
+      "data/outputs/phase5/statistics/phase5_exclusion_summary.csv"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+phase5_code,phase5_name,phase6_code,phase6_name,pixel_count,area_km2,area_ha,pct_study_aoi,physical_interpretation
+1,Persistent Water,0,Persistent Mainland Non-Water,5758,2.3032,230.32,0.5701,"Persistent water bodies on mainland floodplain (beels, borrow pits) unclassified by channel mask."
+1,Persistent Water,1,Persistent Channel Water,210710,84.284,8428.4,20.8616,Continuous flow within main braided channel network in both epochs.
+1,Persistent Water,5,Persistent Internal Char,127,0.0508,5.08,0.0126,Small persistent water bodies/depressions on internal char islands absorbed into char mask.
+2,Newly Inundated Candidate,2,External Bank Erosion Candidate,54850,21.94,2194.0,5.4305,Active outward expansion of continuous channel corridor into previous mainland floodplain.
+2,Newly Inundated Candidate,3,Internal Char Submergence,58025,23.21,2321.0,5.7448,Submergence of internal mid-channel char islands and sand shoals by rising monsoon stage.
+2,Newly Inundated Candidate,6,Disconnected Floodplain Inundation,34117,13.6468,1364.68,3.3778,Newly inundated agricultural depressions and backswamps disconnected from main channel.
+3,Receded Water,0,Persistent Mainland Non-Water,597,0.2388,23.88,0.0591,Receded temporary ponding on mainland floodplain unclassified by channel mask.
+3,Receded Water,4,Apparent Accretion,1037,0.4148,41.48,0.1027,Apparent water recession or contraction within active channel corridor.
+4,Persistent Non-Water,0,Persistent Mainland Non-Water,571454,228.5816,22858.16,56.5774,Permanent dry mainland and elevated natural levees outside active channel corridor.
+4,Persistent Non-Water,5,Persistent Internal Char,57061,22.8244,2282.44,5.6494,Elevated cores of semi-permanent mid-channel char islands remaining dry in both epochs.
+5,Indeterminate Noise Floor,5,Persistent Internal Char,61,0.0244,2.44,0.006,Noise-floor pixels situated within char footprint overwritten by char assignment.
+5,Indeterminate Noise Floor,7,Indeterminate Noise Floor,16181,6.4724,647.24,1.602,Low-backscatter SAR instrument noise floor outside char islands.
+6,Source NoData / Invalid,255,NoData Border,61,0.0244,2.44,0.006,Invalid border/sensor edge pixels identical across both phases.

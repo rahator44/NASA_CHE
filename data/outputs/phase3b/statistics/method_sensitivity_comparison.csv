@@ -1,0 +1,4 @@
+comparison,primary_newly_inundated_km2,other_newly_inundated_km2,area_difference_km2,jaccard_iou,cohens_kappa,overall_agreement_pct,pixel_discrepancy_count
+Primary_vs_2DOtsu,58.7968,51.9604,-6.8364,0.8387,0.8984,97.596,24283
+Primary_vs_Lee3x3,58.7968,58.4832,-0.3136,0.961,0.9767,99.422,5834
+Primary_vs_Unfiltered,58.7968,63.0348,4.238,0.8768,0.9227,98.021,19989

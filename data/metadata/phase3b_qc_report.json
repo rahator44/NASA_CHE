@@ -1,0 +1,1837 @@
+{
+  "project": "NASA Space Apps Challenge 2026 \u2014 Dancing with the SARs",
+  "phase": "Phase 3B.1: Transition Classification and Full-Scene NoData Audit",
+  "root_cause_investigation": {
+    "issue_reported": "Chat/report misstated full-scene Indeterminate as 595,953 pixels and NoData as 284 pixels.",
+    "root_cause_explanation": "The actual Phase 3B GeoTIFF transition rasters and JSON report data were correctly computed all along (NoData Class 6 = 577,307 pixels [29.50%], Indeterminate Class 5 = 18,930 pixels [0.97%]). However, during conversational summary formatting, a typographical inversion occurred where total non-definitive cells (596,237) minus 284 cells was mislabeled as Indeterminate (595,953 cells), and 284 cells was mislabeled as NoData. This audit comprehensively confirms the mathematical and spatial integrity of the underlying engine.",
+    "original_phase3b_raster_validity": "VERIFIED VALID (Rasters correctly contain 577,307 NoData cells and 18,930 Indeterminate cells)"
+  },
+  "input_audit": {
+    "candidate_masks": {
+      "primary_june10": {
+        "path": "data/processed/phase3a_qc/candidate_masks/june10_lee_5x5_otsu_dual_and_qc.tif",
+        "gdal_nodata": 3.0,
+        "band_description": "Corrected_Candidate_Water_Mask (0=NonWater, 1=Water, 2=Indeterminate, 3=NoData, 4=Ambiguous)",
+        "full_scene_counts": {
+          "0": 1108193,
+          "1": 253048,
+          "2": 18741,
+          "3": 577183
+        },
+        "aoi_counts": {
+          "0": 775543,
+          "1": 218330,
+          "2": 16105,
+          "3": 61
+        },
+        "outside_aoi_counts": {
+          "0": 332650,
+          "1": 34718,
+          "2": 2636,
+          "3": 577122
+        },
+        "total_cells": 1957165
+      },
+      "primary_july16": {
+        "path": "data/processed/phase3a_qc/candidate_masks/july16_lee_5x5_otsu_dual_and_qc.tif",
+        "gdal_nodata": 3.0,
+        "band_description": "Corrected_Candidate_Water_Mask (0=NonWater, 1=Water, 2=Indeterminate, 3=NoData, 4=Ambiguous)",
+        "full_scene_counts": {
+          "0": 910473,
+          "1": 469895,
+          "2": 206,
+          "3": 576591
+        },
+        "aoi_counts": {
+          "0": 630208,
+          "1": 379636,
+          "2": 145,
+          "3": 50
+        },
+        "outside_aoi_counts": {
+          "0": 280265,
+          "1": 90259,
+          "2": 61,
+          "3": 576541
+        },
+        "total_cells": 1957165
+      },
+      "2d_otsu_june10": {
+        "path": "data/processed/phase3a_qc/candidate_masks/june10_lee_5x5_otsu_2d_qc.tif",
+        "gdal_nodata": 3.0,
+        "band_description": "Corrected_Candidate_Water_Mask (0=NonWater, 1=Water, 2=Indeterminate, 3=NoData, 4=Ambiguous)",
+        "full_scene_counts": {
+          "0": 1074992,
+          "1": 259328,
+          "2": 18741,
+          "3": 577183,
+          "4": 26921
+        },
+        "aoi_counts": {
+          "0": 748604,
+          "1": 223391,
+          "2": 16105,
+          "3": 61,
+          "4": 21878
+        },
+        "outside_aoi_counts": {
+          "0": 326388,
+          "1": 35937,
+          "2": 2636,
+          "3": 577122,
+          "4": 5043
+        },
+        "total_cells": 1957165
+      },
+      "2d_otsu_july16": {
+        "path": "data/processed/phase3a_qc/candidate_masks/july16_lee_5x5_otsu_2d_qc.tif",
+        "gdal_nodata": 3.0,
+        "band_description": "Corrected_Candidate_Water_Mask (0=NonWater, 1=Water, 2=Indeterminate, 3=NoData, 4=Ambiguous)",
+        "full_scene_counts": {
+          "0": 859198,
+          "1": 475318,
+          "2": 206,
+          "3": 576591,
+          "4": 45852
+        },
+        "aoi_counts": {
+          "0": 592739,
+          "1": 383680,
+          "2": 145,
+          "3": 50,
+          "4": 33425
+        },
+        "outside_aoi_counts": {
+          "0": 266459,
+          "1": 91638,
+          "2": 61,
+          "3": 576541,
+          "4": 12427
+        },
+        "total_cells": 1957165
+      },
+      "lee_3x3_june10": {
+        "path": "data/processed/phase3a_qc/candidate_masks/june10_lee_3x3_otsu_dual_and_qc.tif",
+        "gdal_nodata": 3.0,
+        "band_description": "Corrected_Candidate_Water_Mask (0=NonWater, 1=Water, 2=Indeterminate, 3=NoData, 4=Ambiguous)",
+        "full_scene_counts": {
+          "0": 1105878,
+          "1": 255363,
+          "2": 18741,
+          "3": 577183
+        },
+        "aoi_counts": {
+          "0": 773862,
+          "1": 220011,
+          "2": 16105,
+          "3": 61
+        },
+        "outside_aoi_counts": {
+          "0": 332016,
+          "1": 35352,
+          "2": 2636,
+          "3": 577122
+        },
+        "total_cells": 1957165
+      },
+      "lee_3x3_july16": {
+        "path": "data/processed/phase3a_qc/candidate_masks/july16_lee_3x3_otsu_dual_and_qc.tif",
+        "gdal_nodata": 3.0,
+        "band_description": "Corrected_Candidate_Water_Mask (0=NonWater, 1=Water, 2=Indeterminate, 3=NoData, 4=Ambiguous)",
+        "full_scene_counts": {
+          "0": 909809,
+          "1": 470559,
+          "2": 206,
+          "3": 576591
+        },
+        "aoi_counts": {
+          "0": 629871,
+          "1": 379973,
+          "2": 145,
+          "3": 50
+        },
+        "outside_aoi_counts": {
+          "0": 279938,
+          "1": 90586,
+          "2": 61,
+          "3": 576541
+        },
+        "total_cells": 1957165
+      },
+      "unfiltered_june10": {
+        "path": "data/processed/phase3a_qc/candidate_masks/june10_unfiltered_otsu_dual_and_qc.tif",
+        "gdal_nodata": 3.0,
+        "band_description": "Corrected_Candidate_Water_Mask (0=NonWater, 1=Water, 2=Indeterminate, 3=NoData, 4=Ambiguous)",
+        "full_scene_counts": {
+          "0": 1117245,
+          "1": 243996,
+          "2": 18741,
+          "3": 577183
+        },
+        "aoi_counts": {
+          "0": 783625,
+          "1": 210248,
+          "2": 16105,
+          "3": 61
+        },
+        "outside_aoi_counts": {
+          "0": 333620,
+          "1": 33748,
+          "2": 2636,
+          "3": 577122
+        },
+        "total_cells": 1957165
+      },
+      "unfiltered_july16": {
+        "path": "data/processed/phase3a_qc/candidate_masks/july16_unfiltered_otsu_dual_and_qc.tif",
+        "gdal_nodata": 3.0,
+        "band_description": "Corrected_Candidate_Water_Mask (0=NonWater, 1=Water, 2=Indeterminate, 3=NoData, 4=Ambiguous)",
+        "full_scene_counts": {
+          "0": 910109,
+          "1": 470259,
+          "2": 206,
+          "3": 576591
+        },
+        "aoi_counts": {
+          "0": 630355,
+          "1": 379489,
+          "2": 145,
+          "3": 50
+        },
+        "outside_aoi_counts": {
+          "0": 279754,
+          "1": 90770,
+          "2": 61,
+          "3": 576541
+        },
+        "total_cells": 1957165
+      }
+    },
+    "quality_masks": {
+      "qm_june10": {
+        "path": "data/processed/phase2b/quality_mask/june10_quality_mask.tif",
+        "bands": {
+          "band_1_Quality_VH": {
+            "gdal_nodata": 1.0,
+            "full_scene_counts": {
+              "0": 1361248,
+              "1": 577183,
+              "2": 18734
+            },
+            "aoi_counts": {
+              "0": 993880,
+              "1": 61,
+              "2": 16098
+            },
+            "outside_aoi_counts": {
+              "0": 367368,
+              "1": 577122,
+              "2": 2636
+            }
+          },
+          "band_2_Quality_VV": {
+            "gdal_nodata": 1.0,
+            "full_scene_counts": {
+              "0": 1379975,
+              "1": 577183,
+              "2": 7
+            },
+            "aoi_counts": {
+              "0": 1009971,
+              "1": 61,
+              "2": 7
+            },
+            "outside_aoi_counts": {
+              "0": 370004,
+              "1": 577122
+            }
+          }
+        }
+      },
+      "qm_july16": {
+        "path": "data/processed/phase2b/quality_mask/july16_quality_mask.tif",
+        "bands": {
+          "band_1_Quality_VH": {
+            "gdal_nodata": 1.0,
+            "full_scene_counts": {
+              "0": 1380369,
+              "1": 576591,
+              "2": 205
+            },
+            "aoi_counts": {
+              "0": 1009845,
+              "1": 50,
+              "2": 144
+            },
+            "outside_aoi_counts": {
+              "0": 370524,
+              "1": 576541,
+              "2": 61
+            }
+          },
+          "band_2_Quality_VV": {
+            "gdal_nodata": 1.0,
+            "full_scene_counts": {
+              "0": 1380573,
+              "1": 576591,
+              "2": 1
+            },
+            "aoi_counts": {
+              "0": 1009988,
+              "1": 50,
+              "2": 1
+            },
+            "outside_aoi_counts": {
+              "0": 370585,
+              "1": 576541
+            }
+          }
+        }
+      }
+    }
+  },
+  "full_scene_reconciliation": {
+    "total_cells": 1957165,
+    "total_area_km2": 782.866,
+    "source_nodata_june10": 577183,
+    "source_nodata_july16": 576591,
+    "common_nodata_both": 576467,
+    "union_nodata_either_date_class_6": 577307,
+    "union_nodata_pct": 29.4971,
+    "clipping_floor_indeterminate_class_5": 18930,
+    "clipping_floor_pct": 0.9672,
+    "definitive_valid_cells": 1360928,
+    "definitive_valid_pct": 69.5357,
+    "conservation_sum": 1957165,
+    "conservation_holds": true
+  },
+  "statistics_aoi": {
+    "primary": {
+      "total_cells": 1010039,
+      "total_area_km2": 404.0156,
+      "valid_transition_cells": 993736,
+      "valid_transition_area_km2": 397.4944,
+      "persistent_water_cells": 216595,
+      "persistent_water_area_km2": 86.638,
+      "persistent_water_area_ha": 8663.8,
+      "persistent_water_pct_total": 21.4442,
+      "persistent_water_pct_valid": 21.796,
+      "newly_inundated_candidate_cells": 146992,
+      "newly_inundated_candidate_area_km2": 58.7968,
+      "newly_inundated_candidate_area_ha": 5879.68,
+      "newly_inundated_pct_total": 14.5531,
+      "newly_inundated_pct_valid": 14.7919,
+      "receded_water_cells": 1634,
+      "receded_water_area_km2": 0.6536,
+      "receded_water_area_ha": 65.36,
+      "receded_water_pct_total": 0.1618,
+      "receded_water_pct_valid": 0.1644,
+      "persistent_non_water_cells": 628515,
+      "persistent_non_water_area_km2": 251.406,
+      "persistent_non_water_area_ha": 25140.6,
+      "persistent_non_water_pct_total": 62.2268,
+      "persistent_non_water_pct_valid": 63.2477,
+      "indeterminate_cells": 16242,
+      "indeterminate_area_km2": 6.4968,
+      "indeterminate_area_ha": 649.68,
+      "indeterminate_pct_total": 1.6081,
+      "nodata_cells": 61,
+      "nodata_area_km2": 0.0244,
+      "nodata_area_ha": 2.44,
+      "nodata_pct_total": 0.006,
+      "gross_candidate_water_expansion_km2": 58.7968,
+      "gross_candidate_water_recession_km2": 0.6536,
+      "net_candidate_water_area_change_km2": 58.1432,
+      "net_candidate_water_area_change_ha": 5814.32,
+      "valid_june_water_cells": 218229,
+      "valid_july_water_cells": 363587,
+      "reconciliation_identity_holds": true
+    },
+    "2d_otsu": {
+      "total_cells": 1010039,
+      "total_area_km2": 404.0156,
+      "valid_transition_cells": 940042,
+      "valid_transition_area_km2": 376.0168,
+      "persistent_water_cells": 221334,
+      "persistent_water_area_km2": 88.5336,
+      "persistent_water_area_ha": 8853.36,
+      "persistent_water_pct_total": 21.9134,
+      "persistent_water_pct_valid": 23.5451,
+      "newly_inundated_candidate_cells": 129901,
+      "newly_inundated_candidate_area_km2": 51.9604,
+      "newly_inundated_candidate_area_ha": 5196.04,
+      "newly_inundated_pct_total": 12.861,
+      "newly_inundated_pct_valid": 13.8186,
+      "receded_water_cells": 689,
+      "receded_water_area_km2": 0.2756,
+      "receded_water_area_ha": 27.56,
+      "receded_water_pct_total": 0.0682,
+      "receded_water_pct_valid": 0.0733,
+      "persistent_non_water_cells": 588118,
+      "persistent_non_water_area_km2": 235.2472,
+      "persistent_non_water_area_ha": 23524.72,
+      "persistent_non_water_pct_total": 58.2273,
+      "persistent_non_water_pct_valid": 62.5629,
+      "indeterminate_cells": 69936,
+      "indeterminate_area_km2": 27.9744,
+      "indeterminate_area_ha": 2797.44,
+      "indeterminate_pct_total": 6.9241,
+      "nodata_cells": 61,
+      "nodata_area_km2": 0.0244,
+      "nodata_area_ha": 2.44,
+      "nodata_pct_total": 0.006,
+      "gross_candidate_water_expansion_km2": 51.9604,
+      "gross_candidate_water_recession_km2": 0.2756,
+      "net_candidate_water_area_change_km2": 51.6848,
+      "net_candidate_water_area_change_ha": 5168.48,
+      "valid_june_water_cells": 222023,
+      "valid_july_water_cells": 351235,
+      "reconciliation_identity_holds": true
+    },
+    "lee_3x3": {
+      "total_cells": 1010039,
+      "total_area_km2": 404.0156,
+      "valid_transition_cells": 993736,
+      "valid_transition_area_km2": 397.4944,
+      "persistent_water_cells": 217726,
+      "persistent_water_area_km2": 87.0904,
+      "persistent_water_area_ha": 8709.04,
+      "persistent_water_pct_total": 21.5562,
+      "persistent_water_pct_valid": 21.9098,
+      "newly_inundated_candidate_cells": 146208,
+      "newly_inundated_candidate_area_km2": 58.4832,
+      "newly_inundated_candidate_area_ha": 5848.32,
+      "newly_inundated_pct_total": 14.4755,
+      "newly_inundated_pct_valid": 14.713,
+      "receded_water_cells": 2184,
+      "receded_water_area_km2": 0.8736,
+      "receded_water_area_ha": 87.36,
+      "receded_water_pct_total": 0.2162,
+      "receded_water_pct_valid": 0.2198,
+      "persistent_non_water_cells": 627618,
+      "persistent_non_water_area_km2": 251.0472,
+      "persistent_non_water_area_ha": 25104.72,
+      "persistent_non_water_pct_total": 62.138,
+      "persistent_non_water_pct_valid": 63.1574,
+      "indeterminate_cells": 16242,
+      "indeterminate_area_km2": 6.4968,
+      "indeterminate_area_ha": 649.68,
+      "indeterminate_pct_total": 1.6081,
+      "nodata_cells": 61,
+      "nodata_area_km2": 0.0244,
+      "nodata_area_ha": 2.44,
+      "nodata_pct_total": 0.006,
+      "gross_candidate_water_expansion_km2": 58.4832,
+      "gross_candidate_water_recession_km2": 0.8736,
+      "net_candidate_water_area_change_km2": 57.6096,
+      "net_candidate_water_area_change_ha": 5760.96,
+      "valid_june_water_cells": 219910,
+      "valid_july_water_cells": 363934,
+      "reconciliation_identity_holds": true
+    },
+    "unfiltered": {
+      "total_cells": 1010039,
+      "total_area_km2": 404.0156,
+      "valid_transition_cells": 993736,
+      "valid_transition_area_km2": 397.4944,
+      "persistent_water_cells": 205953,
+      "persistent_water_area_km2": 82.3812,
+      "persistent_water_area_ha": 8238.12,
+      "persistent_water_pct_total": 20.3906,
+      "persistent_water_pct_valid": 20.7251,
+      "newly_inundated_candidate_cells": 157587,
+      "newly_inundated_candidate_area_km2": 63.0348,
+      "newly_inundated_candidate_area_ha": 6303.48,
+      "newly_inundated_pct_total": 15.6021,
+      "newly_inundated_pct_valid": 15.858,
+      "receded_water_cells": 4200,
+      "receded_water_area_km2": 1.68,
+      "receded_water_area_ha": 168.0,
+      "receded_water_pct_total": 0.4158,
+      "receded_water_pct_valid": 0.4226,
+      "persistent_non_water_cells": 625996,
+      "persistent_non_water_area_km2": 250.3984,
+      "persistent_non_water_area_ha": 25039.84,
+      "persistent_non_water_pct_total": 61.9774,
+      "persistent_non_water_pct_valid": 62.9942,
+      "indeterminate_cells": 16242,
+      "indeterminate_area_km2": 6.4968,
+      "indeterminate_area_ha": 649.68,
+      "indeterminate_pct_total": 1.6081,
+      "nodata_cells": 61,
+      "nodata_area_km2": 0.0244,
+      "nodata_area_ha": 2.44,
+      "nodata_pct_total": 0.006,
+      "gross_candidate_water_expansion_km2": 63.0348,
+      "gross_candidate_water_recession_km2": 1.68,
+      "net_candidate_water_area_change_km2": 61.3548,
+      "net_candidate_water_area_change_ha": 6135.48,
+      "valid_june_water_cells": 210153,
+      "valid_july_water_cells": 363540,
+      "reconciliation_identity_holds": true
+    }
+  },
+  "statistics_full_raster": {
+    "primary": {
+      "total_cells": 1957165,
+      "total_area_km2": 782.866,
+      "valid_transition_cells": 1360928,
+      "valid_transition_area_km2": 544.3712,
+      "persistent_water_cells": 250766,
+      "persistent_water_area_km2": 100.3064,
+      "persistent_water_area_ha": 10030.64,
+      "persistent_water_pct_total": 12.8127,
+      "persistent_water_pct_valid": 18.4261,
+      "newly_inundated_candidate_cells": 200211,
+      "newly_inundated_candidate_area_km2": 80.0844,
+      "newly_inundated_candidate_area_ha": 8008.44,
+      "newly_inundated_pct_total": 10.2296,
+      "newly_inundated_pct_valid": 14.7114,
+      "receded_water_cells": 2145,
+      "receded_water_area_km2": 0.858,
+      "receded_water_area_ha": 85.8,
+      "receded_water_pct_total": 0.1096,
+      "receded_water_pct_valid": 0.1576,
+      "persistent_non_water_cells": 907806,
+      "persistent_non_water_area_km2": 363.1224,
+      "persistent_non_water_area_ha": 36312.24,
+      "persistent_non_water_pct_total": 46.3837,
+      "persistent_non_water_pct_valid": 66.7049,
+      "indeterminate_cells": 18930,
+      "indeterminate_area_km2": 7.572,
+      "indeterminate_area_ha": 757.2,
+      "indeterminate_pct_total": 0.9672,
+      "nodata_cells": 577307,
+      "nodata_area_km2": 230.9228,
+      "nodata_area_ha": 23092.28,
+      "nodata_pct_total": 29.4971,
+      "gross_candidate_water_expansion_km2": 80.0844,
+      "gross_candidate_water_recession_km2": 0.858,
+      "net_candidate_water_area_change_km2": 79.2264,
+      "net_candidate_water_area_change_ha": 7922.64,
+      "valid_june_water_cells": 252911,
+      "valid_july_water_cells": 450977,
+      "reconciliation_identity_holds": true
+    },
+    "2d_otsu": {
+      "total_cells": 1957165,
+      "total_area_km2": 782.866,
+      "valid_transition_cells": 1290278,
+      "valid_transition_area_km2": 516.1112,
+      "persistent_water_cells": 256511,
+      "persistent_water_area_km2": 102.6044,
+      "persistent_water_area_ha": 10260.44,
+      "persistent_water_pct_total": 13.1063,
+      "persistent_water_pct_valid": 19.8803,
+      "newly_inundated_candidate_cells": 180508,
+      "newly_inundated_candidate_area_km2": 72.2032,
+      "newly_inundated_candidate_area_ha": 7220.32,
+      "newly_inundated_pct_total": 9.2229,
+      "newly_inundated_pct_valid": 13.9899,
+      "receded_water_cells": 1108,
+      "receded_water_area_km2": 0.4432,
+      "receded_water_area_ha": 44.32,
+      "receded_water_pct_total": 0.0566,
+      "receded_water_pct_valid": 0.0859,
+      "persistent_non_water_cells": 852151,
+      "persistent_non_water_area_km2": 340.8604,
+      "persistent_non_water_area_ha": 34086.04,
+      "persistent_non_water_pct_total": 43.5401,
+      "persistent_non_water_pct_valid": 66.044,
+      "indeterminate_cells": 89580,
+      "indeterminate_area_km2": 35.832,
+      "indeterminate_area_ha": 3583.2,
+      "indeterminate_pct_total": 4.577,
+      "nodata_cells": 577307,
+      "nodata_area_km2": 230.9228,
+      "nodata_area_ha": 23092.28,
+      "nodata_pct_total": 29.4971,
+      "gross_candidate_water_expansion_km2": 72.2032,
+      "gross_candidate_water_recession_km2": 0.4432,
+      "net_candidate_water_area_change_km2": 71.76,
+      "net_candidate_water_area_change_ha": 7176.0,
+      "valid_june_water_cells": 257619,
+      "valid_july_water_cells": 437019,
+      "reconciliation_identity_holds": true
+    },
+    "lee_3x3": {
+      "total_cells": 1957165,
+      "total_area_km2": 782.866,
+      "valid_transition_cells": 1360928,
+      "valid_transition_area_km2": 544.3712,
+      "persistent_water_cells": 252259,
+      "persistent_water_area_km2": 100.9036,
+      "persistent_water_area_ha": 10090.36,
+      "persistent_water_pct_total": 12.889,
+      "persistent_water_pct_valid": 18.5358,
+      "newly_inundated_candidate_cells": 199385,
+      "newly_inundated_candidate_area_km2": 79.754,
+      "newly_inundated_candidate_area_ha": 7975.4,
+      "newly_inundated_pct_total": 10.1874,
+      "newly_inundated_pct_valid": 14.6507,
+      "receded_water_cells": 2964,
+      "receded_water_area_km2": 1.1856,
+      "receded_water_area_ha": 118.56,
+      "receded_water_pct_total": 0.1514,
+      "receded_water_pct_valid": 0.2178,
+      "persistent_non_water_cells": 906320,
+      "persistent_non_water_area_km2": 362.528,
+      "persistent_non_water_area_ha": 36252.8,
+      "persistent_non_water_pct_total": 46.3078,
+      "persistent_non_water_pct_valid": 66.5957,
+      "indeterminate_cells": 18930,
+      "indeterminate_area_km2": 7.572,
+      "indeterminate_area_ha": 757.2,
+      "indeterminate_pct_total": 0.9672,
+      "nodata_cells": 577307,
+      "nodata_area_km2": 230.9228,
+      "nodata_area_ha": 23092.28,
+      "nodata_pct_total": 29.4971,
+      "gross_candidate_water_expansion_km2": 79.754,
+      "gross_candidate_water_recession_km2": 1.1856,
+      "net_candidate_water_area_change_km2": 78.5684,
+      "net_candidate_water_area_change_ha": 7856.84,
+      "valid_june_water_cells": 255223,
+      "valid_july_water_cells": 451644,
+      "reconciliation_identity_holds": true
+    },
+    "unfiltered": {
+      "total_cells": 1957165,
+      "total_area_km2": 782.866,
+      "valid_transition_cells": 1360928,
+      "valid_transition_area_km2": 544.3712,
+      "persistent_water_cells": 238332,
+      "persistent_water_area_km2": 95.3328,
+      "persistent_water_area_ha": 9533.28,
+      "persistent_water_pct_total": 12.1774,
+      "persistent_water_pct_valid": 17.5125,
+      "newly_inundated_candidate_cells": 213127,
+      "newly_inundated_candidate_area_km2": 85.2508,
+      "newly_inundated_candidate_area_ha": 8525.08,
+      "newly_inundated_pct_total": 10.8896,
+      "newly_inundated_pct_valid": 15.6604,
+      "receded_water_cells": 5535,
+      "receded_water_area_km2": 2.214,
+      "receded_water_area_ha": 221.4,
+      "receded_water_pct_total": 0.2828,
+      "receded_water_pct_valid": 0.4067,
+      "persistent_non_water_cells": 903934,
+      "persistent_non_water_area_km2": 361.5736,
+      "persistent_non_water_area_ha": 36157.36,
+      "persistent_non_water_pct_total": 46.1859,
+      "persistent_non_water_pct_valid": 66.4204,
+      "indeterminate_cells": 18930,
+      "indeterminate_area_km2": 7.572,
+      "indeterminate_area_ha": 757.2,
+      "indeterminate_pct_total": 0.9672,
+      "nodata_cells": 577307,
+      "nodata_area_km2": 230.9228,
+      "nodata_area_ha": 23092.28,
+      "nodata_pct_total": 29.4971,
+      "gross_candidate_water_expansion_km2": 85.2508,
+      "gross_candidate_water_recession_km2": 2.214,
+      "net_candidate_water_area_change_km2": 83.0368,
+      "net_candidate_water_area_change_ha": 8303.68,
+      "valid_june_water_cells": 243867,
+      "valid_july_water_cells": 451459,
+      "reconciliation_identity_holds": true
+    }
+  },
+  "connected_components_aoi": {
+    "total_components": 3934,
+    "total_pixels": 146992,
+    "total_area_km2": 58.7968,
+    "top_components": [
+      {
+        "rank": 1,
+        "component_id": 713,
+        "pixel_count": 15950,
+        "area_ha": 638.0,
+        "area_km2": 6.38,
+        "centroid_utm45n": [
+          774475.52,
+          2735465.98
+        ],
+        "bbox_grid": [
+          357,
+          925,
+          580,
+          1134
+        ],
+        "bbox_utm45n": [
+          772615.65,
+          2733339.18,
+          776795.65,
+          2737799.18
+        ]
+      },
+      {
+        "rank": 2,
+        "component_id": 1067,
+        "pixel_count": 7106,
+        "area_ha": 284.24,
+        "area_km2": 2.8424,
+        "centroid_utm45n": [
+          768483.83,
+          2733319.55
+        ],
+        "bbox_grid": [
+          435,
+          662,
+          689,
+          774
+        ],
+        "bbox_utm45n": [
+          767355.65,
+          2731159.18,
+          769595.65,
+          2736239.18
+        ]
+      },
+      {
+        "rank": 3,
+        "component_id": 2991,
+        "pixel_count": 6377,
+        "area_ha": 255.08,
+        "area_km2": 2.5508,
+        "centroid_utm45n": [
+          774197.49,
+          2724428.99
+        ],
+        "bbox_grid": [
+          921,
+          956,
+          1104,
+          1070
+        ],
+        "bbox_utm45n": [
+          773235.65,
+          2722859.18,
+          775515.65,
+          2726519.18
+        ]
+      },
+      {
+        "rank": 4,
+        "component_id": 263,
+        "pixel_count": 5762,
+        "area_ha": 230.48,
+        "area_km2": 2.3048,
+        "centroid_utm45n": [
+          774614.5,
+          2738536.14
+        ],
+        "bbox_grid": [
+          257,
+          933,
+          392,
+          1102
+        ],
+        "bbox_utm45n": [
+          772775.65,
+          2737099.18,
+          776155.65,
+          2739799.18
+        ]
+      },
+      {
+        "rank": 5,
+        "component_id": 7,
+        "pixel_count": 5700,
+        "area_ha": 228.0,
+        "area_km2": 2.28,
+        "centroid_utm45n": [
+          773110.18,
+          2740329.22
+        ],
+        "bbox_grid": [
+          193,
+          839,
+          278,
+          1033
+        ],
+        "bbox_utm45n": [
+          770895.65,
+          2739379.18,
+          774775.65,
+          2741079.18
+        ]
+      },
+      {
+        "rank": 6,
+        "component_id": 139,
+        "pixel_count": 4885,
+        "area_ha": 195.4,
+        "area_km2": 1.954,
+        "centroid_utm45n": [
+          770095.54,
+          2739680.81
+        ],
+        "bbox_grid": [
+          227,
+          716,
+          298,
+          891
+        ],
+        "bbox_utm45n": [
+          768435.65,
+          2738979.18,
+          771935.65,
+          2740399.18
+        ]
+      },
+      {
+        "rank": 7,
+        "component_id": 3534,
+        "pixel_count": 4387,
+        "area_ha": 175.48,
+        "area_km2": 1.7548,
+        "centroid_utm45n": [
+          777227.59,
+          2722257.97
+        ],
+        "bbox_grid": [
+          1069,
+          1093,
+          1188,
+          1219
+        ],
+        "bbox_utm45n": [
+          775975.65,
+          2721179.18,
+          778495.65,
+          2723559.18
+        ]
+      },
+      {
+        "rank": 8,
+        "component_id": 2850,
+        "pixel_count": 3979,
+        "area_ha": 159.16,
+        "area_km2": 1.5916,
+        "centroid_utm45n": [
+          777805.68,
+          2726249.47
+        ],
+        "bbox_grid": [
+          881,
+          1148,
+          1024,
+          1215
+        ],
+        "bbox_utm45n": [
+          777075.65,
+          2724459.18,
+          778415.65,
+          2727319.18
+        ]
+      },
+      {
+        "rank": 9,
+        "component_id": 3155,
+        "pixel_count": 3024,
+        "area_ha": 120.96,
+        "area_km2": 1.2096,
+        "centroid_utm45n": [
+          770629.46,
+          2724401.46
+        ],
+        "bbox_grid": [
+          964,
+          784,
+          1114,
+          862
+        ],
+        "bbox_utm45n": [
+          769795.65,
+          2722659.18,
+          771355.65,
+          2725659.18
+        ]
+      },
+      {
+        "rank": 10,
+        "component_id": 358,
+        "pixel_count": 2958,
+        "area_ha": 118.32,
+        "area_km2": 1.1832,
+        "centroid_utm45n": [
+          770322.93,
+          2738609.37
+        ],
+        "bbox_grid": [
+          283,
+          761,
+          347,
+          860
+        ],
+        "bbox_utm45n": [
+          769335.65,
+          2737999.18,
+          771315.65,
+          2739279.18
+        ]
+      },
+      {
+        "rank": 11,
+        "component_id": 3332,
+        "pixel_count": 2692,
+        "area_ha": 107.68,
+        "area_km2": 1.0768,
+        "centroid_utm45n": [
+          771962.53,
+          2723740.92
+        ],
+        "bbox_grid": [
+          1011,
+          844,
+          1122,
+          932
+        ],
+        "bbox_utm45n": [
+          770995.65,
+          2722499.18,
+          772755.65,
+          2724719.18
+        ]
+      },
+      {
+        "rank": 12,
+        "component_id": 1035,
+        "pixel_count": 2594,
+        "area_ha": 103.76,
+        "area_km2": 1.0376,
+        "centroid_utm45n": [
+          769864.0,
+          2735299.88
+        ],
+        "bbox_grid": [
+          426,
+          757,
+          532,
+          858
+        ],
+        "bbox_utm45n": [
+          769255.65,
+          2734299.18,
+          771275.65,
+          2736419.18
+        ]
+      },
+      {
+        "rank": 13,
+        "component_id": 2090,
+        "pixel_count": 2548,
+        "area_ha": 101.92,
+        "area_km2": 1.0192,
+        "centroid_utm45n": [
+          770664.92,
+          2730243.54
+        ],
+        "bbox_grid": [
+          680,
+          802,
+          798,
+          859
+        ],
+        "bbox_utm45n": [
+          770155.65,
+          2728979.18,
+          771295.65,
+          2731339.18
+        ]
+      },
+      {
+        "rank": 14,
+        "component_id": 2,
+        "pixel_count": 2500,
+        "area_ha": 100.0,
+        "area_km2": 1.0,
+        "centroid_utm45n": [
+          776410.23,
+          2740531.7
+        ],
+        "bbox_grid": [
+          190,
+          1078,
+          265,
+          1159
+        ],
+        "bbox_utm45n": [
+          775675.65,
+          2739639.18,
+          777295.65,
+          2741139.18
+        ]
+      },
+      {
+        "rank": 15,
+        "component_id": 598,
+        "pixel_count": 2212,
+        "area_ha": 88.48,
+        "area_km2": 0.8848,
+        "centroid_utm45n": [
+          772365.28,
+          2737219.99
+        ],
+        "bbox_grid": [
+          339,
+          877,
+          444,
+          943
+        ],
+        "bbox_utm45n": [
+          771655.65,
+          2736059.18,
+          772975.65,
+          2738159.18
+        ]
+      },
+      {
+        "rank": 16,
+        "component_id": 841,
+        "pixel_count": 2190,
+        "area_ha": 87.6,
+        "area_km2": 0.876,
+        "centroid_utm45n": [
+          769858.4,
+          2736520.79
+        ],
+        "bbox_grid": [
+          380,
+          745,
+          464,
+          828
+        ],
+        "bbox_utm45n": [
+          769015.65,
+          2735659.18,
+          770675.65,
+          2737339.18
+        ]
+      },
+      {
+        "rank": 17,
+        "component_id": 167,
+        "pixel_count": 2056,
+        "area_ha": 82.24,
+        "area_km2": 0.8224,
+        "centroid_utm45n": [
+          776035.1,
+          2738758.33
+        ],
+        "bbox_grid": [
+          232,
+          1069,
+          376,
+          1123
+        ],
+        "bbox_utm45n": [
+          775495.65,
+          2737419.18,
+          776575.65,
+          2740299.18
+        ]
+      },
+      {
+        "rank": 18,
+        "component_id": 1620,
+        "pixel_count": 1958,
+        "area_ha": 78.32,
+        "area_km2": 0.7832,
+        "centroid_utm45n": [
+          773828.1,
+          2732345.32
+        ],
+        "bbox_grid": [
+          569,
+          967,
+          710,
+          1006
+        ],
+        "bbox_utm45n": [
+          773455.65,
+          2730739.18,
+          774235.65,
+          2733559.18
+        ]
+      },
+      {
+        "rank": 19,
+        "component_id": 240,
+        "pixel_count": 1661,
+        "area_ha": 66.44,
+        "area_km2": 0.6644,
+        "centroid_utm45n": [
+          776657.95,
+          2739094.93
+        ],
+        "bbox_grid": [
+          250,
+          1105,
+          332,
+          1155
+        ],
+        "bbox_utm45n": [
+          776215.65,
+          2738299.18,
+          777215.65,
+          2739939.18
+        ]
+      },
+      {
+        "rank": 20,
+        "component_id": 3366,
+        "pixel_count": 1481,
+        "area_ha": 59.24,
+        "area_km2": 0.5924,
+        "centroid_utm45n": [
+          768479.23,
+          2723425.68
+        ],
+        "bbox_grid": [
+          1017,
+          694,
+          1136,
+          742
+        ],
+        "bbox_utm45n": [
+          767995.65,
+          2722219.18,
+          768955.65,
+          2724599.18
+        ]
+      },
+      {
+        "rank": 21,
+        "component_id": 2425,
+        "pixel_count": 1456,
+        "area_ha": 58.24,
+        "area_km2": 0.5824,
+        "centroid_utm45n": [
+          771998.41,
+          2728767.74
+        ],
+        "bbox_grid": [
+          771,
+          874,
+          859,
+          927
+        ],
+        "bbox_utm45n": [
+          771595.65,
+          2727759.18,
+          772655.65,
+          2729519.18
+        ]
+      },
+      {
+        "rank": 22,
+        "component_id": 6,
+        "pixel_count": 1367,
+        "area_ha": 54.68,
+        "area_km2": 0.5468,
+        "centroid_utm45n": [
+          775007.01,
+          2740289.82
+        ],
+        "bbox_grid": [
+          192,
+          1015,
+          273,
+          1069
+        ],
+        "bbox_utm45n": [
+          774415.65,
+          2739479.18,
+          775495.65,
+          2741099.18
+        ]
+      },
+      {
+        "rank": 23,
+        "component_id": 1512,
+        "pixel_count": 1152,
+        "area_ha": 46.08,
+        "area_km2": 0.4608,
+        "centroid_utm45n": [
+          772722.99,
+          2733013.94
+        ],
+        "bbox_grid": [
+          544,
+          909,
+          638,
+          957
+        ],
+        "bbox_utm45n": [
+          772295.65,
+          2732179.18,
+          773255.65,
+          2734059.18
+        ]
+      },
+      {
+        "rank": 24,
+        "component_id": 29,
+        "pixel_count": 1134,
+        "area_ha": 45.36,
+        "area_km2": 0.4536,
+        "centroid_utm45n": [
+          764269.37,
+          2740283.2
+        ],
+        "bbox_grid": [
+          202,
+          483,
+          271,
+          530
+        ],
+        "bbox_utm45n": [
+          763775.65,
+          2739519.18,
+          764715.65,
+          2740899.18
+        ]
+      },
+      {
+        "rank": 25,
+        "component_id": 3253,
+        "pixel_count": 1112,
+        "area_ha": 44.48,
+        "area_km2": 0.4448,
+        "centroid_utm45n": [
+          769773.4,
+          2724287.83
+        ],
+        "bbox_grid": [
+          990,
+          771,
+          1082,
+          798
+        ],
+        "bbox_utm45n": [
+          769535.65,
+          2723299.18,
+          770075.65,
+          2725139.18
+        ]
+      },
+      {
+        "rank": 26,
+        "component_id": 2341,
+        "pixel_count": 1111,
+        "area_ha": 44.44,
+        "area_km2": 0.4444,
+        "centroid_utm45n": [
+          776831.2,
+          2729603.72
+        ],
+        "bbox_grid": [
+          746,
+          1106,
+          787,
+          1161
+        ],
+        "bbox_utm45n": [
+          776235.65,
+          2729199.18,
+          777335.65,
+          2730019.18
+        ]
+      },
+      {
+        "rank": 27,
+        "component_id": 1215,
+        "pixel_count": 1103,
+        "area_ha": 44.12,
+        "area_km2": 0.4412,
+        "centroid_utm45n": [
+          771899.4,
+          2734588.79
+        ],
+        "bbox_grid": [
+          477,
+          862,
+          583,
+          914
+        ],
+        "bbox_utm45n": [
+          771355.65,
+          2733279.18,
+          772395.65,
+          2735399.18
+        ]
+      },
+      {
+        "rank": 28,
+        "component_id": 3010,
+        "pixel_count": 1009,
+        "area_ha": 40.36,
+        "area_km2": 0.4036,
+        "centroid_utm45n": [
+          775252.65,
+          2725818.41
+        ],
+        "bbox_grid": [
+          927,
+          1029,
+          980,
+          1079
+        ],
+        "bbox_utm45n": [
+          774695.65,
+          2725339.18,
+          775695.65,
+          2726399.18
+        ]
+      },
+      {
+        "rank": 29,
+        "component_id": 3362,
+        "pixel_count": 968,
+        "area_ha": 38.72,
+        "area_km2": 0.3872,
+        "centroid_utm45n": [
+          777949.88,
+          2723826.35
+        ],
+        "bbox_grid": [
+          1015,
+          1161,
+          1096,
+          1218
+        ],
+        "bbox_utm45n": [
+          777335.65,
+          2723019.18,
+          778475.65,
+          2724639.18
+        ]
+      },
+      {
+        "rank": 30,
+        "component_id": 1675,
+        "pixel_count": 938,
+        "area_ha": 37.52,
+        "area_km2": 0.3752,
+        "centroid_utm45n": [
+          770794.41,
+          2732904.7
+        ],
+        "bbox_grid": [
+          583,
+          809,
+          630,
+          863
+        ],
+        "bbox_utm45n": [
+          770295.65,
+          2732339.18,
+          771375.65,
+          2733279.18
+        ]
+      },
+      {
+        "rank": 31,
+        "component_id": 2475,
+        "pixel_count": 933,
+        "area_ha": 37.32,
+        "area_km2": 0.3732,
+        "centroid_utm45n": [
+          774060.06,
+          2728761.78
+        ],
+        "bbox_grid": [
+          783,
+          975,
+          840,
+          1043
+        ],
+        "bbox_utm45n": [
+          773615.65,
+          2728139.18,
+          774975.65,
+          2729279.18
+        ]
+      },
+      {
+        "rank": 32,
+        "component_id": 3768,
+        "pixel_count": 899,
+        "area_ha": 35.96,
+        "area_km2": 0.3596,
+        "centroid_utm45n": [
+          772001.19,
+          2721720.65
+        ],
+        "bbox_grid": [
+          1139,
+          855,
+          1192,
+          910
+        ],
+        "bbox_utm45n": [
+          771215.65,
+          2721099.18,
+          772315.65,
+          2722159.18
+        ]
+      },
+      {
+        "rank": 33,
+        "component_id": 1551,
+        "pixel_count": 881,
+        "area_ha": 35.24,
+        "area_km2": 0.3524,
+        "centroid_utm45n": [
+          770682.39,
+          2733514.91
+        ],
+        "bbox_grid": [
+          553,
+          789,
+          609,
+          890
+        ],
+        "bbox_utm45n": [
+          769895.65,
+          2732759.18,
+          771915.65,
+          2733879.18
+        ]
+      },
+      {
+        "rank": 34,
+        "component_id": 1227,
+        "pixel_count": 877,
+        "area_ha": 35.08,
+        "area_km2": 0.3508,
+        "centroid_utm45n": [
+          777943.74,
+          2734596.03
+        ],
+        "bbox_grid": [
+          480,
+          1168,
+          560,
+          1207
+        ],
+        "bbox_utm45n": [
+          777475.65,
+          2733739.18,
+          778255.65,
+          2735339.18
+        ]
+      },
+      {
+        "rank": 35,
+        "component_id": 2855,
+        "pixel_count": 869,
+        "area_ha": 34.76,
+        "area_km2": 0.3476,
+        "centroid_utm45n": [
+          772775.07,
+          2726591.06
+        ],
+        "bbox_grid": [
+          883,
+          916,
+          955,
+          954
+        ],
+        "bbox_utm45n": [
+          772435.65,
+          2725839.18,
+          773195.65,
+          2727279.18
+        ]
+      },
+      {
+        "rank": 36,
+        "component_id": 2316,
+        "pixel_count": 823,
+        "area_ha": 32.92,
+        "area_km2": 0.3292,
+        "centroid_utm45n": [
+          777779.85,
+          2729472.94
+        ],
+        "bbox_grid": [
+          739,
+          1162,
+          797,
+          1212
+        ],
+        "bbox_utm45n": [
+          777355.65,
+          2728999.18,
+          778355.65,
+          2730159.18
+        ]
+      },
+      {
+        "rank": 37,
+        "component_id": 1866,
+        "pixel_count": 820,
+        "area_ha": 32.8,
+        "area_km2": 0.328,
+        "centroid_utm45n": [
+          770036.72,
+          2731923.64
+        ],
+        "bbox_grid": [
+          629,
+          784,
+          677,
+          810
+        ],
+        "bbox_utm45n": [
+          769795.65,
+          2731399.18,
+          770315.65,
+          2732359.18
+        ]
+      },
+      {
+        "rank": 38,
+        "component_id": 17,
+        "pixel_count": 803,
+        "area_ha": 32.12,
+        "area_km2": 0.3212,
+        "centroid_utm45n": [
+          766996.29,
+          2740770.79
+        ],
+        "bbox_grid": [
+          199,
+          602,
+          225,
+          683
+        ],
+        "bbox_utm45n": [
+          766155.65,
+          2740439.18,
+          767775.65,
+          2740959.18
+        ]
+      },
+      {
+        "rank": 39,
+        "component_id": 287,
+        "pixel_count": 795,
+        "area_ha": 31.8,
+        "area_km2": 0.318,
+        "centroid_utm45n": [
+          764974.41,
+          2738735.61
+        ],
+        "bbox_grid": [
+          265,
+          527,
+          351,
+          557
+        ],
+        "bbox_utm45n": [
+          764655.65,
+          2737919.18,
+          765255.65,
+          2739639.18
+        ]
+      },
+      {
+        "rank": 40,
+        "component_id": 1898,
+        "pixel_count": 734,
+        "area_ha": 29.36,
+        "area_km2": 0.2936,
+        "centroid_utm45n": [
+          778079.76,
+          2731698.99
+        ],
+        "bbox_grid": [
+          638,
+          1186,
+          695,
+          1210
+        ],
+        "bbox_utm45n": [
+          777835.65,
+          2731039.18,
+          778315.65,
+          2732179.18
+        ]
+      },
+      {
+        "rank": 41,
+        "component_id": 1277,
+        "pixel_count": 718,
+        "area_ha": 28.72,
+        "area_km2": 0.2872,
+        "centroid_utm45n": [
+          777816.29,
+          2733993.28
+        ],
+        "bbox_grid": [
+          491,
+          1162,
+          583,
+          1208
+        ],
+        "bbox_utm45n": [
+          777355.65,
+          2733279.18,
+          778275.65,
+          2735119.18
+        ]
+      },
+      {
+        "rank": 42,
+        "component_id": 3737,
+        "pixel_count": 672,
+        "area_ha": 26.88,
+        "area_km2": 0.2688,
+        "centroid_utm45n": [
+          774654.93,
+          2721661.53
+        ],
+        "bbox_grid": [
+          1131,
+          1013,
+          1190,
+          1046
+        ],
+        "bbox_utm45n": [
+          774375.65,
+          2721139.18,
+          775035.65,
+          2722319.18
+        ]
+      },
+      {
+        "rank": 43,
+        "component_id": 2380,
+        "pixel_count": 625,
+        "area_ha": 25.0,
+        "area_km2": 0.25,
+        "centroid_utm45n": [
+          771364.8,
+          2729236.81
+        ],
+        "bbox_grid": [
+          757,
+          850,
+          815,
+          879
+        ],
+        "bbox_utm45n": [
+          771115.65,
+          2728639.18,
+          771695.65,
+          2729799.18
+        ]
+      },
+      {
+        "rank": 44,
+        "component_id": 2339,
+        "pixel_count": 616,
+        "area_ha": 24.64,
+        "area_km2": 0.2464,
+        "centroid_utm45n": [
+          775600.22,
+          2729341.88
+        ],
+        "bbox_grid": [
+          746,
+          1051,
+          816,
+          1095
+        ],
+        "bbox_utm45n": [
+          775135.65,
+          2728619.18,
+          776015.65,
+          2730019.18
+        ]
+      },
+      {
+        "rank": 45,
+        "component_id": 344,
+        "pixel_count": 590,
+        "area_ha": 23.6,
+        "area_km2": 0.236,
+        "centroid_utm45n": [
+          768975.38,
+          2739004.27
+        ],
+        "bbox_grid": [
+          280,
+          720,
+          315,
+          766
+        ],
+        "bbox_utm45n": [
+          768515.65,
+          2738639.18,
+          769435.65,
+          2739339.18
+        ]
+      },
+      {
+        "rank": 46,
+        "component_id": 3634,
+        "pixel_count": 538,
+        "area_ha": 21.52,
+        "area_km2": 0.2152,
+        "centroid_utm45n": [
+          769093.01,
+          2722523.01
+        ],
+        "bbox_grid": [
+          1100,
+          732,
+          1141,
+          764
+        ],
+        "bbox_utm45n": [
+          768755.65,
+          2722119.18,
+          769395.65,
+          2722939.18
+        ]
+      },
+      {
+        "rank": 47,
+        "component_id": 879,
+        "pixel_count": 535,
+        "area_ha": 21.4,
+        "area_km2": 0.214,
+        "centroid_utm45n": [
+          770468.58,
+          2736831.78
+        ],
+        "bbox_grid": [
+          387,
+          792,
+          438,
+          844
+        ],
+        "bbox_utm45n": [
+          769955.65,
+          2736179.18,
+          770995.65,
+          2737199.18
+        ]
+      },
+      {
+        "rank": 48,
+        "component_id": 2739,
+        "pixel_count": 533,
+        "area_ha": 21.32,
+        "area_km2": 0.2132,
+        "centroid_utm45n": [
+          773417.9,
+          2727463.2
+        ],
+        "bbox_grid": [
+          855,
+          941,
+          893,
+          984
+        ],
+        "bbox_utm45n": [
+          772935.65,
+          2727079.18,
+          773795.65,
+          2727839.18
+        ]
+      },
+      {
+        "rank": 49,
+        "component_id": 2101,
+        "pixel_count": 530,
+        "area_ha": 21.2,
+        "area_km2": 0.212,
+        "centroid_utm45n": [
+          769612.14,
+          2730915.67
+        ],
+        "bbox_grid": [
+          682,
+          764,
+          725,
+          787
+        ],
+        "bbox_utm45n": [
+          769395.65,
+          2730439.18,
+          769855.65,
+          2731299.18
+        ]
+      },
+      {
+        "rank": 50,
+        "component_id": 2269,
+        "pixel_count": 524,
+        "area_ha": 20.96,
+        "area_km2": 0.2096,
+        "centroid_utm45n": [
+          777044.35,
+          2730137.12
+        ],
+        "bbox_grid": [
+          722,
+          1130,
+          757,
+          1160
+        ],
+        "bbox_utm45n": [
+          776715.65,
+          2729799.18,
+          777315.65,
+          2730499.18
+        ]
+      }
+    ],
+    "size_distribution": {
+      "<5_px": {
+        "count": 3168,
+        "pixels": 4236
+      },
+      "5-24_px": {
+        "count": 460,
+        "pixels": 5049
+      },
+      "25-99_px": {
+        "count": 168,
+        "pixels": 7968
+      },
+      ">=100_px": {
+        "count": 138,
+        "pixels": 129739
+      }
+    }
+  },
+  "output_qc_files": {
+    "rasters": [
+      "data/processed/phase3b_qc/transition_primary_qc.tif",
+      "data/processed/phase3b_qc/transition_2d_otsu_qc.tif",
+      "data/processed/phase3b_qc/transition_lee_3x3_qc.tif",
+      "data/processed/phase3b_qc/transition_unfiltered_qc.tif",
+      "data/processed/phase3b_qc/newly_inundated_candidate_qc.tif",
+      "data/processed/phase3b_qc/receded_water_qc.tif",
+      "data/processed/phase3b_qc/persistent_water_qc.tif",
+      "data/processed/phase3b_qc/indeterminate_mask_qc.tif"
+    ],
+    "vectors": [
+      "data/processed/phase3b_qc/newly_inundated_candidate_qc.geojson"
+    ],
+    "statistics": [
+      "data/outputs/phase3b_qc/statistics/transition_area_summary_qc.csv",
+      "data/outputs/phase3b_qc/statistics/full_scene_nodata_reconciliation_qc.csv",
+      "data/outputs/phase3b_qc/statistics/input_masks_audit_qc.csv",
+      "data/outputs/phase3b_qc/statistics/top_inundation_clusters_qc.csv",
+      "data/outputs/phase3b_qc/statistics/uncertainty_statistics_qc.csv"
+    ]
+  }
+}

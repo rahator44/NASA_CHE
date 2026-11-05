@@ -1,0 +1,4 @@
+target_feature,column_name,transect_count,mean_displacement_m,median_displacement_m,std_dev_m,min_m,max_m,p10_m,p25_m,p75_m,p90_m,p95_m,iqr_m,clarification_notes
+Right Bank (West / Mainland),right_bank_displacement_m,122,130.0,40.0,200.83,-120.0,820.0,0.0,0.0,200.0,440.0,578.0,200.0,Recalculated directly from audited 122 valid transects. Confirms exact empirical P90 values: 440 m (Right) and 400 m (Left).
+Left Bank (East / Chars),left_bank_displacement_m,122,160.66,90.0,209.95,-20.0,960.0,0.0,0.0,275.0,400.0,539.0,275.0,Recalculated directly from audited 122 valid transects. Confirms exact empirical P90 values: 440 m (Right) and 400 m (Left).
+Channel Width Expansion,channel_width_expansion_m,122,290.66,180.0,286.68,-60.0,1100.0,0.0,60.0,420.0,760.0,879.0,360.0,Recalculated directly from audited 122 valid transects. Confirms exact empirical P90 values: 440 m (Right) and 400 m (Left).

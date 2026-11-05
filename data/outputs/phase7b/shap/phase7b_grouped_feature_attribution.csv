@@ -1,0 +1,4 @@
+feature_group,constituent_features,mean_abs_attribution,attribution_fraction_pct,mean_signed_attribution,rank
+radiometric_backscatter,"vv_db, vh_db",0.0876923229570648,67.38,-0.0029,1
+spatial_texture_group,"texture_vv, texture_vh",0.028554061833701978,21.94,-0.0027,2
+polarization_ratio_group,"vv_minus_vh_db, cross_pol_ratio",0.013890628896169155,10.67,-0.0012,3

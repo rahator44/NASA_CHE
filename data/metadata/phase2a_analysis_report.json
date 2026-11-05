@@ -1,0 +1,373 @@
+{
+  "pipeline": "Earth Pulse Phase 2A: Radiometric Analysis & Backscatter Characterization",
+  "timestamp_utc": "2026-10-31T17:42:53Z",
+  "duration_seconds": 27.65,
+  "project_root": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR",
+  "thermal_noise_verification": {
+    "status": "VERIFIED_NOT_DUPLICATED",
+    "description": "Level-1 IPF processing left thermal noise correction unperformed; SNAP applied it exactly once.",
+    "records": {
+      "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.zip": [
+        {
+          "annotation_file": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/s1a-iw-grd-vh-20240610t120508-20240610t120533-054261-06999f-002.xml",
+          "thermalNoiseCorrectionPerformed": false
+        },
+        {
+          "annotation_file": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/s1a-iw-grd-vv-20240610t120508-20240610t120533-054261-06999f-001.xml",
+          "thermalNoiseCorrectionPerformed": false
+        }
+      ],
+      "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.zip": [
+        {
+          "annotation_file": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/s1a-iw-grd-vh-20240716t120507-20240716t120532-054786-06abd2-002.xml",
+          "thermalNoiseCorrectionPerformed": false
+        },
+        {
+          "annotation_file": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/s1a-iw-grd-vv-20240716t120507-20240716t120532-054786-06abd2-001.xml",
+          "thermalNoiseCorrectionPerformed": false
+        }
+      ]
+    }
+  },
+  "input_verification": {
+    "status": "VERIFIED_COMPLIANT",
+    "dimensions": [
+      1405,
+      1393
+    ],
+    "crs": "EPSG:32645",
+    "geotransform": [
+      754115.6463743874,
+      20.0,
+      0.0,
+      2744939.181560975,
+      0.0,
+      -20.0
+    ],
+    "bands": {
+      "1": "Sigma0_VH",
+      "2": "Sigma0_VV"
+    },
+    "nodata": -9999.0
+  },
+  "inputs": {
+    "june10_aligned": {
+      "path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/aligned/june10_aligned.tif",
+      "sha256": "c54f97e0a24b20574f38c786ac82e38855c266a5842c7f099d980d6b239f9252"
+    },
+    "july16_aligned": {
+      "path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/aligned/july16_aligned.tif",
+      "sha256": "7b441b2a8a816dcc35b1e64b828def155687658e27be357ddb2e43984099c353"
+    }
+  },
+  "decibel_conversion_formula": "Sigma0_dB = 10 * log10(Sigma0_linear)",
+  "db_raster_outputs": {
+    "june10_vh": {
+      "output_path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/phase2a/june10_sigma0_vh_db.tif",
+      "sha256": "c1c95ac3537840a5fef39eaa34184b0c0e20151bb06bd731d9fafa3ee2f2d76c",
+      "valid_pixels": 1379982,
+      "nodata_pixels": 577183
+    },
+    "june10_vv": {
+      "output_path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/phase2a/june10_sigma0_vv_db.tif",
+      "sha256": "c5256db594a8cf49976fde20bdf65582153ea118939fa835b162dbb5f3ced8f4",
+      "valid_pixels": 1379982,
+      "nodata_pixels": 577183
+    },
+    "july16_vh": {
+      "output_path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/phase2a/july16_sigma0_vh_db.tif",
+      "sha256": "0a9915cea8a25317e29d4cff6f78fcb4972bf56ebaecd06c58e406c5f839985e",
+      "valid_pixels": 1380574,
+      "nodata_pixels": 576591
+    },
+    "july16_vv": {
+      "output_path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/phase2a/july16_sigma0_vv_db.tif",
+      "sha256": "8717fb72e58828ba568552a044eb85bb562d2cac68d0c9b728ebdf3a234443c8",
+      "valid_pixels": 1380574,
+      "nodata_pixels": 576591
+    }
+  },
+  "statistical_characterization": {
+    "june10_vh": {
+      "raster_file": "june10_sigma0_vh_db.tif",
+      "total_pixels": 1957165,
+      "valid_pixels": 1379982,
+      "invalid_pixels": 577183,
+      "valid_percentage": 70.5092,
+      "decibel_stats": {
+        "min_db": -105.92819213867188,
+        "max_db": 13.572858810424805,
+        "mean_db": -19.197511672973633,
+        "median_db": -15.858194351196289,
+        "stddev_db": 12.347341537475586,
+        "percentiles_db": {
+          "p5": -34.555198097229,
+          "p10": -29.0727876663208,
+          "p25": -19.809950828552246,
+          "p50": -15.85819387435913,
+          "p75": -13.747846603393555,
+          "p90": -12.069807147979736,
+          "p95": -11.041059541702271,
+          "p99": -8.828693742752085
+        }
+      },
+      "linear_sigma0_reference": {
+        "min_linear": 2.553766573210048e-11,
+        "max_linear": 22.76595115661621,
+        "mean_linear": 0.030816717073321342,
+        "median_linear": 0.02595258504152298,
+        "stddev_linear": 0.04571745917201042,
+        "percentiles_linear": {
+          "p5": 0.00035033237363677475,
+          "p10": 0.0012380019412375988,
+          "p25": 0.010447320993989706,
+          "p50": 0.025952584110200405,
+          "p75": 0.04219056945294142,
+          "p90": 0.06208966448903084,
+          "p95": 0.07868538424372672,
+          "p99": 0.13095757052302331
+        }
+      }
+    },
+    "june10_vv": {
+      "raster_file": "june10_sigma0_vv_db.tif",
+      "total_pixels": 1957165,
+      "valid_pixels": 1379982,
+      "invalid_pixels": 577183,
+      "valid_percentage": 70.5092,
+      "decibel_stats": {
+        "min_db": -105.84870910644531,
+        "max_db": 25.416566848754883,
+        "mean_db": -10.00729751586914,
+        "median_db": -9.098346710205078,
+        "stddev_db": 4.931954383850098,
+        "percentiles_db": {
+          "p5": -19.183727741241455,
+          "p10": -17.44904899597168,
+          "p25": -12.325691223144531,
+          "p50": -9.098347187042236,
+          "p75": -7.03418755531311,
+          "p90": -5.020914983749388,
+          "p95": -3.3494230389595048,
+          "p99": 1.4261576282978052
+        }
+      },
+      "linear_sigma0_reference": {
+        "min_linear": 2.600927806462039e-11,
+        "max_linear": 348.06207275390625,
+        "mean_linear": 0.19511865079402924,
+        "median_linear": 0.12307369709014893,
+        "stddev_linear": 0.8311712741851807,
+        "percentiles_linear": {
+          "p5": 0.012067773565649987,
+          "p10": 0.017992646619677543,
+          "p25": 0.05853705573827028,
+          "p50": 0.12307370081543922,
+          "p75": 0.1979617476463318,
+          "p90": 0.31470852494239815,
+          "p95": 0.46244244724512085,
+          "p99": 1.3887234342098234
+        }
+      }
+    },
+    "july16_vh": {
+      "raster_file": "july16_sigma0_vh_db.tif",
+      "total_pixels": 1957165,
+      "valid_pixels": 1380574,
+      "invalid_pixels": 576591,
+      "valid_percentage": 70.5395,
+      "decibel_stats": {
+        "min_db": -105.8621826171875,
+        "max_db": 9.973326683044434,
+        "mean_db": -20.304872512817383,
+        "median_db": -17.414602279663086,
+        "stddev_db": 7.675158977508545,
+        "percentiles_db": {
+          "p5": -33.871209907531735,
+          "p10": -31.076166725158693,
+          "p25": -26.508495330810547,
+          "p50": -17.414602279663086,
+          "p75": -14.27146601676941,
+          "p90": -12.46429738998413,
+          "p95": -11.44207696914673,
+          "p99": -9.41892539024353
+        }
+      },
+      "linear_sigma0_reference": {
+        "min_linear": 2.592878863005854e-11,
+        "max_linear": 9.938769340515137,
+        "mean_linear": 0.024503497406840324,
+        "median_linear": 0.018135925754904747,
+        "stddev_linear": 0.037755172699689865,
+        "percentiles_linear": {
+          "p5": 0.0004100899139302783,
+          "p10": 0.000780518859392032,
+          "p25": 0.002234345651231706,
+          "p50": 0.018135925754904747,
+          "p75": 0.03739843424409628,
+          "p90": 0.056698330119252204,
+          "p95": 0.07174511067569256,
+          "p99": 0.11431610941886902
+        }
+      }
+    },
+    "july16_vv": {
+      "raster_file": "july16_sigma0_vv_db.tif",
+      "total_pixels": 1957165,
+      "valid_pixels": 1380574,
+      "invalid_pixels": 576591,
+      "valid_percentage": 70.5395,
+      "decibel_stats": {
+        "min_db": -105.84166717529297,
+        "max_db": 23.476253509521484,
+        "mean_db": -12.942903518676758,
+        "median_db": -10.216070175170898,
+        "stddev_db": 7.531721115112305,
+        "percentiles_db": {
+          "p5": -26.07830753326416,
+          "p10": -23.906467056274415,
+          "p25": -19.532612800598145,
+          "p50": -10.216070652008057,
+          "p75": -7.448113679885864,
+          "p90": -5.197727298736573,
+          "p95": -3.509677898883828,
+          "p99": 1.058414431810382
+        }
+      },
+      "linear_sigma0_reference": {
+        "min_linear": 2.6051565418794276e-11,
+        "max_linear": 222.65126037597656,
+        "mean_linear": 0.16145510971546173,
+        "median_linear": 0.0951465368270874,
+        "stddev_linear": 0.632927656173706,
+        "percentiles_linear": {
+          "p5": 0.002467000938486308,
+          "p10": 0.0040677407756447796,
+          "p25": 0.011136244051158428,
+          "p50": 0.0951465368270874,
+          "p75": 0.17996523529291153,
+          "p90": 0.3021532654762268,
+          "p95": 0.4456892967224112,
+          "p99": 1.2759728658199319
+        }
+      }
+    }
+  },
+  "histogram_analysis": {
+    "VH": {
+      "polarization": "VH",
+      "bin_edges": [
+        -105.92819213867188,
+        13.572958810424804
+      ],
+      "bin_count": 120,
+      "bin_width_db": 0.9958,
+      "plots": {
+        "june10": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histograms/june10_vh_histogram.png",
+        "july16": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histograms/july16_vh_histogram.png",
+        "comparative": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histograms/comparative_vh_histogram.png"
+      },
+      "csv_tables": {
+        "june10": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histogram_data/june10_vh_histogram.csv",
+        "july16": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histogram_data/july16_vh_histogram.csv"
+      }
+    },
+    "VV": {
+      "polarization": "VV",
+      "bin_edges": [
+        -105.84870910644531,
+        25.416666848754883
+      ],
+      "bin_count": 120,
+      "bin_width_db": 1.0939,
+      "plots": {
+        "june10": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histograms/june10_vv_histogram.png",
+        "july16": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histograms/july16_vv_histogram.png",
+        "comparative": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histograms/comparative_vv_histogram.png"
+      },
+      "csv_tables": {
+        "june10": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histogram_data/june10_vv_histogram.csv",
+        "july16": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/histogram_data/july16_vv_histogram.csv"
+      }
+    }
+  },
+  "difference_analysis": {
+    "formula": "Delta_dB = July16_dB - June10_dB",
+    "delta_vh": {
+      "output_path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/phase2a/delta_vh_db.tif",
+      "sha256": "52377b47484191c3fa57aafcce0523f55fef62ef717fdcb8fee63bb19636817b",
+      "valid_common_pixels": 1379858,
+      "nodata_pixels": 577307,
+      "statistics": {
+        "min_db": -94.80223846435547,
+        "max_db": 91.49561309814453,
+        "mean_db": -1.106451153755188,
+        "median_db": -1.1641993522644043,
+        "stddev_db": 11.03938102722168,
+        "percentiles_db": {
+          "p5": -13.866367626190184,
+          "p10": -10.534963989257813,
+          "p25": -4.842738151550293,
+          "p50": -1.1641993522644043,
+          "p75": 1.494455337524414,
+          "p90": 4.218024349212647,
+          "p95": 7.017817687988263,
+          "p99": 73.67384414672848
+        }
+      }
+    },
+    "delta_vv": {
+      "output_path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/phase2a/delta_vv_db.tif",
+      "sha256": "74f0f5aaa43e8f3ef754e9eb9441e72c9ad22c6524da52b88c0b552cc901ef87",
+      "valid_common_pixels": 1379858,
+      "nodata_pixels": 577307,
+      "statistics": {
+        "min_db": -89.93255615234375,
+        "max_db": 87.64199829101562,
+        "mean_db": -2.935425281524658,
+        "median_db": -1.6564726829528809,
+        "stddev_db": 5.456569671630859,
+        "percentiles_db": {
+          "p5": -13.96792984008789,
+          "p10": -11.043962478637695,
+          "p25": -5.566268444061279,
+          "p50": -1.6564726829528809,
+          "p75": 0.7608352303504944,
+          "p90": 2.705124473571778,
+          "p95": 3.874359202384949,
+          "p99": 6.231239557266225
+        }
+      }
+    },
+    "difference_maps": {
+      "delta_vh_map": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/difference_maps/delta_vh_map.png",
+      "delta_vv_map": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/difference_maps/delta_vv_map.png"
+    }
+  },
+  "aoi_coverage_assessment": {
+    "status": "PRELIMINARY_AOI_ASSESSED",
+    "aoi_wkt_wgs84": "POLYGON((89.55 24.58, 89.75 24.58, 89.75 24.76, 89.55 24.76, 89.55 24.58))",
+    "aoi_transformed_envelope_utm45n": [
+      757873.004,
+      778508.006,
+      2720834.523,
+      2741169.998
+    ],
+    "total_aoi_grid_cells": 1010039,
+    "total_aoi_area_km2": 404.0156,
+    "june10_valid_aoi_cells": 1009978,
+    "june10_valid_aoi_pct": 99.994,
+    "july16_valid_aoi_cells": 1009989,
+    "july16_valid_aoi_pct": 99.995,
+    "common_valid_aoi_cells": 1009978,
+    "common_valid_aoi_pct": 99.994,
+    "common_valid_aoi_area_km2": 403.9912
+  },
+  "scientific_limitations": [
+    "Bilinear resampling on July 16 introduces minor subpixel smoothing.",
+    "Speckle noise is unmitigated in this phase (filtering scheduled for Phase 2B).",
+    "Backscatter difference measures radiometric surface change; it does not constitute validated flood classification.",
+    "Decibel values do not follow strict Gaussian distributions due to heterogeneous land cover and surface roughness.",
+    "Preliminary Kazipur AOI is illustrative and subject to hydrological boundary refinement."
+  ]
+}

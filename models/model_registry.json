@@ -1,0 +1,55 @@
+{
+  "title": "Earth Pulse SAR Machine Learning Model Registry",
+  "version": "1.0.0",
+  "models": [
+    {
+      "model_id": "phase7a_rf_jamuna_v1",
+      "version": "1.0.0",
+      "region_coverage": [
+        "jamuna_sirajganj"
+      ],
+      "sensor_compatibility": [
+        "sentinel1"
+      ],
+      "feature_schema_version": "1.0.0",
+      "training_dataset_identifiers": [
+        "s1a_iw_grd_20240610_filtered_lee5x5",
+        "s1a_iw_grd_20240716_filtered_lee5x5"
+      ],
+      "training_dates": [
+        "2024-06-10",
+        "2024-07-16"
+      ],
+      "hyperparameters": {
+        "n_estimators": 40,
+        "max_depth": 6,
+        "min_samples_leaf": 10,
+        "max_features": "sqrt",
+        "class_weight": "balanced",
+        "optimal_probability_threshold": 0.35
+      },
+      "random_seed": 42,
+      "validation_metrics": {
+        "precision": 0.4578,
+        "recall": 0.8439,
+        "f1_score": 0.594,
+        "roc_auc": 0.6174
+      },
+      "held_out_test_metrics": {
+        "precision": 0.4477,
+        "recall": 0.9214,
+        "f1_score": 0.6026,
+        "iou": 0.4312,
+        "specificity": 0.2523,
+        "balanced_accuracy": 0.5869,
+        "roc_auc": 0.681,
+        "brier_score": 0.227
+      },
+      "model_artifact_path": "models/phase7a/phase7a_random_forest_model.joblib",
+      "model_artifact_sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+      "creation_date": "2026-11-03T16:24:31Z",
+      "status": "RETAINED_AS_PROBABILITY_LAYER",
+      "promotion_notes": "Promotion rejected: Precision (0.4477 < 0.55) and Specificity (0.2523 < 0.70) do not satisfy operational criteria. Retained Lee 5x5 Dual-AND Otsu baseline as primary operational classifier."
+    }
+  ]
+}

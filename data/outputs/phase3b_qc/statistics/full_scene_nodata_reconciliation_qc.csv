@@ -1,0 +1,10 @@
+metric,cell_count,area_km2,percentage_of_full_raster,source_of_truth_verification
+june10_source_nodata,577183,230.8732,29.4908,Phase 1 / Phase 2B june10_quality_mask Band 1/2 == 1
+july16_source_nodata,576591,230.6364,29.4605,Phase 1 / Phase 2B july16_quality_mask Band 1/2 == 1
+common_nodata_both_dates,576467,230.5868,29.4542,Intersection (june_nodata AND july_nodata)
+union_nodata_either_date,577307,230.9228,29.4971,Union (june_nodata OR july_nodata) = Class 6
+june_only_nodata,716,0.2864,0.0366,june_nodata AND NOT july_nodata (Phase 1 verified)
+july_only_nodata,124,0.0496,0.0063,july_nodata AND NOT june_nodata (Phase 1 verified)
+full_scene_indeterminate_clipping_floor,18930,7.572,0.9672,Clipping-floor (June OR July is 2) outside NoData = Class 5
+full_scene_valid_transitions,1360928,544.3712,69.5357,Definitive transition cells (Classes 1+2+3+4)
+full_scene_total_conservation,1957165,782.866,100.0,"Sum of Classes 1-6 = 1,957,165 cells"

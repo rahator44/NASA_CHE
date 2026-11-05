@@ -1,0 +1,573 @@
+{
+  "synthetic_edge_evaluation": {
+    "high_contrast_13db": {
+      "vertical": {
+        "noiseless": {
+          "ideal_gradient": 0.095,
+          "lee_3x3_gradient": 0.07811891287565231,
+          "lee_5x5_gradient": 0.0758235827088356,
+          "lee_3x3_retention_pct": 82.2304346059498,
+          "lee_5x5_retention_pct": 79.814297588248,
+          "lee_3x3_transition_width_px": 1.0,
+          "lee_5x5_transition_width_px": 2.0,
+          "edge_displacement_px": 0.0
+        },
+        "noisy_speckle": {
+          "enl_4.4": {
+            "ensemble_mean_gradient_3x3": 0.085849329829216,
+            "ensemble_mean_gradient_5x5": 0.08606533706188202,
+            "ensemble_retention_3x3_pct": 90.36771392822266,
+            "ensemble_retention_5x5_pct": 90.5950927734375
+          },
+          "enl_7.0": {
+            "ensemble_mean_gradient_3x3": 0.0853646844625473,
+            "ensemble_mean_gradient_5x5": 0.08456427603960037,
+            "ensemble_retention_3x3_pct": 89.8575668334961,
+            "ensemble_retention_5x5_pct": 89.01502990722656
+          },
+          "enl_10.0": {
+            "ensemble_mean_gradient_3x3": 0.0871308222413063,
+            "ensemble_mean_gradient_5x5": 0.08683442324399948,
+            "ensemble_retention_3x3_pct": 91.71665954589844,
+            "ensemble_retention_5x5_pct": 91.40465545654297
+          }
+        }
+      },
+      "horizontal": {
+        "noiseless": {
+          "ideal_gradient": 0.095,
+          "lee_3x3_gradient": 0.07811891287565231,
+          "lee_5x5_gradient": 0.0758235827088356,
+          "lee_3x3_retention_pct": 82.2304346059498,
+          "lee_5x5_retention_pct": 79.814297588248,
+          "lee_3x3_transition_width_px": 1.0,
+          "lee_5x5_transition_width_px": 2.0,
+          "edge_displacement_px": 0.0
+        },
+        "noisy_speckle": {
+          "enl_4.4": {
+            "ensemble_mean_gradient_3x3": 0.08346893638372421,
+            "ensemble_mean_gradient_5x5": 0.08301684260368347,
+            "ensemble_retention_3x3_pct": 87.8620376586914,
+            "ensemble_retention_5x5_pct": 87.38614654541016
+          },
+          "enl_7.0": {
+            "ensemble_mean_gradient_3x3": 0.0877935141324997,
+            "ensemble_mean_gradient_5x5": 0.08761198073625565,
+            "ensemble_retention_3x3_pct": 92.41422271728516,
+            "ensemble_retention_5x5_pct": 92.22313690185547
+          },
+          "enl_10.0": {
+            "ensemble_mean_gradient_3x3": 0.08884062618017197,
+            "ensemble_mean_gradient_5x5": 0.08855755627155304,
+            "ensemble_retention_3x3_pct": 93.51644897460938,
+            "ensemble_retention_5x5_pct": 93.2184829711914
+          }
+        }
+      },
+      "diagonal": {
+        "noiseless": {
+          "ideal_gradient": 0.0949999988079071,
+          "lee_3x3_gradient": 0.0813833698630333,
+          "lee_5x5_gradient": 0.07999659329652786,
+          "lee_3x3_retention_pct": 85.6667061939579,
+          "lee_5x5_retention_pct": 84.20694136879246,
+          "lee_3x3_transition_width_px": 1.41,
+          "lee_5x5_transition_width_px": 2.82,
+          "edge_displacement_px": 0.0
+        },
+        "noisy_speckle": {
+          "enl_4.4": {
+            "ensemble_mean_gradient_3x3": 0.0813833698630333,
+            "ensemble_mean_gradient_5x5": 0.07999659329652786,
+            "ensemble_retention_3x3_pct": 85.6667061939579,
+            "ensemble_retention_5x5_pct": 84.20694136879246
+          },
+          "enl_7.0": {
+            "ensemble_mean_gradient_3x3": 0.0813833698630333,
+            "ensemble_mean_gradient_5x5": 0.07999659329652786,
+            "ensemble_retention_3x3_pct": 85.6667061939579,
+            "ensemble_retention_5x5_pct": 84.20694136879246
+          },
+          "enl_10.0": {
+            "ensemble_mean_gradient_3x3": 0.0813833698630333,
+            "ensemble_mean_gradient_5x5": 0.07999659329652786,
+            "ensemble_retention_3x3_pct": 85.6667061939579,
+            "ensemble_retention_5x5_pct": 84.20694136879246
+          }
+        }
+      }
+    },
+    "med_contrast_8db": {
+      "vertical": {
+        "noiseless": {
+          "ideal_gradient": 0.085,
+          "lee_3x3_gradient": 0.06299564242362976,
+          "lee_5x5_gradient": 0.05956188589334488,
+          "lee_3x3_retention_pct": 74.11252049838795,
+          "lee_5x5_retention_pct": 70.07280693334691,
+          "lee_3x3_transition_width_px": 1.0,
+          "lee_5x5_transition_width_px": 3.0,
+          "edge_displacement_px": 0.0
+        },
+        "noisy_speckle": {
+          "enl_4.4": {
+            "ensemble_mean_gradient_3x3": 0.07464839518070221,
+            "ensemble_mean_gradient_5x5": 0.07434571534395218,
+            "ensemble_retention_3x3_pct": 87.82164001464844,
+            "ensemble_retention_5x5_pct": 87.46554565429688
+          },
+          "enl_7.0": {
+            "ensemble_mean_gradient_3x3": 0.07393032312393188,
+            "ensemble_mean_gradient_5x5": 0.07264585793018341,
+            "ensemble_retention_3x3_pct": 86.97685241699219,
+            "ensemble_retention_5x5_pct": 85.46571350097656
+          },
+          "enl_10.0": {
+            "ensemble_mean_gradient_3x3": 0.0755443274974823,
+            "ensemble_mean_gradient_5x5": 0.07518123090267181,
+            "ensemble_retention_3x3_pct": 88.87567901611328,
+            "ensemble_retention_5x5_pct": 88.4485092163086
+          }
+        }
+      },
+      "horizontal": {
+        "noiseless": {
+          "ideal_gradient": 0.085,
+          "lee_3x3_gradient": 0.06299564242362976,
+          "lee_5x5_gradient": 0.05956188589334488,
+          "lee_3x3_retention_pct": 74.11252049838795,
+          "lee_5x5_retention_pct": 70.07280693334691,
+          "lee_3x3_transition_width_px": 1.0,
+          "lee_5x5_transition_width_px": 2.0,
+          "edge_displacement_px": 0.0
+        },
+        "noisy_speckle": {
+          "enl_4.4": {
+            "ensemble_mean_gradient_3x3": 0.07024750858545303,
+            "ensemble_mean_gradient_5x5": 0.06912247836589813,
+            "ensemble_retention_3x3_pct": 82.64412689208984,
+            "ensemble_retention_5x5_pct": 81.320556640625
+          },
+          "enl_7.0": {
+            "ensemble_mean_gradient_3x3": 0.07548999786376953,
+            "ensemble_mean_gradient_5x5": 0.0746924877166748,
+            "ensemble_retention_3x3_pct": 88.81175994873047,
+            "ensemble_retention_5x5_pct": 87.8735122680664
+          },
+          "enl_10.0": {
+            "ensemble_mean_gradient_3x3": 0.07675567269325256,
+            "ensemble_mean_gradient_5x5": 0.07615786790847778,
+            "ensemble_retention_3x3_pct": 90.30078887939453,
+            "ensemble_retention_5x5_pct": 89.59749603271484
+          }
+        }
+      },
+      "diagonal": {
+        "noiseless": {
+          "ideal_gradient": 0.08500000089406967,
+          "lee_3x3_gradient": 0.06748075783252716,
+          "lee_5x5_gradient": 0.06487638503313065,
+          "lee_3x3_retention_pct": 79.38912602674478,
+          "lee_5x5_retention_pct": 76.325158059683,
+          "lee_3x3_transition_width_px": 1.41,
+          "lee_5x5_transition_width_px": 2.82,
+          "edge_displacement_px": 0.0
+        },
+        "noisy_speckle": {
+          "enl_4.4": {
+            "ensemble_mean_gradient_3x3": 0.06748075783252716,
+            "ensemble_mean_gradient_5x5": 0.06487638503313065,
+            "ensemble_retention_3x3_pct": 79.38912602674478,
+            "ensemble_retention_5x5_pct": 76.325158059683
+          },
+          "enl_7.0": {
+            "ensemble_mean_gradient_3x3": 0.06748075783252716,
+            "ensemble_mean_gradient_5x5": 0.06487638503313065,
+            "ensemble_retention_3x3_pct": 79.38912602674478,
+            "ensemble_retention_5x5_pct": 76.325158059683
+          },
+          "enl_10.0": {
+            "ensemble_mean_gradient_3x3": 0.06748075783252716,
+            "ensemble_mean_gradient_5x5": 0.06487638503313065,
+            "ensemble_retention_3x3_pct": 79.38912602674478,
+            "ensemble_retention_5x5_pct": 76.325158059683
+          }
+        }
+      }
+    },
+    "low_contrast_3db": {
+      "vertical": {
+        "noiseless": {
+          "ideal_gradient": 0.05,
+          "lee_3x3_gradient": 0.01666666939854622,
+          "lee_5x5_gradient": 0.01000000536441803,
+          "lee_3x3_retention_pct": 33.33333879709244,
+          "lee_5x5_retention_pct": 20.00001072883606,
+          "lee_3x3_transition_width_px": 2.0,
+          "lee_5x5_transition_width_px": 4.0,
+          "edge_displacement_px": 0.0
+        },
+        "noisy_speckle": {
+          "enl_4.4": {
+            "ensemble_mean_gradient_3x3": 0.04292663186788559,
+            "ensemble_mean_gradient_5x5": 0.03708286210894585,
+            "ensemble_retention_3x3_pct": 85.85326385498047,
+            "ensemble_retention_5x5_pct": 74.16572570800781
+          },
+          "enl_7.0": {
+            "ensemble_mean_gradient_3x3": 0.039944056421518326,
+            "ensemble_mean_gradient_5x5": 0.03384070098400116,
+            "ensemble_retention_3x3_pct": 79.88811492919922,
+            "ensemble_retention_5x5_pct": 67.68140411376953
+          },
+          "enl_10.0": {
+            "ensemble_mean_gradient_3x3": 0.038038332015275955,
+            "ensemble_mean_gradient_5x5": 0.036044977605342865,
+            "ensemble_retention_3x3_pct": 76.07666015625,
+            "ensemble_retention_5x5_pct": 72.08995056152344
+          }
+        }
+      },
+      "horizontal": {
+        "noiseless": {
+          "ideal_gradient": 0.05,
+          "lee_3x3_gradient": 0.01666666939854622,
+          "lee_5x5_gradient": 0.01000000536441803,
+          "lee_3x3_retention_pct": 33.33333879709244,
+          "lee_5x5_retention_pct": 20.00001072883606,
+          "lee_3x3_transition_width_px": 1.0,
+          "lee_5x5_transition_width_px": 2.0,
+          "edge_displacement_px": 0.0
+        },
+        "noisy_speckle": {
+          "enl_4.4": {
+            "ensemble_mean_gradient_3x3": 0.038144681602716446,
+            "ensemble_mean_gradient_5x5": 0.03019673563539982,
+            "ensemble_retention_3x3_pct": 76.28936004638672,
+            "ensemble_retention_5x5_pct": 60.393470764160156
+          },
+          "enl_7.0": {
+            "ensemble_mean_gradient_3x3": 0.03833822160959244,
+            "ensemble_mean_gradient_5x5": 0.03277575597167015,
+            "ensemble_retention_3x3_pct": 76.67643737792969,
+            "ensemble_retention_5x5_pct": 65.551513671875
+          },
+          "enl_10.0": {
+            "ensemble_mean_gradient_3x3": 0.037813812494277954,
+            "ensemble_mean_gradient_5x5": 0.034164488315582275,
+            "ensemble_retention_3x3_pct": 75.62762451171875,
+            "ensemble_retention_5x5_pct": 68.3289794921875
+          }
+        }
+      },
+      "diagonal": {
+        "noiseless": {
+          "ideal_gradient": 0.05000000074505806,
+          "lee_3x3_gradient": 0.0277777798473835,
+          "lee_5x5_gradient": 0.01799999549984932,
+          "lee_3x3_retention_pct": 55.555558866924656,
+          "lee_5x5_retention_pct": 35.99999046325698,
+          "lee_3x3_transition_width_px": 1.41,
+          "lee_5x5_transition_width_px": 2.82,
+          "edge_displacement_px": 0.0
+        },
+        "noisy_speckle": {
+          "enl_4.4": {
+            "ensemble_mean_gradient_3x3": 0.0277777798473835,
+            "ensemble_mean_gradient_5x5": 0.01799999549984932,
+            "ensemble_retention_3x3_pct": 55.555558866924656,
+            "ensemble_retention_5x5_pct": 35.99999046325698
+          },
+          "enl_7.0": {
+            "ensemble_mean_gradient_3x3": 0.0277777798473835,
+            "ensemble_mean_gradient_5x5": 0.01799999549984932,
+            "ensemble_retention_3x3_pct": 55.555558866924656,
+            "ensemble_retention_5x5_pct": 35.99999046325698
+          },
+          "enl_10.0": {
+            "ensemble_mean_gradient_3x3": 0.0277777798473835,
+            "ensemble_mean_gradient_5x5": 0.01799999549984932,
+            "ensemble_retention_3x3_pct": 55.555558866924656,
+            "ensemble_retention_5x5_pct": 35.99999046325698
+          }
+        }
+      }
+    }
+  },
+  "natural_transects": {
+    "June 10": {
+      "VH": [
+        {
+          "transect": "Transect 1 (Northern Reach)",
+          "row": 300,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.18524302542209625,
+          "lee_3x3_max_gradient": 0.0909113809466362,
+          "lee_5x5_max_gradient": 0.0903838723897934,
+          "lee_3x3_gradient_retention_pct": 49.076817191624244,
+          "lee_5x5_gradient_retention_pct": 48.79205151386616
+        },
+        {
+          "transect": "Transect 2 (Upper-Central Reach)",
+          "row": 500,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.0850815698504448,
+          "lee_3x3_max_gradient": 0.05670629069209099,
+          "lee_5x5_max_gradient": 0.06109160557389259,
+          "lee_3x3_gradient_retention_pct": 66.64932345720527,
+          "lee_5x5_gradient_retention_pct": 71.80357118619058
+        },
+        {
+          "transect": "Transect 3 (Kazipur Core Riverbank)",
+          "row": 700,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.16665631532669067,
+          "lee_3x3_max_gradient": 0.13001090288162231,
+          "lee_5x5_max_gradient": 0.12157537043094635,
+          "lee_3x3_gradient_retention_pct": 78.01138686329791,
+          "lee_5x5_gradient_retention_pct": 72.94975302473615
+        },
+        {
+          "transect": "Transect 4 (Lower-Central Braided)",
+          "row": 900,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.1619420349597931,
+          "lee_3x3_max_gradient": 0.10881426930427551,
+          "lee_5x5_max_gradient": 0.10278168320655823,
+          "lee_3x3_gradient_retention_pct": 67.19334441566816,
+          "lee_5x5_gradient_retention_pct": 63.46819294451673
+        },
+        {
+          "transect": "Transect 5 (Southern Confluence)",
+          "row": 1100,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.21234840154647827,
+          "lee_3x3_max_gradient": 0.13702134788036346,
+          "lee_5x5_max_gradient": 0.132294163107872,
+          "lee_3x3_gradient_retention_pct": 64.52666791107094,
+          "lee_5x5_gradient_retention_pct": 62.30052222875613
+        }
+      ],
+      "VV": [
+        {
+          "transect": "Transect 1 (Northern Reach)",
+          "row": 300,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 1.7183356285095215,
+          "lee_3x3_max_gradient": 1.3717453479766846,
+          "lee_5x5_max_gradient": 1.454590082168579,
+          "lee_3x3_gradient_retention_pct": 79.82988452416201,
+          "lee_5x5_gradient_retention_pct": 84.65110412860878
+        },
+        {
+          "transect": "Transect 2 (Upper-Central Reach)",
+          "row": 500,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.6890321969985962,
+          "lee_3x3_max_gradient": 0.4959818124771118,
+          "lee_5x5_max_gradient": 0.49740004539489746,
+          "lee_3x3_gradient_retention_pct": 71.98238553112523,
+          "lee_5x5_gradient_retention_pct": 72.18821523312805
+        },
+        {
+          "transect": "Transect 3 (Kazipur Core Riverbank)",
+          "row": 700,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 7.393279552459717,
+          "lee_3x3_max_gradient": 6.764444351196289,
+          "lee_5x5_max_gradient": 6.848042011260986,
+          "lee_3x3_gradient_retention_pct": 91.49450258438804,
+          "lee_5x5_gradient_retention_pct": 92.62522758229355
+        },
+        {
+          "transect": "Transect 4 (Lower-Central Braided)",
+          "row": 900,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.873021125793457,
+          "lee_3x3_max_gradient": 0.7509357333183289,
+          "lee_5x5_max_gradient": 0.8141238689422607,
+          "lee_3x3_gradient_retention_pct": 86.01575736621847,
+          "lee_5x5_gradient_retention_pct": 93.25362753419435
+        },
+        {
+          "transect": "Transect 5 (Southern Confluence)",
+          "row": 1100,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 12.834914207458496,
+          "lee_3x3_max_gradient": 11.583597183227539,
+          "lee_5x5_max_gradient": 11.97374153137207,
+          "lee_3x3_gradient_retention_pct": 90.25067870337766,
+          "lee_5x5_gradient_retention_pct": 93.29039008623845
+        }
+      ]
+    },
+    "July 16": {
+      "VH": [
+        {
+          "transect": "Transect 1 (Northern Reach)",
+          "row": 300,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.07266481220722198,
+          "lee_3x3_max_gradient": 0.05646304786205292,
+          "lee_5x5_max_gradient": 0.05745397508144379,
+          "lee_3x3_gradient_retention_pct": 77.70342500994063,
+          "lee_5x5_gradient_retention_pct": 79.06712112266845
+        },
+        {
+          "transect": "Transect 2 (Upper-Central Reach)",
+          "row": 500,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.1610545516014099,
+          "lee_3x3_max_gradient": 0.13990004360675812,
+          "lee_5x5_max_gradient": 0.13243965804576874,
+          "lee_3x3_gradient_retention_pct": 86.86500456875844,
+          "lee_5x5_gradient_retention_pct": 82.23279424821256
+        },
+        {
+          "transect": "Transect 3 (Kazipur Core Riverbank)",
+          "row": 700,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.11163796484470367,
+          "lee_3x3_max_gradient": 0.0806354358792305,
+          "lee_5x5_max_gradient": 0.08676376938819885,
+          "lee_3x3_gradient_retention_pct": 72.22940331400713,
+          "lee_5x5_gradient_retention_pct": 77.71887413828567
+        },
+        {
+          "transect": "Transect 4 (Lower-Central Braided)",
+          "row": 900,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.06619864702224731,
+          "lee_3x3_max_gradient": 0.028850872069597244,
+          "lee_5x5_max_gradient": 0.031835444271564484,
+          "lee_3x3_gradient_retention_pct": 43.582268471289694,
+          "lee_5x5_gradient_retention_pct": 48.09077783850413
+        },
+        {
+          "transect": "Transect 5 (Southern Confluence)",
+          "row": 1100,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.14272131025791168,
+          "lee_3x3_max_gradient": 0.09988706558942795,
+          "lee_5x5_max_gradient": 0.1114777997136116,
+          "lee_3x3_gradient_retention_pct": 69.98749199325736,
+          "lee_5x5_gradient_retention_pct": 78.10872778014725
+        }
+      ],
+      "VV": [
+        {
+          "transect": "Transect 1 (Northern Reach)",
+          "row": 300,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.9911942481994629,
+          "lee_3x3_max_gradient": 0.6873791217803955,
+          "lee_5x5_max_gradient": 0.7925742864608765,
+          "lee_3x3_gradient_retention_pct": 69.34857854845731,
+          "lee_5x5_gradient_retention_pct": 79.9615502108304
+        },
+        {
+          "transect": "Transect 2 (Upper-Central Reach)",
+          "row": 500,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.41913604736328125,
+          "lee_3x3_max_gradient": 0.33909833431243896,
+          "lee_5x5_max_gradient": 0.35956549644470215,
+          "lee_3x3_gradient_retention_pct": 80.90412085661758,
+          "lee_5x5_gradient_retention_pct": 85.78729954311302
+        },
+        {
+          "transect": "Transect 3 (Kazipur Core Riverbank)",
+          "row": 700,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 3.2420125007629395,
+          "lee_3x3_max_gradient": 3.0581440925598145,
+          "lee_5x5_max_gradient": 3.0420351028442383,
+          "lee_3x3_gradient_retention_pct": 94.32857189292591,
+          "lee_5x5_gradient_retention_pct": 93.83168948695784
+        },
+        {
+          "transect": "Transect 4 (Lower-Central Braided)",
+          "row": 900,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 0.4770357608795166,
+          "lee_3x3_max_gradient": 0.3585333526134491,
+          "lee_5x5_max_gradient": 0.3963142931461334,
+          "lee_3x3_gradient_retention_pct": 75.15859019718287,
+          "lee_5x5_gradient_retention_pct": 83.07852904265374
+        },
+        {
+          "transect": "Transect 5 (Southern Confluence)",
+          "row": 1100,
+          "cols": [
+            450,
+            750
+          ],
+          "orig_max_gradient": 6.238612651824951,
+          "lee_3x3_max_gradient": 5.182371139526367,
+          "lee_5x5_max_gradient": 5.584372043609619,
+          "lee_3x3_gradient_retention_pct": 83.06928845807397,
+          "lee_5x5_gradient_retention_pct": 89.51304328817481
+        }
+      ]
+    }
+  },
+  "plot_file": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2b/comparisons/multi_transect_edge_evaluation.png"
+}

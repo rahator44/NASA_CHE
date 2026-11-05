@@ -1,0 +1,283 @@
+{
+  "phase": "4D.1 \u2014 Validation Metric Reconciliation & Scientific Correction",
+  "timestamp": "2026-11-02T07:24:18.918733+00:00",
+  "reconciliation_finding_a_confusion_matrices": {
+    "root_cause": "The confusion matrix computation in scripts/validate_reference_phase4d.py strictly and correctly evaluated SCL Class 6 (Water) vs SCL Class 5 (Bare ground). Inside the study AOI, the true SCL raster contains 353,793 pixels of Class 5 (Bare ground) and 199,802 pixels of Class 6 (Water) in June, and 70,297 pixels of Class 5 and 49,206 pixels of Class 6 in July. However, the historical Phase 4D report table incorrectly reported the Phase 4C.1 hybrid MNDWI water mask counts (256,636 and 68,898) and subtracted values as raw SCL counts. Comparing the valid confusion matrix non-water sums (June FP+TN = 349,040 <= 353,793; July FP+TN = 70,283 <= 70,297) against the true SCL raster confirms that all mathematical conservation invariants hold perfectly.",
+    "june_strict_invariants_verified": true,
+    "july_strict_invariants_verified": true
+  },
+  "reconciliation_finding_b_july_optical_water": {
+    "june_optical_water": {
+      "phase4c1_hybrid_water_mask_pixels": 256636,
+      "raw_scl_class_6_water_pixels": 199802,
+      "scl_5_bare_ground_with_mndwi_gt_0": 56834,
+      "scl_4_vegetation_with_mndwi_gt_0": 0,
+      "mathematical_identity": "256636 = 199802 (SCL 6) + 56834 (SCL 5 with MNDWI>0)",
+      "exact_match": true
+    },
+    "july_optical_water": {
+      "phase4c1_hybrid_water_mask_pixels": 99131,
+      "raw_scl_class_6_water_pixels": 49206,
+      "scl_5_bare_ground_with_mndwi_gt_0": 49899,
+      "scl_4_vegetation_with_mndwi_gt_0": 26,
+      "mathematical_identity": "99131 = 49206 (SCL 6) + 49899 (SCL 5 with MNDWI>0) + 26 (SCL 4 with MNDWI>0)",
+      "exact_match": true
+    },
+    "scientific_explanation": "In Phase 4C.1, ref_water_mask was constructed via a hybrid rule: clear_mask & ((mndwi > 0.0) | (scl == 6)). During the July 2024 peak flood crest, 49,899 pixels of SCL Class 5 bare ground were heavily waterlogged/saturated, triggering positive MNDWI values. Consequently, Phase 4C.1 reported 99,131 pixels of water. In Phase 4D, strict optical validation used pure SCL Class 6 (49,206 pixels) to avoid spectral false alarms on damp char sand. The 49,925 pixel difference is mathematically explained by 49,899 wet sand pixels and 26 vegetated pixels with MNDWI > 0."
+  },
+  "vegetation_sensitivity_interpretation": "All evaluated SCL Class 4 pixels (9,813 in June; 30,215 in July) received a candidate non-water prediction from the SAR classifier. Because dense floodplain vegetation and crop canopies are not definitive dry-land references due to radar attenuation and sub-canopy inundation, this result is descriptive of model behavior and does not establish ground-truth classification correctness over vegetated charland.",
+  "method_sensitivity_interpretation": "Among the seven evaluated SAR configurations, Lee 5x5 Dual-AND maintains high precision (0.5910 in June; 0.4882 in July) and balanced performance. Unfiltered Dual-AND achieves slightly higher specificity in June (0.8117 vs 0.8041) and lower false positive count (65,728 vs 68,382) at the cost of lower recall (0.4925 vs 0.5141). Dual-OR and 2D Otsu configurations yield higher raw recall (0.8288 and 0.8242 in July) but exhibit increased false alarms over damp soils (specificity 0.3736 and 0.3884). Lee 5x5 Dual-AND remains the scientifically defensible primary configuration.",
+  "evaluations": {
+    "evaluation_a_baseline_june": {
+      "sar_date": "2024-06-10",
+      "optical_date": "2024-06-07",
+      "delta_t_days": 3,
+      "primary_strict": {
+        "mode": "primary_strict",
+        "confusion_matrix": {
+          "true_positive": 98808,
+          "false_positive": 68382,
+          "true_negative": 280658,
+          "false_negative": 93394,
+          "total_evaluated_pixels": 541242,
+          "evaluated_area_km2": 216.4968,
+          "aoi_coverage_pct": 53.59
+        },
+        "agreement_metrics": {
+          "precision": 0.591,
+          "recall": 0.5141,
+          "f1_score": 0.5499,
+          "iou": 0.3792,
+          "specificity": 0.8041,
+          "balanced_accuracy": 0.6591
+        },
+        "prevalence": {
+          "reference_water_pixels": 192202,
+          "reference_water_pct": 35.51,
+          "reference_water_km2": 76.8808,
+          "sar_water_pixels": 167190,
+          "sar_water_pct": 30.89,
+          "sar_water_km2": 66.876
+        },
+        "aoi_exclusions": {
+          "sar_indeterminate_clipping_floor": 16105,
+          "sar_nodata": 61,
+          "optical_pure_cloud_classes_8_9_10": 365193,
+          "optical_unclassified_class_7": 78082,
+          "optical_cloud_shadow_class_3": 3356,
+          "optical_dark_area_class_2": 0,
+          "optical_defective_class_1": 0,
+          "optical_vegetation_class_4": 9813
+        },
+        "raw_aoi_scl_counts": {
+          "scl_class_6_water": 199802,
+          "scl_class_5_bare_ground": 353793,
+          "scl_class_4_vegetation": 9813
+        }
+      },
+      "secondary_vegetation_included": {
+        "mode": "secondary_vegetation_included",
+        "confusion_matrix": {
+          "true_positive": 98808,
+          "false_positive": 68382,
+          "true_negative": 290471,
+          "false_negative": 93394,
+          "total_evaluated_pixels": 551055,
+          "evaluated_area_km2": 220.422,
+          "aoi_coverage_pct": 54.56
+        },
+        "agreement_metrics": {
+          "precision": 0.591,
+          "recall": 0.5141,
+          "f1_score": 0.5499,
+          "iou": 0.3792,
+          "specificity": 0.8094,
+          "balanced_accuracy": 0.6618
+        },
+        "prevalence": {
+          "reference_water_pixels": 192202,
+          "reference_water_pct": 34.88,
+          "reference_water_km2": 76.8808,
+          "sar_water_pixels": 167190,
+          "sar_water_pct": 30.34,
+          "sar_water_km2": 66.876
+        },
+        "aoi_exclusions": {
+          "sar_indeterminate_clipping_floor": 16105,
+          "sar_nodata": 61,
+          "optical_pure_cloud_classes_8_9_10": 365193,
+          "optical_unclassified_class_7": 78082,
+          "optical_cloud_shadow_class_3": 3356,
+          "optical_dark_area_class_2": 0,
+          "optical_defective_class_1": 0,
+          "optical_vegetation_class_4": 0
+        },
+        "raw_aoi_scl_counts": {
+          "scl_class_6_water": 199802,
+          "scl_class_5_bare_ground": 353793,
+          "scl_class_4_vegetation": 9813
+        }
+      },
+      "spatial_block_summary": {
+        "block_size_km": 1.0,
+        "total_aoi_blocks": 451,
+        "evaluable_blocks_count": 241,
+        "evaluable_blocks_pct": 53.44,
+        "spatial_representativeness_status": "REPRESENTATIVE",
+        "bootstrap_uncertainty_95ci": {
+          "iterations": 1000,
+          "random_seed": 42,
+          "precision_ci_95": [
+            0.5365,
+            0.6572
+          ],
+          "recall_ci_95": [
+            0.4419,
+            0.5616
+          ],
+          "f1_score_ci_95": [
+            0.4932,
+            0.5938
+          ],
+          "iou_ci_95": [
+            0.3273,
+            0.4223
+          ]
+        }
+      }
+    },
+    "evaluation_b_flood_peak_july": {
+      "sar_date": "2024-07-16",
+      "optical_date": "2024-07-17",
+      "delta_t_days": 1,
+      "primary_strict": {
+        "mode": "primary_strict",
+        "confusion_matrix": {
+          "true_positive": 38454,
+          "false_positive": 40309,
+          "true_negative": 29974,
+          "false_negative": 10741,
+          "total_evaluated_pixels": 119478,
+          "evaluated_area_km2": 47.7912,
+          "aoi_coverage_pct": 11.83
+        },
+        "agreement_metrics": {
+          "precision": 0.4882,
+          "recall": 0.7817,
+          "f1_score": 0.601,
+          "iou": 0.4296,
+          "specificity": 0.4265,
+          "balanced_accuracy": 0.6041
+        },
+        "prevalence": {
+          "reference_water_pixels": 49195,
+          "reference_water_pct": 41.17,
+          "reference_water_km2": 19.678,
+          "sar_water_pixels": 78763,
+          "sar_water_pct": 65.92,
+          "sar_water_km2": 31.5052
+        },
+        "aoi_exclusions": {
+          "sar_indeterminate_clipping_floor": 145,
+          "sar_nodata": 50,
+          "optical_pure_cloud_classes_8_9_10": 842741,
+          "optical_unclassified_class_7": 15478,
+          "optical_cloud_shadow_class_3": 1912,
+          "optical_dark_area_class_2": 190,
+          "optical_defective_class_1": 0,
+          "optical_vegetation_class_4": 30215
+        },
+        "raw_aoi_scl_counts": {
+          "scl_class_6_water": 49206,
+          "scl_class_5_bare_ground": 70297,
+          "scl_class_4_vegetation": 30215
+        }
+      },
+      "secondary_vegetation_included": {
+        "mode": "secondary_vegetation_included",
+        "confusion_matrix": {
+          "true_positive": 38454,
+          "false_positive": 40309,
+          "true_negative": 60189,
+          "false_negative": 10741,
+          "total_evaluated_pixels": 149693,
+          "evaluated_area_km2": 59.8772,
+          "aoi_coverage_pct": 14.82
+        },
+        "agreement_metrics": {
+          "precision": 0.4882,
+          "recall": 0.7817,
+          "f1_score": 0.601,
+          "iou": 0.4296,
+          "specificity": 0.5989,
+          "balanced_accuracy": 0.6903
+        },
+        "prevalence": {
+          "reference_water_pixels": 49195,
+          "reference_water_pct": 32.86,
+          "reference_water_km2": 19.678,
+          "sar_water_pixels": 78763,
+          "sar_water_pct": 52.62,
+          "sar_water_km2": 31.5052
+        },
+        "aoi_exclusions": {
+          "sar_indeterminate_clipping_floor": 145,
+          "sar_nodata": 50,
+          "optical_pure_cloud_classes_8_9_10": 842741,
+          "optical_unclassified_class_7": 15478,
+          "optical_cloud_shadow_class_3": 1912,
+          "optical_dark_area_class_2": 190,
+          "optical_defective_class_1": 0,
+          "optical_vegetation_class_4": 0
+        },
+        "raw_aoi_scl_counts": {
+          "scl_class_6_water": 49206,
+          "scl_class_5_bare_ground": 70297,
+          "scl_class_4_vegetation": 30215
+        }
+      },
+      "spatial_block_summary": {
+        "block_size_km": 1.0,
+        "total_aoi_blocks": 451,
+        "evaluable_blocks_count": 88,
+        "evaluable_blocks_pct": 19.51,
+        "spatial_representativeness_status": "PARTIALLY_EVALUABLE",
+        "bootstrap_uncertainty_95ci": {
+          "iterations": 1000,
+          "random_seed": 42,
+          "precision_ci_95": [
+            0.3982,
+            0.5888
+          ],
+          "recall_ci_95": [
+            0.7083,
+            0.8572
+          ],
+          "f1_score_ci_95": [
+            0.5207,
+            0.6891
+          ],
+          "iou_ci_95": [
+            0.352,
+            0.5257
+          ]
+        }
+      }
+    }
+  },
+  "output_files": {
+    "maps": [
+      "data/outputs/phase4d1/maps/phase4d1_june10_optical_agreement_map.png",
+      "data/outputs/phase4d1/maps/phase4d1_july16_optical_agreement_map.png"
+    ],
+    "statistics": [
+      "data/outputs/phase4d1/statistics/phase4d1_confusion_matrices.csv",
+      "data/outputs/phase4d1/statistics/phase4d1_agreement_metrics.csv",
+      "data/outputs/phase4d1/statistics/phase4d1_scl_crosstabulation.csv",
+      "data/outputs/phase4d1/statistics/phase4d1_reference_coverage.csv",
+      "data/outputs/phase4d1/statistics/phase4d1_spatial_block_statistics.csv",
+      "data/outputs/phase4d1/statistics/phase4d1_uncertainty_statistics.csv",
+      "data/outputs/phase4d1/statistics/phase4d1_method_sensitivity.csv"
+    ]
+  }
+}

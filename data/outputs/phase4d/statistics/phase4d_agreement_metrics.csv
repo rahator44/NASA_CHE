@@ -1,0 +1,5 @@
+Evaluation_Epoch,Mode,Precision,Recall,F1_Score,IoU,Specificity,Balanced_Accuracy,Reference_Prevalence_Pct,SAR_Prevalence_Pct,Validation_Status
+June 10 SAR vs June 07 Optical,Primary Strict (SCL 6 vs 5),0.591,0.5141,0.5499,0.3792,0.8041,0.6591,35.51,30.89,READY
+June 10 SAR vs June 07 Optical,Secondary (SCL 6 vs 4+5),0.591,0.5141,0.5499,0.3792,0.8094,0.6618,34.88,30.34,READY
+July 16 SAR vs July 17 Optical,Primary Strict (SCL 6 vs 5),0.4882,0.7817,0.601,0.4296,0.4265,0.6041,41.17,65.92,PARTIALLY_EVALUABLE
+July 16 SAR vs July 17 Optical,Secondary (SCL 6 vs 4+5),0.4882,0.7817,0.601,0.4296,0.5989,0.6903,32.86,52.62,PARTIALLY_EVALUABLE

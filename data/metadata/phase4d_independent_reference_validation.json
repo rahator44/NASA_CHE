@@ -1,0 +1,498 @@
+{
+  "phase": "4D \u2014 Scientific Correction, Independent Optical Validation & Agreement Assessment",
+  "timestamp": "2026-11-02T06:57:09.661453+00:00",
+  "area_reconciliation": {
+    "full_raster_footprint": {
+      "columns": 1405,
+      "rows": 1393,
+      "total_cells": 1957165,
+      "pixel_spacing_m": [
+        20.0,
+        20.0
+      ],
+      "area_km2": 782.866,
+      "area_ha": 78286.6
+    },
+    "vector_aoi": {
+      "wkt": "POLYGON((89.55 24.58, 89.75 24.58, 89.75 24.76, 89.55 24.76, 89.55 24.58))",
+      "projected_utm45n_area_km2": 404.0163,
+      "geodesic_wgs84_ellipsoidal_area_km2": 403.6218
+    },
+    "rasterized_aoi": {
+      "cells": 1010039,
+      "cell_area_km2": 0.0004,
+      "raster_area_km2": 404.0156,
+      "raster_area_ha": 40401.56
+    },
+    "discrepancy_analysis": {
+      "rasterization_difference_km2": -0.000706,
+      "rasterization_difference_pct": -0.0002,
+      "projection_distortion_km2": 0.3945,
+      "projection_distortion_pct": 0.0977,
+      "copernicus_browser_discrepancy_explanation": "Copernicus Browser and web GIS frontends compute polygon surface area using spherical Web Mercator (EPSG:3857) or geodesic polygons without UTM grid convergence correction. At latitude 24.67\u00b0N, the true ellipsoidal geodesic area is 403.62 km\u00b2 and the conformal UTM Zone 45N planar area is 404.02 km\u00b2. Rasterizing the vector polygon onto the 20m SAR grid captures exactly 1,010,039 cells (404.0156 km\u00b2), preserving 99.9998% of the projected vector polygon area (discrepancy < 2 pixels)."
+    }
+  },
+  "evaluations": {
+    "evaluation_a_baseline_june": {
+      "sar_date": "2024-06-10",
+      "optical_date": "2024-06-07",
+      "delta_t_days": 3,
+      "primary_strict": {
+        "mode": "primary_strict",
+        "confusion_matrix": {
+          "true_positive": 98808,
+          "false_positive": 68382,
+          "true_negative": 280658,
+          "false_negative": 93394,
+          "total_evaluated_pixels": 541242,
+          "evaluated_area_km2": 216.4968,
+          "aoi_coverage_pct": 53.59
+        },
+        "agreement_metrics": {
+          "precision": 0.591,
+          "recall": 0.5141,
+          "f1_score": 0.5499,
+          "iou": 0.3792,
+          "specificity": 0.8041,
+          "balanced_accuracy": 0.6591
+        },
+        "prevalence": {
+          "reference_water_pixels": 192202,
+          "reference_water_pct": 35.51,
+          "reference_water_km2": 76.8808,
+          "sar_water_pixels": 167190,
+          "sar_water_pct": 30.89,
+          "sar_water_km2": 66.876
+        },
+        "aoi_exclusions": {
+          "sar_indeterminate_clipping_floor": 16105,
+          "sar_nodata": 61,
+          "optical_pure_cloud_classes_8_9_10": 365193,
+          "optical_unclassified_class_7": 78082,
+          "optical_cloud_shadow_class_3": 3356,
+          "optical_dark_area_class_2": 0,
+          "optical_defective_class_1": 0,
+          "optical_vegetation_class_4": 9813
+        }
+      },
+      "secondary_vegetation_included": {
+        "mode": "secondary_vegetation_included",
+        "confusion_matrix": {
+          "true_positive": 98808,
+          "false_positive": 68382,
+          "true_negative": 290471,
+          "false_negative": 93394,
+          "total_evaluated_pixels": 551055,
+          "evaluated_area_km2": 220.422,
+          "aoi_coverage_pct": 54.56
+        },
+        "agreement_metrics": {
+          "precision": 0.591,
+          "recall": 0.5141,
+          "f1_score": 0.5499,
+          "iou": 0.3792,
+          "specificity": 0.8094,
+          "balanced_accuracy": 0.6618
+        },
+        "prevalence": {
+          "reference_water_pixels": 192202,
+          "reference_water_pct": 34.88,
+          "reference_water_km2": 76.8808,
+          "sar_water_pixels": 167190,
+          "sar_water_pct": 30.34,
+          "sar_water_km2": 66.876
+        },
+        "aoi_exclusions": {
+          "sar_indeterminate_clipping_floor": 16105,
+          "sar_nodata": 61,
+          "optical_pure_cloud_classes_8_9_10": 365193,
+          "optical_unclassified_class_7": 78082,
+          "optical_cloud_shadow_class_3": 3356,
+          "optical_dark_area_class_2": 0,
+          "optical_defective_class_1": 0,
+          "optical_vegetation_class_4": 0
+        }
+      },
+      "spatial_block_summary": {
+        "block_size_km": 1.0,
+        "total_aoi_blocks": 451,
+        "evaluable_blocks_count": 241,
+        "evaluable_blocks_pct": 53.44,
+        "spatial_representativeness_status": "REPRESENTATIVE",
+        "bootstrap_uncertainty_95ci": {
+          "iterations": 1000,
+          "random_seed": 42,
+          "precision_ci_95": [
+            0.5365,
+            0.6572
+          ],
+          "recall_ci_95": [
+            0.4419,
+            0.5616
+          ],
+          "f1_score_ci_95": [
+            0.4932,
+            0.5938
+          ],
+          "iou_ci_95": [
+            0.3273,
+            0.4223
+          ]
+        }
+      }
+    },
+    "evaluation_b_flood_peak_july": {
+      "sar_date": "2024-07-16",
+      "optical_date": "2024-07-17",
+      "delta_t_days": 1,
+      "primary_strict": {
+        "mode": "primary_strict",
+        "confusion_matrix": {
+          "true_positive": 38454,
+          "false_positive": 40309,
+          "true_negative": 29974,
+          "false_negative": 10741,
+          "total_evaluated_pixels": 119478,
+          "evaluated_area_km2": 47.7912,
+          "aoi_coverage_pct": 11.83
+        },
+        "agreement_metrics": {
+          "precision": 0.4882,
+          "recall": 0.7817,
+          "f1_score": 0.601,
+          "iou": 0.4296,
+          "specificity": 0.4265,
+          "balanced_accuracy": 0.6041
+        },
+        "prevalence": {
+          "reference_water_pixels": 49195,
+          "reference_water_pct": 41.17,
+          "reference_water_km2": 19.678,
+          "sar_water_pixels": 78763,
+          "sar_water_pct": 65.92,
+          "sar_water_km2": 31.5052
+        },
+        "aoi_exclusions": {
+          "sar_indeterminate_clipping_floor": 145,
+          "sar_nodata": 50,
+          "optical_pure_cloud_classes_8_9_10": 842741,
+          "optical_unclassified_class_7": 15478,
+          "optical_cloud_shadow_class_3": 1912,
+          "optical_dark_area_class_2": 190,
+          "optical_defective_class_1": 0,
+          "optical_vegetation_class_4": 30215
+        }
+      },
+      "secondary_vegetation_included": {
+        "mode": "secondary_vegetation_included",
+        "confusion_matrix": {
+          "true_positive": 38454,
+          "false_positive": 40309,
+          "true_negative": 60189,
+          "false_negative": 10741,
+          "total_evaluated_pixels": 149693,
+          "evaluated_area_km2": 59.8772,
+          "aoi_coverage_pct": 14.82
+        },
+        "agreement_metrics": {
+          "precision": 0.4882,
+          "recall": 0.7817,
+          "f1_score": 0.601,
+          "iou": 0.4296,
+          "specificity": 0.5989,
+          "balanced_accuracy": 0.6903
+        },
+        "prevalence": {
+          "reference_water_pixels": 49195,
+          "reference_water_pct": 32.86,
+          "reference_water_km2": 19.678,
+          "sar_water_pixels": 78763,
+          "sar_water_pct": 52.62,
+          "sar_water_km2": 31.5052
+        },
+        "aoi_exclusions": {
+          "sar_indeterminate_clipping_floor": 145,
+          "sar_nodata": 50,
+          "optical_pure_cloud_classes_8_9_10": 842741,
+          "optical_unclassified_class_7": 15478,
+          "optical_cloud_shadow_class_3": 1912,
+          "optical_dark_area_class_2": 190,
+          "optical_defective_class_1": 0,
+          "optical_vegetation_class_4": 0
+        }
+      },
+      "spatial_block_summary": {
+        "block_size_km": 1.0,
+        "total_aoi_blocks": 451,
+        "evaluable_blocks_count": 88,
+        "evaluable_blocks_pct": 19.51,
+        "spatial_representativeness_status": "PARTIALLY_EVALUABLE",
+        "bootstrap_uncertainty_95ci": {
+          "iterations": 1000,
+          "random_seed": 42,
+          "precision_ci_95": [
+            0.3982,
+            0.5888
+          ],
+          "recall_ci_95": [
+            0.7083,
+            0.8572
+          ],
+          "f1_score_ci_95": [
+            0.5207,
+            0.6891
+          ],
+          "iou_ci_95": [
+            0.352,
+            0.5257
+          ]
+        }
+      }
+    }
+  },
+  "method_sensitivity_analysis": [
+    {
+      "evaluation_epoch": "June (dt=3d)",
+      "method_configuration": "Lee 5x5 Dual-AND (Primary)",
+      "filename": "june10_lee_5x5_otsu_dual_and_qc.tif",
+      "evaluated_pixels": 541242,
+      "true_positive": 98808,
+      "false_positive": 68382,
+      "true_negative": 280658,
+      "false_negative": 93394,
+      "precision": 0.591,
+      "recall": 0.5141,
+      "f1_score": 0.5499,
+      "iou": 0.3792,
+      "specificity": 0.8041,
+      "balanced_accuracy": 0.6591
+    },
+    {
+      "evaluation_epoch": "June (dt=3d)",
+      "method_configuration": "Lee 3x3 Dual-AND",
+      "filename": "june10_lee_3x3_otsu_dual_and_qc.tif",
+      "evaluated_pixels": 541242,
+      "true_positive": 99255,
+      "false_positive": 69044,
+      "true_negative": 279996,
+      "false_negative": 92947,
+      "precision": 0.5898,
+      "recall": 0.5164,
+      "f1_score": 0.5507,
+      "iou": 0.3799,
+      "specificity": 0.8022,
+      "balanced_accuracy": 0.6593
+    },
+    {
+      "evaluation_epoch": "June (dt=3d)",
+      "method_configuration": "Unfiltered Dual-AND",
+      "filename": "june10_unfiltered_otsu_dual_and_qc.tif",
+      "evaluated_pixels": 541242,
+      "true_positive": 94669,
+      "false_positive": 65728,
+      "true_negative": 283312,
+      "false_negative": 97533,
+      "precision": 0.5902,
+      "recall": 0.4925,
+      "f1_score": 0.537,
+      "iou": 0.367,
+      "specificity": 0.8117,
+      "balanced_accuracy": 0.6521
+    },
+    {
+      "evaluation_epoch": "June (dt=3d)",
+      "method_configuration": "Lee 5x5 2D Otsu Bivariate",
+      "filename": "june10_lee_5x5_otsu_2d_qc.tif",
+      "evaluated_pixels": 525259,
+      "true_positive": 100706,
+      "false_positive": 70250,
+      "true_negative": 270222,
+      "false_negative": 84081,
+      "precision": 0.5891,
+      "recall": 0.545,
+      "f1_score": 0.5662,
+      "iou": 0.3949,
+      "specificity": 0.7937,
+      "balanced_accuracy": 0.6693
+    },
+    {
+      "evaluation_epoch": "June (dt=3d)",
+      "method_configuration": "Lee 5x5 VV-only Otsu",
+      "filename": "june10_lee_5x5_otsu_vv_qc.tif",
+      "evaluated_pixels": 553588,
+      "true_positive": 111981,
+      "false_positive": 79699,
+      "true_negative": 274093,
+      "false_negative": 87815,
+      "precision": 0.5842,
+      "recall": 0.5605,
+      "f1_score": 0.5721,
+      "iou": 0.4007,
+      "specificity": 0.7747,
+      "balanced_accuracy": 0.6676
+    },
+    {
+      "evaluation_epoch": "June (dt=3d)",
+      "method_configuration": "Lee 5x5 VH-only Otsu",
+      "filename": "june10_lee_5x5_otsu_vh_qc.tif",
+      "evaluated_pixels": 541249,
+      "true_positive": 101393,
+      "false_positive": 71034,
+      "true_negative": 278007,
+      "false_negative": 90815,
+      "precision": 0.588,
+      "recall": 0.5275,
+      "f1_score": 0.5561,
+      "iou": 0.3852,
+      "specificity": 0.7965,
+      "balanced_accuracy": 0.662
+    },
+    {
+      "evaluation_epoch": "June (dt=3d)",
+      "method_configuration": "Lee 5x5 Dual-OR",
+      "filename": "june10_lee_5x5_otsu_dual_or_qc.tif",
+      "evaluated_pixels": 541242,
+      "true_positive": 106987,
+      "false_positive": 77619,
+      "true_negative": 271421,
+      "false_negative": 85215,
+      "precision": 0.5795,
+      "recall": 0.5566,
+      "f1_score": 0.5679,
+      "iou": 0.3965,
+      "specificity": 0.7776,
+      "balanced_accuracy": 0.6671
+    },
+    {
+      "evaluation_epoch": "July (dt=1d)",
+      "method_configuration": "Lee 5x5 Dual-AND (Primary)",
+      "filename": "july16_lee_5x5_otsu_dual_and_qc.tif",
+      "evaluated_pixels": 119478,
+      "true_positive": 38454,
+      "false_positive": 40309,
+      "true_negative": 29974,
+      "false_negative": 10741,
+      "precision": 0.4882,
+      "recall": 0.7817,
+      "f1_score": 0.601,
+      "iou": 0.4296,
+      "specificity": 0.4265,
+      "balanced_accuracy": 0.6041
+    },
+    {
+      "evaluation_epoch": "July (dt=1d)",
+      "method_configuration": "Lee 3x3 Dual-AND",
+      "filename": "july16_lee_3x3_otsu_dual_and_qc.tif",
+      "evaluated_pixels": 119478,
+      "true_positive": 38443,
+      "false_positive": 40317,
+      "true_negative": 29966,
+      "false_negative": 10752,
+      "precision": 0.4881,
+      "recall": 0.7814,
+      "f1_score": 0.6009,
+      "iou": 0.4295,
+      "specificity": 0.4264,
+      "balanced_accuracy": 0.6039
+    },
+    {
+      "evaluation_epoch": "July (dt=1d)",
+      "method_configuration": "Unfiltered Dual-AND",
+      "filename": "july16_unfiltered_otsu_dual_and_qc.tif",
+      "evaluated_pixels": 119478,
+      "true_positive": 38119,
+      "false_positive": 40178,
+      "true_negative": 30105,
+      "false_negative": 11076,
+      "precision": 0.4869,
+      "recall": 0.7749,
+      "f1_score": 0.598,
+      "iou": 0.4265,
+      "specificity": 0.4283,
+      "balanced_accuracy": 0.6016
+    },
+    {
+      "evaluation_epoch": "July (dt=1d)",
+      "method_configuration": "Lee 5x5 2D Otsu Bivariate",
+      "filename": "july16_lee_5x5_otsu_2d_qc.tif",
+      "evaluated_pixels": 113601,
+      "true_positive": 38740,
+      "false_positive": 40735,
+      "true_negative": 25864,
+      "false_negative": 8262,
+      "precision": 0.4874,
+      "recall": 0.8242,
+      "f1_score": 0.6126,
+      "iou": 0.4415,
+      "specificity": 0.3884,
+      "balanced_accuracy": 0.6063
+    },
+    {
+      "evaluation_epoch": "July (dt=1d)",
+      "method_configuration": "Lee 5x5 VV-only Otsu",
+      "filename": "july16_lee_5x5_otsu_vv_qc.tif",
+      "evaluated_pixels": 119503,
+      "true_positive": 39010,
+      "false_positive": 41638,
+      "true_negative": 28659,
+      "false_negative": 10196,
+      "precision": 0.4837,
+      "recall": 0.7928,
+      "f1_score": 0.6008,
+      "iou": 0.4294,
+      "specificity": 0.4077,
+      "balanced_accuracy": 0.6002
+    },
+    {
+      "evaluation_epoch": "July (dt=1d)",
+      "method_configuration": "Lee 5x5 VH-only Otsu",
+      "filename": "july16_lee_5x5_otsu_vh_qc.tif",
+      "evaluated_pixels": 119478,
+      "true_positive": 40227,
+      "false_positive": 42711,
+      "true_negative": 27572,
+      "false_negative": 8968,
+      "precision": 0.485,
+      "recall": 0.8177,
+      "f1_score": 0.6089,
+      "iou": 0.4377,
+      "specificity": 0.3923,
+      "balanced_accuracy": 0.605
+    },
+    {
+      "evaluation_epoch": "July (dt=1d)",
+      "method_configuration": "Lee 5x5 Dual-OR",
+      "filename": "july16_lee_5x5_otsu_dual_or_qc.tif",
+      "evaluated_pixels": 119478,
+      "true_positive": 40773,
+      "false_positive": 44026,
+      "true_negative": 26257,
+      "false_negative": 8422,
+      "precision": 0.4808,
+      "recall": 0.8288,
+      "f1_score": 0.6086,
+      "iou": 0.4374,
+      "specificity": 0.3736,
+      "balanced_accuracy": 0.6012
+    }
+  ],
+  "scientific_conclusions": {
+    "terminology_standard": "optical_reference_agreement (NOT ground_truth_accuracy)",
+    "june_baseline_summary": "Under primary strict validation (SCL 6 Water vs SCL 5 Bare Ground), the June 10 SAR candidate water mask achieves an optical-reference agreement Precision of 0.5910, Recall of 0.5141, and F1 of 0.5499 over 541,242 evaluated cells (53.59% of the study AOI). The 3-day temporal gap captures pre-monsoon river discharge changes along dynamic braided bars.",
+    "july_flood_summary": "In the peak flood epoch, heavy monsoon convective cloud cover leaves only 11.83% of the study AOI (119,478 cells) evaluable under strict criteria. Within this cloud-free spatial domain, SAR exhibits a high detection sensitivity (Recall = 0.7817, F1 = 0.6010, IoU = 0.4296). However, because the evaluable pixels are strongly spatially clustered in cloud gaps, July is formally designated as PARTIALLY_EVALUABLE and must not be extrapolated as a full-scene accuracy rating."
+  },
+  "output_files": {
+    "maps": [
+      "data/outputs/phase4d/maps/phase4d_june10_optical_agreement_map.png",
+      "data/outputs/phase4d/maps/phase4d_july16_optical_agreement_map.png"
+    ],
+    "statistics": [
+      "data/outputs/phase4d/statistics/phase4d_confusion_matrices.csv",
+      "data/outputs/phase4d/statistics/phase4d_agreement_metrics.csv",
+      "data/outputs/phase4d/statistics/phase4d_spatial_block_statistics.csv",
+      "data/outputs/phase4d/statistics/phase4d_reference_coverage.csv",
+      "data/outputs/phase4d/statistics/phase4d_method_sensitivity.csv",
+      "data/outputs/phase4d/statistics/phase4d_uncertainty_statistics.csv"
+    ]
+  }
+}

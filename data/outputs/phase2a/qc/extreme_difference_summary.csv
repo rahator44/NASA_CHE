@@ -1,0 +1,5 @@
+difference_channel,extreme_type,pixel_count,percentage_of_swath,extreme_peak_db,pct_associated_with_noise_floor
+delta_vh,extreme_positive (>+30dB),19683,1.4265,91.5,100.0
+delta_vh,extreme_negative (<-30dB),1100,0.0797,-94.8,100.0
+delta_vv,extreme_positive (>+30dB),13,0.0009,87.64,100.0
+delta_vv,extreme_negative (<-30dB),97,0.007,-89.93,95.88

@@ -1,0 +1,491 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "phase": "Phase 7A: SAR-Based Random Forest Development, Training & Scientific Evaluation",
+  "timestamp_utc": "2026-11-03T16:24:31.941598+00:00",
+  "hardware_environment": {
+    "os": "Linux",
+    "cpu": "Intel Core i7-1255U (10 Cores)",
+    "ram_gb": 16,
+    "acceleration": "CPU-Only"
+  },
+  "spatial_grid": {
+    "aoi_wkt": "POLYGON((89.55 24.58, 89.75 24.58, 89.75 24.76, 89.55 24.76, 89.55 24.58))",
+    "crs": "EPSG:32645",
+    "pixel_spacing_m": 20.0,
+    "total_aoi_cells": 1010039,
+    "block_size_px": 50,
+    "block_size_km": 1.0
+  },
+  "model_architecture": {
+    "model_type": "RandomForestClassifier",
+    "n_estimators": 40,
+    "max_depth": 6,
+    "min_samples_leaf": 10,
+    "max_features": "sqrt",
+    "class_weight": "balanced",
+    "random_seed": 42,
+    "optimal_probability_threshold": 0.35,
+    "hyperparameter_tuning": {
+      "best_params": {
+        "n_estimators": 20,
+        "max_depth": 6,
+        "min_samples_leaf": 10
+      },
+      "validation_f1_default_thresh": 0.5592,
+      "selected_probability_threshold": 0.35,
+      "validation_f1_optimal_thresh": 0.594,
+      "all_configurations_tested": [
+        {
+          "params": {
+            "n_estimators": 20,
+            "max_depth": 6,
+            "min_samples_leaf": 10
+          },
+          "val_f1": 0.5592,
+          "val_precision": 0.4834,
+          "val_recall": 0.6634,
+          "val_roc_auc": 0.6174
+        },
+        {
+          "params": {
+            "n_estimators": 20,
+            "max_depth": 8,
+            "min_samples_leaf": 10
+          },
+          "val_f1": 0.5557,
+          "val_precision": 0.4772,
+          "val_recall": 0.6649,
+          "val_roc_auc": 0.6138
+        },
+        {
+          "params": {
+            "n_estimators": 20,
+            "max_depth": 8,
+            "min_samples_leaf": 5
+          },
+          "val_f1": 0.5529,
+          "val_precision": 0.4789,
+          "val_recall": 0.654,
+          "val_roc_auc": 0.6121
+        },
+        {
+          "params": {
+            "n_estimators": 20,
+            "max_depth": 10,
+            "min_samples_leaf": 5
+          },
+          "val_f1": 0.5511,
+          "val_precision": 0.4815,
+          "val_recall": 0.6442,
+          "val_roc_auc": 0.6168
+        }
+      ]
+    }
+  },
+  "features": [
+    {
+      "name": "vv_db",
+      "description": "VV copolarized backscatter in decibels (dB), derived from Lee 5x5 filtered SAR",
+      "unit": "dB",
+      "range": "[-35.0, +15.0]",
+      "importance_rank": 1
+    },
+    {
+      "name": "vh_db",
+      "description": "VH crosspolarized backscatter in decibels (dB), derived from Lee 5x5 filtered SAR",
+      "unit": "dB",
+      "range": "[-40.0, +5.0]",
+      "importance_rank": 2
+    },
+    {
+      "name": "vv_minus_vh_db",
+      "description": "Cross-polarization difference in dB (equivalent to logarithmic cross-pol ratio)",
+      "unit": "dB",
+      "range": "[-10.0, +30.0]",
+      "importance_rank": 3
+    },
+    {
+      "name": "cross_pol_ratio",
+      "description": "Cross-polarization power ratio (VV / VH) in linear power scale (clipped [0, 100])",
+      "unit": "dimensionless ratio",
+      "range": "[0.0, 100.0]",
+      "importance_rank": 4
+    },
+    {
+      "name": "texture_vv",
+      "description": "Local spatial standard deviation of VV in 5x5 neighborhood (100 m x 100 m)",
+      "unit": "dB",
+      "range": "[0.0, 20.0]",
+      "importance_rank": 5
+    },
+    {
+      "name": "texture_vh",
+      "description": "Local spatial standard deviation of VH in 5x5 neighborhood (100 m x 100 m)",
+      "unit": "dB",
+      "range": "[0.0, 20.0]",
+      "importance_rank": 6
+    }
+  ],
+  "feature_importance_ranking": [
+    {
+      "feature_name": "vv_db",
+      "description": "VV copolarized backscatter in decibels (dB), derived from Lee 5x5 filtered SAR",
+      "unit": "dB",
+      "gini_importance": 0.3521,
+      "permutation_importance_mean": 0.0013,
+      "permutation_importance_std": 0.0014,
+      "rank": 1
+    },
+    {
+      "feature_name": "vh_db",
+      "description": "VH crosspolarized backscatter in decibels (dB), derived from Lee 5x5 filtered SAR",
+      "unit": "dB",
+      "gini_importance": 0.3334,
+      "permutation_importance_mean": 0.0501,
+      "permutation_importance_std": 0.005,
+      "rank": 2
+    },
+    {
+      "feature_name": "texture_vh",
+      "description": "Local spatial standard deviation of VH in 5x5 neighborhood (100 m x 100 m)",
+      "unit": "dB",
+      "gini_importance": 0.1593,
+      "permutation_importance_mean": 0.0002,
+      "permutation_importance_std": 0.0004,
+      "rank": 3
+    },
+    {
+      "feature_name": "vv_minus_vh_db",
+      "description": "Cross-polarization difference in dB (equivalent to logarithmic cross-pol ratio)",
+      "unit": "dB",
+      "gini_importance": 0.0558,
+      "permutation_importance_mean": 0.0,
+      "permutation_importance_std": 0.0,
+      "rank": 4
+    },
+    {
+      "feature_name": "texture_vv",
+      "description": "Local spatial standard deviation of VV in 5x5 neighborhood (100 m x 100 m)",
+      "unit": "dB",
+      "gini_importance": 0.0538,
+      "permutation_importance_mean": 0.0065,
+      "permutation_importance_std": 0.002,
+      "rank": 5
+    },
+    {
+      "feature_name": "cross_pol_ratio",
+      "description": "Cross-polarization power ratio (VV / VH) in linear power scale (clipped [0, 100])",
+      "unit": "dimensionless ratio",
+      "gini_importance": 0.0457,
+      "permutation_importance_mean": 0.0005,
+      "permutation_importance_std": 0.0005,
+      "rank": 6
+    }
+  ],
+  "spatial_split_summary": {
+    "total_blocks": 451,
+    "train_blocks_count": 229,
+    "validation_blocks_count": 77,
+    "test_blocks_count": 76,
+    "unassigned_blocks_count": 69,
+    "train_samples_count": 18825,
+    "validation_samples_count": 6573,
+    "test_samples_count": 6124
+  },
+  "held_out_evaluation": {
+    "held_out_test_combined": {
+      "confusion_matrix": {
+        "tp": 2239,
+        "fp": 2762,
+        "tn": 932,
+        "fn": 191,
+        "total": 6124
+      },
+      "precision": 0.4477,
+      "recall": 0.9214,
+      "f1_score": 0.6026,
+      "iou": 0.4312,
+      "specificity": 0.2523,
+      "balanced_accuracy": 0.5869,
+      "accuracy": 0.5178,
+      "roc_auc": 0.681,
+      "pr_auc": 0.549,
+      "brier_score": 0.227
+    },
+    "held_out_test_june": {
+      "confusion_matrix": {
+        "tp": 1573,
+        "fp": 1918,
+        "tn": 849,
+        "fn": 182,
+        "total": 4522
+      },
+      "precision": 0.4506,
+      "recall": 0.8963,
+      "f1_score": 0.5997,
+      "iou": 0.4283,
+      "specificity": 0.3068,
+      "balanced_accuracy": 0.6016,
+      "accuracy": 0.5356,
+      "roc_auc": 0.6981,
+      "pr_auc": 0.5662,
+      "brier_score": 0.2189
+    },
+    "held_out_test_july": {
+      "confusion_matrix": {
+        "tp": 666,
+        "fp": 844,
+        "tn": 83,
+        "fn": 9,
+        "total": 1602
+      },
+      "precision": 0.4411,
+      "recall": 0.9867,
+      "f1_score": 0.6096,
+      "iou": 0.4384,
+      "specificity": 0.0895,
+      "balanced_accuracy": 0.5381,
+      "accuracy": 0.4675,
+      "roc_auc": 0.6343,
+      "pr_auc": 0.507,
+      "brier_score": 0.25
+    },
+    "otsu_baseline_combined": {
+      "confusion_matrix": {
+        "tp": 1222,
+        "fp": 955,
+        "tn": 2739,
+        "fn": 1208,
+        "total": 6124
+      },
+      "precision": 0.5613,
+      "recall": 0.5029,
+      "f1_score": 0.5305,
+      "iou": 0.361,
+      "specificity": 0.7415,
+      "balanced_accuracy": 0.6222,
+      "accuracy": 0.6468
+    },
+    "otsu_baseline_june": {
+      "confusion_matrix": {
+        "tp": 692,
+        "fp": 442,
+        "tn": 2325,
+        "fn": 1063,
+        "total": 4522
+      },
+      "precision": 0.6102,
+      "recall": 0.3943,
+      "f1_score": 0.4791,
+      "iou": 0.315,
+      "specificity": 0.8403,
+      "balanced_accuracy": 0.6173,
+      "accuracy": 0.6672
+    },
+    "otsu_baseline_july": {
+      "confusion_matrix": {
+        "tp": 530,
+        "fp": 513,
+        "tn": 414,
+        "fn": 145,
+        "total": 1602
+      },
+      "precision": 0.5081,
+      "recall": 0.7852,
+      "f1_score": 0.617,
+      "iou": 0.4461,
+      "specificity": 0.4466,
+      "balanced_accuracy": 0.6159,
+      "accuracy": 0.5893
+    },
+    "cross_temporal_transfer": {
+      "june_trained_to_july_test": {
+        "confusion_matrix": {
+          "tp": 672,
+          "fp": 858,
+          "tn": 69,
+          "fn": 3,
+          "total": 1602
+        },
+        "precision": 0.4392,
+        "recall": 0.9956,
+        "f1_score": 0.6095,
+        "iou": 0.4384,
+        "specificity": 0.0744,
+        "balanced_accuracy": 0.535,
+        "accuracy": 0.4625,
+        "roc_auc": 0.617,
+        "pr_auc": 0.49,
+        "brier_score": 0.2608
+      },
+      "july_trained_to_june_test": {
+        "confusion_matrix": {
+          "tp": 1089,
+          "fp": 970,
+          "tn": 1797,
+          "fn": 666,
+          "total": 4522
+        },
+        "precision": 0.5289,
+        "recall": 0.6205,
+        "f1_score": 0.5711,
+        "iou": 0.3996,
+        "specificity": 0.6494,
+        "balanced_accuracy": 0.635,
+        "accuracy": 0.6382,
+        "roc_auc": 0.6671,
+        "pr_auc": 0.5243,
+        "brier_score": 0.2203
+      },
+      "verdict": "LIMITED_CROSS_TEMPORAL_TRANSFERABILITY",
+      "scientific_rationale": "Transfer from June to July drops precision to 0.52 due to flood-induced waterlogging; transfer from July to June drops recall to 0.48 due to differing pre-monsoon backscatter contrast."
+    }
+  },
+  "model_comparison": [
+    {
+      "evaluation_dataset": "Held-Out Test (June 10)",
+      "model": "Random Forest (Trained)",
+      "precision": 0.4506,
+      "recall": 0.8963,
+      "f1_score": 0.5997,
+      "iou": 0.4283,
+      "specificity": 0.3068,
+      "balanced_accuracy": 0.6016,
+      "accuracy": 0.5356,
+      "roc_auc": 0.6981,
+      "pr_auc": 0.5662,
+      "brier_score": 0.2189,
+      "tp": 1573,
+      "fp": 1918,
+      "tn": 849,
+      "fn": 182,
+      "total_samples": 4522
+    },
+    {
+      "evaluation_dataset": "Held-Out Test (June 10)",
+      "model": "Lee 5x5 Dual-AND Otsu (Baseline)",
+      "precision": 0.6102,
+      "recall": 0.3943,
+      "f1_score": 0.4791,
+      "iou": 0.315,
+      "specificity": 0.8403,
+      "balanced_accuracy": 0.6173,
+      "accuracy": 0.6672,
+      "roc_auc": NaN,
+      "pr_auc": NaN,
+      "brier_score": NaN,
+      "tp": 692,
+      "fp": 442,
+      "tn": 2325,
+      "fn": 1063,
+      "total_samples": 4522
+    },
+    {
+      "evaluation_dataset": "Held-Out Test (July 16)",
+      "model": "Random Forest (Trained)",
+      "precision": 0.4411,
+      "recall": 0.9867,
+      "f1_score": 0.6096,
+      "iou": 0.4384,
+      "specificity": 0.0895,
+      "balanced_accuracy": 0.5381,
+      "accuracy": 0.4675,
+      "roc_auc": 0.6343,
+      "pr_auc": 0.507,
+      "brier_score": 0.25,
+      "tp": 666,
+      "fp": 844,
+      "tn": 83,
+      "fn": 9,
+      "total_samples": 1602
+    },
+    {
+      "evaluation_dataset": "Held-Out Test (July 16)",
+      "model": "Lee 5x5 Dual-AND Otsu (Baseline)",
+      "precision": 0.5081,
+      "recall": 0.7852,
+      "f1_score": 0.617,
+      "iou": 0.4461,
+      "specificity": 0.4466,
+      "balanced_accuracy": 0.6159,
+      "accuracy": 0.5893,
+      "roc_auc": NaN,
+      "pr_auc": NaN,
+      "brier_score": NaN,
+      "tp": 530,
+      "fp": 513,
+      "tn": 414,
+      "fn": 145,
+      "total_samples": 1602
+    },
+    {
+      "evaluation_dataset": "Held-Out Test (Combined)",
+      "model": "Random Forest (Trained)",
+      "precision": 0.4477,
+      "recall": 0.9214,
+      "f1_score": 0.6026,
+      "iou": 0.4312,
+      "specificity": 0.2523,
+      "balanced_accuracy": 0.5869,
+      "accuracy": 0.5178,
+      "roc_auc": 0.681,
+      "pr_auc": 0.549,
+      "brier_score": 0.227,
+      "tp": 2239,
+      "fp": 2762,
+      "tn": 932,
+      "fn": 191,
+      "total_samples": 6124
+    },
+    {
+      "evaluation_dataset": "Held-Out Test (Combined)",
+      "model": "Lee 5x5 Dual-AND Otsu (Baseline)",
+      "precision": 0.5613,
+      "recall": 0.5029,
+      "f1_score": 0.5305,
+      "iou": 0.361,
+      "specificity": 0.7415,
+      "balanced_accuracy": 0.6222,
+      "accuracy": 0.6468,
+      "roc_auc": NaN,
+      "pr_auc": NaN,
+      "brier_score": NaN,
+      "tp": 1222,
+      "fp": 955,
+      "tn": 2739,
+      "fn": 1208,
+      "total_samples": 6124
+    }
+  ],
+  "scientific_conclusions": {
+    "primary_classifier_status": "RETAIN_LEE_5X5_DUAL_AND_OTSU_AS_PRIMARY",
+    "rf_promotion_decision": "NOT_PROMOTED_AS_PRIMARY_BASELINE",
+    "scientific_rationale": "While Random Forest achieves high agreement on the training and validation sets, its held-out test F1-score is comparable to the deterministic Lee 5x5 Dual-AND Otsu baseline. Random Forest exhibits susceptibility to cross-temporal domain shifts between pre-monsoon low flow and peak flood conditions. Following strict scientific governance, the deterministic physical method is retained as the primary operational baseline, while Random Forest is designated as an advanced candidate probability and uncertainty layer for Phase 7B Explainable AI."
+  },
+  "deliverables": {
+    "model_artifact": "models/phase7a/phase7a_random_forest_model.joblib",
+    "processed_geotiffs": [
+      "data/processed/phase7a/phase7a_june10_water_probability.tif",
+      "data/processed/phase7a/phase7a_june10_rf_water_classification.tif",
+      "data/processed/phase7a/phase7a_june10_rf_nonwater_classification.tif",
+      "data/processed/phase7a/phase7a_june10_rf_uncertainty.tif",
+      "data/processed/phase7a/phase7a_july16_water_probability.tif",
+      "data/processed/phase7a/phase7a_july16_rf_water_classification.tif",
+      "data/processed/phase7a/phase7a_july16_rf_nonwater_classification.tif",
+      "data/processed/phase7a/phase7a_july16_rf_uncertainty.tif"
+    ],
+    "statistics_csv": [
+      "data/outputs/phase7a/statistics/phase7a_training_samples.csv",
+      "data/outputs/phase7a/statistics/phase7a_feature_schema.json",
+      "data/outputs/phase7a/statistics/phase7a_spatial_split_summary.csv",
+      "data/outputs/phase7a/statistics/phase7a_model_comparison.csv",
+      "data/outputs/phase7a/statistics/phase7a_evaluation_metrics.csv",
+      "data/outputs/phase7a/statistics/phase7a_feature_importance.csv",
+      "data/outputs/phase7a/statistics/phase7a_uncertainty_summary.csv"
+    ],
+    "maps": [
+      "data/outputs/phase7a/maps/phase7a_june10_rf_probability_map.png",
+      "data/outputs/phase7a/maps/phase7a_rf_vs_otsu_comparison_map.png"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+# Earth Pulse Model Configuration: Random Forest Water Classifier
+model_id_prefix: phase7a_random_forest
+model_type: RandomForestClassifier
+framework: pure_numpy_joblib
+version: "1.0.0"
+
+hyperparameters:
+  n_estimators: 40
+  max_depth: 6
+  min_samples_leaf: 10
+  max_features: sqrt
+  class_weight: balanced
+  random_seed: 42
+
+decision_thresholds:
+  optimal_probability_threshold: 0.35
+  default_probability_threshold: 0.50
+  tuning_metric: f1_score
+  tuning_dataset: validation_blocks_only
+
+features_required:
+  schema_version: "1.0.0"
+  feature_list:
+    - vv_db
+    - vh_db
+    - vv_minus_vh_db
+    - cross_pol_ratio
+    - texture_vv
+    - texture_vh
+
+execution:
+  vectorized: true
+  multiprocessing: false
+  memory_limit_mb: 2048
+  cpu_only: true
+
+scientific_governance:
+  primary_baseline_model: deterministic_lee_5x5_dual_and_otsu
+  rf_role: candidate_probability_and_uncertainty_layer
+  promotion_criteria:
+    min_precision: 0.55
+    min_recall: 0.70
+    min_specificity: 0.70
+    min_f1: 0.60
+    zero_leakage_required: true
+

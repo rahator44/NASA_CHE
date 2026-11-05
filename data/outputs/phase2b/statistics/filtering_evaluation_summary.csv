@@ -1,0 +1,5 @@
+acquisition,polarization,unfiltered_enl,lee_3x3_enl,lee_5x5_enl,enl_gain_3x3,enl_gain_5x5,variance_reduction_3x3_pct,variance_reduction_5x5_pct,mean_drift_3x3_pct,mean_drift_5x5_pct,median_drift_3x3_pct,median_drift_5x5_pct,clipping_floor_preserved,nodata_zero_bleed
+June 10,VH,6.21,26.08,61.54,4.20x,9.91x,75.95%,89.24%,-0.9717%,-0.4653%,+12.7953%,+16.4688%,True,True
+June 10,VV,7.35,30.13,70.20,4.10x,9.55x,75.52%,89.00%,-1.0040%,-0.2772%,+10.4580%,+13.1251%,True,True
+July 16,VH,10.79,37.67,88.51,3.49x,8.20x,70.80%,86.56%,-1.4473%,-0.9790%,+13.0567%,+17.9275%,True,True
+July 16,VV,11.77,37.24,71.43,3.16x,6.07x,68.30%,83.73%,-1.3855%,-0.6448%,+12.0131%,+16.1333%,True,True

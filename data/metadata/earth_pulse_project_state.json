@@ -1,0 +1,927 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "system": "Earth Pulse",
+  "handoff_date": "2026-11-03",
+  "current_phase_completed": "Phase 6.2 (Displacement Uncertainty, Statistical Confidence & Final Scientific Readiness Audit) / Phase 7B.1 (Tree Explainability Mathematical Verification & Model Integrity Audit) / Phase 8 (Backend API, Scientific Data Services & Application Foundation)",
+  "next_phase_planned": "Phase 7 (Random Forest and Explainable AI)",
+  "hardware_environment": {
+    "os": "Linux",
+    "cpu": "Intel Core i7-1255U (12th Gen, 10 cores)",
+    "ram_gb": 16,
+    "acceleration": "CPU-only"
+  },
+  "software_stack": {
+    "gdal_version": "3.8.4",
+    "python_packages": [
+      "osgeo.gdal",
+      "numpy",
+      "scipy",
+      "matplotlib",
+      "pytest"
+    ],
+    "preprocessing_suite": "ESA SNAP 14.0.0"
+  },
+  "study_area": {
+    "name": "Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)",
+    "wgs84_polygon_wkt": "POLYGON((89.55 24.58, 89.75 24.58, 89.75 24.76, 89.55 24.76, 89.55 24.58))",
+    "projected_crs": "EPSG:32645",
+    "raster_dimensions": [
+      1405,
+      1393
+    ],
+    "pixel_spacing_m": 20.0
+  },
+  "verified_test_count": 315,
+  "verified_test_status": "ALL_315_TESTS_PASSING",
+  "data_inventory": {
+    "raw_zip_june10": {
+      "path": "data/raw/sentinel1/S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.zip",
+      "size_bytes": 1739698625,
+      "sha256": "91b2b46e6682bfd678371e51f625dbf35b10bd68ca970c1369a385cbfa4e6dbc",
+      "status": "VERIFIED_INTACT"
+    },
+    "raw_zip_july16": {
+      "path": "data/raw/sentinel1/S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.zip",
+      "size_bytes": 1038705942,
+      "sha256": "1b71d31b3bb9fe83426d5f832158fa6a0b0bdab935053dd1662743c35d358ab4",
+      "status": "VERIFIED_INTACT"
+    },
+    "aligned_june10": {
+      "path": "data/processed/aligned/june10_aligned.tif",
+      "size_bytes": 9410940,
+      "sha256": "c54f97e0a24b20574f38c786ac82e38855c266a5842c7f099d980d6b239f9252",
+      "status": "VERIFIED_INTACT"
+    },
+    "aligned_july16": {
+      "path": "data/processed/aligned/july16_aligned.tif",
+      "size_bytes": 9283566,
+      "sha256": "7b441b2a8a816dcc35b1e64b828def155687658e27be357ddb2e43984099c353",
+      "status": "VERIFIED_INTACT"
+    },
+    "db_june10_vh": {
+      "path": "data/processed/phase2a/june10_sigma0_vh_db.tif",
+      "size_bytes": 4320826,
+      "sha256": "c1c95ac3537840a5fef39eaa34184b0c0e20151bb06bd731d9fafa3ee2f2d76c",
+      "status": "VERIFIED_INTACT"
+    },
+    "db_june10_vv": {
+      "path": "data/processed/phase2a/june10_sigma0_vv_db.tif",
+      "size_bytes": 4571642,
+      "sha256": "c5256db594a8cf49976fde20bdf65582153ea118939fa835b162dbb5f3ced8f4",
+      "status": "VERIFIED_INTACT"
+    },
+    "db_july16_vh": {
+      "path": "data/processed/phase2a/july16_sigma0_vh_db.tif",
+      "size_bytes": 4301386,
+      "sha256": "0a9915cea8a25317e29d4cff6f78fcb4972bf56ebaecd06c58e406c5f839985e",
+      "status": "VERIFIED_INTACT"
+    },
+    "db_july16_vv": {
+      "path": "data/processed/phase2a/july16_sigma0_vv_db.tif",
+      "size_bytes": 4479316,
+      "sha256": "8717fb72e58828ba568552a044eb85bb562d2cac68d0c9b728ebdf3a234443c8",
+      "status": "VERIFIED_INTACT"
+    },
+    "delta_vh": {
+      "path": "data/processed/phase2a/delta_vh_db.tif",
+      "size_bytes": 4995406,
+      "sha256": "52377b47484191c3fa57aafcce0523f55fef62ef717fdcb8fee63bb19636817b",
+      "status": "VERIFIED_INTACT"
+    },
+    "delta_vv": {
+      "path": "data/processed/phase2a/delta_vv_db.tif",
+      "size_bytes": 4961242,
+      "sha256": "74f0f5aaa43e8f3ef754e9eb9441e72c9ad22c6524da52b88c0b552cc901ef87",
+      "status": "VERIFIED_INTACT"
+    },
+    "quality_mask_june10": {
+      "path": "data/processed/phase2b/quality_mask/june10_quality_mask.tif",
+      "size_bytes": 57918,
+      "sha256": "441e4c1bf6ec343f268077d3dcee6968822fed741857c266bde315a0610f480c",
+      "status": "VERIFIED_INTACT"
+    },
+    "quality_mask_july16": {
+      "path": "data/processed/phase2b/quality_mask/july16_quality_mask.tif",
+      "size_bytes": 36412,
+      "sha256": "bd83f9feef19f3cde7b6c29c1e951a0978864eba9823247ccbaa0b63be7b3a36",
+      "status": "VERIFIED_INTACT"
+    },
+    "lee_3x3_june10": {
+      "path": "data/processed/phase2b/lee_3x3/june10_lee_3x3.tif",
+      "size_bytes": 20430254,
+      "sha256": "6e922082fb6838d783e1449b2aa13df922056abe670d41865d1431d254c64f12",
+      "status": "VERIFIED_INTACT"
+    },
+    "lee_3x3_july16": {
+      "path": "data/processed/phase2b/lee_3x3/july16_lee_3x3.tif",
+      "size_bytes": 20668700,
+      "sha256": "bbd91a0655267d7877e92d8324199fba69c88d653f21a6e0edde06a3f68fcb65",
+      "status": "VERIFIED_INTACT"
+    },
+    "lee_5x5_june10": {
+      "path": "data/processed/phase2b/lee_5x5/june10_lee_5x5.tif",
+      "size_bytes": 20325358,
+      "sha256": "1479ce3fdb415b253a940f1a0babaac552cb079c279abc785007ed9c6deb5215",
+      "status": "VERIFIED_INTACT"
+    },
+    "lee_5x5_july16": {
+      "path": "data/processed/phase2b/lee_5x5/july16_lee_5x5.tif",
+      "size_bytes": 20622122,
+      "sha256": "933c39c844cc84260d33fc67c452d3cab38e001b8be4d4b77c7b10c7858aa140",
+      "status": "VERIFIED_INTACT"
+    },
+    "candidate_mask_june10_lee_5x5": {
+      "path": "data/processed/phase3a_qc/candidate_masks/june10_lee_5x5_otsu_dual_and_qc.tif",
+      "size_bytes": 62159,
+      "sha256": "5af1b999317a3d461084d61b455849cbd73df67d040d5e38fa23dfbecbbe8b7a",
+      "status": "VERIFIED_INTACT"
+    },
+    "candidate_mask_july16_lee_5x5": {
+      "path": "data/processed/phase3a_qc/candidate_masks/july16_lee_5x5_otsu_dual_and_qc.tif",
+      "size_bytes": 60483,
+      "sha256": "e66b798c3670606fc56985ea76db9975768ac71962c7a2ea541f4b0f2a83c8df",
+      "status": "VERIFIED_INTACT"
+    },
+    "raw_optical_zip_june07": {
+      "path": "data/reference/optical/sentinel2/June_2024/S2A_MSIL2A_20240607T043711_N0510_R033_T45RYH_20240607T091101.SAFE.zip",
+      "size_bytes": 1107390958,
+      "sha256": "e4d9ecd24029af5f370fb994c4676370ea5a2a208995edc625feb4db34b53192",
+      "status": "VERIFIED_INTACT"
+    },
+    "raw_optical_zip_july17": {
+      "path": "data/reference/optical/sentinel2/July_2024/S2A_MSIL2A_20240717T043701_N0510_R033_T45RYH_20240717T145054.SAFE.zip",
+      "size_bytes": 1134551476,
+      "sha256": "705d2d667e5fe7693e8b5a818eb4ba232baed7bac4be9403645eb2d4437bead4",
+      "status": "VERIFIED_INTACT"
+    },
+    "aligned_optical_scl_june07": {
+      "path": "data/processed/reference/optical/sentinel2/june_2024/s2_june07_aligned_scl.tif",
+      "size_bytes": 1959211,
+      "sha256": "f1f7cfeb1a32279a4f417d0d563719878cf051e538bfc7063d5bbcd1604d3f37",
+      "status": "VERIFIED_INTACT"
+    },
+    "aligned_optical_scl_july17": {
+      "path": "data/processed/reference/optical/sentinel2/july_2024/s2_july17_aligned_scl.tif",
+      "size_bytes": 1959211,
+      "sha256": "866636a211803e8c95d9b775611a0accc7946e888ab845b5a1f26da5c98509d3",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d_validation_map_june": {
+      "path": "data/outputs/phase4d/maps/phase4d_june10_optical_agreement_map.png",
+      "size_bytes": 837620,
+      "sha256": "388cb4a0a0404f3d08f82ce866e9253c34c7885b8c42c75872f616cb70d1219f",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d_validation_map_july": {
+      "path": "data/outputs/phase4d/maps/phase4d_july16_optical_agreement_map.png",
+      "size_bytes": 615478,
+      "sha256": "535a87b0db781b9a501380f62410ddac766160f9bd64823451dc8c4db1ffcde9",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d_confusion_matrices_csv": {
+      "path": "data/outputs/phase4d/statistics/phase4d_confusion_matrices.csv",
+      "size_bytes": 586,
+      "sha256": "eeb994e513d07c67b32d5069b3365ac403e45ca3b352e055883235714930fef2",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d_agreement_metrics_csv": {
+      "path": "data/outputs/phase4d/statistics/phase4d_agreement_metrics.csv",
+      "size_bytes": 638,
+      "sha256": "439ebb1349ed51a93fcf812a2e854cfb66f5ca9d2c0e7fc5916ae26c9218bcea",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d_spatial_block_statistics_csv": {
+      "path": "data/outputs/phase4d/statistics/phase4d_spatial_block_statistics.csv",
+      "size_bytes": 63936,
+      "sha256": "6d8d86c55fa4f4afc3c37194554bc0a2b2d64dcb75b8598b77d4266565052635",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d_reference_coverage_csv": {
+      "path": "data/outputs/phase4d/statistics/phase4d_reference_coverage.csv",
+      "size_bytes": 525,
+      "sha256": "836c578aa17cd37a4654edb79599a6464bf290b2af0e8cdb2ba2a4a04322ccb4",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d_method_sensitivity_csv": {
+      "path": "data/outputs/phase4d/statistics/phase4d_method_sensitivity.csv",
+      "size_bytes": 2152,
+      "sha256": "206bb36bdfb90d8e263cfc65787ec5f19022a4613f774ffa8c614a5b79d00f67",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d_uncertainty_statistics_csv": {
+      "path": "data/outputs/phase4d/statistics/phase4d_uncertainty_statistics.csv",
+      "size_bytes": 1043,
+      "sha256": "4ff5cff030abf83ec6731b97191c0c6a27ca7f423983aef5b8a0f55756b18400",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d_metadata_json": {
+      "path": "data/metadata/phase4d_independent_reference_validation.json",
+      "size_bytes": 16753,
+      "sha256": "5841e0e56395934bded42f12716f5414f611e951b9cffd064da733e97eaf0711",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_validation_map_june": {
+      "path": "data/outputs/phase4d1/maps/phase4d1_june10_optical_agreement_map.png",
+      "size_bytes": 991356,
+      "sha256": "78b3015eda9a2efa0a85a5e75cc8392c2e925b86c046cf9523675de6af96bdbc",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_validation_map_july": {
+      "path": "data/outputs/phase4d1/maps/phase4d1_july16_optical_agreement_map.png",
+      "size_bytes": 754905,
+      "sha256": "da15dce5bdf158bf89d9ad63942dab86f1408e23e28eae9f219434c412596c02",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_confusion_matrices_csv": {
+      "path": "data/outputs/phase4d1/statistics/phase4d1_confusion_matrices.csv",
+      "size_bytes": 788,
+      "sha256": "ac331e53b43ced290dd90f94b9393e8ed49f33c98ecb3b5148a293838e6964d4",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_agreement_metrics_csv": {
+      "path": "data/outputs/phase4d1/statistics/phase4d1_agreement_metrics.csv",
+      "size_bytes": 638,
+      "sha256": "439ebb1349ed51a93fcf812a2e854cfb66f5ca9d2c0e7fc5916ae26c9218bcea",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_scl_crosstabulation_csv": {
+      "path": "data/outputs/phase4d1/statistics/phase4d1_scl_crosstabulation.csv",
+      "size_bytes": 1682,
+      "sha256": "1f3e5e024c8667ebbcefa3ba9c45a41ce70fcb3947de40504e373b2adda96e05",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_spatial_block_statistics_csv": {
+      "path": "data/outputs/phase4d1/statistics/phase4d1_spatial_block_statistics.csv",
+      "size_bytes": 63936,
+      "sha256": "6d8d86c55fa4f4afc3c37194554bc0a2b2d64dcb75b8598b77d4266565052635",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_reference_coverage_csv": {
+      "path": "data/outputs/phase4d1/statistics/phase4d1_reference_coverage.csv",
+      "size_bytes": 525,
+      "sha256": "836c578aa17cd37a4654edb79599a6464bf290b2af0e8cdb2ba2a4a04322ccb4",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_method_sensitivity_csv": {
+      "path": "data/outputs/phase4d1/statistics/phase4d1_method_sensitivity.csv",
+      "size_bytes": 2152,
+      "sha256": "206bb36bdfb90d8e263cfc65787ec5f19022a4613f774ffa8c614a5b79d00f67",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_uncertainty_statistics_csv": {
+      "path": "data/outputs/phase4d1/statistics/phase4d1_uncertainty_statistics.csv",
+      "size_bytes": 1043,
+      "sha256": "4ff5cff030abf83ec6731b97191c0c6a27ca7f423983aef5b8a0f55756b18400",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase4d1_metadata_json": {
+      "path": "data/metadata/phase4d1_reconciliation_report.json",
+      "size_bytes": 11663,
+      "sha256": "c1249cd58cd9762a2e06df77f5552f495123dd5bd9d7115b37c829a3fa733ab5",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_flood_transitions_tif": {
+      "path": "data/processed/phase5/phase5_flood_transitions.tif",
+      "size_bytes": 101530,
+      "sha256": "977d35beaadaeee15a1252e83839e6d58d577aef62e5f5ae5e0928ec832863f0",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_newly_inundated_candidate_tif": {
+      "path": "data/processed/phase5/phase5_newly_inundated_candidate.tif",
+      "size_bytes": 50137,
+      "sha256": "41089f2527103aa3c286f2069e0a769beefc95821cb36b65ac17c99d0ec0a1d7",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_receded_water_tif": {
+      "path": "data/processed/phase5/phase5_receded_water.tif",
+      "size_bytes": 7329,
+      "sha256": "309025def4e12c42ee4263c993f60b79635d6c88007ef9df064684a24b62280d",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_persistent_water_tif": {
+      "path": "data/processed/phase5/phase5_persistent_water.tif",
+      "size_bytes": 42428,
+      "sha256": "ff36ef0cbe49af63ce0f173176f5c4d088f88348042b9c86b88afb52880494e9",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_persistent_non_water_tif": {
+      "path": "data/processed/phase5/phase5_persistent_non_water.tif",
+      "size_bytes": 40858,
+      "sha256": "64a13d924b18f09b8846efb243d8c0de2a14810ebb301f14abe990633a175596",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_indeterminate_mask_tif": {
+      "path": "data/processed/phase5/phase5_indeterminate_mask.tif",
+      "size_bytes": 25448,
+      "sha256": "1d1fd4d373553e254bdcb93e711e35320126965884187824db3578bc794ca96e",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_major_inundation_clusters_geojson": {
+      "path": "data/processed/phase5/phase5_major_inundation_clusters.geojson",
+      "size_bytes": 2533493,
+      "sha256": "d57c07e4d6daf8a9dae76ef63d05b4c643a0fac4a7896781cb1b3103d722c9ac",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_flood_transitions_map_png": {
+      "path": "data/outputs/phase5/maps/phase5_flood_transitions_map.png",
+      "size_bytes": 929790,
+      "sha256": "312c001edddd3d6ae20d64a093766857bfa3a29146bca6b707521cd0264457b5",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_inundation_cluster_map_png": {
+      "path": "data/outputs/phase5/maps/phase5_inundation_cluster_map.png",
+      "size_bytes": 245146,
+      "sha256": "a0a19bf7e16e7a49c2c255648cd1e28fb97f3ebed36d3f8e6a86709af1b0929f",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_transition_matrix_csv": {
+      "path": "data/outputs/phase5/statistics/phase5_transition_matrix.csv",
+      "size_bytes": 517,
+      "sha256": "c85a9c8c0f7474eb5991b4000d45f7c0eab9890657b7bf83df3767c028726ee1",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_inundation_area_summary_csv": {
+      "path": "data/outputs/phase5/statistics/phase5_inundation_area_summary.csv",
+      "size_bytes": 545,
+      "sha256": "15040a602dc23aebeb86e30894d1cf19666661d53a13f70e958e1b31b3313f56",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_epoch_water_area_csv": {
+      "path": "data/outputs/phase5/statistics/phase5_epoch_water_area.csv",
+      "size_bytes": 284,
+      "sha256": "8031982349cd5ac13c9b3df4593da4020eee7aa445dafe517c5d3da084ceec56",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_cluster_statistics_csv": {
+      "path": "data/outputs/phase5/statistics/phase5_cluster_statistics.csv",
+      "size_bytes": 24735,
+      "sha256": "220c6bdcd5dbceba3a49623ce1b0b0c0be43b645f31e1216963175ae748b59b1",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_uncertainty_summary_csv": {
+      "path": "data/outputs/phase5/statistics/phase5_uncertainty_summary.csv",
+      "size_bytes": 782,
+      "sha256": "8aaab2df4bd249c9f03f57f3c31d3600586f781b9ba79b5c343275293d6949d9",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_exclusion_summary_csv": {
+      "path": "data/outputs/phase5/statistics/phase5_exclusion_summary.csv",
+      "size_bytes": 285,
+      "sha256": "ae6e9f29f7fb6c8df5a458a78c5aa077ccbbe864290ba98fd39ff6ab4e13b191",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase5_flood_change_report_json": {
+      "path": "data/metadata/phase5_flood_change_report.json",
+      "size_bytes": 11790,
+      "sha256": "33bd5fb28b6a78fbaf4a425bb1689eaf6074169af109a42f77d95a3cb5ec18ff",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_channel_change_zones_tif": {
+      "path": "data/processed/phase6/phase6_channel_change_zones.tif",
+      "size_bytes": 92767,
+      "sha256": "52e1e22d22f0f5dfa9c2936fe8c18b098a6947835c53ecba36fa214d11a8625e",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_external_bank_erosion_candidate_tif": {
+      "path": "data/processed/phase6/phase6_external_bank_erosion_candidate.tif",
+      "size_bytes": 29672,
+      "sha256": "0ca97d9653a85bfc36123965e7a38f8b4d946aeb95f58d21c00d989181f53324",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_internal_char_submergence_tif": {
+      "path": "data/processed/phase6/phase6_internal_char_submergence.tif",
+      "size_bytes": 33384,
+      "sha256": "a66b67c86375308f60598f116836fc3105114705c1d2f9a62d60e25d01ece8f3",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_channel_contraction_accretion_tif": {
+      "path": "data/processed/phase6/phase6_channel_contraction_accretion.tif",
+      "size_bytes": 17506,
+      "sha256": "ccaab787b10303303842f4ab8f702a776b55a177f6a187d43f2fa062229f91a6",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_channel_belt_june_tif": {
+      "path": "data/processed/phase6/phase6_channel_belt_june.tif",
+      "size_bytes": 24769,
+      "sha256": "b3105504d230199f6667200fa8cb8cbb10f67e20f7e82ff4c62d5d1e3094c9b4",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_channel_belt_july_tif": {
+      "path": "data/processed/phase6/phase6_channel_belt_july.tif",
+      "size_bytes": 25237,
+      "sha256": "74c35215f2594c93272b1146a0e0435f21173c48287fb4409824a14db594452c",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_disconnected_floodplain_inundation_tif": {
+      "path": "data/processed/phase6/phase6_disconnected_floodplain_inundation.tif",
+      "size_bytes": 30038,
+      "sha256": "31b34f9894bf287e31e1a354a4468653b1e88ec4fe80831ed338519324e6f730",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_riverbank_transects_geojson": {
+      "path": "data/processed/phase6/phase6_riverbank_transects.geojson",
+      "size_bytes": 105518,
+      "sha256": "07a9ed13df5a7c6124fef2c35b762a12d1b8ae1bbe38e337b7c6e6d3b08a5692",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_provisional_centerline_geojson": {
+      "path": "data/processed/phase6/phase6_provisional_centerline.geojson",
+      "size_bytes": 86742,
+      "sha256": "0db330c49d9f864dde4130b5da4ab56df439b9244079718d1fd131ad2224c9e6",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_channel_margin_displacement_map_png": {
+      "path": "data/outputs/phase6/maps/phase6_channel_margin_displacement_map.png",
+      "size_bytes": 4520747,
+      "sha256": "7ccbd958ed049698c01edc00cd0582e8b4330b03c0366de55493051a1791d61c",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_erosion_accretion_zones_map_png": {
+      "path": "data/outputs/phase6/maps/phase6_erosion_accretion_zones_map.png",
+      "size_bytes": 4725560,
+      "sha256": "693bfa07c665e336cfea2b27faa06965e28dac994a0490cd5a75c65d16f2ba8f",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_transect_displacement_summary_csv": {
+      "path": "data/outputs/phase6/statistics/phase6_transect_displacement_summary.csv",
+      "size_bytes": 24051,
+      "sha256": "e27f885bbe7d2dc811dcbab6e2871dca5ddebd8f7f0b31c302f64b9f584f353b",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_channel_change_zones_csv": {
+      "path": "data/outputs/phase6/statistics/phase6_channel_change_zones.csv",
+      "size_bytes": 576,
+      "sha256": "738f4c8c1093e5508757301dcc7ff815c22403940bfe47d154972fba3d6ca1f7",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_transect_sensitivity_csv": {
+      "path": "data/outputs/phase6/statistics/phase6_transect_sensitivity.csv",
+      "size_bytes": 594,
+      "sha256": "415088abaf2bd4d9717a59f4c515d18834b1683f3527d2301b9265147ad45b3a",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_bank_displacement_distribution_csv": {
+      "path": "data/outputs/phase6/statistics/phase6_bank_displacement_distribution.csv",
+      "size_bytes": 295,
+      "sha256": "7e8a8ea0cbd807a7d43fac4e4198be766788e9c9fba9caf28323cbac16e442ac",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_floodplain_vs_channel_accounting_csv": {
+      "path": "data/outputs/phase6/statistics/phase6_floodplain_vs_channel_accounting.csv",
+      "size_bytes": 446,
+      "sha256": "3473df709f92c93e93b7ee2654f000a71254dc36efb76da2591d2eef5714a3d7",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_riverbank_migration_report_json": {
+      "path": "data/metadata/phase6_riverbank_migration_report.json",
+      "size_bytes": 6465,
+      "sha256": "581eea84f6b352b4b863fe283b8294e652a2fa29427cf23717b9802463e02a0d",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_channel_change_zones_tif": {
+      "path": "data/processed/phase6_1/phase6_1_channel_change_zones.tif",
+      "size_bytes": 95366,
+      "sha256": "37eeb1fecc2b279a23c30fa5402d7bb4f30892cdf344584ef5a708f2a2130f26",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_external_bank_expansion_candidate_tif": {
+      "path": "data/processed/phase6_1/phase6_1_external_bank_expansion_candidate.tif",
+      "size_bytes": 29672,
+      "sha256": "0ca97d9653a85bfc36123965e7a38f8b4d946aeb95f58d21c00d989181f53324",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_internal_char_submergence_candidate_tif": {
+      "path": "data/processed/phase6_1/phase6_1_internal_char_submergence_candidate.tif",
+      "size_bytes": 33384,
+      "sha256": "a66b67c86375308f60598f116836fc3105114705c1d2f9a62d60e25d01ece8f3",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_apparent_channel_contraction_tif": {
+      "path": "data/processed/phase6_1/phase6_1_apparent_channel_contraction.tif",
+      "size_bytes": 17506,
+      "sha256": "ccaab787b10303303842f4ab8f702a776b55a177f6a187d43f2fa062229f91a6",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_disconnected_floodplain_inundation_tif": {
+      "path": "data/processed/phase6_1/phase6_1_disconnected_floodplain_inundation.tif",
+      "size_bytes": 30038,
+      "sha256": "31b34f9894bf287e31e1a354a4468653b1e88ec4fe80831ed338519324e6f730",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_persistent_floodplain_water_tif": {
+      "path": "data/processed/phase6_1/phase6_1_persistent_floodplain_water.tif",
+      "size_bytes": 19105,
+      "sha256": "3de519aa83845525b1d33b665e8399fcee893af421e2c475dc69ed04cb6b0beb",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_riverbank_transects_geojson": {
+      "path": "data/processed/phase6_1/phase6_1_riverbank_transects.geojson",
+      "size_bytes": 108400,
+      "sha256": "83a0b5d38e6a440a262964b50c7f0e046efe67726b1f9a6ec623e361a15440d2",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_channel_margin_displacement_map_png": {
+      "path": "data/outputs/phase6_1/maps/phase6_1_channel_margin_displacement_map.png",
+      "size_bytes": 4652101,
+      "sha256": "a430099a3f975c0fd539d633f437c803dca380f2d5c0a7c116bf0f0bc76aa677",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_erosion_submergence_zones_map_png": {
+      "path": "data/outputs/phase6_1/maps/phase6_1_erosion_submergence_zones_map.png",
+      "size_bytes": 5327978,
+      "sha256": "e66f289d9884dcfcac1e8209f5fae4b037bf700eb5b9299de0f28ed01d6a5b9a",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_phase5_phase6_crosstab_csv": {
+      "path": "data/outputs/phase6_1/statistics/phase6_1_phase5_phase6_crosstab.csv",
+      "size_bytes": 2187,
+      "sha256": "1e4b850a194fbd8b76758614495702d5db6d27a897f85b0a3f2d9a2fa67ee7f9",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_transect_geometry_audit_csv": {
+      "path": "data/outputs/phase6_1/statistics/phase6_1_transect_geometry_audit.csv",
+      "size_bytes": 694,
+      "sha256": "21a9c8da7b06b97cad2fa60fbdf3b207ae9a664da4e70cb24baa77df8ec3c975",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_transect_displacement_audit_csv": {
+      "path": "data/outputs/phase6_1/statistics/phase6_1_transect_displacement_audit.csv",
+      "size_bytes": 44912,
+      "sha256": "7788c14a0568360baec7802ab8ca363ae3050853724d4b9b590141bdd48a3715",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_channel_belt_sensitivity_csv": {
+      "path": "data/outputs/phase6_1/statistics/phase6_1_channel_belt_sensitivity.csv",
+      "size_bytes": 747,
+      "sha256": "abfc9e555b70e31bb20ae4b513cba2332491ad8d87d5995280236cd2e9b4a79f",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_area_reconciliation_csv": {
+      "path": "data/outputs/phase6_1/statistics/phase6_1_area_reconciliation.csv",
+      "size_bytes": 813,
+      "sha256": "5baa0baf3a941045eb17f3c40bb3c2ffc3db488d6068ef55c7ee495157bb607e",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_uncertainty_summary_csv": {
+      "path": "data/outputs/phase6_1/statistics/phase6_1_uncertainty_summary.csv",
+      "size_bytes": 732,
+      "sha256": "e8cec0ec4c63230122d3fe308c14e94ac27583318efe3f03058323732b121d13",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_causal_claim_audit_csv": {
+      "path": "data/outputs/phase6_1/statistics/phase6_1_causal_claim_audit.csv",
+      "size_bytes": 1801,
+      "sha256": "ab72f8450f6e2c0897e8cd84052a1741efb45237b015a9d4ab02b5988265de83",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_1_riverbank_audit_report_json": {
+      "path": "data/metadata/phase6_1_riverbank_audit_report.json",
+      "size_bytes": 8641,
+      "sha256": "1a57fd28a27f779982d8b0230996d8ecc10d02bf77d86b8addb5c97f09e87848",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_2_uncertainty_budget_csv": {
+      "path": "data/outputs/phase6_2/statistics/phase6_2_uncertainty_budget.csv",
+      "size_bytes": 3221,
+      "sha256": "b9d48f6fd7d0ba1ddc3beb0a56b5c84e3de8f35936b4f8b6e6a341272f1a7f17",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_2_bank_displacement_statistics_csv": {
+      "path": "data/outputs/phase6_2/statistics/phase6_2_bank_displacement_statistics.csv",
+      "size_bytes": 896,
+      "sha256": "d52f0c1876342cd67946b5c8482b318602e788851e90936ab71b466a9abd3304",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_2_spatial_bootstrap_intervals_csv": {
+      "path": "data/outputs/phase6_2/statistics/phase6_2_spatial_bootstrap_intervals.csv",
+      "size_bytes": 1367,
+      "sha256": "84ae0eea6ad02af8e3742cb77efdfef9c6cb7041a9454e015a043634b9df5934",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_2_detection_threshold_assessment_csv": {
+      "path": "data/outputs/phase6_2/statistics/phase6_2_detection_threshold_assessment.csv",
+      "size_bytes": 1932,
+      "sha256": "9ffb81ebbbb1ab2af1e91fa8c6e3a1857e51b6d3a7beebfc3a6abd3f136865ff",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_2_sampling_sensitivity_audit_csv": {
+      "path": "data/outputs/phase6_2/statistics/phase6_2_sampling_sensitivity_audit.csv",
+      "size_bytes": 1797,
+      "sha256": "1251488d88026844fa7a03ba56e894d15fb71b2d104ed114ed873218272e96d0",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_2_scientific_readiness_csv": {
+      "path": "data/outputs/phase6_2/statistics/phase6_2_scientific_readiness.csv",
+      "size_bytes": 2620,
+      "sha256": "0a8eed9e74b4a62f3662f748ebe0bd389d1fa453d18166f5878e5ef09dc16739",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase6_2_uncertainty_audit_json": {
+      "path": "data/metadata/phase6_2_uncertainty_audit.json",
+      "size_bytes": 21479,
+      "sha256": "eac5460017231c441f618f6650ce00f24aee98237bfd2569d5ae9ab4625d29d6",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_model_artifact": {
+      "path": "models/phase7a/phase7a_random_forest_model.joblib",
+      "size_bytes": 103922,
+      "sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_june10_water_probability": {
+      "path": "data/processed/phase7a/phase7a_june10_water_probability.tif",
+      "size_bytes": 4428046,
+      "sha256": "53fa0662d995571e73739a3a22ed980872dbbdbee5a36d29f5d973834236cbd5",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_june10_rf_water_classification": {
+      "path": "data/processed/phase7a/phase7a_june10_rf_water_classification.tif",
+      "size_bytes": 103406,
+      "sha256": "7200d066f0b08b3244ce8422bb387eccdb34202cfc3a8f6a976f7990855ceaeb",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_june10_rf_nonwater_classification": {
+      "path": "data/processed/phase7a/phase7a_june10_rf_nonwater_classification.tif",
+      "size_bytes": 103406,
+      "sha256": "e8dbc263d0c70ad2437c7ddd2e70b55cc3234696dfbbb4a79457c1e469118305",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_june10_rf_uncertainty": {
+      "path": "data/processed/phase7a/phase7a_june10_rf_uncertainty.tif",
+      "size_bytes": 4391638,
+      "sha256": "cf4bd9b0ab34ffc8c29f1d9d73fa0dfe0476fd171d3a608cf030551a02d2d7ab",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_july16_water_probability": {
+      "path": "data/processed/phase7a/phase7a_july16_water_probability.tif",
+      "size_bytes": 4359758,
+      "sha256": "add30cd01ec7cbefe8e6858b218469cbb590b983a02e298063d3f74fb8d69885",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_july16_rf_water_classification": {
+      "path": "data/processed/phase7a/phase7a_july16_rf_water_classification.tif",
+      "size_bytes": 81504,
+      "sha256": "319e84befda9a01a718bb6abadd65251e7f1166a129b105fe35fe88950a069e5",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_july16_rf_nonwater_classification": {
+      "path": "data/processed/phase7a/phase7a_july16_rf_nonwater_classification.tif",
+      "size_bytes": 81504,
+      "sha256": "e1f39762913c1424edc442a6805a5da92c38b76f5ae5f60530f65338a357791f",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_july16_rf_uncertainty": {
+      "path": "data/processed/phase7a/phase7a_july16_rf_uncertainty.tif",
+      "size_bytes": 4322314,
+      "sha256": "ca6c330e7bf3a8c81ce5fdcbd073f91dd582ac0e750aa36068b0f208c851f132",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_training_samples_csv": {
+      "path": "data/outputs/phase7a/statistics/phase7a_training_samples.csv",
+      "size_bytes": 2681220,
+      "sha256": "61dde1ebac6a4c3eafa2bb30c4e886fbd036558479bd6fe26d974595e25a56d6",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_feature_schema_json": {
+      "path": "data/outputs/phase7a/statistics/phase7a_feature_schema.json",
+      "size_bytes": 1268,
+      "sha256": "fc859dda32dcb5abb30b5ff6eed7dde00bdb3b6233abec5157dc0bbde1707d40",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_spatial_split_summary_csv": {
+      "path": "data/outputs/phase7a/statistics/phase7a_spatial_split_summary.csv",
+      "size_bytes": 26604,
+      "sha256": "6944efdab14c62c65621fb67229a67ee98704d9b564d4d53cc13c8f468bb11c5",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_model_comparison_csv": {
+      "path": "data/outputs/phase7a/statistics/phase7a_model_comparison.csv",
+      "size_bytes": 953,
+      "sha256": "04d780142c236e2ebb0c157460aee211fb5073a5005d20c1d4d672b3be52b22e",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_evaluation_metrics_csv": {
+      "path": "data/outputs/phase7a/statistics/phase7a_evaluation_metrics.csv",
+      "size_bytes": 419,
+      "sha256": "b1d84af82a1333ca9166900b99e29c7167bdcd5381cb25403b9a47cd11f7e347",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_feature_importance_csv": {
+      "path": "data/outputs/phase7a/statistics/phase7a_feature_importance.csv",
+      "size_bytes": 815,
+      "sha256": "86f15d9e3f7ef7708d87d112cd1440848b22c820b4c8772ac6891dc12a3479cf",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_uncertainty_summary_csv": {
+      "path": "data/outputs/phase7a/statistics/phase7a_uncertainty_summary.csv",
+      "size_bytes": 160,
+      "sha256": "738fe35c569494b9b736662047d5cbd8c3947b43440de5cff78a0fb407042095",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_june10_rf_probability_map_png": {
+      "path": "data/outputs/phase7a/maps/phase7a_june10_rf_probability_map.png",
+      "size_bytes": 6098984,
+      "sha256": "1074825ea39f7341cf008cbd65563e60e2f660c8583e217dea2bd1f4c68f609b",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_rf_vs_otsu_comparison_map_png": {
+      "path": "data/outputs/phase7a/maps/phase7a_rf_vs_otsu_comparison_map.png",
+      "size_bytes": 3610293,
+      "sha256": "30cb43732a304d0cb59f007b55cc27e993489b24edd0be1ffb8742e3d9935cc3",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7a_model_report_json": {
+      "path": "data/metadata/phase7a_model_report.json",
+      "size_bytes": 14603,
+      "sha256": "21c3e44f57ef42313120ca2ae29ed26af4b40be773775b443594aaa4e42b6b3b",
+      "status": "VERIFIED_INTACT"
+    },
+    "config_jamuna_sirajganj_yaml": {
+      "path": "configs/regions/jamuna_sirajganj.yaml",
+      "size_bytes": 2603,
+      "sha256": "ae2e3ce0fd91be91366bcd0953187abf38ab104df61eac711fb481463aa52def",
+      "status": "VERIFIED_INTACT"
+    },
+    "config_sentinel1_yaml": {
+      "path": "configs/sensors/sentinel1.yaml",
+      "size_bytes": 1731,
+      "sha256": "8e8b08219888fcc055aa6a3f0eae8675b0774d1bf1ae6c6086b0b45651bab5c2",
+      "status": "VERIFIED_INTACT"
+    },
+    "config_random_forest_yaml": {
+      "path": "configs/models/random_forest.yaml",
+      "size_bytes": 1033,
+      "sha256": "9ad72cd60c05fbbb2da0437768e3bbdf00336e3fe7c653a7a049306660b7eeb1",
+      "status": "VERIFIED_INTACT"
+    },
+    "config_sar_features_yaml": {
+      "path": "configs/features/sar_features.yaml",
+      "size_bytes": 2135,
+      "sha256": "b1f30d18bf928412dec9b22b0cc940683284850f7bce3d7c5cb8e65ce742d3e2",
+      "status": "VERIFIED_INTACT"
+    },
+    "dataset_manifest_json": {
+      "path": "data/metadata/dataset_manifest.json",
+      "size_bytes": 5393,
+      "sha256": "916ee7ac90c8b7e56e51b6561ccc481e4c264c2dd1a4123371b5a2c78f98532a",
+      "status": "VERIFIED_INTACT"
+    },
+    "model_registry_json": {
+      "path": "models/model_registry.json",
+      "size_bytes": 1741,
+      "sha256": "a2576cfb56ac4d99e715747e036c06a53084fd098d3d37a4932e46cc1d93a4b4",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_explainability_report_json": {
+      "path": "data/metadata/phase7b_explainability_report.json",
+      "size_bytes": 5690,
+      "sha256": "e0426e39e3126669ca0270c6aa8832eaa14b66182254cdf7abea051056125f57",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_feature_correlation_csv": {
+      "path": "data/outputs/phase7b/shap/phase7b_feature_correlation.csv",
+      "size_bytes": 373,
+      "sha256": "07c4e37bdf92bee90c061e34565d1e570f79929b769c684136dffb5dfb3ae3b5",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_global_shap_importance_csv": {
+      "path": "data/outputs/phase7b/shap/phase7b_global_shap_importance.csv",
+      "size_bytes": 386,
+      "sha256": "9f970cc66e1001fef733e64c820de58939278c697fab0ca6195f0e1147f04a3d",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_grouped_feature_attribution_csv": {
+      "path": "data/outputs/phase7b/shap/phase7b_grouped_feature_attribution.csv",
+      "size_bytes": 364,
+      "sha256": "edc5e9507c3ce9ddfb5e6d65d64dffc732f22449b40e0bf8a6f96b4e93d7cfd7",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_local_prediction_explanations_csv": {
+      "path": "data/outputs/phase7b/local_explanations/phase7b_local_prediction_explanations.csv",
+      "size_bytes": 2303,
+      "sha256": "73ebcb72174493c0f2a5ce561e15a19d53ced5b47eb140e3ba5a40add2719c83",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_false_positive_analysis_csv": {
+      "path": "data/outputs/phase7b/diagnostics/phase7b_false_positive_analysis.csv",
+      "size_bytes": 1722,
+      "sha256": "725417a0d1cd7676ef939887e609bb896705f00bb2baa1c0b35800c8a689f0d1",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_false_negative_analysis_csv": {
+      "path": "data/outputs/phase7b/diagnostics/phase7b_false_negative_analysis.csv",
+      "size_bytes": 1193,
+      "sha256": "d77c4957e62120248af23e2d42fc75d02698565fb4a3bbf445de41c9206f9117",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_model_disagreement_summary_csv": {
+      "path": "data/outputs/phase7b/diagnostics/phase7b_model_disagreement_summary.csv",
+      "size_bytes": 315,
+      "sha256": "82b437533b7797d3620c305ef2286998f002661bf6e965d67366c874462f8d8a",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_probability_diagnostics_csv": {
+      "path": "data/outputs/phase7b/diagnostics/phase7b_probability_diagnostics.csv",
+      "size_bytes": 487,
+      "sha256": "4dda0a6ec20037b5fc4e0b68c5155806195ee2f05b7f8cc674e1d9e1f532934f",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_global_shap_beeswarm_png": {
+      "path": "data/outputs/phase7b/maps/phase7b_global_shap_beeswarm.png",
+      "size_bytes": 758435,
+      "sha256": "1c86e9a93a65b4b077e067bd01b386599b4252e4b0d7ecef4703b137e6157631",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_global_feature_importance_png": {
+      "path": "data/outputs/phase7b/maps/phase7b_global_feature_importance.png",
+      "size_bytes": 131005,
+      "sha256": "2b0cf41c3737727e32e15493895abb16a8f057e878accdf3bc379f5721e31ff0",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_polarization_dependence_png": {
+      "path": "data/outputs/phase7b/maps/phase7b_polarization_dependence.png",
+      "size_bytes": 747045,
+      "sha256": "e0688990d19667bb2f68e8e8b435150e2d90b6bf755985b7f600f83a1fd6a55f",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_texture_dependence_png": {
+      "path": "data/outputs/phase7b/maps/phase7b_texture_dependence.png",
+      "size_bytes": 617361,
+      "sha256": "9a1d42284d877a35f75f8f43182924b6b12708500b83874a162c804b975f63bd",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_local_waterfall_examples_png": {
+      "path": "data/outputs/phase7b/maps/phase7b_local_waterfall_examples.png",
+      "size_bytes": 352694,
+      "sha256": "d1e0af5b2b361de9cb9d4c0fa144214b01851db95bfc95c8ef395602ab139de7",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_false_positive_comparison_png": {
+      "path": "data/outputs/phase7b/maps/phase7b_false_positive_comparison.png",
+      "size_bytes": 163702,
+      "sha256": "29dc07abd873f40ad86a7c6ba9af7c736d3b4fd92325be35cbec823381cbc7ac",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_false_negative_comparison_png": {
+      "path": "data/outputs/phase7b/maps/phase7b_false_negative_comparison.png",
+      "size_bytes": 161939,
+      "sha256": "234b6c149250a801185c3fd71996766a50d5e509e56af32cc726505034502291",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_rf_vs_otsu_disagreement_map_png": {
+      "path": "data/outputs/phase7b/maps/phase7b_rf_vs_otsu_disagreement_map.png",
+      "size_bytes": 927985,
+      "sha256": "cee4efa1fc0a3214fa85b99fb9a08240b7042f7d48d8300dd373bf36354429c0",
+      "status": "VERIFIED_INTACT"
+    },
+    "phase7b_probability_uncertainty_map_png": {
+      "path": "data/outputs/phase7b/maps/phase7b_probability_uncertainty_map.png",
+      "size_bytes": 273111,
+      "sha256": "567b8769c25b8861e8d14908dd027addd4748f4d89b9431bdf0c744b0a2a56ca",
+      "status": "VERIFIED_INTACT"
+    }
+  },
+  "ready_for_phase5": true,
+  "phase_milestone_history": {
+    "Phase 0": "Project & Dataset Read-Only Audit (Completed)",
+    "Phase 1": "Raster Harmonization Engine (Completed, 10 tests)",
+    "Phase 2A": "Radiometric Analysis & Backscatter Characterization (Completed, 9 tests)",
+    "Phase 2A.1": "Quality Control & Noise Floor Investigation (Completed, 5 tests)",
+    "Phase 2A.2": "Scientific Calibration Corrections (Completed, 5 tests)",
+    "Phase 2B": "Adaptive Speckle Filtering Benchmark (Completed, 7 tests)",
+    "Phase 3A": "Surface-Water Classification Benchmark (Completed, 9 tests)",
+    "Phase 3A.1": "Classification QC & 4-Category Mask Fix (Completed, 7 tests)",
+    "Phase 3B": "Multi-Temporal Flood-Change Detection (Completed, 8 tests)",
+    "Phase 3B.1": "Transition Classification & NoData Fix (Completed, 8 tests)",
+    "Phase 4A": "Independent Validation Protocol (Completed, 7 tests)",
+    "Phase 4A.1": "Scientific Provenance Audit (Completed, 7 tests)",
+    "Phase 4B": "Reference Ingestion Engine & Synthetic Tests (Completed, 18 tests)",
+    "Phase 4B.1": "SCL Dark Area Correction (Completed, 13 tests)",
+    "Phase 4C.1": "Sentinel-2 Real Data Ingestion (Completed, 48 tests)",
+    "Phase 4D": "Independent Optical Validation & Agreement Assessment (Completed, 9 tests)",
+    "Phase 4D.1": "Validation Metric Reconciliation & Scientific Correction (Completed, 12 tests, 174 total tests passing)",
+    "Phase 5": "Final SAR Flood-Change Engine & Inundation Area Accounting (Completed, 18 tests, 192 total tests passing)",
+    "Phase 6": "Riverbank Migration, Channel-Margin Displacement & Erosion Analysis (Completed, 15 tests, 207 total tests passing)",
+    "Phase 6.1": "Riverbank Geometry Audit, Cross-Phase Reconciliation & Scientific Validation (Completed, 12 tests, 219 total tests passing)",
+    "Phase 6.2": "Final Displacement Uncertainty, Spatial Block Bootstrap & Readiness Audit (Completed)",
+    "Phase 7A": "SAR-Based Random Forest & Multi-Region Extensible Architecture (Completed, 30 tests, 260 total tests passing)",
+    "Phase 7B": "Explainable AI, SHAP Attribution & SAR Model Interpretability (Completed, 15 tests, 275 total tests passing)",
+    "Phase 7B.1": "Tree Explainability Mathematical Verification & Random Forest Model Integrity Audit (Completed, 16 tests, 291 total tests passing)",
+    "Phase 8": "Backend API, Scientific Data Services & Application Foundation (Completed, 24 tests, 315 total tests passing)"
+  },
+  "development_roadmap": {
+    "Phase 4D.1": "Independent optical-reference validation reconciliation (COMPLETE)",
+    "Phase 5": "SAR flood-change engine & inundation area accounting (COMPLETE)",
+    "Phase 6": "Riverbank migration analysis (COMPLETE)",
+    "Phase 6.1": "Riverbank geometry and cross-phase audit (COMPLETE)",
+    "Phase 6.2": "Final displacement uncertainty and statistical audit (COMPLETE)",
+    "Phase 7A": "SAR-Based Random Forest Development & Evaluation (COMPLETE)",
+    "Phase 7B": "Explainable AI (XAI) & Model Interpretability (COMPLETE)",
+    "Phase 7B.1": "Tree Explainability Mathematical Verification & Model Integrity Audit (COMPLETE)",
+    "Phase 7": "Random Forest and Explainable AI (PLANNED / COMPLETE: Phase 7A, 7B & 7B.1 Finished)",
+    "Phase 8": "Backend API & Scientific Data Services (PLANNED / COMPLETE: Phase 8 Backend, 24 tests, 315 total tests passing)",
+    "Phase 9": "Frontend and interactive GIS development (PLANNED)",
+    "Phase 10": "Final integration, optimization and NASA Space Apps demonstration (PLANNED)"
+  },
+  "next_major_phase_planned": "Phase 9 (Interactive Geospatial Dashboard & Web Frontend)"
+}

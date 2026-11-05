@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "audit_title": "Earth Pulse — Phase 4A.1: Scientific Provenance and Validation Assumption Audit",
+  "project": "NASA Space Apps Challenge 2026 — Dancing with the SARs",
+  "audit_timestamp_utc": "2026-11-01T11:07:00Z",
+  "study_reach": "Jamuna River, Kazipur / Sirajganj, Bangladesh",
+  "audited_components": [
+    "scripts/validate_reference_data.py",
+    "docs/PHASE4A_VALIDATION_PROTOCOL.md",
+    "data/metadata/reference_data_registry.json",
+    "data/metadata/phase4a_validation_readiness.json"
+  ],
+  "hydrological_constants_audit": [
+    {
+      "parameter": "Station SW46.9 (Sirajganj)",
+      "claimed_value": "Lat 24.45 N, Lon 89.72 E",
+      "claimed_danger_level": "13.35 m PWD",
+      "local_source_present": false,
+      "provenance_classification": "UNVERIFIED",
+      "operational_restriction": "PROHIBITED_FROM_AUTOMATIC_USE_WITHOUT_OFFICIAL_CITATION",
+      "remediation": "Requires official BWDB/FFWC station registry bulletin and water level log before use in hydraulic corroboration."
+    },
+    {
+      "parameter": "Station SW46.9A (Kazipur)",
+      "claimed_value": "Lat 24.67 N, Lon 89.65 E",
+      "claimed_danger_level": "15.25 m PWD",
+      "local_source_present": false,
+      "provenance_classification": "UNVERIFIED",
+      "operational_restriction": "PROHIBITED_FROM_AUTOMATIC_USE_WITHOUT_OFFICIAL_CITATION",
+      "remediation": "Requires official BWDB daily bulletin for Kazipur reach."
+    },
+    {
+      "parameter": "Station SW46.8 (Sariakandi)",
+      "claimed_value": "Lat 24.88 N, Lon 89.57 E",
+      "claimed_danger_level": "16.70 m PWD",
+      "local_source_present": false,
+      "provenance_classification": "UNVERIFIED",
+      "operational_restriction": "PROHIBITED_FROM_AUTOMATIC_USE_WITHOUT_OFFICIAL_CITATION",
+      "remediation": "Located north of target AOI; preliminary literature reference only."
+    },
+    {
+      "parameter": "Public Works Department (PWD) Vertical Datum",
+      "claimed_definition": "Standard national hydrological vertical datum in Bangladesh",
+      "local_source_present": false,
+      "provenance_classification": "UNVERIFIED",
+      "operational_restriction": "REQUIRES_BENCHMARK_DOCUMENTATION",
+      "remediation": "Document official Survey of Bangladesh (SoB) / BWDB datum definition."
+    },
+    {
+      "parameter": "PWD-to-MSL Conversion Offset",
+      "claimed_value": "Elevation(PWD) = Elevation(MSL) + 0.46 m (or PWD = MSL - 0.46m)",
+      "local_source_present": false,
+      "provenance_classification": "ASSUMPTION",
+      "operational_restriction": "PROHIBITED_FROM_QUANTITATIVE_CONVERSION_WITHOUT_LOCAL_SURVEY",
+      "remediation": "Geodetic datum offset varies regionally; must not be applied without explicit SoB benchmark calibration."
+    }
+  ],
+  "terrain_assumptions_audit": [
+    {
+      "assumption": "Floodplain Elevation Range (11.0 - 18.0 m PWD)",
+      "local_source_present": false,
+      "provenance_classification": "ASSUMPTION",
+      "operational_restriction": "PROHIBITED_FROM_AUTOMATIC_USE_WITHOUT_CALIBRATED_DEM",
+      "scientific_status": "Regional rule-of-thumb; not calibrated against verified in-situ or LiDAR DEM data."
+    },
+    {
+      "assumption": "Height Above Nearest Drainage (HAND) Threshold (3.0 m)",
+      "local_source_present": false,
+      "provenance_classification": "ASSUMPTION",
+      "operational_restriction": "PROHIBITED_FROM_AUTOMATIC_USE_WITHOUT_CALIBRATED_DEM",
+      "scientific_status": "Hydraulic rule-of-thumb; requires hydrodynamic drainage network calibration."
+    },
+    {
+      "assumption": "Barind Tract Pleistocene Terrace Elevation (> 25.0 m)",
+      "local_source_present": false,
+      "provenance_classification": "ASSUMPTION",
+      "operational_restriction": "PROHIBITED_FROM_AUTOMATIC_USE_WITHOUT_CALIBRATED_DEM",
+      "scientific_status": "Regional geomorphological assumption; no local elevation model present in workspace."
+    },
+    {
+      "assumption": "Radar Shadow / Layover Masking",
+      "local_source_present": false,
+      "provenance_classification": "ASSUMPTION",
+      "operational_restriction": "QUALITATIVE_NOTE_ONLY",
+      "scientific_status": "Embankments and bridges create localized micro-shadow, but quantitative masking requires a high-resolution DSM."
+    },
+    {
+      "assumption": "Copernicus GLO-30 and FABDEM Datasets",
+      "local_source_present": false,
+      "provenance_classification": "UNVERIFIED",
+      "operational_restriction": "PROPOSED_EXTERNAL_SOURCE_NOT_PRESENT",
+      "scientific_status": "Recommended external elevation models; neither dataset exists locally in the workspace."
+    }
+  ],
+  "optical_validation_protocol_audit": {
+    "band_selections": "VERIFIED_SOUND (S2: B03, B08, B11, B12, SCL; Landsat: B3, B5, B6, QA_PIXEL)",
+    "cloud_shadow_masking": "VERIFIED_SOUND (SCL classes 3, 7, 8, 9, 10, 11 and QA_PIXEL cloud bits strictly excluded)",
+    "uncertainty_tagging": "VERIFIED_SOUND (Optical cloud/shadow mapped to code 255/254 and excluded from denominator)",
+    "spatial_aggregation": "VERIFIED_SOUND (Area-weighted aggregation to 20m reference grid EPSG:32645)",
+    "cloud_availability_limitation": "EXPLICITLY_DOCUMENTED (> 85% monsoon cloud cover in June-July requires multi-day temporal windows; cloud-free imagery cannot be assumed)"
+  },
+  "validation_metrics_engine_audit": {
+    "metrics_implemented": [
+      "true_positive", "false_positive", "true_negative", "false_negative",
+      "precision", "recall", "f1_score", "intersection_over_union",
+      "specificity", "balanced_accuracy", "overall_accuracy"
+    ],
+    "zero_division_handling": "VERIFIED_AND_DOCUMENTED (Explicit class_distribution_flags report precision_undefined, recall_undefined, f1_undefined, and specificity_undefined when validation classes are missing, preventing concealment of missing classes)",
+    "exclusion_handling": "VERIFIED_SOUND (Candidate NoData 6, Candidate Indeterminate 5, Reference NoData 255, and Reference Uncertain 254 strictly excluded)",
+    "spatial_block_cross_validation": "VERIFIED_SPECIFIED (5 km x 5 km spatial blocks with 500 m halo buffers to prevent spatial autocorrelation data leakage in future ML models)"
+  },
+  "reference_data_registry_audit": {
+    "schema_file": "data/metadata/reference_data_registry.json",
+    "required_fields_enforced": [
+      "dataset_name", "category", "provider", "source_identifier", "source_url_or_citation",
+      "original_acquisition_date", "spatial_extent_wkt", "crs", "resolution", "processing_history",
+      "license_or_usage_conditions", "intended_validation_purpose", "local_file_path", "quality_information"
+    ],
+    "registered_datasets_count": 0,
+    "fabrication_detected": false
+  },
+  "anti_circular_validation_guard": {
+    "status": "ACTIVE_AND_ENFORCED",
+    "rule": "SAR-derived candidate masks cannot validate SAR-derived candidate masks",
+    "implementation": "validate_reference_dataset_provenance strictly rejects files originating from Sentinel-1 or backscatter thresholding"
+  },
+  "audit_verdict": {
+    "sar_calculations_integrity": "INTACT_AND_VERIFIED (Phases 1 through 3B.1 preserved without modification)",
+    "validation_readiness_status": "BLOCKED_REFERENCE_DATA_MISSING",
+    "unsupported_constants_remediated": "Quarantined and prohibited from automatic operational execution."
+  }
+}
+

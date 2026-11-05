@@ -1,0 +1,354 @@
+{
+  "pipeline": "Earth Pulse Phase 2A.1: Backscatter Quality Control & Anomaly Investigation",
+  "timestamp_utc": "2026-10-31T18:02:44Z",
+  "duration_seconds": 15.42,
+  "project_root": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR",
+  "low_backscatter_quantification": {
+    "june10_vh": {
+      "file": "june10_sigma0_vh_db.tif",
+      "total_valid_pixels": 1379982,
+      "total_grid_pixels": 1957165,
+      "thresholds": {
+        "below_20db": {
+          "threshold_db": -20.0,
+          "pixel_count": 338736,
+          "percentage_of_valid": 24.5464,
+          "area_km2": 135.4944
+        },
+        "below_25db": {
+          "threshold_db": -25.0,
+          "pixel_count": 228101,
+          "percentage_of_valid": 16.5293,
+          "area_km2": 91.2404
+        },
+        "below_30db": {
+          "threshold_db": -30.0,
+          "pixel_count": 121994,
+          "percentage_of_valid": 8.8403,
+          "area_km2": 48.7976
+        },
+        "below_35db": {
+          "threshold_db": -35.0,
+          "pixel_count": 65620,
+          "percentage_of_valid": 4.7551,
+          "area_km2": 26.248
+        },
+        "below_40db": {
+          "threshold_db": -40.0,
+          "pixel_count": 40428,
+          "percentage_of_valid": 2.9296,
+          "area_km2": 16.1712
+        },
+        "below_45db": {
+          "threshold_db": -45.0,
+          "pixel_count": 28531,
+          "percentage_of_valid": 2.0675,
+          "area_km2": 11.4124
+        },
+        "below_50db": {
+          "threshold_db": -50.0,
+          "pixel_count": 23042,
+          "percentage_of_valid": 1.6697,
+          "area_km2": 9.2168
+        }
+      }
+    },
+    "june10_vv": {
+      "file": "june10_sigma0_vv_db.tif",
+      "total_valid_pixels": 1379982,
+      "total_grid_pixels": 1957165,
+      "thresholds": {
+        "below_20db": {
+          "threshold_db": -20.0,
+          "pixel_count": 46899,
+          "percentage_of_valid": 3.3985,
+          "area_km2": 18.7596
+        },
+        "below_25db": {
+          "threshold_db": -25.0,
+          "pixel_count": 3619,
+          "percentage_of_valid": 0.2622,
+          "area_km2": 1.4476
+        },
+        "below_30db": {
+          "threshold_db": -30.0,
+          "pixel_count": 491,
+          "percentage_of_valid": 0.0356,
+          "area_km2": 0.1964
+        },
+        "below_35db": {
+          "threshold_db": -35.0,
+          "pixel_count": 122,
+          "percentage_of_valid": 0.0088,
+          "area_km2": 0.0488
+        },
+        "below_40db": {
+          "threshold_db": -40.0,
+          "pixel_count": 35,
+          "percentage_of_valid": 0.0025,
+          "area_km2": 0.014
+        },
+        "below_45db": {
+          "threshold_db": -45.0,
+          "pixel_count": 15,
+          "percentage_of_valid": 0.0011,
+          "area_km2": 0.006
+        },
+        "below_50db": {
+          "threshold_db": -50.0,
+          "pixel_count": 12,
+          "percentage_of_valid": 0.0009,
+          "area_km2": 0.0048
+        }
+      }
+    },
+    "july16_vh": {
+      "file": "july16_sigma0_vh_db.tif",
+      "total_valid_pixels": 1380574,
+      "total_grid_pixels": 1957165,
+      "thresholds": {
+        "below_20db": {
+          "threshold_db": -20.0,
+          "pixel_count": 568011,
+          "percentage_of_valid": 41.1431,
+          "area_km2": 227.2044
+        },
+        "below_25db": {
+          "threshold_db": -25.0,
+          "pixel_count": 417008,
+          "percentage_of_valid": 30.2054,
+          "area_km2": 166.8032
+        },
+        "below_30db": {
+          "threshold_db": -30.0,
+          "pixel_count": 177432,
+          "percentage_of_valid": 12.852,
+          "area_km2": 70.9728
+        },
+        "below_35db": {
+          "threshold_db": -35.0,
+          "pixel_count": 51682,
+          "percentage_of_valid": 3.7435,
+          "area_km2": 20.6728
+        },
+        "below_40db": {
+          "threshold_db": -40.0,
+          "pixel_count": 13440,
+          "percentage_of_valid": 0.9735,
+          "area_km2": 5.376
+        },
+        "below_45db": {
+          "threshold_db": -45.0,
+          "pixel_count": 3690,
+          "percentage_of_valid": 0.2673,
+          "area_km2": 1.476
+        },
+        "below_50db": {
+          "threshold_db": -50.0,
+          "pixel_count": 1241,
+          "percentage_of_valid": 0.0899,
+          "area_km2": 0.4964
+        }
+      }
+    },
+    "july16_vv": {
+      "file": "july16_sigma0_vv_db.tif",
+      "total_valid_pixels": 1380574,
+      "total_grid_pixels": 1957165,
+      "thresholds": {
+        "below_20db": {
+          "threshold_db": -20.0,
+          "pixel_count": 321406,
+          "percentage_of_valid": 23.2806,
+          "area_km2": 128.5624
+        },
+        "below_25db": {
+          "threshold_db": -25.0,
+          "pixel_count": 99424,
+          "percentage_of_valid": 7.2016,
+          "area_km2": 39.7696
+        },
+        "below_30db": {
+          "threshold_db": -30.0,
+          "pixel_count": 14948,
+          "percentage_of_valid": 1.0827,
+          "area_km2": 5.9792
+        },
+        "below_35db": {
+          "threshold_db": -35.0,
+          "pixel_count": 1774,
+          "percentage_of_valid": 0.1285,
+          "area_km2": 0.7096
+        },
+        "below_40db": {
+          "threshold_db": -40.0,
+          "pixel_count": 216,
+          "percentage_of_valid": 0.0156,
+          "area_km2": 0.0864
+        },
+        "below_45db": {
+          "threshold_db": -45.0,
+          "pixel_count": 30,
+          "percentage_of_valid": 0.0022,
+          "area_km2": 0.012
+        },
+        "below_50db": {
+          "threshold_db": -50.0,
+          "pixel_count": 9,
+          "percentage_of_valid": 0.0007,
+          "area_km2": 0.0036
+        }
+      }
+    }
+  },
+  "aoi_statistics": {
+    "june10_vh": {
+      "file": "june10_sigma0_vh_db.tif",
+      "aoi_valid_pixels": 1009978,
+      "mean_db": -19.900415420532227,
+      "median_db": -16.05197525024414,
+      "stddev_db": 13.219063758850098,
+      "min_db": -105.92819213867188,
+      "max_db": 13.572858810424805,
+      "percentiles": {
+        "p5": -36.10626525878906,
+        "p10": -30.355423736572263,
+        "p25": -21.756938457489014,
+        "p50": -16.05197525024414,
+        "p75": -13.808442115783691,
+        "p90": -12.084087276458739,
+        "p95": -11.035307550430298,
+        "p99": -8.791186428070077
+      }
+    },
+    "june10_vv": {
+      "file": "june10_sigma0_vv_db.tif",
+      "aoi_valid_pixels": 1009978,
+      "mean_db": -10.35827350616455,
+      "median_db": -9.322309494018555,
+      "stddev_db": 5.134932994842529,
+      "min_db": -105.84870910644531,
+      "max_db": 22.995281219482422,
+      "percentiles": {
+        "p5": -19.552282333374023,
+        "p10": -17.924814414978027,
+        "p25": -13.528914213180542,
+        "p50": -9.322309970855713,
+        "p75": -7.136105418205261,
+        "p90": -5.075066232681272,
+        "p95": -3.380760025978093,
+        "p99": 1.3731044602394058
+      }
+    },
+    "july16_vh": {
+      "file": "july16_sigma0_vh_db.tif",
+      "aoi_valid_pixels": 1009989,
+      "mean_db": -20.861238479614258,
+      "median_db": -18.1600399017334,
+      "stddev_db": 7.857731819152832,
+      "min_db": -105.8621826171875,
+      "max_db": 9.973326683044434,
+      "percentiles": {
+        "p5": -34.35753860473633,
+        "p10": -31.590549087524415,
+        "p25": -27.23627281188965,
+        "p50": -18.1600399017334,
+        "p75": -14.430564880371094,
+        "p90": -12.536434364318847,
+        "p95": -11.48096160888672,
+        "p99": -9.401140213012695
+      }
+    },
+    "july16_vv": {
+      "file": "july16_sigma0_vv_db.tif",
+      "aoi_valid_pixels": 1009989,
+      "mean_db": -13.527714729309082,
+      "median_db": -10.744208335876465,
+      "stddev_db": 7.778722286224365,
+      "min_db": -105.84166717529297,
+      "max_db": 20.709970474243164,
+      "percentiles": {
+        "p5": -26.66770210266113,
+        "p10": -24.56244239807129,
+        "p25": -20.34053611755371,
+        "p50": -10.744208335876465,
+        "p75": -7.613831520080566,
+        "p90": -5.29911136627197,
+        "p95": -3.5906569004058855,
+        "p99": 1.0010007286071774
+      }
+    }
+  },
+  "extreme_difference_investigation": {
+    "delta_vh": {
+      "diff_file": "delta_vh_db.tif",
+      "total_common_valid_pixels": 1379858,
+      "extreme_positive": {
+        "count": 19683,
+        "pct_of_valid_swath": 1.4265,
+        "max_positive_diff_db": 91.49561309814453,
+        "mean_june_at_pos_db": -103.73548889160156,
+        "mean_july_at_pos_db": -29.934553146362305,
+        "pixels_with_june_below_noise_floor": 19683,
+        "pct_caused_by_low_june_noise_floor": 100.0
+      },
+      "extreme_negative": {
+        "count": 1100,
+        "pct_of_valid_swath": 0.0797,
+        "min_negative_diff_db": -94.80223846435547,
+        "mean_june_at_neg_db": -18.258140563964844,
+        "mean_july_at_neg_db": -60.63231658935547,
+        "pixels_with_july_below_noise_floor": 1100,
+        "pct_caused_by_low_july_noise_floor": 100.0
+      },
+      "noise_floor_reference_db": -35.0
+    },
+    "delta_vv": {
+      "diff_file": "delta_vv_db.tif",
+      "total_common_valid_pixels": 1379858,
+      "extreme_positive": {
+        "count": 13,
+        "pct_of_valid_swath": 0.0009,
+        "max_positive_diff_db": 87.64199829101562,
+        "mean_june_at_pos_db": -82.54598999023438,
+        "mean_july_at_pos_db": -20.32447052001953,
+        "pixels_with_june_below_noise_floor": 13,
+        "pct_caused_by_low_june_noise_floor": 100.0
+      },
+      "extreme_negative": {
+        "count": 97,
+        "pct_of_valid_swath": 0.007,
+        "min_negative_diff_db": -89.93255615234375,
+        "mean_june_at_neg_db": -8.808865547180176,
+        "mean_july_at_neg_db": -42.07980728149414,
+        "pixels_with_july_below_noise_floor": 93,
+        "pct_caused_by_low_july_noise_floor": 95.88
+      },
+      "noise_floor_reference_db": -35.0
+    }
+  },
+  "diagnostic_histograms": {
+    "VH": {
+      "full_range_plot": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/qc/qc_vh_full_range_histogram.png",
+      "robust_range_plot": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/qc/qc_vh_robust_range_histogram.png"
+    },
+    "VV": {
+      "full_range_plot": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/qc/qc_vv_full_range_histogram.png",
+      "robust_range_plot": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/qc/qc_vv_robust_range_histogram.png"
+    }
+  },
+  "spatial_anomaly_maps": {
+    "delta_vh": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/qc/qc_delta_vh_anomaly_map.png",
+    "delta_vv": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/qc/qc_delta_vv_anomaly_map.png"
+  },
+  "csv_tables": {
+    "aoi_statistics": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/qc/aoi_channel_statistics.csv",
+    "low_backscatter": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/qc/low_backscatter_distribution.csv",
+    "extreme_difference": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/outputs/phase2a/qc/extreme_difference_summary.csv"
+  },
+  "scientific_findings": {
+    "root_cause_of_extreme_diff": "Extreme differences (> +30 dB and < -30 dB) are driven almost exclusively by pixels where backscatter falls below the Sentinel-1 Noise Equivalent Sigma Zero (NESZ, approx -22 to -28 dB). Following thermal noise removal, smooth calm water produces residual linear values of 10^-5 to 10^-11 (-50 to -106 dB). When differencing logarithmic values (Delta_dB = July_dB - June_dB), dividing by a 10^-11 denominator yields differences of +70 to +91 dB.",
+    "spatial_concentration": "Pixels below -35 dB and extreme difference anomalies are spatially concentrated along the primary river channel of the Jamuna, permanent water oxbows, and swath boundary interpolation edges. They are not random sensor noise.",
+    "recommendation_for_phase2b": "For Phase 2B, do not clip physical observations. Instead, in thresholding and flood mapping: (1) Apply adaptive speckle filtering (Refined Lee 5x5 or Gamma MAP) in linear power before dB conversion to stabilize the noise floor; (2) In threshold classification, all values below the water mode threshold (e.g. < -23 dB VH, < -15 dB VV) are classified as water regardless of whether they are -25 dB or -100 dB, rendering the deep negative tail completely harmless to binary flood classification."
+  }
+}

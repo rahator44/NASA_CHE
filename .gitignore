@@ -1,0 +1,94 @@
+# ==============================================================================
+# EarthPulse-SAR — .gitignore
+# NASA Space Apps Challenge 2026 — Dancing with the SARs
+# ==============================================================================
+
+# Python bytecode and execution caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Sensitive data and credentials
+*.key
+*.pem
+*.token
+*.p12
+*.pfx
+credentials.json
+service_account.json
+id_rsa
+id_ed25519
+
+# Operating System and IDE files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Large archives and compressed packages
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.SAFE
+
+# Large scientific rasters & raw satellite archives (Hosted on Google Drive)
+data/raw/
+data/reference/
+data/intermediate/
+*.tif
+*.tiff
+*.jp2
+*.img
+*.hdr
+*.dim
+data/processed/**/*.tif
+data/processed/**/*.img
+data/processed/**/*.hdr
+data/processed/**/*.dim
+
+# Log files and runtime traces
+*.log
+logs/
+*.tmp
+*.bak
+*.swp
+*.local_backup
+*.db.local*
+
+# Staging directories
+EarthPulse-SAR-Scientific-Data/
+
+# ==============================================================================
+# Whitelist / Explicit Inclusions
+# ==============================================================================
+!models/phase7a/phase7a_random_forest_model.joblib
+!data/metadata/
+!data/metadata/*.json
+!data/metadata/*.db
+!data/outputs/**
+!data/outputs/**/*.csv
+!data/outputs/**/*.json
+!data/outputs/**/*.geojson
+!data/outputs/**/*.png
+!data/outputs/**/*.jpg
+!data/outputs/**/*.svg
+!data/processed/**/*.geojson
+!data/processed/**/*.json

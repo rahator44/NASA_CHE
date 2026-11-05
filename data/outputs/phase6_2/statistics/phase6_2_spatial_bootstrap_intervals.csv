@@ -1,0 +1,13 @@
+target_feature,statistic,point_estimate_m,bootstrap_mean_m,bootstrap_se_m,ci_95_lower_m,ci_95_upper_m,block_size_transects,block_length_km,lag1_autocorrelation_r,bootstrap_iterations,random_seed
+Right Bank (West / Mainland),Median Displacement,40.0,34.69,19.17,20.0,80.0,6,1.2,0.766,2000,42
+Right Bank (West / Mainland),Mean Displacement,130.0,126.18,36.97,59.83,203.28,6,1.2,0.766,2000,42
+Right Bank (West / Mainland),90th Percentile (P90),440.0,434.6,103.59,189.95,598.0,6,1.2,0.766,2000,42
+Right Bank (West / Mainland),95th Percentile (P95),578.0,551.9,88.82,398.95,700.0,6,1.2,0.766,2000,42
+Left Bank (East / Chars),Median Displacement,90.0,83.85,35.73,20.0,150.0,6,1.2,0.728,2000,42
+Left Bank (East / Chars),Mean Displacement,160.66,157.67,30.76,101.96,222.8,6,1.2,0.728,2000,42
+Left Bank (East / Chars),90th Percentile (P90),400.0,415.66,93.23,280.0,540.0,6,1.2,0.728,2000,42
+Left Bank (East / Chars),95th Percentile (P95),539.0,589.07,178.21,360.0,860.0,6,1.2,0.728,2000,42
+Channel Width Expansion,Median Displacement,180.0,199.06,52.82,120.0,320.0,6,1.2,0.767,2000,42
+Channel Width Expansion,Mean Displacement,290.66,283.85,47.28,194.42,378.04,6,1.2,0.767,2000,42
+Channel Width Expansion,90th Percentile (P90),760.0,692.11,127.8,420.0,880.0,6,1.2,0.767,2000,42
+Channel Width Expansion,95th Percentile (P95),879.0,842.93,113.8,540.0,1060.0,6,1.2,0.767,2000,42

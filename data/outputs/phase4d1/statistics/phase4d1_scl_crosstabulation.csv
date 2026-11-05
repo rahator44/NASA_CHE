@@ -1,0 +1,18 @@
+epoch,scl_class,scl_class_name,aoi_pixel_count,aoi_area_km2,aoi_percentage,sar_excluded_pixels,strict_eligible_pixels,secondary_eligible_pixels,sar_predicted_water,sar_predicted_non_water
+June 07 Optical vs June 10 SAR,3,3: Cloud Shadows,3356,1.3424,0.3323,63,0,0,0,0
+June 07 Optical vs June 10 SAR,4,4: Vegetation,9813,3.9252,0.9715,0,0,9813,0,9813
+June 07 Optical vs June 10 SAR,5,5: Bare Ground,353793,141.5172,35.0277,4753,349040,349040,68382,280658
+June 07 Optical vs June 10 SAR,6,6: Water,199802,79.9208,19.7816,7600,192202,192202,98808,93394
+June 07 Optical vs June 10 SAR,7,7: Unclassified,78082,31.2328,7.7306,601,0,0,0,0
+June 07 Optical vs June 10 SAR,8,8: Medium Probability Cloud,158958,63.5832,15.7378,1958,0,0,0,0
+June 07 Optical vs June 10 SAR,9,9: High Probability Cloud,205545,82.218,20.3502,1190,0,0,0,0
+June 07 Optical vs June 10 SAR,10,10: Thin Cirrus,690,0.276,0.0683,1,0,0,0,0
+July 17 Optical vs July 16 SAR,2,2: Dark Area Pixels,190,0.076,0.0188,0,0,0,0,0
+July 17 Optical vs July 16 SAR,3,3: Cloud Shadows,1912,0.7648,0.1893,0,0,0,0,0
+July 17 Optical vs July 16 SAR,4,4: Vegetation,30215,12.086,2.9915,0,0,30215,0,30215
+July 17 Optical vs July 16 SAR,5,5: Bare Ground,70297,28.1188,6.9598,14,70283,70283,40309,29974
+July 17 Optical vs July 16 SAR,6,6: Water,49206,19.6824,4.8717,11,49195,49195,38454,10741
+July 17 Optical vs July 16 SAR,7,7: Unclassified,15478,6.1912,1.5324,0,0,0,0,0
+July 17 Optical vs July 16 SAR,8,8: Medium Probability Cloud,408496,163.3984,40.4436,57,0,0,0,0
+July 17 Optical vs July 16 SAR,9,9: High Probability Cloud,243758,97.5032,24.1335,83,0,0,0,0
+July 17 Optical vs July 16 SAR,10,10: Thin Cirrus,190487,76.1948,18.8594,30,0,0,0,0

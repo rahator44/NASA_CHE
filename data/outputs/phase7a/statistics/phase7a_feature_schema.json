@@ -1,0 +1,44 @@
+[
+  {
+    "name": "vv_db",
+    "description": "VV copolarized backscatter in decibels (dB), derived from Lee 5x5 filtered SAR",
+    "unit": "dB",
+    "range": "[-35.0, +15.0]",
+    "importance_rank": 1
+  },
+  {
+    "name": "vh_db",
+    "description": "VH crosspolarized backscatter in decibels (dB), derived from Lee 5x5 filtered SAR",
+    "unit": "dB",
+    "range": "[-40.0, +5.0]",
+    "importance_rank": 2
+  },
+  {
+    "name": "vv_minus_vh_db",
+    "description": "Cross-polarization difference in dB (equivalent to logarithmic cross-pol ratio)",
+    "unit": "dB",
+    "range": "[-10.0, +30.0]",
+    "importance_rank": 3
+  },
+  {
+    "name": "cross_pol_ratio",
+    "description": "Cross-polarization power ratio (VV / VH) in linear power scale (clipped [0, 100])",
+    "unit": "dimensionless ratio",
+    "range": "[0.0, 100.0]",
+    "importance_rank": 4
+  },
+  {
+    "name": "texture_vv",
+    "description": "Local spatial standard deviation of VV in 5x5 neighborhood (100 m x 100 m)",
+    "unit": "dB",
+    "range": "[0.0, 20.0]",
+    "importance_rank": 5
+  },
+  {
+    "name": "texture_vh",
+    "description": "Local spatial standard deviation of VH in 5x5 neighborhood (100 m x 100 m)",
+    "unit": "dB",
+    "range": "[0.0, 20.0]",
+    "importance_rank": 6
+  }
+]

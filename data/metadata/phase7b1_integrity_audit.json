@@ -1,0 +1,103 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "phase": "Phase 7B.1: Tree Explainability Mathematical Verification & Random Forest Model Integrity Audit",
+  "study_area": "Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)",
+  "model_audited": {
+    "model_id": "phase7a_rf_jamuna_v1",
+    "artifact_path": "models/phase7a/phase7a_random_forest_model.joblib",
+    "sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+    "status": "RETAINED_AS_PROBABILITY_LAYER",
+    "immutability_status": "PRESERVED_UNMODIFIED"
+  },
+  "audit_findings": {
+    "task_a_random_forest_architecture": {
+      "verdict": "COMPLIANT_PURE_NUMPY_RANDOM_FOREST",
+      "bootstrap": "75.0% sub-bagging with replacement (Breiman 2001)",
+      "feature_selection": "Random 2 features (sqrt(6)) per split",
+      "split_criterion": "Vectorized Gini impurity gain (10 linear candidate thresholds)",
+      "ensemble_aggregation": "Soft voting across all 40 independent trees"
+    },
+    "task_b_oob_terminology": {
+      "verdict": "TERMINOLOGY_RECONCILED",
+      "correction": "Model evaluation on test set (N=6,124) is held-out ensemble soft voting, not out-of-bag prediction.",
+      "true_oob_characteristics": "True OOB evaluates only bootstrap-omitted trees per sample (mean 18.89 trees on training set)."
+    },
+    "task_c_shapley_mathematical_verification": {
+      "verdict": "SAABAS_PATH_ATTRIBUTION_DISTINCT_FROM_EXACT_SHAPLEY",
+      "additivity_verified": true,
+      "max_additivity_error": 1.1e-07,
+      "mathematical_distinction": "Saabas tree-path attribution decomposes probabilities along the single observed path (telescoping sum), satisfying additivity. However, it is path-dependent and violates Shapley symmetry. Terminology downgraded to Pure-NumPy Tree-Path Attribution (Saabas Formulation)."
+    },
+    "task_d_feature_redundancy": {
+      "formula": "cross_pol_ratio = min(10 ** ((vv_db - vh_db) / 10), 100.0)",
+      "exact_invertibility_range": "vv_minus_vh_db < 20.0 dB",
+      "test_clipped_pct": 0.52,
+      "test_unclipped_pct": 99.48,
+      "test_spearman_r": 1.0,
+      "credit_splitting_mitigation": "Grouped Polarization Attribution aggregates both into a unified 10.67% attribution block."
+    },
+    "task_e_local_additivity": {
+      "total_local_cases_audited": 8,
+      "all_cases_passed_additivity": true,
+      "base_value_phi0": 0.3905
+    },
+    "task_f_probability_calibration": {
+      "brier_score": 0.227,
+      "expected_calibration_error": 0.0959,
+      "uncertainty_interpretation": "abs(P - 0.5) is a decision margin / uncertainty proxy; NOT calibrated Bayesian confidence."
+    },
+    "task_g_confusion_matrix_reconciliation": {
+      "total_test_samples": 6124,
+      "confusion_matrix": {
+        "tp": 2239,
+        "tn": 932,
+        "fp": 2762,
+        "fn": 191
+      },
+      "epoch_subsets": {
+        "june_test_total": 4522,
+        "june_tp": 1573,
+        "june_tn": 849,
+        "june_fp": 1918,
+        "june_fn": 182,
+        "july_test_total": 1602,
+        "july_tp": 666,
+        "july_tn": 83,
+        "july_fp": 844,
+        "july_fn": 9
+      },
+      "epistemological_correction": "Specular scattering on moist char sands is a scientifically supported physical hypothesis, not an in-situ proven causal fact."
+    },
+    "task_h_deterministic_baseline_thresholds": {
+      "june10_lee5x5_otsu": {
+        "vv_db": -12.457063674926758,
+        "vh_db": -21.697208404541016
+      },
+      "july16_lee5x5_otsu": {
+        "vv_db": -14.959856033325195,
+        "vh_db": -21.82791519165039
+      },
+      "illustrative_fixed_threshold": {
+        "vv_db": -16.0,
+        "vh_db": -23.5
+      },
+      "scientific_conclusion": "Adaptive Otsu baseline derived in Phase 3A reflects seasonal hydrological shifts; static heuristic is overly conservative."
+    },
+    "task_i_multiregion_readiness": {
+      "status": "VERIFIED_EXTENSIBLE",
+      "prediction_record_buffer": "Operational",
+      "data_intake_protocol": "Preserved for unconfirmed Nov 12-13 dataset"
+    }
+  },
+  "artifacts_generated": [
+    "data/outputs/phase7b1/audit/phase7b1_random_forest_integrity.csv",
+    "data/outputs/phase7b1/audit/phase7b1_oob_prediction_audit.csv",
+    "data/outputs/phase7b1/audit/phase7b1_shap_bruteforce_verification.csv",
+    "data/outputs/phase7b1/audit/phase7b1_feature_redundancy_audit.csv",
+    "data/outputs/phase7b1/audit/phase7b1_local_additivity_audit.csv",
+    "data/outputs/phase7b1/audit/phase7b1_probability_calibration_audit.csv",
+    "data/outputs/phase7b1/audit/phase7b1_false_positive_physics_audit.csv",
+    "data/outputs/phase7b1/audit/phase7b1_baseline_threshold_audit.csv",
+    "data/metadata/phase7b1_integrity_audit.json"
+  ]
+}

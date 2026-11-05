@@ -1,0 +1,50 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "system": "Earth Pulse",
+  "document": "Phase 7B.1 Errata and Backend Metadata Corrections",
+  "reconciliation_date": "2026-11-04",
+  "errata": {
+    "b1_base_value_reconciliation": {
+      "training_background_mean_prediction": 0.49046,
+      "training_background_rounded": 0.4905,
+      "ensemble_root_prob_mean": 0.49945,
+      "ensemble_root_prob_rounded": 0.4995,
+      "specification_typo_value": 0.3905,
+      "authoritative_background_base_value": 0.4905,
+      "authoritative_instance_root_base_value": 0.4995,
+      "explanation": "0.4905 represents empirical mean prediction over training samples (background_X); 0.4995 represents mean tree root probability. 0.3905 was a typographical specification error (0.1000 offset)."
+    },
+    "b2_acquisition_year_correction": {
+      "verified_acquisition_year": 2024,
+      "erroneous_text_year": 2020,
+      "sentinel1_acquisitions": [
+        "2024-06-10T12:05:08Z",
+        "2024-07-16T12:05:07Z"
+      ],
+      "sentinel2_optical_acquisitions": [
+        "2024-06-07T04:37:11Z",
+        "2024-07-17T04:37:01Z"
+      ],
+      "status": "CORRECTED_IN_BACKEND_SCHEMAS"
+    },
+    "b3_adaptive_baseline_agreement": {
+      "test_population_n": 6124,
+      "adaptive_otsu_water_count": 2177,
+      "adaptive_otsu_water_pct": 35.55,
+      "random_forest_water_count": 5001,
+      "random_forest_water_pct": 81.66,
+      "optical_reference_water_count": 2430,
+      "optical_reference_water_pct": 39.68,
+      "both_predict_water_count": 2177,
+      "both_predict_nonwater_count": 1123,
+      "otsu_only_water_count": 0,
+      "rf_only_water_count": 2824,
+      "spatial_agreement_count": 3300,
+      "spatial_agreement_pct": 53.8863,
+      "spatial_agreement_rounded_pct": 53.89,
+      "otsu_accuracy_vs_optical_pct": 64.68,
+      "status": "MATHEMATICALLY_DISAMBIGUATED"
+    }
+  }
+}
+

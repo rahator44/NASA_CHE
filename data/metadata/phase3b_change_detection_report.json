@@ -1,0 +1,917 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "system": "Earth Pulse",
+  "phase": "Phase 3B: Multi-Temporal Flood-Change Detection Engine",
+  "georeferencing": {
+    "crs": "EPSG:32645",
+    "pixel_dimensions_m": [
+      20.0,
+      20.0
+    ],
+    "pixel_area_m2": 400.0,
+    "grid_dimensions": [
+      1405,
+      1393
+    ],
+    "geotransform": [
+      754115.6463743874,
+      20.0,
+      0.0,
+      2744939.181560975,
+      0.0,
+      -20.0
+    ]
+  },
+  "aoi_study_polygon": {
+    "wkt_wgs84": "POLYGON((89.55 24.58, 89.75 24.58, 89.75 24.76, 89.55 24.76, 89.55 24.58))",
+    "aoi_cells": 1010039,
+    "aoi_area_km2": 404.0156
+  },
+  "full_raster_extent": {
+    "total_cells": 1957165,
+    "total_area_km2": 782.866
+  },
+  "statistics_aoi": {
+    "primary": {
+      "total_cells": 1010039,
+      "total_area_km2": 404.0156,
+      "valid_transition_cells": 993736,
+      "valid_transition_area_km2": 397.4944,
+      "persistent_water_cells": 216595,
+      "persistent_water_area_km2": 86.638,
+      "persistent_water_area_ha": 8663.8,
+      "persistent_water_pct_total": 21.4442,
+      "persistent_water_pct_valid": 21.796,
+      "newly_inundated_candidate_cells": 146992,
+      "newly_inundated_candidate_area_km2": 58.7968,
+      "newly_inundated_candidate_area_ha": 5879.68,
+      "newly_inundated_pct_total": 14.5531,
+      "newly_inundated_pct_valid": 14.7919,
+      "receded_water_cells": 1634,
+      "receded_water_area_km2": 0.6536,
+      "receded_water_area_ha": 65.36,
+      "receded_water_pct_total": 0.1618,
+      "receded_water_pct_valid": 0.1644,
+      "persistent_non_water_cells": 628515,
+      "persistent_non_water_area_km2": 251.406,
+      "persistent_non_water_area_ha": 25140.6,
+      "persistent_non_water_pct_total": 62.2268,
+      "persistent_non_water_pct_valid": 63.2477,
+      "indeterminate_cells": 16242,
+      "indeterminate_area_km2": 6.4968,
+      "indeterminate_pct_total": 1.6081,
+      "nodata_cells": 61,
+      "nodata_area_km2": 0.0244,
+      "nodata_pct_total": 0.006,
+      "gross_candidate_water_expansion_km2": 58.7968,
+      "gross_candidate_water_recession_km2": 0.6536,
+      "net_candidate_water_area_change_km2": 58.1432,
+      "net_candidate_water_area_change_ha": 5814.32,
+      "valid_june_water_cells": 218229,
+      "valid_july_water_cells": 363587,
+      "reconciliation_identity_holds": true
+    },
+    "2d_otsu": {
+      "total_cells": 1010039,
+      "total_area_km2": 404.0156,
+      "valid_transition_cells": 940042,
+      "valid_transition_area_km2": 376.0168,
+      "persistent_water_cells": 221334,
+      "persistent_water_area_km2": 88.5336,
+      "persistent_water_area_ha": 8853.36,
+      "persistent_water_pct_total": 21.9134,
+      "persistent_water_pct_valid": 23.5451,
+      "newly_inundated_candidate_cells": 129901,
+      "newly_inundated_candidate_area_km2": 51.9604,
+      "newly_inundated_candidate_area_ha": 5196.04,
+      "newly_inundated_pct_total": 12.861,
+      "newly_inundated_pct_valid": 13.8186,
+      "receded_water_cells": 689,
+      "receded_water_area_km2": 0.2756,
+      "receded_water_area_ha": 27.56,
+      "receded_water_pct_total": 0.0682,
+      "receded_water_pct_valid": 0.0733,
+      "persistent_non_water_cells": 588118,
+      "persistent_non_water_area_km2": 235.2472,
+      "persistent_non_water_area_ha": 23524.72,
+      "persistent_non_water_pct_total": 58.2273,
+      "persistent_non_water_pct_valid": 62.5629,
+      "indeterminate_cells": 69936,
+      "indeterminate_area_km2": 27.9744,
+      "indeterminate_pct_total": 6.9241,
+      "nodata_cells": 61,
+      "nodata_area_km2": 0.0244,
+      "nodata_pct_total": 0.006,
+      "gross_candidate_water_expansion_km2": 51.9604,
+      "gross_candidate_water_recession_km2": 0.2756,
+      "net_candidate_water_area_change_km2": 51.6848,
+      "net_candidate_water_area_change_ha": 5168.48,
+      "valid_june_water_cells": 222023,
+      "valid_july_water_cells": 351235,
+      "reconciliation_identity_holds": true
+    },
+    "lee_3x3": {
+      "total_cells": 1010039,
+      "total_area_km2": 404.0156,
+      "valid_transition_cells": 993736,
+      "valid_transition_area_km2": 397.4944,
+      "persistent_water_cells": 217726,
+      "persistent_water_area_km2": 87.0904,
+      "persistent_water_area_ha": 8709.04,
+      "persistent_water_pct_total": 21.5562,
+      "persistent_water_pct_valid": 21.9098,
+      "newly_inundated_candidate_cells": 146208,
+      "newly_inundated_candidate_area_km2": 58.4832,
+      "newly_inundated_candidate_area_ha": 5848.32,
+      "newly_inundated_pct_total": 14.4755,
+      "newly_inundated_pct_valid": 14.713,
+      "receded_water_cells": 2184,
+      "receded_water_area_km2": 0.8736,
+      "receded_water_area_ha": 87.36,
+      "receded_water_pct_total": 0.2162,
+      "receded_water_pct_valid": 0.2198,
+      "persistent_non_water_cells": 627618,
+      "persistent_non_water_area_km2": 251.0472,
+      "persistent_non_water_area_ha": 25104.72,
+      "persistent_non_water_pct_total": 62.138,
+      "persistent_non_water_pct_valid": 63.1574,
+      "indeterminate_cells": 16242,
+      "indeterminate_area_km2": 6.4968,
+      "indeterminate_pct_total": 1.6081,
+      "nodata_cells": 61,
+      "nodata_area_km2": 0.0244,
+      "nodata_pct_total": 0.006,
+      "gross_candidate_water_expansion_km2": 58.4832,
+      "gross_candidate_water_recession_km2": 0.8736,
+      "net_candidate_water_area_change_km2": 57.6096,
+      "net_candidate_water_area_change_ha": 5760.96,
+      "valid_june_water_cells": 219910,
+      "valid_july_water_cells": 363934,
+      "reconciliation_identity_holds": true
+    },
+    "unfiltered": {
+      "total_cells": 1010039,
+      "total_area_km2": 404.0156,
+      "valid_transition_cells": 993736,
+      "valid_transition_area_km2": 397.4944,
+      "persistent_water_cells": 205953,
+      "persistent_water_area_km2": 82.3812,
+      "persistent_water_area_ha": 8238.12,
+      "persistent_water_pct_total": 20.3906,
+      "persistent_water_pct_valid": 20.7251,
+      "newly_inundated_candidate_cells": 157587,
+      "newly_inundated_candidate_area_km2": 63.0348,
+      "newly_inundated_candidate_area_ha": 6303.48,
+      "newly_inundated_pct_total": 15.6021,
+      "newly_inundated_pct_valid": 15.858,
+      "receded_water_cells": 4200,
+      "receded_water_area_km2": 1.68,
+      "receded_water_area_ha": 168.0,
+      "receded_water_pct_total": 0.4158,
+      "receded_water_pct_valid": 0.4226,
+      "persistent_non_water_cells": 625996,
+      "persistent_non_water_area_km2": 250.3984,
+      "persistent_non_water_area_ha": 25039.84,
+      "persistent_non_water_pct_total": 61.9774,
+      "persistent_non_water_pct_valid": 62.9942,
+      "indeterminate_cells": 16242,
+      "indeterminate_area_km2": 6.4968,
+      "indeterminate_pct_total": 1.6081,
+      "nodata_cells": 61,
+      "nodata_area_km2": 0.0244,
+      "nodata_pct_total": 0.006,
+      "gross_candidate_water_expansion_km2": 63.0348,
+      "gross_candidate_water_recession_km2": 1.68,
+      "net_candidate_water_area_change_km2": 61.3548,
+      "net_candidate_water_area_change_ha": 6135.48,
+      "valid_june_water_cells": 210153,
+      "valid_july_water_cells": 363540,
+      "reconciliation_identity_holds": true
+    }
+  },
+  "statistics_full_raster": {
+    "primary": {
+      "total_cells": 1957165,
+      "total_area_km2": 782.866,
+      "valid_transition_cells": 1360928,
+      "valid_transition_area_km2": 544.3712,
+      "persistent_water_cells": 250766,
+      "persistent_water_area_km2": 100.3064,
+      "persistent_water_area_ha": 10030.64,
+      "persistent_water_pct_total": 12.8127,
+      "persistent_water_pct_valid": 18.4261,
+      "newly_inundated_candidate_cells": 200211,
+      "newly_inundated_candidate_area_km2": 80.0844,
+      "newly_inundated_candidate_area_ha": 8008.44,
+      "newly_inundated_pct_total": 10.2296,
+      "newly_inundated_pct_valid": 14.7114,
+      "receded_water_cells": 2145,
+      "receded_water_area_km2": 0.858,
+      "receded_water_area_ha": 85.8,
+      "receded_water_pct_total": 0.1096,
+      "receded_water_pct_valid": 0.1576,
+      "persistent_non_water_cells": 907806,
+      "persistent_non_water_area_km2": 363.1224,
+      "persistent_non_water_area_ha": 36312.24,
+      "persistent_non_water_pct_total": 46.3837,
+      "persistent_non_water_pct_valid": 66.7049,
+      "indeterminate_cells": 18930,
+      "indeterminate_area_km2": 7.572,
+      "indeterminate_pct_total": 0.9672,
+      "nodata_cells": 577307,
+      "nodata_area_km2": 230.9228,
+      "nodata_pct_total": 29.4971,
+      "gross_candidate_water_expansion_km2": 80.0844,
+      "gross_candidate_water_recession_km2": 0.858,
+      "net_candidate_water_area_change_km2": 79.2264,
+      "net_candidate_water_area_change_ha": 7922.64,
+      "valid_june_water_cells": 252911,
+      "valid_july_water_cells": 450977,
+      "reconciliation_identity_holds": true
+    },
+    "2d_otsu": {
+      "total_cells": 1957165,
+      "total_area_km2": 782.866,
+      "valid_transition_cells": 1290278,
+      "valid_transition_area_km2": 516.1112,
+      "persistent_water_cells": 256511,
+      "persistent_water_area_km2": 102.6044,
+      "persistent_water_area_ha": 10260.44,
+      "persistent_water_pct_total": 13.1063,
+      "persistent_water_pct_valid": 19.8803,
+      "newly_inundated_candidate_cells": 180508,
+      "newly_inundated_candidate_area_km2": 72.2032,
+      "newly_inundated_candidate_area_ha": 7220.32,
+      "newly_inundated_pct_total": 9.2229,
+      "newly_inundated_pct_valid": 13.9899,
+      "receded_water_cells": 1108,
+      "receded_water_area_km2": 0.4432,
+      "receded_water_area_ha": 44.32,
+      "receded_water_pct_total": 0.0566,
+      "receded_water_pct_valid": 0.0859,
+      "persistent_non_water_cells": 852151,
+      "persistent_non_water_area_km2": 340.8604,
+      "persistent_non_water_area_ha": 34086.04,
+      "persistent_non_water_pct_total": 43.5401,
+      "persistent_non_water_pct_valid": 66.044,
+      "indeterminate_cells": 89580,
+      "indeterminate_area_km2": 35.832,
+      "indeterminate_pct_total": 4.577,
+      "nodata_cells": 577307,
+      "nodata_area_km2": 230.9228,
+      "nodata_pct_total": 29.4971,
+      "gross_candidate_water_expansion_km2": 72.2032,
+      "gross_candidate_water_recession_km2": 0.4432,
+      "net_candidate_water_area_change_km2": 71.76,
+      "net_candidate_water_area_change_ha": 7176.0,
+      "valid_june_water_cells": 257619,
+      "valid_july_water_cells": 437019,
+      "reconciliation_identity_holds": true
+    },
+    "lee_3x3": {
+      "total_cells": 1957165,
+      "total_area_km2": 782.866,
+      "valid_transition_cells": 1360928,
+      "valid_transition_area_km2": 544.3712,
+      "persistent_water_cells": 252259,
+      "persistent_water_area_km2": 100.9036,
+      "persistent_water_area_ha": 10090.36,
+      "persistent_water_pct_total": 12.889,
+      "persistent_water_pct_valid": 18.5358,
+      "newly_inundated_candidate_cells": 199385,
+      "newly_inundated_candidate_area_km2": 79.754,
+      "newly_inundated_candidate_area_ha": 7975.4,
+      "newly_inundated_pct_total": 10.1874,
+      "newly_inundated_pct_valid": 14.6507,
+      "receded_water_cells": 2964,
+      "receded_water_area_km2": 1.1856,
+      "receded_water_area_ha": 118.56,
+      "receded_water_pct_total": 0.1514,
+      "receded_water_pct_valid": 0.2178,
+      "persistent_non_water_cells": 906320,
+      "persistent_non_water_area_km2": 362.528,
+      "persistent_non_water_area_ha": 36252.8,
+      "persistent_non_water_pct_total": 46.3078,
+      "persistent_non_water_pct_valid": 66.5957,
+      "indeterminate_cells": 18930,
+      "indeterminate_area_km2": 7.572,
+      "indeterminate_pct_total": 0.9672,
+      "nodata_cells": 577307,
+      "nodata_area_km2": 230.9228,
+      "nodata_pct_total": 29.4971,
+      "gross_candidate_water_expansion_km2": 79.754,
+      "gross_candidate_water_recession_km2": 1.1856,
+      "net_candidate_water_area_change_km2": 78.5684,
+      "net_candidate_water_area_change_ha": 7856.84,
+      "valid_june_water_cells": 255223,
+      "valid_july_water_cells": 451644,
+      "reconciliation_identity_holds": true
+    },
+    "unfiltered": {
+      "total_cells": 1957165,
+      "total_area_km2": 782.866,
+      "valid_transition_cells": 1360928,
+      "valid_transition_area_km2": 544.3712,
+      "persistent_water_cells": 238332,
+      "persistent_water_area_km2": 95.3328,
+      "persistent_water_area_ha": 9533.28,
+      "persistent_water_pct_total": 12.1774,
+      "persistent_water_pct_valid": 17.5125,
+      "newly_inundated_candidate_cells": 213127,
+      "newly_inundated_candidate_area_km2": 85.2508,
+      "newly_inundated_candidate_area_ha": 8525.08,
+      "newly_inundated_pct_total": 10.8896,
+      "newly_inundated_pct_valid": 15.6604,
+      "receded_water_cells": 5535,
+      "receded_water_area_km2": 2.214,
+      "receded_water_area_ha": 221.4,
+      "receded_water_pct_total": 0.2828,
+      "receded_water_pct_valid": 0.4067,
+      "persistent_non_water_cells": 903934,
+      "persistent_non_water_area_km2": 361.5736,
+      "persistent_non_water_area_ha": 36157.36,
+      "persistent_non_water_pct_total": 46.1859,
+      "persistent_non_water_pct_valid": 66.4204,
+      "indeterminate_cells": 18930,
+      "indeterminate_area_km2": 7.572,
+      "indeterminate_pct_total": 0.9672,
+      "nodata_cells": 577307,
+      "nodata_area_km2": 230.9228,
+      "nodata_pct_total": 29.4971,
+      "gross_candidate_water_expansion_km2": 85.2508,
+      "gross_candidate_water_recession_km2": 2.214,
+      "net_candidate_water_area_change_km2": 83.0368,
+      "net_candidate_water_area_change_ha": 8303.68,
+      "valid_june_water_cells": 243867,
+      "valid_july_water_cells": 451459,
+      "reconciliation_identity_holds": true
+    }
+  },
+  "connected_components_aoi": {
+    "total_components": 3934,
+    "total_pixels": 146992,
+    "total_area_km2": 58.7968,
+    "size_distribution": {
+      "<5_px": {
+        "count": 3168,
+        "pixels": 4236
+      },
+      "5-24_px": {
+        "count": 460,
+        "pixels": 5049
+      },
+      "25-99_px": {
+        "count": 168,
+        "pixels": 7968
+      },
+      ">=100_px": {
+        "count": 138,
+        "pixels": 129739
+      }
+    },
+    "top_10_clusters": [
+      {
+        "rank": 1,
+        "component_id": 713,
+        "pixel_count": 15950,
+        "area_ha": 638.0,
+        "area_km2": 6.38,
+        "centroid_utm45n": [
+          774475.52,
+          2735465.98
+        ],
+        "bbox_grid": [
+          357,
+          925,
+          580,
+          1134
+        ],
+        "bbox_utm45n": [
+          772615.65,
+          2733339.18,
+          776795.65,
+          2737799.18
+        ]
+      },
+      {
+        "rank": 2,
+        "component_id": 1067,
+        "pixel_count": 7106,
+        "area_ha": 284.24,
+        "area_km2": 2.8424,
+        "centroid_utm45n": [
+          768483.83,
+          2733319.55
+        ],
+        "bbox_grid": [
+          435,
+          662,
+          689,
+          774
+        ],
+        "bbox_utm45n": [
+          767355.65,
+          2731159.18,
+          769595.65,
+          2736239.18
+        ]
+      },
+      {
+        "rank": 3,
+        "component_id": 2991,
+        "pixel_count": 6377,
+        "area_ha": 255.08,
+        "area_km2": 2.5508,
+        "centroid_utm45n": [
+          774197.49,
+          2724428.99
+        ],
+        "bbox_grid": [
+          921,
+          956,
+          1104,
+          1070
+        ],
+        "bbox_utm45n": [
+          773235.65,
+          2722859.18,
+          775515.65,
+          2726519.18
+        ]
+      },
+      {
+        "rank": 4,
+        "component_id": 263,
+        "pixel_count": 5762,
+        "area_ha": 230.48,
+        "area_km2": 2.3048,
+        "centroid_utm45n": [
+          774614.5,
+          2738536.14
+        ],
+        "bbox_grid": [
+          257,
+          933,
+          392,
+          1102
+        ],
+        "bbox_utm45n": [
+          772775.65,
+          2737099.18,
+          776155.65,
+          2739799.18
+        ]
+      },
+      {
+        "rank": 5,
+        "component_id": 7,
+        "pixel_count": 5700,
+        "area_ha": 228.0,
+        "area_km2": 2.28,
+        "centroid_utm45n": [
+          773110.18,
+          2740329.22
+        ],
+        "bbox_grid": [
+          193,
+          839,
+          278,
+          1033
+        ],
+        "bbox_utm45n": [
+          770895.65,
+          2739379.18,
+          774775.65,
+          2741079.18
+        ]
+      },
+      {
+        "rank": 6,
+        "component_id": 139,
+        "pixel_count": 4885,
+        "area_ha": 195.4,
+        "area_km2": 1.954,
+        "centroid_utm45n": [
+          770095.54,
+          2739680.81
+        ],
+        "bbox_grid": [
+          227,
+          716,
+          298,
+          891
+        ],
+        "bbox_utm45n": [
+          768435.65,
+          2738979.18,
+          771935.65,
+          2740399.18
+        ]
+      },
+      {
+        "rank": 7,
+        "component_id": 3534,
+        "pixel_count": 4387,
+        "area_ha": 175.48,
+        "area_km2": 1.7548,
+        "centroid_utm45n": [
+          777227.59,
+          2722257.97
+        ],
+        "bbox_grid": [
+          1069,
+          1093,
+          1188,
+          1219
+        ],
+        "bbox_utm45n": [
+          775975.65,
+          2721179.18,
+          778495.65,
+          2723559.18
+        ]
+      },
+      {
+        "rank": 8,
+        "component_id": 2850,
+        "pixel_count": 3979,
+        "area_ha": 159.16,
+        "area_km2": 1.5916,
+        "centroid_utm45n": [
+          777805.68,
+          2726249.47
+        ],
+        "bbox_grid": [
+          881,
+          1148,
+          1024,
+          1215
+        ],
+        "bbox_utm45n": [
+          777075.65,
+          2724459.18,
+          778415.65,
+          2727319.18
+        ]
+      },
+      {
+        "rank": 9,
+        "component_id": 3155,
+        "pixel_count": 3024,
+        "area_ha": 120.96,
+        "area_km2": 1.2096,
+        "centroid_utm45n": [
+          770629.46,
+          2724401.46
+        ],
+        "bbox_grid": [
+          964,
+          784,
+          1114,
+          862
+        ],
+        "bbox_utm45n": [
+          769795.65,
+          2722659.18,
+          771355.65,
+          2725659.18
+        ]
+      },
+      {
+        "rank": 10,
+        "component_id": 358,
+        "pixel_count": 2958,
+        "area_ha": 118.32,
+        "area_km2": 1.1832,
+        "centroid_utm45n": [
+          770322.93,
+          2738609.37
+        ],
+        "bbox_grid": [
+          283,
+          761,
+          347,
+          860
+        ],
+        "bbox_utm45n": [
+          769335.65,
+          2737999.18,
+          771315.65,
+          2739279.18
+        ]
+      }
+    ]
+  },
+  "connected_components_full_raster": {
+    "total_components": 4984,
+    "total_pixels": 200211,
+    "total_area_km2": 80.0844,
+    "size_distribution": {
+      "<5_px": {
+        "count": 3937,
+        "pixels": 5365
+      },
+      "5-24_px": {
+        "count": 650,
+        "pixels": 7081
+      },
+      "25-99_px": {
+        "count": 217,
+        "pixels": 10441
+      },
+      ">=100_px": {
+        "count": 180,
+        "pixels": 177324
+      }
+    },
+    "top_10_clusters": [
+      {
+        "rank": 1,
+        "component_id": 1041,
+        "pixel_count": 15950,
+        "area_ha": 638.0,
+        "area_km2": 6.38,
+        "centroid_utm45n": [
+          774475.52,
+          2735465.98
+        ],
+        "bbox_grid": [
+          357,
+          925,
+          580,
+          1134
+        ],
+        "bbox_utm45n": [
+          772615.65,
+          2733339.18,
+          776795.65,
+          2737799.18
+        ]
+      },
+      {
+        "rank": 2,
+        "component_id": 28,
+        "pixel_count": 13559,
+        "area_ha": 542.36,
+        "area_km2": 5.4236,
+        "centroid_utm45n": [
+          772263.54,
+          2741442.58
+        ],
+        "bbox_grid": [
+          69,
+          756,
+          278,
+          1033
+        ],
+        "bbox_utm45n": [
+          769235.65,
+          2739379.18,
+          774775.65,
+          2743559.18
+        ]
+      },
+      {
+        "rank": 3,
+        "component_id": 11,
+        "pixel_count": 7541,
+        "area_ha": 301.64,
+        "area_km2": 3.0164,
+        "centroid_utm45n": [
+          774199.21,
+          2742261.96
+        ],
+        "bbox_grid": [
+          43,
+          913,
+          273,
+          1069
+        ],
+        "bbox_utm45n": [
+          772375.65,
+          2739479.18,
+          775495.65,
+          2744079.18
+        ]
+      },
+      {
+        "rank": 4,
+        "component_id": 1416,
+        "pixel_count": 7106,
+        "area_ha": 284.24,
+        "area_km2": 2.8424,
+        "centroid_utm45n": [
+          768483.83,
+          2733319.55
+        ],
+        "bbox_grid": [
+          435,
+          662,
+          689,
+          774
+        ],
+        "bbox_utm45n": [
+          767355.65,
+          2731159.18,
+          769595.65,
+          2736239.18
+        ]
+      },
+      {
+        "rank": 5,
+        "component_id": 3746,
+        "pixel_count": 6377,
+        "area_ha": 255.08,
+        "area_km2": 2.5508,
+        "centroid_utm45n": [
+          774197.49,
+          2724428.99
+        ],
+        "bbox_grid": [
+          921,
+          956,
+          1104,
+          1070
+        ],
+        "bbox_utm45n": [
+          773235.65,
+          2722859.18,
+          775515.65,
+          2726519.18
+        ]
+      },
+      {
+        "rank": 6,
+        "component_id": 1593,
+        "pixel_count": 6070,
+        "area_ha": 242.8,
+        "area_km2": 2.428,
+        "centroid_utm45n": [
+          778754.91,
+          2733317.28
+        ],
+        "bbox_grid": [
+          480,
+          1162,
+          694,
+          1290
+        ],
+        "bbox_utm45n": [
+          777355.65,
+          2731059.18,
+          779915.65,
+          2735339.18
+        ]
+      },
+      {
+        "rank": 7,
+        "component_id": 562,
+        "pixel_count": 5762,
+        "area_ha": 230.48,
+        "area_km2": 2.3048,
+        "centroid_utm45n": [
+          774614.5,
+          2738536.14
+        ],
+        "bbox_grid": [
+          257,
+          933,
+          392,
+          1102
+        ],
+        "bbox_utm45n": [
+          772775.65,
+          2737099.18,
+          776155.65,
+          2739799.18
+        ]
+      },
+      {
+        "rank": 8,
+        "component_id": 4,
+        "pixel_count": 5716,
+        "area_ha": 228.64,
+        "area_km2": 2.2864,
+        "centroid_utm45n": [
+          776007.32,
+          2741650.47
+        ],
+        "bbox_grid": [
+          25,
+          1031,
+          265,
+          1159
+        ],
+        "bbox_utm45n": [
+          774735.65,
+          2739639.18,
+          777295.65,
+          2744439.18
+        ]
+      },
+      {
+        "rank": 9,
+        "component_id": 4363,
+        "pixel_count": 5189,
+        "area_ha": 207.56,
+        "area_km2": 2.0756,
+        "centroid_utm45n": [
+          777395.58,
+          2722250.5
+        ],
+        "bbox_grid": [
+          1069,
+          1093,
+          1201,
+          1243
+        ],
+        "bbox_utm45n": [
+          775975.65,
+          2720919.18,
+          778975.65,
+          2723559.18
+        ]
+      },
+      {
+        "rank": 10,
+        "component_id": 434,
+        "pixel_count": 4885,
+        "area_ha": 195.4,
+        "area_km2": 1.954,
+        "centroid_utm45n": [
+          770095.54,
+          2739680.81
+        ],
+        "bbox_grid": [
+          227,
+          716,
+          298,
+          891
+        ],
+        "bbox_utm45n": [
+          768435.65,
+          2738979.18,
+          771935.65,
+          2740399.18
+        ]
+      }
+    ]
+  },
+  "method_sensitivity_aoi": [
+    {
+      "comparison": "Primary_vs_2DOtsu",
+      "primary_newly_inundated_km2": 58.7968,
+      "other_newly_inundated_km2": 51.9604,
+      "area_difference_km2": -6.8364,
+      "jaccard_iou": 0.8387,
+      "cohens_kappa": 0.8984,
+      "overall_agreement_pct": 97.596,
+      "pixel_discrepancy_count": 24283
+    },
+    {
+      "comparison": "Primary_vs_Lee3x3",
+      "primary_newly_inundated_km2": 58.7968,
+      "other_newly_inundated_km2": 58.4832,
+      "area_difference_km2": -0.3136,
+      "jaccard_iou": 0.961,
+      "cohens_kappa": 0.9767,
+      "overall_agreement_pct": 99.422,
+      "pixel_discrepancy_count": 5834
+    },
+    {
+      "comparison": "Primary_vs_Unfiltered",
+      "primary_newly_inundated_km2": 58.7968,
+      "other_newly_inundated_km2": 63.0348,
+      "area_difference_km2": 4.238,
+      "jaccard_iou": 0.8768,
+      "cohens_kappa": 0.9227,
+      "overall_agreement_pct": 98.021,
+      "pixel_discrepancy_count": 19989
+    }
+  ],
+  "ancillary_elevation_audit": {
+    "dem_available_locally": false,
+    "dem_path": null,
+    "limitation_note": "No ancillary DEM or Height Above Nearest Drainage (HAND) dataset is available locally. Terrain shadow elimination and hydrodynamic slope constraints cannot be applied without external data."
+  },
+  "output_files": {
+    "rasters": {
+      "transition_primary": "data/processed/phase3b/transition_primary.tif",
+      "transition_2d_otsu": "data/processed/phase3b/transition_2d_otsu.tif",
+      "transition_lee_3x3": "data/processed/phase3b/transition_lee_3x3.tif",
+      "transition_unfiltered": "data/processed/phase3b/transition_unfiltered.tif",
+      "newly_inundated_candidate": "data/processed/phase3b/newly_inundated_candidate.tif",
+      "receded_water": "data/processed/phase3b/receded_water.tif",
+      "persistent_water": "data/processed/phase3b/persistent_water.tif",
+      "indeterminate_mask": "data/processed/phase3b/indeterminate_mask.tif"
+    },
+    "vectors": {
+      "newly_inundated_geojson": "data/processed/phase3b/newly_inundated_candidate.geojson"
+    },
+    "tables": {
+      "transition_area_summary": "data/outputs/phase3b/statistics/transition_area_summary.csv",
+      "method_sensitivity_comparison": "data/outputs/phase3b/statistics/method_sensitivity_comparison.csv",
+      "top_inundation_clusters": "data/outputs/phase3b/statistics/top_inundation_clusters.csv"
+    }
+  }
+}

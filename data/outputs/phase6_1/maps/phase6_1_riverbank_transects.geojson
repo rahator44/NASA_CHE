@@ -1,0 +1,4009 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            775435.65,
+            2741119.18
+          ],
+          [
+            776675.65,
+            2741119.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 1,
+        "chainage_m": 0.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 1080.0,
+        "channel_width_expansion_m": 1080.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            775435.65,
+            2741119.18
+          ],
+          [
+            776675.65,
+            2741119.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 2,
+        "chainage_m": 200.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 1080.0,
+        "channel_width_expansion_m": 1080.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            774415.65,
+            2741099.18
+          ],
+          [
+            776675.65,
+            2741099.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 3,
+        "chainage_m": 400.0,
+        "right_bank_displacement_m": 1020.0,
+        "left_bank_displacement_m": 1080.0,
+        "channel_width_expansion_m": 2100.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            774415.65,
+            2741099.18
+          ],
+          [
+            776675.65,
+            2741099.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 4,
+        "chainage_m": 600.0,
+        "right_bank_displacement_m": 1020.0,
+        "left_bank_displacement_m": 1080.0,
+        "channel_width_expansion_m": 2100.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            774415.65,
+            2741099.18
+          ],
+          [
+            776675.65,
+            2741099.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 5,
+        "chainage_m": 800.0,
+        "right_bank_displacement_m": 1020.0,
+        "left_bank_displacement_m": 1080.0,
+        "channel_width_expansion_m": 2100.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            772915.65,
+            2741079.18
+          ],
+          [
+            776675.65,
+            2741079.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 6,
+        "chainage_m": 1000.0,
+        "right_bank_displacement_m": 2520.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 3580.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            772915.65,
+            2741079.18
+          ],
+          [
+            776675.65,
+            2741079.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 7,
+        "chainage_m": 1200.0,
+        "right_bank_displacement_m": 2520.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 3580.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            772915.65,
+            2741079.18
+          ],
+          [
+            776675.65,
+            2741079.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 8,
+        "chainage_m": 1400.0,
+        "right_bank_displacement_m": 2520.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 3580.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            771935.65,
+            2741059.18
+          ],
+          [
+            776675.65,
+            2741059.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 9,
+        "chainage_m": 1600.0,
+        "right_bank_displacement_m": 3520.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 4580.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            771935.65,
+            2741059.18
+          ],
+          [
+            776675.65,
+            2741059.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 10,
+        "chainage_m": 1800.0,
+        "right_bank_displacement_m": 3520.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 4580.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            771075.65,
+            2741039.18
+          ],
+          [
+            776675.65,
+            2741039.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 11,
+        "chainage_m": 2000.0,
+        "right_bank_displacement_m": 4420.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 5480.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            771075.65,
+            2741039.18
+          ],
+          [
+            776675.65,
+            2741039.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 12,
+        "chainage_m": 2200.0,
+        "right_bank_displacement_m": 4420.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 5480.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            771075.65,
+            2741039.18
+          ],
+          [
+            776675.65,
+            2741039.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 13,
+        "chainage_m": 2400.0,
+        "right_bank_displacement_m": 4420.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 5480.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769815.65,
+            2741019.18
+          ],
+          [
+            776695.65,
+            2741019.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 14,
+        "chainage_m": 2600.0,
+        "right_bank_displacement_m": 5660.0,
+        "left_bank_displacement_m": 1040.0,
+        "channel_width_expansion_m": 6700.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769815.65,
+            2741019.18
+          ],
+          [
+            776695.65,
+            2741019.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 15,
+        "chainage_m": 2800.0,
+        "right_bank_displacement_m": 5660.0,
+        "left_bank_displacement_m": 1040.0,
+        "channel_width_expansion_m": 6700.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768775.65,
+            2740999.18
+          ],
+          [
+            776695.65,
+            2740999.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 16,
+        "chainage_m": 3000.0,
+        "right_bank_displacement_m": 180.0,
+        "left_bank_displacement_m": 1040.0,
+        "channel_width_expansion_m": 1220.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768775.65,
+            2740999.18
+          ],
+          [
+            776695.65,
+            2740999.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 17,
+        "chainage_m": 3200.0,
+        "right_bank_displacement_m": 180.0,
+        "left_bank_displacement_m": 1040.0,
+        "channel_width_expansion_m": 1220.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            767755.65,
+            2740979.18
+          ],
+          [
+            776715.65,
+            2740979.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 18,
+        "chainage_m": 3400.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 1080.0,
+        "channel_width_expansion_m": 1080.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            767755.65,
+            2740979.18
+          ],
+          [
+            776715.65,
+            2740979.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 19,
+        "chainage_m": 3600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 1080.0,
+        "channel_width_expansion_m": 1080.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766815.65,
+            2740959.18
+          ],
+          [
+            776715.65,
+            2740959.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 20,
+        "chainage_m": 3800.0,
+        "right_bank_displacement_m": 920.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 1980.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766815.65,
+            2740959.18
+          ],
+          [
+            776715.65,
+            2740959.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 21,
+        "chainage_m": 4000.0,
+        "right_bank_displacement_m": 920.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 1980.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765675.65,
+            2740939.18
+          ],
+          [
+            776735.65,
+            2740939.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 22,
+        "chainage_m": 4200.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 1060.0,
+        "channel_width_expansion_m": 1080.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764655.65,
+            2740919.18
+          ],
+          [
+            776695.65,
+            2740919.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 23,
+        "chainage_m": 4400.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 1020.0,
+        "channel_width_expansion_m": 1020.0,
+        "confidence_status": "AMBIGUOUS_EDGE_EFFECT",
+        "anomaly_type": "AOI_BOUNDARY_ENTRY_ASYMMETRY",
+        "audit_notes": "Northern AOI entry asymmetry: In June, the western braid entered south of row 196, so the scanline sampled only the eastern braid in June vs full reach in July, creating artificial 5.6km displacement."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764015.65,
+            2740899.18
+          ],
+          [
+            776715.65,
+            2740899.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 24,
+        "chainage_m": 4600.0,
+        "right_bank_displacement_m": 380.0,
+        "left_bank_displacement_m": 400.0,
+        "channel_width_expansion_m": 780.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764015.65,
+            2740899.18
+          ],
+          [
+            776715.65,
+            2740899.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 25,
+        "chainage_m": 4800.0,
+        "right_bank_displacement_m": 380.0,
+        "left_bank_displacement_m": 400.0,
+        "channel_width_expansion_m": 780.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            763995.65,
+            2740879.18
+          ],
+          [
+            776735.65,
+            2740879.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 26,
+        "chainage_m": 5000.0,
+        "right_bank_displacement_m": 440.0,
+        "left_bank_displacement_m": 420.0,
+        "channel_width_expansion_m": 860.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            763995.65,
+            2740859.18
+          ],
+          [
+            776735.65,
+            2740859.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 27,
+        "chainage_m": 5200.0,
+        "right_bank_displacement_m": 440.0,
+        "left_bank_displacement_m": 380.0,
+        "channel_width_expansion_m": 820.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            763995.65,
+            2740819.18
+          ],
+          [
+            776755.65,
+            2740819.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 28,
+        "chainage_m": 5400.0,
+        "right_bank_displacement_m": 380.0,
+        "left_bank_displacement_m": 380.0,
+        "channel_width_expansion_m": 760.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            763975.65,
+            2740799.18
+          ],
+          [
+            776775.65,
+            2740799.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 29,
+        "chainage_m": 5600.0,
+        "right_bank_displacement_m": 400.0,
+        "left_bank_displacement_m": 360.0,
+        "channel_width_expansion_m": 760.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            763795.65,
+            2740739.18
+          ],
+          [
+            776795.65,
+            2740739.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 30,
+        "chainage_m": 5800.0,
+        "right_bank_displacement_m": 500.0,
+        "left_bank_displacement_m": 360.0,
+        "channel_width_expansion_m": 860.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            763935.65,
+            2740599.18
+          ],
+          [
+            776855.65,
+            2740599.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 31,
+        "chainage_m": 6000.0,
+        "right_bank_displacement_m": 200.0,
+        "left_bank_displacement_m": 300.0,
+        "channel_width_expansion_m": 500.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            763955.65,
+            2740519.18
+          ],
+          [
+            776875.65,
+            2740519.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 32,
+        "chainage_m": 6200.0,
+        "right_bank_displacement_m": 140.0,
+        "left_bank_displacement_m": 280.0,
+        "channel_width_expansion_m": 420.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            763835.65,
+            2740439.18
+          ],
+          [
+            776935.65,
+            2740439.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 33,
+        "chainage_m": 6400.0,
+        "right_bank_displacement_m": 820.0,
+        "left_bank_displacement_m": 280.0,
+        "channel_width_expansion_m": 1100.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764015.65,
+            2740239.18
+          ],
+          [
+            777015.65,
+            2740239.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 34,
+        "chainage_m": 6600.0,
+        "right_bank_displacement_m": 700.0,
+        "left_bank_displacement_m": 220.0,
+        "channel_width_expansion_m": 920.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764075.65,
+            2740059.18
+          ],
+          [
+            777075.65,
+            2740059.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 35,
+        "chainage_m": 6800.0,
+        "right_bank_displacement_m": 540.0,
+        "left_bank_displacement_m": 120.0,
+        "channel_width_expansion_m": 660.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764035.65,
+            2739879.18
+          ],
+          [
+            777155.65,
+            2739879.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 36,
+        "chainage_m": 7000.0,
+        "right_bank_displacement_m": 500.0,
+        "left_bank_displacement_m": 40.0,
+        "channel_width_expansion_m": 540.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764295.65,
+            2739719.18
+          ],
+          [
+            777255.65,
+            2739719.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 37,
+        "chainage_m": 7200.0,
+        "right_bank_displacement_m": 200.0,
+        "left_bank_displacement_m": 80.0,
+        "channel_width_expansion_m": 280.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764295.65,
+            2739579.18
+          ],
+          [
+            777275.65,
+            2739579.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 38,
+        "chainage_m": 7400.0,
+        "right_bank_displacement_m": 640.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 640.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764795.65,
+            2739439.18
+          ],
+          [
+            777295.65,
+            2739439.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 39,
+        "chainage_m": 7600.0,
+        "right_bank_displacement_m": 340.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 340.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765035.65,
+            2739259.18
+          ],
+          [
+            777315.65,
+            2739259.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 40,
+        "chainage_m": 7800.0,
+        "right_bank_displacement_m": 120.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 120.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764995.65,
+            2739059.18
+          ],
+          [
+            777275.65,
+            2739059.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 41,
+        "chainage_m": 8000.0,
+        "right_bank_displacement_m": 120.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 120.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764895.65,
+            2738879.18
+          ],
+          [
+            777215.65,
+            2738879.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 42,
+        "chainage_m": 8200.0,
+        "right_bank_displacement_m": 220.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 240.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764895.65,
+            2738699.18
+          ],
+          [
+            777115.65,
+            2738699.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 43,
+        "chainage_m": 8400.0,
+        "right_bank_displacement_m": 280.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 280.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764855.65,
+            2738499.18
+          ],
+          [
+            777035.65,
+            2738499.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 44,
+        "chainage_m": 8600.0,
+        "right_bank_displacement_m": 340.0,
+        "left_bank_displacement_m": 40.0,
+        "channel_width_expansion_m": 380.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764715.65,
+            2738319.18
+          ],
+          [
+            776995.65,
+            2738319.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 45,
+        "chainage_m": 8800.0,
+        "right_bank_displacement_m": 480.0,
+        "left_bank_displacement_m": 40.0,
+        "channel_width_expansion_m": 520.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764775.65,
+            2738119.18
+          ],
+          [
+            776935.65,
+            2738119.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 46,
+        "chainage_m": 9000.0,
+        "right_bank_displacement_m": 420.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 420.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765355.65,
+            2737919.18
+          ],
+          [
+            776815.65,
+            2737919.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 47,
+        "chainage_m": 9200.0,
+        "right_bank_displacement_m": 80.0,
+        "left_bank_displacement_m": -20.0,
+        "channel_width_expansion_m": 60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764795.65,
+            2737719.18
+          ],
+          [
+            776715.65,
+            2737719.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 48,
+        "chainage_m": 9400.0,
+        "right_bank_displacement_m": 600.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 600.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            764975.65,
+            2737519.18
+          ],
+          [
+            776655.65,
+            2737519.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 49,
+        "chainage_m": 9600.0,
+        "right_bank_displacement_m": 400.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 420.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765135.65,
+            2737339.18
+          ],
+          [
+            776615.65,
+            2737339.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 50,
+        "chainage_m": 9800.0,
+        "right_bank_displacement_m": 200.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 220.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765315.65,
+            2737159.18
+          ],
+          [
+            776655.65,
+            2737159.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 51,
+        "chainage_m": 10000.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 120.0,
+        "channel_width_expansion_m": 120.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765315.65,
+            2736959.18
+          ],
+          [
+            776695.65,
+            2736959.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 52,
+        "chainage_m": 10200.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 160.0,
+        "channel_width_expansion_m": 160.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765315.65,
+            2736759.18
+          ],
+          [
+            776815.65,
+            2736759.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 53,
+        "chainage_m": 10400.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 200.0,
+        "channel_width_expansion_m": 220.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765395.65,
+            2736579.18
+          ],
+          [
+            776815.65,
+            2736579.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 54,
+        "chainage_m": 10600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 120.0,
+        "channel_width_expansion_m": 120.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765375.65,
+            2736379.18
+          ],
+          [
+            776895.65,
+            2736379.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 55,
+        "chainage_m": 10800.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 140.0,
+        "channel_width_expansion_m": 160.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765395.65,
+            2736179.18
+          ],
+          [
+            776955.65,
+            2736179.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 56,
+        "chainage_m": 11000.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 120.0,
+        "channel_width_expansion_m": 140.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765475.65,
+            2735999.18
+          ],
+          [
+            776975.65,
+            2735999.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 57,
+        "chainage_m": 11200.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 60.0,
+        "channel_width_expansion_m": 60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765535.65,
+            2735799.18
+          ],
+          [
+            777075.65,
+            2735799.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 58,
+        "chainage_m": 11400.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 80.0,
+        "channel_width_expansion_m": 80.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765555.65,
+            2735619.18
+          ],
+          [
+            777175.65,
+            2735619.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 59,
+        "chainage_m": 11600.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 80.0,
+        "channel_width_expansion_m": 120.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765595.65,
+            2735419.18
+          ],
+          [
+            777255.65,
+            2735419.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 60,
+        "chainage_m": 11800.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 60.0,
+        "channel_width_expansion_m": 80.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765635.65,
+            2735219.18
+          ],
+          [
+            777295.65,
+            2735219.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 61,
+        "chainage_m": 12000.0,
+        "right_bank_displacement_m": -20.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": -20.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765655.65,
+            2735039.18
+          ],
+          [
+            777415.65,
+            2735039.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 62,
+        "chainage_m": 12200.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 40.0,
+        "channel_width_expansion_m": 40.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765635.65,
+            2734839.18
+          ],
+          [
+            777515.65,
+            2734839.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 63,
+        "chainage_m": 12400.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 60.0,
+        "channel_width_expansion_m": 60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765715.65,
+            2734659.18
+          ],
+          [
+            777615.65,
+            2734659.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 64,
+        "chainage_m": 12600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 100.0,
+        "channel_width_expansion_m": 100.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765755.65,
+            2734459.18
+          ],
+          [
+            777675.65,
+            2734459.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 65,
+        "chainage_m": 12800.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 140.0,
+        "channel_width_expansion_m": 140.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765795.65,
+            2734259.18
+          ],
+          [
+            777735.65,
+            2734259.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 66,
+        "chainage_m": 13000.0,
+        "right_bank_displacement_m": -20.0,
+        "left_bank_displacement_m": 160.0,
+        "channel_width_expansion_m": 140.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765815.65,
+            2734079.18
+          ],
+          [
+            777795.65,
+            2734079.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 67,
+        "chainage_m": 13200.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 180.0,
+        "channel_width_expansion_m": 180.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765895.65,
+            2733899.18
+          ],
+          [
+            777935.65,
+            2733899.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 68,
+        "chainage_m": 13400.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 280.0,
+        "channel_width_expansion_m": 280.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            765935.65,
+            2733739.18
+          ],
+          [
+            778075.65,
+            2733739.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 69,
+        "chainage_m": 13600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 320.0,
+        "channel_width_expansion_m": 320.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766095.65,
+            2733579.18
+          ],
+          [
+            778215.65,
+            2733579.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 70,
+        "chainage_m": 13800.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 380.0,
+        "channel_width_expansion_m": 400.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766315.65,
+            2733399.18
+          ],
+          [
+            778235.65,
+            2733399.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 71,
+        "chainage_m": 14000.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 300.0,
+        "channel_width_expansion_m": 320.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766415.65,
+            2733199.18
+          ],
+          [
+            778075.65,
+            2733199.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 72,
+        "chainage_m": 14200.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 20.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766535.65,
+            2733019.18
+          ],
+          [
+            778195.65,
+            2733019.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 73,
+        "chainage_m": 14400.0,
+        "right_bank_displacement_m": -40.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": -40.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766575.65,
+            2732819.18
+          ],
+          [
+            778255.65,
+            2732819.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 74,
+        "chainage_m": 14600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 20.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766615.65,
+            2732619.18
+          ],
+          [
+            778255.65,
+            2732619.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 75,
+        "chainage_m": 14800.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 40.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766595.65,
+            2732439.18
+          ],
+          [
+            778255.65,
+            2732439.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 76,
+        "chainage_m": 15000.0,
+        "right_bank_displacement_m": 60.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766655.65,
+            2732239.18
+          ],
+          [
+            778275.65,
+            2732239.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 77,
+        "chainage_m": 15200.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 20.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766715.65,
+            2732039.18
+          ],
+          [
+            778275.65,
+            2732039.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 78,
+        "chainage_m": 15400.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 0.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766795.65,
+            2731839.18
+          ],
+          [
+            778275.65,
+            2731839.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 79,
+        "chainage_m": 15600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 460.0,
+        "channel_width_expansion_m": 460.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            766915.65,
+            2731639.18
+          ],
+          [
+            778175.65,
+            2731639.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 80,
+        "chainage_m": 15800.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 240.0,
+        "channel_width_expansion_m": 260.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            767015.65,
+            2731459.18
+          ],
+          [
+            778215.65,
+            2731459.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 81,
+        "chainage_m": 16000.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 240.0,
+        "channel_width_expansion_m": 260.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            767275.65,
+            2731299.18
+          ],
+          [
+            778295.65,
+            2731299.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 82,
+        "chainage_m": 16200.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 180.0,
+        "channel_width_expansion_m": 180.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            767555.65,
+            2731179.18
+          ],
+          [
+            778295.65,
+            2731179.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 83,
+        "chainage_m": 16400.0,
+        "right_bank_displacement_m": 80.0,
+        "left_bank_displacement_m": 120.0,
+        "channel_width_expansion_m": 200.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            767855.65,
+            2731039.18
+          ],
+          [
+            778295.65,
+            2731039.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 84,
+        "chainage_m": 16600.0,
+        "right_bank_displacement_m": -60.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": -60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768275.65,
+            2730899.18
+          ],
+          [
+            778295.65,
+            2730899.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 85,
+        "chainage_m": 16800.0,
+        "right_bank_displacement_m": -120.0,
+        "left_bank_displacement_m": 120.0,
+        "channel_width_expansion_m": 0.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768335.65,
+            2730719.18
+          ],
+          [
+            778295.65,
+            2730719.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 86,
+        "chainage_m": 17000.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 160.0,
+        "channel_width_expansion_m": 180.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768435.65,
+            2730539.18
+          ],
+          [
+            778295.65,
+            2730539.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 87,
+        "chainage_m": 17200.0,
+        "right_bank_displacement_m": 80.0,
+        "left_bank_displacement_m": 160.0,
+        "channel_width_expansion_m": 240.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768555.65,
+            2730339.18
+          ],
+          [
+            778295.65,
+            2730339.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 88,
+        "chainage_m": 17400.0,
+        "right_bank_displacement_m": 60.0,
+        "left_bank_displacement_m": 60.0,
+        "channel_width_expansion_m": 120.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768735.65,
+            2730159.18
+          ],
+          [
+            778315.65,
+            2730159.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 89,
+        "chainage_m": 17600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 0.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768795.65,
+            2729959.18
+          ],
+          [
+            778315.65,
+            2729959.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 90,
+        "chainage_m": 17800.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 20.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768895.65,
+            2729759.18
+          ],
+          [
+            778315.65,
+            2729759.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 91,
+        "chainage_m": 18000.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 0.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768875.65,
+            2729559.18
+          ],
+          [
+            778315.65,
+            2729559.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 92,
+        "chainage_m": 18200.0,
+        "right_bank_displacement_m": 60.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768915.65,
+            2729419.18
+          ],
+          [
+            778315.65,
+            2729419.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 93,
+        "chainage_m": 18400.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 3580.0,
+        "channel_width_expansion_m": 3600.0,
+        "confidence_status": "ANABRANCH_ACTIVATION",
+        "anomaly_type": "SEASONAL_SIDE_CHANNEL_REACTIVATION",
+        "audit_notes": "Seasonal secondary anabranch reactivation: Rising monsoon stage overtopped dry char bar at row 776, inundating an eastern side-channel corridor (apparent expansion of 3.58km, not cut-bank scour)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768975.65,
+            2729279.18
+          ],
+          [
+            778335.65,
+            2729279.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 94,
+        "chainage_m": 18600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 3440.0,
+        "channel_width_expansion_m": 3440.0,
+        "confidence_status": "ANABRANCH_ACTIVATION",
+        "anomaly_type": "SEASONAL_SIDE_CHANNEL_REACTIVATION",
+        "audit_notes": "Seasonal secondary anabranch reactivation: Rising monsoon stage overtopped dry char bar at row 776, inundating an eastern side-channel corridor (apparent expansion of 3.58km, not cut-bank scour)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768975.65,
+            2729199.18
+          ],
+          [
+            778335.65,
+            2729199.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 95,
+        "chainage_m": 18800.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 3380.0,
+        "channel_width_expansion_m": 3400.0,
+        "confidence_status": "ANABRANCH_ACTIVATION",
+        "anomaly_type": "SEASONAL_SIDE_CHANNEL_REACTIVATION",
+        "audit_notes": "Seasonal secondary anabranch reactivation: Rising monsoon stage overtopped dry char bar at row 776, inundating an eastern side-channel corridor (apparent expansion of 3.58km, not cut-bank scour)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768995.65,
+            2729139.18
+          ],
+          [
+            778335.65,
+            2729139.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 96,
+        "chainage_m": 19000.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 3360.0,
+        "channel_width_expansion_m": 3360.0,
+        "confidence_status": "ANABRANCH_ACTIVATION",
+        "anomaly_type": "SEASONAL_SIDE_CHANNEL_REACTIVATION",
+        "audit_notes": "Seasonal secondary anabranch reactivation: Rising monsoon stage overtopped dry char bar at row 776, inundating an eastern side-channel corridor (apparent expansion of 3.58km, not cut-bank scour)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769015.65,
+            2729059.18
+          ],
+          [
+            778015.65,
+            2729059.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 97,
+        "chainage_m": 19200.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 2940.0,
+        "channel_width_expansion_m": 2980.0,
+        "confidence_status": "ANABRANCH_ACTIVATION",
+        "anomaly_type": "SEASONAL_SIDE_CHANNEL_REACTIVATION",
+        "audit_notes": "Seasonal secondary anabranch reactivation: Rising monsoon stage overtopped dry char bar at row 776, inundating an eastern side-channel corridor (apparent expansion of 3.58km, not cut-bank scour)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769035.65,
+            2728999.18
+          ],
+          [
+            775235.65,
+            2728999.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 98,
+        "chainage_m": 19400.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 140.0,
+        "channel_width_expansion_m": 160.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769035.65,
+            2728939.18
+          ],
+          [
+            775235.65,
+            2728939.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 99,
+        "chainage_m": 19600.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 100.0,
+        "channel_width_expansion_m": 140.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769075.65,
+            2728859.18
+          ],
+          [
+            775355.65,
+            2728859.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 100,
+        "chainage_m": 19800.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 140.0,
+        "channel_width_expansion_m": 160.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769095.65,
+            2728779.18
+          ],
+          [
+            775455.65,
+            2728779.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 101,
+        "chainage_m": 20000.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 180.0,
+        "channel_width_expansion_m": 180.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769155.65,
+            2728599.18
+          ],
+          [
+            775635.65,
+            2728599.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 102,
+        "chainage_m": 20200.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 280.0,
+        "channel_width_expansion_m": 320.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769195.65,
+            2728479.18
+          ],
+          [
+            775595.65,
+            2728479.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 103,
+        "chainage_m": 20400.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 200.0,
+        "channel_width_expansion_m": 220.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2728279.18
+          ],
+          [
+            775435.65,
+            2728279.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 104,
+        "chainage_m": 20600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": -20.0,
+        "channel_width_expansion_m": -20.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769375.65,
+            2728079.18
+          ],
+          [
+            775415.65,
+            2728079.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 105,
+        "chainage_m": 20800.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 0.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769435.65,
+            2727879.18
+          ],
+          [
+            775335.65,
+            2727879.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 106,
+        "chainage_m": 21000.0,
+        "right_bank_displacement_m": -40.0,
+        "left_bank_displacement_m": -20.0,
+        "channel_width_expansion_m": -60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769455.65,
+            2727679.18
+          ],
+          [
+            775215.65,
+            2727679.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 107,
+        "chainage_m": 21200.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 0.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769435.65,
+            2727499.18
+          ],
+          [
+            775155.65,
+            2727499.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 108,
+        "chainage_m": 21400.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769415.65,
+            2727299.18
+          ],
+          [
+            775115.65,
+            2727299.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 109,
+        "chainage_m": 21600.0,
+        "right_bank_displacement_m": 60.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 80.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769395.65,
+            2727099.18
+          ],
+          [
+            775095.65,
+            2727099.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 110,
+        "chainage_m": 21800.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 60.0,
+        "channel_width_expansion_m": 60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769375.65,
+            2726899.18
+          ],
+          [
+            774995.65,
+            2726899.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 111,
+        "chainage_m": 22000.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 40.0,
+        "channel_width_expansion_m": 80.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769375.65,
+            2726719.18
+          ],
+          [
+            774915.65,
+            2726719.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 112,
+        "chainage_m": 22200.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 40.0,
+        "channel_width_expansion_m": 40.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769355.65,
+            2726539.18
+          ],
+          [
+            774835.65,
+            2726539.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 113,
+        "chainage_m": 22400.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 100.0,
+        "channel_width_expansion_m": 100.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769335.65,
+            2726359.18
+          ],
+          [
+            775495.65,
+            2726359.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 114,
+        "chainage_m": 22600.0,
+        "right_bank_displacement_m": 60.0,
+        "left_bank_displacement_m": 820.0,
+        "channel_width_expansion_m": 880.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2726179.18
+          ],
+          [
+            775535.65,
+            2726179.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 115,
+        "chainage_m": 22800.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 860.0,
+        "channel_width_expansion_m": 880.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769195.65,
+            2725999.18
+          ],
+          [
+            775555.65,
+            2725999.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 116,
+        "chainage_m": 23000.0,
+        "right_bank_displacement_m": 80.0,
+        "left_bank_displacement_m": 840.0,
+        "channel_width_expansion_m": 920.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769155.65,
+            2725799.18
+          ],
+          [
+            775415.65,
+            2725799.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 117,
+        "chainage_m": 23200.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 540.0,
+        "channel_width_expansion_m": 580.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769135.65,
+            2725599.18
+          ],
+          [
+            775555.65,
+            2725599.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 118,
+        "chainage_m": 23400.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 520.0,
+        "channel_width_expansion_m": 540.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769155.65,
+            2725419.18
+          ],
+          [
+            775655.65,
+            2725419.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 119,
+        "chainage_m": 23600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 20.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769155.65,
+            2725219.18
+          ],
+          [
+            775695.65,
+            2725219.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 120,
+        "chainage_m": 23800.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": -20.0,
+        "channel_width_expansion_m": -20.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769115.65,
+            2725019.18
+          ],
+          [
+            775715.65,
+            2725019.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 121,
+        "chainage_m": 24000.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": -20.0,
+        "channel_width_expansion_m": -20.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769055.65,
+            2724839.18
+          ],
+          [
+            775795.65,
+            2724839.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 122,
+        "chainage_m": 24200.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 0.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768975.65,
+            2724679.18
+          ],
+          [
+            776235.65,
+            2724679.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 123,
+        "chainage_m": 24400.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 540.0,
+        "channel_width_expansion_m": 540.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768775.65,
+            2724479.18
+          ],
+          [
+            776695.65,
+            2724479.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 124,
+        "chainage_m": 24600.0,
+        "right_bank_displacement_m": 100.0,
+        "left_bank_displacement_m": 960.0,
+        "channel_width_expansion_m": 1060.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768615.65,
+            2724299.18
+          ],
+          [
+            776655.65,
+            2724299.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 125,
+        "chainage_m": 24800.0,
+        "right_bank_displacement_m": 200.0,
+        "left_bank_displacement_m": 900.0,
+        "channel_width_expansion_m": 1100.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768435.65,
+            2724099.18
+          ],
+          [
+            777235.65,
+            2724099.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 126,
+        "chainage_m": 25000.0,
+        "right_bank_displacement_m": 440.0,
+        "left_bank_displacement_m": 1480.0,
+        "channel_width_expansion_m": 1920.0,
+        "confidence_status": "MAJOR_CHANNEL_EXPANSION",
+        "anomaly_type": "MULTI_BRAID_EXPANSION",
+        "audit_notes": "Significant multi-braid channel margin expansion exceeding 1000m."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768255.65,
+            2723919.18
+          ],
+          [
+            777195.65,
+            2723919.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 127,
+        "chainage_m": 25200.0,
+        "right_bank_displacement_m": 600.0,
+        "left_bank_displacement_m": 1480.0,
+        "channel_width_expansion_m": 2080.0,
+        "confidence_status": "MAJOR_CHANNEL_EXPANSION",
+        "anomaly_type": "MULTI_BRAID_EXPANSION",
+        "audit_notes": "Significant multi-braid channel margin expansion exceeding 1000m."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768215.65,
+            2723799.18
+          ],
+          [
+            777155.65,
+            2723799.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 128,
+        "chainage_m": 25400.0,
+        "right_bank_displacement_m": 540.0,
+        "left_bank_displacement_m": 1460.0,
+        "channel_width_expansion_m": 2000.0,
+        "confidence_status": "MAJOR_CHANNEL_EXPANSION",
+        "anomaly_type": "MULTI_BRAID_EXPANSION",
+        "audit_notes": "Significant multi-braid channel margin expansion exceeding 1000m."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768195.65,
+            2723699.18
+          ],
+          [
+            777095.65,
+            2723699.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 129,
+        "chainage_m": 25600.0,
+        "right_bank_displacement_m": 640.0,
+        "left_bank_displacement_m": 1420.0,
+        "channel_width_expansion_m": 2060.0,
+        "confidence_status": "MAJOR_CHANNEL_EXPANSION",
+        "anomaly_type": "MULTI_BRAID_EXPANSION",
+        "audit_notes": "Significant multi-braid channel margin expansion exceeding 1000m."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768195.65,
+            2723619.18
+          ],
+          [
+            775675.65,
+            2723619.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 130,
+        "chainage_m": 25800.0,
+        "right_bank_displacement_m": 620.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 640.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768195.65,
+            2723539.18
+          ],
+          [
+            775615.65,
+            2723539.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 131,
+        "chainage_m": 26000.0,
+        "right_bank_displacement_m": 580.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 600.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768015.65,
+            2723419.18
+          ],
+          [
+            775555.65,
+            2723419.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 132,
+        "chainage_m": 26200.0,
+        "right_bank_displacement_m": 760.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 760.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768095.65,
+            2723259.18
+          ],
+          [
+            775475.65,
+            2723259.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 133,
+        "chainage_m": 26400.0,
+        "right_bank_displacement_m": 480.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 480.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768415.65,
+            2723059.18
+          ],
+          [
+            775355.65,
+            2723059.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 134,
+        "chainage_m": 26600.0,
+        "right_bank_displacement_m": 140.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 140.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768355.65,
+            2722879.18
+          ],
+          [
+            775275.65,
+            2722879.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 135,
+        "chainage_m": 26800.0,
+        "right_bank_displacement_m": 200.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 200.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768155.65,
+            2722699.18
+          ],
+          [
+            775175.65,
+            2722699.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 136,
+        "chainage_m": 27000.0,
+        "right_bank_displacement_m": 420.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 420.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768235.65,
+            2722499.18
+          ],
+          [
+            775035.65,
+            2722499.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 137,
+        "chainage_m": 27200.0,
+        "right_bank_displacement_m": 420.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 420.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768615.65,
+            2722319.18
+          ],
+          [
+            774975.65,
+            2722319.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 138,
+        "chainage_m": 27400.0,
+        "right_bank_displacement_m": 200.0,
+        "left_bank_displacement_m": 20.0,
+        "channel_width_expansion_m": 220.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            768895.65,
+            2722179.18
+          ],
+          [
+            775015.65,
+            2722179.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 139,
+        "chainage_m": 27600.0,
+        "right_bank_displacement_m": 0.0,
+        "left_bank_displacement_m": 100.0,
+        "channel_width_expansion_m": 100.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769095.65,
+            2722019.18
+          ],
+          [
+            774975.65,
+            2722019.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 140,
+        "chainage_m": 27800.0,
+        "right_bank_displacement_m": 60.0,
+        "left_bank_displacement_m": 120.0,
+        "channel_width_expansion_m": 180.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769315.65,
+            2721819.18
+          ],
+          [
+            774895.65,
+            2721819.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 141,
+        "chainage_m": 28000.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 400.0,
+        "channel_width_expansion_m": 420.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769315.65,
+            2721639.18
+          ],
+          [
+            774855.65,
+            2721639.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 142,
+        "chainage_m": 28200.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 480.0,
+        "channel_width_expansion_m": 520.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769335.65,
+            2721519.18
+          ],
+          [
+            774795.65,
+            2721519.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 143,
+        "chainage_m": 28400.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 400.0,
+        "channel_width_expansion_m": 420.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2721359.18
+          ],
+          [
+            774735.65,
+            2721359.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 144,
+        "chainage_m": 28600.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 360.0,
+        "channel_width_expansion_m": 400.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2721299.18
+          ],
+          [
+            774735.65,
+            2721299.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 145,
+        "chainage_m": 28800.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 360.0,
+        "channel_width_expansion_m": 380.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2721259.18
+          ],
+          [
+            774735.65,
+            2721259.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 146,
+        "chainage_m": 29000.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 280.0,
+        "channel_width_expansion_m": 320.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769275.65,
+            2721219.18
+          ],
+          [
+            774735.65,
+            2721219.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 147,
+        "chainage_m": 29200.0,
+        "right_bank_displacement_m": 60.0,
+        "left_bank_displacement_m": 280.0,
+        "channel_width_expansion_m": 340.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2721179.18
+          ],
+          [
+            774715.65,
+            2721179.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 148,
+        "chainage_m": 29400.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 260.0,
+        "channel_width_expansion_m": 300.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2721159.18
+          ],
+          [
+            774575.65,
+            2721159.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 149,
+        "chainage_m": 29600.0,
+        "right_bank_displacement_m": 20.0,
+        "left_bank_displacement_m": 120.0,
+        "channel_width_expansion_m": 140.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2721139.18
+          ],
+          [
+            773535.65,
+            2721139.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 150,
+        "chainage_m": 29800.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 40.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769255.65,
+            2721119.18
+          ],
+          [
+            772495.65,
+            2721119.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 151,
+        "chainage_m": 30000.0,
+        "right_bank_displacement_m": 80.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 80.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2721099.18
+          ],
+          [
+            770895.65,
+            2721099.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 152,
+        "chainage_m": 30200.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 140.0,
+        "channel_width_expansion_m": 180.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769295.65,
+            2721079.18
+          ],
+          [
+            770415.65,
+            2721079.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 153,
+        "chainage_m": 30400.0,
+        "right_bank_displacement_m": 60.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 60.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            769315.65,
+            2721059.18
+          ],
+          [
+            769375.65,
+            2721059.18
+          ]
+        ]
+      },
+      "properties": {
+        "transect_id": 154,
+        "chainage_m": 30600.0,
+        "right_bank_displacement_m": 40.0,
+        "left_bank_displacement_m": 0.0,
+        "channel_width_expansion_m": 40.0,
+        "confidence_status": "VALID_LOCAL_MIGRATION",
+        "anomaly_type": "NONE",
+        "audit_notes": "Continuous active channel belt margin with unambiguous bankline matching."
+      }
+    }
+  ]
+}

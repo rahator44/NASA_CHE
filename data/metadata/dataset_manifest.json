@@ -1,0 +1,156 @@
+{
+  "title": "Earth Pulse Multi-Region Dataset Manifest",
+  "version": "1.0.0",
+  "datasets": [
+    {
+      "dataset_id": "s1a_iw_grd_20240610_raw",
+      "region_id": "jamuna_sirajganj",
+      "sensor": "sentinel1",
+      "product_type": "GRD_IW",
+      "acquisition_date": "2024-06-10T12:05:08Z",
+      "polarization": [
+        "VV",
+        "VH"
+      ],
+      "spatial_resolution_m": 20.0,
+      "crs": "EPSG:32645",
+      "source_path": "data/raw/sentinel1/S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.zip",
+      "reference_label_availability": true,
+      "quality_status": "VERIFIED_INTACT",
+      "sha256": "91b2b46e6682bfd678371e51f625dbf35b10bd68ca970c1369a385cbfa4e6dbc",
+      "processing_version": "Level-1_GRD"
+    },
+    {
+      "dataset_id": "s1a_iw_grd_20240716_raw",
+      "region_id": "jamuna_sirajganj",
+      "sensor": "sentinel1",
+      "product_type": "GRD_IW",
+      "acquisition_date": "2024-07-16T12:05:07Z",
+      "polarization": [
+        "VV",
+        "VH"
+      ],
+      "spatial_resolution_m": 20.0,
+      "crs": "EPSG:32645",
+      "source_path": "data/raw/sentinel1/S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.zip",
+      "reference_label_availability": true,
+      "quality_status": "VERIFIED_INTACT",
+      "sha256": "1b71d31b3bb9fe83426d5f832158fa6a0b0bdab935053dd1662743c35d358ab4",
+      "processing_version": "Level-1_GRD"
+    },
+    {
+      "dataset_id": "s1a_iw_grd_20240610_aligned",
+      "region_id": "jamuna_sirajganj",
+      "sensor": "sentinel1",
+      "product_type": "GRD_ALIGNED",
+      "acquisition_date": "2024-06-10T12:05:08Z",
+      "polarization": [
+        "VV",
+        "VH"
+      ],
+      "spatial_resolution_m": 20.0,
+      "crs": "EPSG:32645",
+      "source_path": "data/processed/aligned/june10_aligned.tif",
+      "reference_label_availability": true,
+      "quality_status": "VERIFIED_INTACT",
+      "sha256": "c54f97e0a24b20574f38c786ac82e38855c266a5842c7f099d980d6b239f9252",
+      "processing_version": "Phase1_Harmonized"
+    },
+    {
+      "dataset_id": "s1a_iw_grd_20240716_aligned",
+      "region_id": "jamuna_sirajganj",
+      "sensor": "sentinel1",
+      "product_type": "GRD_ALIGNED",
+      "acquisition_date": "2024-07-16T12:05:07Z",
+      "polarization": [
+        "VV",
+        "VH"
+      ],
+      "spatial_resolution_m": 20.0,
+      "crs": "EPSG:32645",
+      "source_path": "data/processed/aligned/july16_aligned.tif",
+      "reference_label_availability": true,
+      "quality_status": "VERIFIED_INTACT",
+      "sha256": "7b441b2a8a816dcc35b1e64b828def155687658e27be357ddb2e43984099c353",
+      "processing_version": "Phase1_Harmonized"
+    },
+    {
+      "dataset_id": "s1a_iw_grd_20240610_filtered_lee5x5",
+      "region_id": "jamuna_sirajganj",
+      "sensor": "sentinel1",
+      "product_type": "SIGMA0_FILTERED",
+      "acquisition_date": "2024-06-10T12:05:08Z",
+      "polarization": [
+        "VV",
+        "VH"
+      ],
+      "spatial_resolution_m": 20.0,
+      "crs": "EPSG:32645",
+      "source_path": "data/processed/phase2b/lee_5x5/june10_lee_5x5.tif",
+      "reference_label_availability": true,
+      "quality_status": "VERIFIED_INTACT",
+      "sha256": "1479ce3fdb415b253a940f1a0babaac552cb079c279abc785007ed9c6deb5215",
+      "processing_version": "Phase2B_Lee_5x5"
+    },
+    {
+      "dataset_id": "s1a_iw_grd_20240716_filtered_lee5x5",
+      "region_id": "jamuna_sirajganj",
+      "sensor": "sentinel1",
+      "product_type": "SIGMA0_FILTERED",
+      "acquisition_date": "2024-07-16T12:05:07Z",
+      "polarization": [
+        "VV",
+        "VH"
+      ],
+      "spatial_resolution_m": 20.0,
+      "crs": "EPSG:32645",
+      "source_path": "data/processed/phase2b/lee_5x5/july16_lee_5x5.tif",
+      "reference_label_availability": true,
+      "quality_status": "VERIFIED_INTACT",
+      "sha256": "933c39c844cc84260d33fc67c452d3cab38e001b8be4d4b77c7b10c7858aa140",
+      "processing_version": "Phase2B_Lee_5x5"
+    },
+    {
+      "dataset_id": "s2a_msil2a_20240607_scl",
+      "region_id": "jamuna_sirajganj",
+      "sensor": "sentinel2",
+      "product_type": "SCL_OPTICAL_REFERENCE",
+      "acquisition_date": "2024-06-07T04:37:11Z",
+      "polarization": [
+        "B03",
+        "B08",
+        "B11",
+        "B12",
+        "SCL"
+      ],
+      "spatial_resolution_m": 20.0,
+      "crs": "EPSG:32645",
+      "source_path": "data/processed/reference/optical/sentinel2/june_2024/s2_june07_aligned_scl.tif",
+      "reference_label_availability": true,
+      "quality_status": "READY",
+      "sha256": "f1f7cfeb1a32279a4f417d0d563719878cf051e538bfc7063d5bbcd1604d3f37",
+      "processing_version": "Phase4C1_Resampled"
+    },
+    {
+      "dataset_id": "s2a_msil2a_20240717_scl",
+      "region_id": "jamuna_sirajganj",
+      "sensor": "sentinel2",
+      "product_type": "SCL_OPTICAL_REFERENCE",
+      "acquisition_date": "2024-07-17T04:37:01Z",
+      "polarization": [
+        "B03",
+        "B08",
+        "B11",
+        "B12",
+        "SCL"
+      ],
+      "spatial_resolution_m": 20.0,
+      "crs": "EPSG:32645",
+      "source_path": "data/processed/reference/optical/sentinel2/july_2024/s2_july17_aligned_scl.tif",
+      "reference_label_availability": true,
+      "quality_status": "PARTIALLY_USABLE",
+      "sha256": "866636a211803e8c95d9b775611a0accc7946e888ab845b5a1f26da5c98509d3",
+      "processing_version": "Phase4C1_Resampled"
+    }
+  ]
+}

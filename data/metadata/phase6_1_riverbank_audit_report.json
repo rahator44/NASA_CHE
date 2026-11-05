@@ -1,0 +1,222 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "phase": "Phase 6.1: Riverbank Geometry Audit, Cross-Phase Reconciliation & Scientific Validation",
+  "timestamp": "2026-11-02T09:01:31.865416+00:00",
+  "audit_summary": {
+    "total_aoi_cells": 1010039,
+    "aoi_area_km2": 404.0156,
+    "cross_phase_pixel_conservation": true,
+    "mdd_uncertainty_m": 53.92
+  },
+  "transect_anomaly_investigation": {
+    "max_right_bank_anomaly": {
+      "reported_max_m": 5660.0,
+      "affected_transects": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "raster_rows": [
+        195,
+        195,
+        195,
+        196,
+        196
+      ],
+      "finding": "AOI Boundary Entry Asymmetry Artifact",
+      "explanation": "At the northern boundary of the AOI (rows 191-201), the western braid arm had not yet entered the study area in June at low stage. The algorithm matched the eastern braid Right Bank in June (col 1068) against the western braid Right Bank in July (col 785), creating an artificial 5,660 m displacement. Within the fully entered river corridor (row >= 202), true maximum Right Bank displacement is 820 m."
+    },
+    "max_left_bank_anomaly": {
+      "reported_max_m": 3580.0,
+      "affected_transects": [
+        93,
+        94,
+        95,
+        96
+      ],
+      "raster_rows": [
+        776,
+        783,
+        787,
+        790
+      ],
+      "finding": "Seasonal Secondary Anabranch Reactivation",
+      "explanation": "At row 776, floodwaters overtopped an elevated char bar that was dry in June, inundating an entire eastern secondary anabranch corridor out to col 1210. This 3,580 m displacement represents floodwater reactivation of an ephemeral braid branch, not 3.5 km of cut-bank scour."
+    }
+  },
+  "valid_local_migration_summary": [
+    {
+      "confidence_status": "VALID_LOCAL_MIGRATION",
+      "transect_count": 122,
+      "pct_total_transects": 79.22,
+      "right_bank_mean_m": 130.0,
+      "right_bank_median_m": 40.0,
+      "right_bank_min_m": -120.0,
+      "right_bank_max_m": 820.0,
+      "left_bank_mean_m": 160.66,
+      "left_bank_median_m": 90.0,
+      "left_bank_min_m": -20.0,
+      "left_bank_max_m": 960.0,
+      "channel_width_expansion_mean_m": 290.66,
+      "channel_width_expansion_median_m": 180.0,
+      "channel_width_expansion_max_m": 1100.0
+    }
+  ],
+  "causal_claims_audit": [
+    {
+      "claim_topic": "Brahmaputra Right Embankment (BRE) Confinement",
+      "reported_assertion": "The confining effect of the Brahmaputra Right Embankment holds median displacement to 40 m on the West Bank.",
+      "available_project_evidence": "No vector GIS layer, CAD drawings, elevation profiles, or maintenance logs for the BRE exist in the repository.",
+      "audit_verdict": "UNVERIFIED_HYPOTHESIS",
+      "scientific_correction": "Observed west-bank stability (median 40 m) is consistent with regional literature on BRE revetments, but constitutes an unverified causal hypothesis within this dataset."
+    },
+    {
+      "claim_topic": "Embankment Breach Assertions",
+      "reported_assertion": "Specific high-displacement reaches (>4000 m) represent embankment breaches.",
+      "available_project_evidence": "No BWDB breach logs or field engineering records exist. The 5,660 m displacement was proven to be an AOI boundary-entry artifact.",
+      "audit_verdict": "DISPROVED_ASSERTION",
+      "scientific_correction": "High displacement at northern edge is an AOI boundary artifact. No localized embankment breaches can be asserted without external geotechnical data."
+    },
+    {
+      "claim_topic": "July 16 Confirmed Flood Crest",
+      "reported_assertion": "July 16 represents the confirmed seasonal flood crest of the Jamuna River.",
+      "available_project_evidence": "Stage records at Kazipur and Sirajganj confirm water level exceeded danger level on July 16, but full-season continuous hydrographs are absent.",
+      "audit_verdict": "UNVERIFIED_DESIGNATION",
+      "scientific_correction": "Refer to July 16 as 'monsoon flood-period acquisition' or 'high-water event observation', reserving 'crest' for continuous hydrological records."
+    },
+    {
+      "claim_topic": "Erosion vs. Stage Submergence",
+      "reported_assertion": "All newly water-covered areas along channel margins represent riverbank erosion.",
+      "available_project_evidence": "River stage rose by >2.5 m between epochs, submerging gently sloping point bars and char berms without requiring cut-bank failure.",
+      "audit_verdict": "SCIENTIFICALLY_AMBIGUOUS",
+      "scientific_correction": "Designate all detected changes as 'Candidate Bank Expansion / Submergence', distinguishing morphological erosion from water-level stage effects."
+    }
+  ],
+  "reconciled_phase6_1_zonal_areas": [
+    {
+      "zone_code": 0,
+      "zone_name": "Persistent Mainland Non-Water",
+      "pixel_count": 571454,
+      "area_km2": 228.5816,
+      "area_ha": 22858.16,
+      "pct_study_aoi": 56.5774
+    },
+    {
+      "zone_code": 1,
+      "zone_name": "Persistent Channel Water",
+      "pixel_count": 210710,
+      "area_km2": 84.284,
+      "area_ha": 8428.4,
+      "pct_study_aoi": 20.8616
+    },
+    {
+      "zone_code": 2,
+      "zone_name": "External Bank Expansion / Erosion Candidate",
+      "pixel_count": 54850,
+      "area_km2": 21.94,
+      "area_ha": 2194.0,
+      "pct_study_aoi": 5.4305
+    },
+    {
+      "zone_code": 3,
+      "zone_name": "Internal Char Submergence Candidate",
+      "pixel_count": 58025,
+      "area_km2": 23.21,
+      "area_ha": 2321.0,
+      "pct_study_aoi": 5.7448
+    },
+    {
+      "zone_code": 4,
+      "zone_name": "Apparent Channel Contraction / Accretion Candidate",
+      "pixel_count": 1037,
+      "area_km2": 0.4148,
+      "area_ha": 41.48,
+      "pct_study_aoi": 0.1027
+    },
+    {
+      "zone_code": 5,
+      "zone_name": "Persistent Internal Char Islands",
+      "pixel_count": 57061,
+      "area_km2": 22.8244,
+      "area_ha": 2282.44,
+      "pct_study_aoi": 5.6494
+    },
+    {
+      "zone_code": 6,
+      "zone_name": "Disconnected Floodplain Inundation",
+      "pixel_count": 34117,
+      "area_km2": 13.6468,
+      "area_ha": 1364.68,
+      "pct_study_aoi": 3.3778
+    },
+    {
+      "zone_code": 7,
+      "zone_name": "Indeterminate Noise Floor",
+      "pixel_count": 16242,
+      "area_km2": 6.4968,
+      "area_ha": 649.68,
+      "pct_study_aoi": 1.6081
+    },
+    {
+      "zone_code": 8,
+      "zone_name": "Persistent Floodplain Water Bodies",
+      "pixel_count": 3606,
+      "area_km2": 1.4424,
+      "area_ha": 144.24,
+      "pct_study_aoi": 0.357
+    },
+    {
+      "zone_code": 9,
+      "zone_name": "Receded Floodplain Water",
+      "pixel_count": 597,
+      "area_km2": 0.2388,
+      "area_ha": 23.88,
+      "pct_study_aoi": 0.0591
+    },
+    {
+      "zone_code": 10,
+      "zone_name": "Persistent Char Island Water Depressions",
+      "pixel_count": 2279,
+      "area_km2": 0.9116,
+      "area_ha": 91.16,
+      "pct_study_aoi": 0.2256
+    },
+    {
+      "zone_code": 255,
+      "zone_name": "Source NoData / Border",
+      "pixel_count": 61,
+      "area_km2": 0.0244,
+      "area_ha": 2.44,
+      "pct_study_aoi": 0.006
+    }
+  ],
+  "deliverables": {
+    "processed_geotiffs": [
+      "data/processed/phase6_1/phase6_1_channel_change_zones.tif",
+      "data/processed/phase6_1/phase6_1_external_bank_expansion_candidate.tif",
+      "data/processed/phase6_1/phase6_1_internal_char_submergence_candidate.tif",
+      "data/processed/phase6_1/phase6_1_apparent_channel_contraction.tif",
+      "data/processed/phase6_1/phase6_1_disconnected_floodplain_inundation.tif",
+      "data/processed/phase6_1/phase6_1_persistent_floodplain_water.tif"
+    ],
+    "geojson_vectors": [
+      "data/processed/phase6_1/phase6_1_riverbank_transects.geojson",
+      "data/outputs/phase6_1/maps/phase6_1_riverbank_transects.geojson"
+    ],
+    "cartography_maps": [
+      "data/outputs/phase6_1/maps/phase6_1_channel_margin_displacement_map.png",
+      "data/outputs/phase6_1/maps/phase6_1_erosion_submergence_zones_map.png"
+    ],
+    "statistics_csv": [
+      "data/outputs/phase6_1/statistics/phase6_1_phase5_phase6_crosstab.csv",
+      "data/outputs/phase6_1/statistics/phase6_1_transect_geometry_audit.csv",
+      "data/outputs/phase6_1/statistics/phase6_1_transect_displacement_audit.csv",
+      "data/outputs/phase6_1/statistics/phase6_1_channel_belt_sensitivity.csv",
+      "data/outputs/phase6_1/statistics/phase6_1_area_reconciliation.csv",
+      "data/outputs/phase6_1/statistics/phase6_1_uncertainty_summary.csv",
+      "data/outputs/phase6_1/statistics/phase6_1_causal_claim_audit.csv"
+    ]
+  }
+}

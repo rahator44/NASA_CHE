@@ -1,0 +1,191 @@
+{
+  "pipeline": "Earth Pulse Phase 1: Raster Harmonization Engine",
+  "timestamp_utc": "2026-10-31T17:18:02Z",
+  "duration_seconds": 3.81,
+  "project_root": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR",
+  "reference_grid": {
+    "source_file": "june10_sigma0_vv_vh.tif",
+    "crs": "EPSG:32645",
+    "dimensions": [
+      1405,
+      1393
+    ],
+    "pixel_resolution_m": [
+      20.0,
+      20.0
+    ],
+    "geotransform": [
+      754115.6463743874,
+      20.0,
+      0.0,
+      2744939.181560975,
+      0.0,
+      -20.0
+    ],
+    "origin": [
+      754115.6463743874,
+      2744939.181560975
+    ]
+  },
+  "source_rasters": {
+    "june10": {
+      "path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/geotiff/june10_sigma0_vv_vh.tif",
+      "sha256": "c32c14adc8a76c62c07fe3dc83a80a2d0aba521f5fee52e206759f7cdd6f4b1a",
+      "size_bytes": 21534955,
+      "dimensions": [
+        1405,
+        1393
+      ],
+      "geotransform": [
+        754115.6463743874,
+        20.0,
+        0.0,
+        2744939.181560975,
+        0.0,
+        -20.0
+      ],
+      "verified_bands": {
+        "1": "Sigma0_VH",
+        "2": "Sigma0_VV"
+      }
+    },
+    "july16": {
+      "path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/geotiff/july16_sigma0_vv_vh.tif",
+      "sha256": "52750a4ec9b314cfb77ea82efb0c874d751e517e1244513c2c31d8f2d2c8d459",
+      "size_bytes": 21837032,
+      "dimensions": [
+        1406,
+        1393
+      ],
+      "geotransform": [
+        754108.3860274315,
+        20.0,
+        0.0,
+        2744937.8139232355,
+        0.0,
+        -20.0
+      ],
+      "verified_bands": {
+        "1": "Sigma0_VH",
+        "2": "Sigma0_VV"
+      }
+    }
+  },
+  "aligned_outputs": {
+    "june10": {
+      "path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/aligned/june10_aligned.tif",
+      "sha256": "c54f97e0a24b20574f38c786ac82e38855c266a5842c7f099d980d6b239f9252",
+      "size_bytes": 9410940,
+      "dimensions": [
+        1405,
+        1393
+      ],
+      "geotransform": [
+        754115.6463743874,
+        20.0,
+        0.0,
+        2744939.181560975,
+        0.0,
+        -20.0
+      ],
+      "nodata_value": -9999.0,
+      "band_descriptions": {
+        "1": "Sigma0_VH",
+        "2": "Sigma0_VV"
+      },
+      "valid_pixel_counts": {
+        "1": 1379982,
+        "2": 1379982
+      }
+    },
+    "july16": {
+      "path": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/processed/aligned/july16_aligned.tif",
+      "sha256": "7b441b2a8a816dcc35b1e64b828def155687658e27be357ddb2e43984099c353",
+      "size_bytes": 9283566,
+      "dimensions": [
+        1405,
+        1393
+      ],
+      "geotransform": [
+        754115.6463743874,
+        20.0,
+        0.0,
+        2744939.181560975,
+        0.0,
+        -20.0
+      ],
+      "nodata_value": -9999.0,
+      "resampling_method": "Bilinear (gdal.GRA_Bilinear)",
+      "band_descriptions": {
+        "1": "Sigma0_VH",
+        "2": "Sigma0_VV"
+      },
+      "valid_pixel_counts": {
+        "1": 1380574,
+        "2": 1380574
+      }
+    }
+  },
+  "coverage_metrics": {
+    "total_grid_pixels": 1957165,
+    "pixel_resolution_m": [
+      20.0,
+      20.0
+    ],
+    "pixel_area_m2": 400.0,
+    "june10_valid_pixels": 1379982,
+    "june10_valid_pct": 70.5092,
+    "july16_valid_pixels": 1380574,
+    "july16_valid_pct": 70.5395,
+    "common_valid_pixels": 1379858,
+    "common_valid_pct": 70.5029,
+    "common_valid_area_km2": 551.9432,
+    "only_june_valid_pixels": 124,
+    "only_july_valid_pixels": 716,
+    "neither_valid_pixels": 576467,
+    "overlap_relative_to_june_pct": 99.991,
+    "valid_pixel_statistics": {
+      "june10": {
+        "vh": {
+          "min": 2.553766573210048e-11,
+          "max": 22.76595115661621,
+          "sum": 42526.51403808594,
+          "count": 1379982,
+          "mean": 0.030816716477523574
+        },
+        "vv": {
+          "min": 2.600927806462039e-11,
+          "max": 348.06207275390625,
+          "sum": 269260.2265625,
+          "count": 1379982,
+          "mean": 0.19511865123059577
+        }
+      },
+      "july16": {
+        "vh": {
+          "min": 2.592878863005854e-11,
+          "max": 9.938769340515137,
+          "sum": 33828.886962890625,
+          "count": 1380574,
+          "mean": 0.02450349417191011
+        },
+        "vv": {
+          "min": 2.6051565418794276e-11,
+          "max": 222.65126037597656,
+          "sum": 222900.7197265625,
+          "count": 1380574,
+          "mean": 0.16145510470757996
+        }
+      }
+    }
+  },
+  "validation_results": {
+    "crs_match": true,
+    "dimensions_match": true,
+    "geotransform_match": true,
+    "band_count_match": true,
+    "band_descriptions_match": true,
+    "explicit_nodata_verified": true,
+    "subpixel_alignment_verified": true
+  }
+}

@@ -1,0 +1,5 @@
+configuration,june_channel_belt_px,june_channel_belt_km2,july_channel_belt_px,july_channel_belt_km2,channel_belt_expansion_px,channel_belt_expansion_km2,june_internal_chars_px,june_internal_chars_km2,july_internal_chars_px,july_internal_chars_km2,char_submergence_difference_km2
+4-connectivity Hole-Fill (Phase 6 Baseline),348644,139.4576,423814,169.5256,75170,30.068,136987,54.7948,79911,31.9644,22.8304
+8-connectivity Hole-Fill,352207,140.8828,425801,170.3204,73594,29.4376,138964,55.5856,78762,31.5048,24.0808
+8-conn + 200m Morphological Closing,358130,143.252,441944,176.7776,83814,33.5256,144887,57.9548,94905,37.962,19.9928
+8-conn + 500m Morphological Closing,369493,147.7972,448037,179.2148,78544,31.4176,156250,62.5,100998,40.3992,22.1008

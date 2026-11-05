@@ -1,0 +1,397 @@
+{
+  "document_type": "Earth Pulse Phase 2A.2: Scientific Interpretation Correction Addendum",
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "study_area": "Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)",
+  "timestamp_utc": "2026-11-01T00:20:00Z",
+  "task_1_noise_floor_verification": {
+    "safe_metadata_findings": {
+      "june10": {
+        "VH": {
+          "noise_file": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/calibration/noise-s1a-iw-grd-vh-20240610t120508-20240610t120533-054261-06999f-002.xml",
+          "calibration_file": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/calibration/calibration-s1a-iw-grd-vh-20240610t120508-20240610t120533-054261-06999f-002.xml",
+          "noise_vector_count": 16952,
+          "noise_lut_min": 0.0,
+          "noise_lut_max": 2793.457,
+          "noise_lut_mean": 1138.628665768051,
+          "cal_sigma_min": 557.4043,
+          "cal_sigma_max": 662.3158,
+          "cal_sigma_mean": 600.5325349768875,
+          "estimated_nesz_db_min": -30.998675114698283,
+          "estimated_nesz_db_max": -20.4619863875772,
+          "estimated_nesz_db_mean": -25.00690968910898
+        },
+        "VV": {
+          "noise_file": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/calibration/noise-s1a-iw-grd-vv-20240610t120508-20240610t120533-054261-06999f-001.xml",
+          "calibration_file": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.SAFE/annotation/calibration/calibration-s1a-iw-grd-vv-20240610t120508-20240610t120533-054261-06999f-001.xml",
+          "noise_vector_count": 16952,
+          "noise_lut_min": 0.0,
+          "noise_lut_max": 2570.741,
+          "noise_lut_mean": 1084.89764339311,
+          "cal_sigma_min": 557.4043,
+          "cal_sigma_max": 662.3158,
+          "cal_sigma_mean": 600.5325349768875,
+          "estimated_nesz_db_min": -30.847628440228945,
+          "estimated_nesz_db_max": -20.82282305319228,
+          "estimated_nesz_db_mean": -25.216843163611546
+        }
+      },
+      "july16": {
+        "VH": {
+          "noise_file": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/calibration/noise-s1a-iw-grd-vh-20240716t120507-20240716t120532-054786-06abd2-002.xml",
+          "calibration_file": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/calibration/calibration-s1a-iw-grd-vh-20240716t120507-20240716t120532-054786-06abd2-002.xml",
+          "noise_vector_count": 17604,
+          "noise_lut_min": 0.0,
+          "noise_lut_max": 2581.477,
+          "noise_lut_mean": 1075.0715763406045,
+          "cal_sigma_min": 557.418,
+          "cal_sigma_max": 662.3633,
+          "cal_sigma_mean": 600.5623351309707,
+          "estimated_nesz_db_min": -31.08801432870355,
+          "estimated_nesz_db_max": -20.80493717462744,
+          "estimated_nesz_db_mean": -25.256788032430727
+        },
+        "VV": {
+          "noise_file": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/calibration/noise-s1a-iw-grd-vv-20240716t120507-20240716t120532-054786-06abd2-001.xml",
+          "calibration_file": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.SAFE/annotation/calibration/calibration-s1a-iw-grd-vv-20240716t120507-20240716t120532-054786-06abd2-001.xml",
+          "noise_vector_count": 17604,
+          "noise_lut_min": 0.0,
+          "noise_lut_max": 2444.728,
+          "noise_lut_mean": 1035.918986929107,
+          "cal_sigma_min": 557.418,
+          "cal_sigma_max": 662.3633,
+          "cal_sigma_mean": 600.5623351309707,
+          "estimated_nesz_db_min": -30.96943563225733,
+          "estimated_nesz_db_max": -21.041314308398317,
+          "estimated_nesz_db_mean": -25.417903898609158
+        }
+      }
+    },
+    "nominal_sentinel1_nesz_range_db": [
+      -28.0,
+      -22.0
+    ],
+    "diagnostic_threshold_35db_status": "RETRACTED_AS_PHYSICAL_NOISE_FLOOR",
+    "diagnostic_threshold_35db_explanation": "A threshold of -35 dB is 7 to 13 dB BELOW the sensor's nominal physical NESZ (-22 to -28 dB). Values below -35 dB occur strictly after SNAP thermal noise removal has subtracted the noise LUT. Therefore, -35 dB is an arbitrary diagnostic bin, NOT a physical noise floor.",
+    "orthorectified_noise_lut_mapping": {
+      "status": "EXACT_PER_PIXEL_DETECTION_LIMIT_UNAVAILABLE",
+      "reason": "In SNAP processing, ThermalNoiseRemoval executed with 'outputNoise: false'. The subsequent Range-Doppler Terrain Correction performed non-linear resampling from radar geometry to UTM 45N without propagating the noise vectors. Consequently, an exact per-pixel NESZ value is not present in the terrain-corrected rasters."
+    }
+  },
+  "task_2_numerical_clipping_floor_discovery": {
+    "snap_operator": "ThermalNoiseRemovalOp (moduleVersion 14.0.0)",
+    "clipNegativeValues_parameter": true,
+    "intensity_clipping_constant": 1e-05,
+    "sigma0_calibrated_floor_range_linear": [
+      2.5537666e-11,
+      2.6458754e-11
+    ],
+    "sigma0_calibrated_floor_range_db": [
+      -105.928,
+      -105.776
+    ],
+    "physical_meaning": "Values near -105.9 dB are NOT radar measurements of surface backscatter. They are the calibrated product of SNAP's internal intensity clipping constant (I = 1e-5) divided by the square of the Sentinel-1 calibration factor (A_sigma^2 approx 390,000).",
+    "clamped_pixel_counts": {
+      "june10_vh_aligned": 18734,
+      "june10_vv_aligned": 7,
+      "july16_vh_aligned": 205,
+      "july16_vv_aligned": 1
+    },
+    "bilinear_interpolation_effect": "In Phase 1, July 16 was aligned to June 10 using GDAL GRA_Bilinear with a subpixel origin offset of ~0.25 pixels. This spatially smoothed adjacent 1e-5 clamped pixels into neighboring non-clamped pixels, raising many July clamped pixels from -105.9 dB to between -35 dB and -60 dB, while June 10 remained an un-resampled reference grid with 18,734 pixels at the exact 1e-5 floor.",
+    "representative_extreme_pixels": {
+      "vh_positive_extremes": [
+        {
+          "raster_row": 231,
+          "raster_col": 135,
+          "utm_easting": 756815.6463743874,
+          "utm_northing": 2740319.181560975,
+          "difference_db": 91.49561309814453,
+          "june10_linear_sigma0": 2.5612413231956843e-11,
+          "june10_sigma0_db": -105.9154949986244,
+          "july16_linear_sigma0": 0.03614196926355362,
+          "july16_sigma0_db": -14.419881877741286,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        },
+        {
+          "raster_row": 372,
+          "raster_col": 358,
+          "utm_easting": 761275.6463743874,
+          "utm_northing": 2737499.181560975,
+          "difference_db": 86.75599670410156,
+          "june10_linear_sigma0": 2.576831630018983e-11,
+          "june10_sigma0_db": -105.88913957290197,
+          "july16_linear_sigma0": 0.012209164910018444,
+          "july16_sigma0_db": -19.133140401807385,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        },
+        {
+          "raster_row": 1021,
+          "raster_col": 1028,
+          "utm_easting": 774675.6463743874,
+          "utm_northing": 2724519.181560975,
+          "difference_db": 85.60234832763672,
+          "june10_linear_sigma0": 2.619192536468251e-11,
+          "june10_sigma0_db": -105.81832575476143,
+          "july16_linear_sigma0": 0.00951484963297844,
+          "july16_sigma0_db": -20.215980706542837,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        },
+        {
+          "raster_row": 1061,
+          "raster_col": 1070,
+          "utm_easting": 775515.6463743874,
+          "utm_northing": 2723719.181560975,
+          "difference_db": 85.55728149414062,
+          "june10_linear_sigma0": 2.6218220303131368e-11,
+          "june10_sigma0_db": -105.8139679162235,
+          "july16_linear_sigma0": 0.00942606944590807,
+          "july16_sigma0_db": -20.25669364930344,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        },
+        {
+          "raster_row": 499,
+          "raster_col": 1012,
+          "utm_easting": 774355.6463743874,
+          "utm_northing": 2734959.181560975,
+          "difference_db": 85.53465270996094,
+          "june10_linear_sigma0": 2.6265978975148485e-11,
+          "june10_sigma0_db": -105.80606407707569,
+          "july16_linear_sigma0": 0.00939418375492096,
+          "july16_sigma0_db": -20.27140949052952,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        }
+      ],
+      "vh_negative_extremes": [
+        {
+          "raster_row": 132,
+          "raster_col": 850,
+          "utm_easting": 771115.6463743874,
+          "utm_northing": 2742299.181560975,
+          "difference_db": -94.80223846435547,
+          "june10_linear_sigma0": 0.07916564494371414,
+          "june10_sigma0_db": -11.014632457882975,
+          "july16_linear_sigma0": 2.6200692657130098e-11,
+          "july16_sigma0_db": -105.8168722726067,
+          "july16_below_detection_limit": true,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        },
+        {
+          "raster_row": 1135,
+          "raster_col": 1184,
+          "utm_easting": 777795.6463743874,
+          "utm_northing": 2722239.181560975,
+          "difference_db": -94.3134536743164,
+          "june10_linear_sigma0": 0.07099840044975281,
+          "june10_sigma0_db": -11.48751435557983,
+          "july16_linear_sigma0": 2.629687960442606e-11,
+          "july16_sigma0_db": -105.80095781965696,
+          "july16_below_detection_limit": true,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        },
+        {
+          "raster_row": 467,
+          "raster_col": 697,
+          "utm_easting": 768055.6463743874,
+          "utm_northing": 2735599.181560975,
+          "difference_db": -94.12415313720703,
+          "june10_linear_sigma0": 0.06726574152708054,
+          "june10_sigma0_db": -11.722060658482087,
+          "july16_linear_sigma0": 2.6024299035198872e-11,
+          "july16_sigma0_db": -105.84620959386876,
+          "july16_below_detection_limit": true,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        },
+        {
+          "raster_row": 260,
+          "raster_col": 778,
+          "utm_easting": 769675.6463743874,
+          "utm_northing": 2739739.181560975,
+          "difference_db": -93.25787353515625,
+          "june10_linear_sigma0": 0.05531127378344536,
+          "june10_sigma0_db": -12.571863398900549,
+          "july16_linear_sigma0": 2.6123183477499978e-11,
+          "july16_sigma0_db": -105.82973899278072,
+          "july16_below_detection_limit": true,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        },
+        {
+          "raster_row": 14,
+          "raster_col": 1116,
+          "utm_easting": 776435.6463743874,
+          "utm_northing": 2744659.181560975,
+          "difference_db": -92.88338470458984,
+          "june10_linear_sigma0": 0.05133332312107086,
+          "june10_sigma0_db": -12.896006202818295,
+          "july16_linear_sigma0": 2.6427778368476318e-11,
+          "july16_sigma0_db": -105.77939343976303,
+          "july16_below_detection_limit": true,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        }
+      ],
+      "vv_positive_extremes": [
+        {
+          "raster_row": 1147,
+          "raster_col": 867,
+          "utm_easting": 771455.6463743874,
+          "utm_northing": 2721999.181560975,
+          "difference_db": 87.64199829101562,
+          "june10_linear_sigma0": 2.6044092230059768e-11,
+          "june10_sigma0_db": -105.84290775353436,
+          "july16_linear_sigma0": 0.01513246912509203,
+          "july16_sigma0_db": -18.200902035093037,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        },
+        {
+          "raster_row": 757,
+          "raster_col": 853,
+          "utm_easting": 771175.6463743874,
+          "utm_northing": 2729799.181560975,
+          "difference_db": 85.6681900024414,
+          "june10_linear_sigma0": 2.6098314481748375e-11,
+          "june10_sigma0_db": -105.83387539976401,
+          "july16_linear_sigma0": 0.009625676088035107,
+          "july16_sigma0_db": -20.165687567814352,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        },
+        {
+          "raster_row": 1140,
+          "raster_col": 895,
+          "utm_easting": 772015.6463743874,
+          "utm_northing": 2722139.181560975,
+          "difference_db": 85.26201629638672,
+          "june10_linear_sigma0": 2.6067427730258608e-11,
+          "june10_sigma0_db": -105.83901821830148,
+          "july16_linear_sigma0": 0.008755896240472794,
+          "july16_sigma0_db": -20.576993935701985,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        },
+        {
+          "raster_row": 769,
+          "raster_col": 888,
+          "utm_easting": 771875.6463743874,
+          "utm_northing": 2729559.181560975,
+          "difference_db": 84.4776611328125,
+          "june10_linear_sigma0": 2.6123945021105932e-11,
+          "june10_sigma0_db": -105.8296123890054,
+          "july16_linear_sigma0": 0.007324952632188797,
+          "july16_sigma0_db": -21.351951793896262,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        },
+        {
+          "raster_row": 266,
+          "raster_col": 1105,
+          "utm_easting": 776215.6463743874,
+          "utm_northing": 2739619.181560975,
+          "difference_db": 84.3853530883789,
+          "june10_linear_sigma0": 2.6376944031736294e-11,
+          "june10_sigma0_db": -105.78775522172266,
+          "july16_linear_sigma0": 0.007240363396704197,
+          "july16_sigma0_db": -21.40239635843909,
+          "june10_at_snap_numerical_clamp": true,
+          "radiometric_interpretation": "June observation at SNAP software clipping floor (1e-5 intensity); mathematically inflated difference"
+        }
+      ],
+      "vv_negative_extremes": [
+        {
+          "raster_row": 422,
+          "raster_col": 722,
+          "utm_easting": 768555.6463743874,
+          "utm_northing": 2736499.181560975,
+          "difference_db": -89.93255615234375,
+          "june10_linear_sigma0": 0.02565009891986847,
+          "june10_sigma0_db": -15.9091095568783,
+          "july16_linear_sigma0": 2.6051565418794276e-11,
+          "july16_sigma0_db": -105.84166175154557,
+          "july16_below_detection_limit": true,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        },
+        {
+          "raster_row": 352,
+          "raster_col": 981,
+          "utm_easting": 773735.6463743874,
+          "utm_northing": 2737899.181560975,
+          "difference_db": -46.20570373535156,
+          "june10_linear_sigma0": 0.02236681804060936,
+          "june10_sigma0_db": -16.503957953265772,
+          "july16_linear_sigma0": 5.358388079912402e-07,
+          "july16_sigma0_db": -62.70965835919845,
+          "july16_below_detection_limit": true,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        },
+        {
+          "raster_row": 394,
+          "raster_col": 876,
+          "utm_easting": 771635.6463743874,
+          "utm_northing": 2737059.181560975,
+          "difference_db": -46.18893051147461,
+          "june10_linear_sigma0": 0.0671762153506279,
+          "june10_sigma0_db": -11.727844675773902,
+          "july16_linear_sigma0": 1.6155574940057704e-06,
+          "july16_sigma0_db": -57.91677581821426,
+          "july16_below_detection_limit": false,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        },
+        {
+          "raster_row": 357,
+          "raster_col": 1085,
+          "utm_easting": 775815.6463743874,
+          "utm_northing": 2737799.181560975,
+          "difference_db": -43.706275939941406,
+          "june10_linear_sigma0": 0.009817801415920258,
+          "june10_sigma0_db": -20.079857565957184,
+          "july16_linear_sigma0": 4.182024042620469e-07,
+          "july16_sigma0_db": -63.78613474735136,
+          "july16_below_detection_limit": true,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        },
+        {
+          "raster_row": 514,
+          "raster_col": 993,
+          "utm_easting": 773975.6463743874,
+          "utm_northing": 2734659.181560975,
+          "difference_db": -36.75960922241211,
+          "june10_linear_sigma0": 0.11070144921541214,
+          "june10_sigma0_db": -9.558466936457862,
+          "july16_linear_sigma0": 2.3344897272181697e-05,
+          "july16_sigma0_db": -46.318080328157535,
+          "july16_below_detection_limit": false,
+          "radiometric_interpretation": "July observation below detection limit or at SNAP software clipping floor"
+        }
+      ]
+    }
+  },
+  "task_3_corrected_classification_guidance": {
+    "flawed_previous_statement": "In threshold classification, all values below the water mode threshold are classified as water regardless of whether they are -25 dB or -100 dB, rendering the deep negative tail completely harmless.",
+    "scientific_correction": "Observations below the sensor detection limit must NOT automatically be classified as water. While specular open water produces low backscatter, radar shadow, smooth tarmac, dry sand flats, and processing border nulls also produce returns below the noise detection limit. Automatically labeling sub-detection pixels as water introduces structural false positives.",
+    "radiometric_categorization_framework": {
+      "Category_1_Reliable_High_Moderate": "sigma0 >= NESZ_margin (~ -20 dB for VV, ~ -24 dB for VH); reliable land/vegetation/infrastructure",
+      "Category_2_Reliable_Low": "NESZ_margin > sigma0 >= Detection_Limit (~ -26 dB for VV, ~ -28 dB for VH); reliable specular water/smooth surface",
+      "Category_3_Below_Detection_Limit": "sigma0 < Detection_Limit (including SNAP 1e-5 numerical floor); indeterminate radiometry requiring contextual or auxiliary validation",
+      "Category_4_Invalid_NoData": "sigma0 == -9999.0; excluded from analysis"
+    }
+  },
+  "task_4_review_of_extreme_difference_claims": {
+    "flawed_previous_claim": "100.0% of extreme positive VH differences were caused by the noise floor.",
+    "corrected_scientific_statement": "Of the 19683 pixels with Delta VH > +30 dB, exactly 18722 pixels (95.12%) have June 10 baseline values residing at SNAP's software clipping constant (1e-5 intensity / -105.9 dB). The extreme difference is a mathematical artifact of subtracting -105.9 dB in logarithmic space (Delta_dB = July_dB - (-105.9 dB)), NOT a physical measurement of radar backscatter change.",
+    "retraction_of_unsupported_land_cover_labels": "All land-cover associations in Phase 2A.1 diagnostic distribution tables (e.g. 'vegetation', 'settlements', 'wet sandbars', 'open water') were speculative interpretations unsupported by in-situ ground truth, optical imagery, or hydrometric data. In the absence of independent verification, diagnostic bins must only be reported as calibrated radiometric backscatter ranges."
+  },
+  "task_5_phase_2b_filtering_and_classification_recommendations": {
+    "speckle_vs_thermal_noise_distinction": "Speckle is multiplicative noise arising from the coherent interference of sub-resolution scatterers. Thermal noise is additive electronic system noise setting the detection limit. Spatial filtering reduces speckle variance; it does NOT correct thermal noise or restore clipped sub-detection values.",
+    "filtering_domain": "LINEAR_POWER (Sigma0_linear, not decibels; decibel filtering introduces Jensen's inequality bias of -2.5 dB)",
+    "recommended_filters": [
+      "Refined Lee (5x5)",
+      "Gamma MAP (5x5)"
+    ],
+    "edge_preservation_requirement": "Filter must use local coefficient of variation (Cv = std / mean) to inhibit smoothing across water-land boundaries",
+    "nodata_handling": "Kernels must strictly mask -9999.0 pixels; invalid pixels must not contribute to neighborhood statistics, and valid data must not bleed into masked areas",
+    "threshold_selection_policy": "NO FINAL WATER THRESHOLD SELECTED IN THIS PHASE. Threshold determination must be empirically evaluated using multi-temporal bimodal histograms in Phase 2B."
+  }
+}

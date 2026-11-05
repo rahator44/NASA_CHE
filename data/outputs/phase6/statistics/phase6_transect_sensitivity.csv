@@ -1,0 +1,5 @@
+sampling_interval_m,transect_count,right_bank_mean_m,right_bank_median_m,right_bank_max_m,right_bank_p90_m,left_bank_mean_m,left_bank_median_m,left_bank_max_m,left_bank_p90_m,channel_width_expansion_mean_m,channel_width_expansion_median_m,channel_width_expansion_max_m
+200.0,154,406.62,40.0,5660.0,802.0,432.08,140.0,3580.0,1074.0,838.7,320.0,6700.0
+100.0,307,418.63,40.0,5660.0,784.0,428.53,140.0,3580.0,1060.0,847.17,320.0,6700.0
+500.0,62,417.42,40.0,5660.0,728.0,453.23,160.0,3480.0,1078.0,870.65,340.0,6700.0
+1000.0,31,370.32,40.0,4420.0,580.0,442.58,160.0,3360.0,1060.0,812.9,320.0,5480.0

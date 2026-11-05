@@ -1,0 +1,9 @@
+configuration,spatial_domain,indeterminate_cells,indeterminate_km2,indeterminate_pct,nodata_cells,nodata_km2,nodata_pct,total_uncertainty_cells,total_uncertainty_km2,total_uncertainty_pct
+primary,Target_AOI,16242,6.4968,1.6081,61,0.0244,0.006,16303,6.5212,1.6141
+primary,Full_Raster,18930,7.572,0.9672,577307,230.9228,29.4971,596237,238.4948,30.4643
+2d_otsu,Target_AOI,69936,27.9744,6.9241,61,0.0244,0.006,69997,27.9988,6.9301
+2d_otsu,Full_Raster,89580,35.832,4.577,577307,230.9228,29.4971,666887,266.7548,34.0741
+lee_3x3,Target_AOI,16242,6.4968,1.6081,61,0.0244,0.006,16303,6.5212,1.6141
+lee_3x3,Full_Raster,18930,7.572,0.9672,577307,230.9228,29.4971,596237,238.4948,30.4643
+unfiltered,Target_AOI,16242,6.4968,1.6081,61,0.0244,0.006,16303,6.5212,1.6141
+unfiltered,Full_Raster,18930,7.572,0.9672,577307,230.9228,29.4971,596237,238.4948,30.4643

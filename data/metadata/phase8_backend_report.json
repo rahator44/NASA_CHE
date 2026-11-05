@@ -1,0 +1,116 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "phase": "Phase 8: Backend API, Scientific Data Services & Application Foundation",
+  "status": "COMPLETED_AND_VERIFIED",
+  "timestamp_utc": "2026-11-03T18:42:00Z",
+  "study_area": {
+    "region_id": "jamuna_sirajganj",
+    "name": "Jamuna River Reach (Kazipur / Sirajganj, Bangladesh)",
+    "crs": "EPSG:32645",
+    "spatial_resolution_m": 20.0,
+    "dimensions": [1405, 1393],
+    "bounding_box": {
+      "minx": 757800.0,
+      "miny": 2720200.0,
+      "maxx": 785900.0,
+      "maxy": 2748060.0
+    }
+  },
+  "runtime_environment": {
+    "os": "Linux",
+    "cpu_architecture": "x86_64 (Intel 12th Gen i7)",
+    "ram_gb": 16,
+    "acceleration": "CPU-only",
+    "dependencies": {
+      "python": "3.14.8",
+      "fastapi": "0.142.2",
+      "starlette": "1.9.0",
+      "pydantic": "2.13.5",
+      "gdal": "3.13.3",
+      "sqlite": "3.46.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pandas": "2.3.3",
+      "pillow": "12.3.0"
+    },
+    "blocked_packages_confirmed_uninstalled": [
+      "rasterio",
+      "geopandas",
+      "shapely",
+      "shap",
+      "sklearn"
+    ]
+  },
+  "metadata_errata_resolution": {
+    "base_value_disambiguation": {
+      "training_background_expectation": 0.4905,
+      "ensemble_root_mean_probability": 0.4995,
+      "prior_specification_typo": 0.3905,
+      "typographical_offset": -0.1000,
+      "resolution": "Both valid values explicitly documented and exposed in distinct API fields"
+    },
+    "acquisition_calendar_year": {
+      "authoritative_year": 2024,
+      "pre_monsoon_acquisition": "2024-06-10T12:05:08Z",
+      "peak_monsoon_acquisition": "2024-07-16T12:05:07Z",
+      "colloquial_references_corrected": "Historical prompt mentions of 2026 reconciled to 2024 satellite capture"
+    },
+    "baseline_spatial_agreement": {
+      "agreement_percentage": 53.89,
+      "derivation": "(N_both_water + N_both_non_water) / N_total = (2177 + 1123) / 6124 = 53.8863%",
+      "interpretation": "Substantial over-prediction by Random Forest justifies auxiliary probability layer status"
+    }
+  },
+  "tile_engine": {
+    "projection": "EPSG:3857 (Spherical Web Mercator)",
+    "tile_dimensions": [256, 256],
+    "format": "image/png",
+    "rendering_method": "In-memory gdal.Warp + Pillow RGBA array colorization",
+    "resampling_discipline": {
+      "categorical_layers": "Nearest Neighbour (gdal.GRA_NearestNeighbour)",
+      "continuous_layers": "Bilinear (gdal.GRA_Bilinear)"
+    },
+    "mean_latency_ms": 7.4,
+    "outside_aoi_behavior": "Fully transparent PNG tile (alpha=0)"
+  },
+  "database": {
+    "engine": "SQLite3",
+    "database_file": "data/metadata/earth_pulse_jobs.db",
+    "precomputed_runs_seeded": 9,
+    "allowlisted_job_actions": [
+      "audit_environment",
+      "verify_dataset_integrity",
+      "generate_flood_summary",
+      "generate_riverbank_summary",
+      "run_model_explainability_audit"
+    ],
+    "shell_execution_policy": "STRICTLY_BLOCKED"
+  },
+  "security": {
+    "path_traversal_protection": "ENFORCED",
+    "cors_allowed_origins": [
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+      "http://localhost:5173",
+      "http://127.0.0.1:5173"
+    ],
+    "unconfirmed_intake_stage": "STAGED_WITHOUT_POLLUTION"
+  },
+  "model_artifact_verification": {
+    "model_id": "phase7a_rf_jamuna_v1",
+    "artifact_path": "models/phase7a/phase7a_random_forest_model.joblib",
+    "expected_sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+    "actual_sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+    "match": true,
+    "operational_status": "RETAINED_AS_PROBABILITY_LAYER",
+    "decision_threshold": 0.35
+  },
+  "test_suite_execution": {
+    "total_tests_passing": 315,
+    "total_tests_failing": 0,
+    "total_warnings": 0,
+    "phase8_test_count": 24,
+    "phase8_test_file": "tests/test_phase8_backend.py",
+    "execution_time_seconds": 14.65
+  }
+}

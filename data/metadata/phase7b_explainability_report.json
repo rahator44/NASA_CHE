@@ -1,0 +1,155 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "phase": "Phase 7B: Explainable AI, SHAP Attribution & SAR Model Interpretability",
+  "model_identifier": "phase7a_rf_jamuna_v1",
+  "model_registry_status": "RETAINED_AS_PROBABILITY_LAYER",
+  "operational_baseline": "deterministic_lee_5x5_dual_and_otsu",
+  "environment_audit": {
+    "python_version": "3.14.8",
+    "packages": {
+      "shap": {
+        "installed": false,
+        "version": null
+      },
+      "sklearn": {
+        "installed": false,
+        "version": null
+      },
+      "numpy": {
+        "installed": true,
+        "version": "2.4.6"
+      },
+      "pandas": {
+        "installed": true,
+        "version": "2.3.3"
+      },
+      "matplotlib": {
+        "installed": true,
+        "version": "3.10.9+dfsg1"
+      },
+      "scipy": {
+        "installed": true,
+        "version": "1.17.1"
+      },
+      "joblib": {
+        "installed": true,
+        "version": "1.5.3"
+      }
+    },
+    "shap_available": false,
+    "shap_status": "BLOCKED_DEPENDENCY_MISSING",
+    "scikit_learn_available": false,
+    "primary_explainer_engine": "Native Pure-NumPy TreePathExplainer (Exact Lundberg/Saabas Formulation)",
+    "notes": "Third-party 'shap' package is not installed. Per strict project governance, package installation is prohibited. Native pure-NumPy tree-path Shapley attributions and model-agnostic diagnostics are executed using verified dependencies (numpy, scipy, pandas, matplotlib)."
+  },
+  "redundancy_analysis": {
+    "pearson_r": 0.8557839828276783,
+    "spearman_r": 0.999999927372229,
+    "verdict": "STRICT_MONOTONIC_REDUNDANCY: cross_pol_ratio is defined as clip(10 ** (vv_minus_vh_db / 10), 0, 100). The Spearman rank correlation is 1.0000 across unclipped domains. In a tree ensemble, splits on cross_pol_ratio and vv_minus_vh_db partition the sample space along identical ordering, causing credit-splitting in tree-path attributions."
+  },
+  "global_importance_ranking": [
+    {
+      "feature_name": "vv_db",
+      "mean_abs_shap": 0.050816082162037396,
+      "mean_signed_shap": -0.0015672509166040863,
+      "rank": 1
+    },
+    {
+      "feature_name": "vh_db",
+      "mean_abs_shap": 0.05028309210425364,
+      "mean_signed_shap": -0.001363188684048135,
+      "rank": 2
+    },
+    {
+      "feature_name": "texture_vh",
+      "mean_abs_shap": 0.029210905547238385,
+      "mean_signed_shap": -0.002385720961185697,
+      "rank": 3
+    },
+    {
+      "feature_name": "texture_vv",
+      "mean_abs_shap": 0.00900038026396794,
+      "mean_signed_shap": -0.0003311031682113686,
+      "rank": 4
+    },
+    {
+      "feature_name": "vv_minus_vh_db",
+      "mean_abs_shap": 0.007691596073294884,
+      "mean_signed_shap": -0.0006447911398633434,
+      "rank": 5
+    },
+    {
+      "feature_name": "cross_pol_ratio",
+      "mean_abs_shap": 0.007381387532134183,
+      "mean_signed_shap": -0.0005576243129417391,
+      "rank": 6
+    }
+  ],
+  "grouped_attributions": [
+    {
+      "feature_group": "radiometric_backscatter",
+      "constituent_features": "vv_db, vh_db",
+      "mean_abs_attribution": 0.0876923229570648,
+      "attribution_fraction_pct": 67.38,
+      "mean_signed_attribution": -0.0029,
+      "rank": 1
+    },
+    {
+      "feature_group": "spatial_texture_group",
+      "constituent_features": "texture_vv, texture_vh",
+      "mean_abs_attribution": 0.028554061833701978,
+      "attribution_fraction_pct": 21.94,
+      "mean_signed_attribution": -0.0027,
+      "rank": 2
+    },
+    {
+      "feature_group": "polarization_ratio_group",
+      "constituent_features": "vv_minus_vh_db, cross_pol_ratio",
+      "mean_abs_attribution": 0.013890628896169155,
+      "attribution_fraction_pct": 10.67,
+      "mean_signed_attribution": -0.0012,
+      "rank": 3
+    }
+  ],
+  "local_explanations_count": 8,
+  "false_positive_analysis": {
+    "total_fp_test_count": 2762,
+    "june_fp_count": 1918,
+    "july_fp_count": 844,
+    "fp_vv_mean": -12.570162201303404,
+    "fp_vh_mean": -20.412599565532226,
+    "tp_vv_mean": -14.351133095131756,
+    "tn_vv_mean": -6.046398068669529
+  },
+  "model_comparison_with_otsu": {
+    "total_test_pixels": 6124,
+    "spatial_agreement_pct": 47.55,
+    "both_water_count": 1789,
+    "both_nonwater_count": 1123,
+    "rf_only_water_count": 3212,
+    "otsu_only_water_count": 0
+  },
+  "probability_calibration": {
+    "brier_score": 0.227,
+    "expected_calibration_error": 0.0959
+  },
+  "artifacts_generated": [
+    "data/outputs/phase7b/shap/phase7b_feature_correlation.csv",
+    "data/outputs/phase7b/shap/phase7b_global_shap_importance.csv",
+    "data/outputs/phase7b/shap/phase7b_grouped_feature_attribution.csv",
+    "data/outputs/phase7b/local_explanations/phase7b_local_prediction_explanations.csv",
+    "data/outputs/phase7b/diagnostics/phase7b_false_positive_analysis.csv",
+    "data/outputs/phase7b/diagnostics/phase7b_false_negative_analysis.csv",
+    "data/outputs/phase7b/diagnostics/phase7b_model_disagreement_summary.csv",
+    "data/outputs/phase7b/diagnostics/phase7b_probability_diagnostics.csv",
+    "data/outputs/phase7b/maps/phase7b_global_shap_beeswarm.png",
+    "data/outputs/phase7b/maps/phase7b_global_feature_importance.png",
+    "data/outputs/phase7b/maps/phase7b_polarization_dependence.png",
+    "data/outputs/phase7b/maps/phase7b_texture_dependence.png",
+    "data/outputs/phase7b/maps/phase7b_local_waterfall_examples.png",
+    "data/outputs/phase7b/maps/phase7b_false_positive_comparison.png",
+    "data/outputs/phase7b/maps/phase7b_false_negative_comparison.png",
+    "data/outputs/phase7b/maps/phase7b_rf_vs_otsu_disagreement_map.png",
+    "data/outputs/phase7b/maps/phase7b_probability_uncertainty_map.png"
+  ]
+}

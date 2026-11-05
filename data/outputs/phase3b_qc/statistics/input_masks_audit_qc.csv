@@ -1,0 +1,9 @@
+mask_key,path,gdal_nodata,full_val_0,full_val_1,full_val_2,full_val_3,full_val_4,aoi_val_0,aoi_val_1,aoi_val_2,aoi_val_3,aoi_val_4
+primary_june10,data/processed/phase3a_qc/candidate_masks/june10_lee_5x5_otsu_dual_and_qc.tif,3.0,1108193,253048,18741,577183,0,775543,218330,16105,61,0
+primary_july16,data/processed/phase3a_qc/candidate_masks/july16_lee_5x5_otsu_dual_and_qc.tif,3.0,910473,469895,206,576591,0,630208,379636,145,50,0
+2d_otsu_june10,data/processed/phase3a_qc/candidate_masks/june10_lee_5x5_otsu_2d_qc.tif,3.0,1074992,259328,18741,577183,26921,748604,223391,16105,61,21878
+2d_otsu_july16,data/processed/phase3a_qc/candidate_masks/july16_lee_5x5_otsu_2d_qc.tif,3.0,859198,475318,206,576591,45852,592739,383680,145,50,33425
+lee_3x3_june10,data/processed/phase3a_qc/candidate_masks/june10_lee_3x3_otsu_dual_and_qc.tif,3.0,1105878,255363,18741,577183,0,773862,220011,16105,61,0
+lee_3x3_july16,data/processed/phase3a_qc/candidate_masks/july16_lee_3x3_otsu_dual_and_qc.tif,3.0,909809,470559,206,576591,0,629871,379973,145,50,0
+unfiltered_june10,data/processed/phase3a_qc/candidate_masks/june10_unfiltered_otsu_dual_and_qc.tif,3.0,1117245,243996,18741,577183,0,783625,210248,16105,61,0
+unfiltered_july16,data/processed/phase3a_qc/candidate_masks/july16_unfiltered_otsu_dual_and_qc.tif,3.0,910109,470259,206,576591,0,630355,379489,145,50,0

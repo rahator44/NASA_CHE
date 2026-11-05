@@ -1,0 +1,2 @@
+epoch,mean_uncertainty,median_uncertainty,std_uncertainty,high_uncertainty_pixels_pct,threshold_used
+"June 10, 2024 (Baseline)",0.7348,0.7647,0.1684,89.42,0.35

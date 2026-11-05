@@ -1,0 +1,7 @@
+metric,value
+ideal_step_jump,0.095
+max_gradient_ideal,0.0949999988079071
+max_gradient_lee_3x3,0.0526316836476326
+max_gradient_lee_5x5,0.051439013332128525
+sharpness_retention_lee_3x3_pct,55.40177295586653
+sharpness_retention_lee_5x5_pct,54.14633050274009

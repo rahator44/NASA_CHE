@@ -1,0 +1,13 @@
+zone_code,zone_name,pixel_count,area_km2,area_ha,pct_study_aoi
+0,Persistent Mainland Non-Water,571454,228.5816,22858.16,56.5774
+1,Persistent Channel Water,210710,84.284,8428.4,20.8616
+2,External Bank Expansion / Erosion Candidate,54850,21.94,2194.0,5.4305
+3,Internal Char Submergence Candidate,58025,23.21,2321.0,5.7448
+4,Apparent Channel Contraction / Accretion Candidate,1037,0.4148,41.48,0.1027
+5,Persistent Internal Char Islands,57061,22.8244,2282.44,5.6494
+6,Disconnected Floodplain Inundation,34117,13.6468,1364.68,3.3778
+7,Indeterminate Noise Floor,16242,6.4968,649.68,1.6081
+8,Persistent Floodplain Water Bodies,3606,1.4424,144.24,0.357
+9,Receded Floodplain Water,597,0.2388,23.88,0.0591
+10,Persistent Char Island Water Depressions,2279,0.9116,91.16,0.2256
+255,Source NoData / Border,61,0.0244,2.44,0.006

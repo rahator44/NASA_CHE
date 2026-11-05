@@ -1,0 +1,955 @@
+{
+  "project": "NASA Space Apps Challenge 2026: Dancing with the SARs",
+  "system": "Earth Pulse",
+  "phase": "Phase 3A: Water Classification and Threshold Benchmarking",
+  "aoi": {
+    "wkt_wgs84": "POLYGON((89.55 24.58, 89.75 24.58, 89.75 24.76, 89.55 24.76, 89.55 24.58))",
+    "crs": "EPSG:32645",
+    "aoi_cells": 1010039,
+    "aoi_area_km2": 404.0156,
+    "aoi_area_ha": 40401.56
+  },
+  "scenarios": {
+    "june10": {
+      "unfiltered": {
+        "thresholds": {
+          "otsu_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -12.33809757232666,
+              "w0": 0.27949748106649436,
+              "w1": 0.7205025189335057,
+              "criterion_value": 17.111112034144494,
+              "bin_center": -12.33809757232666,
+              "bin_index": 145
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -22.831092834472656,
+              "w0": 0.22467860581784596,
+              "w1": 0.7753213941821541,
+              "criterion_value": 40.2078559841331,
+              "bin_center": -22.831092834472656,
+              "bin_index": 169
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -11.66347885131836,
+              "w0": 0.17393067323491024,
+              "w1": 0.8260693267650898,
+              "criterion_value": 13.82122233936431,
+              "bin_center": -11.66347885131836,
+              "bin_index": 150
+            }
+          },
+          "ki_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -14.896170616149902,
+              "w0": 0.20719146208821446,
+              "w1": 0.7928085379117855,
+              "cost_J": 4.253410313916658,
+              "var0": 5.955512923604829,
+              "var1": 10.48810279447467,
+              "criterion_value": 4.253410313916658
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -21.568527221679688,
+              "w0": 0.24384604471597482,
+              "w1": 0.7561539552840252,
+              "cost_J": 4.5212923629260775,
+              "var0": 43.90656772306215,
+              "var1": 7.156297276164366,
+              "criterion_value": 4.5212923629260775
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -17.265518188476562,
+              "w0": 0.05259424493873965,
+              "w1": 0.9474057550612603,
+              "cost_J": 3.9415512032082876,
+              "var0": 34.16715517456464,
+              "var1": 11.867036554540562,
+              "criterion_value": 3.9415512032082876
+            }
+          },
+          "otsu_2d": {
+            "status": "SUCCESS",
+            "threshold_vv": -13.117548443377018,
+            "threshold_vh": -21.351419903337955,
+            "w0": 0.22130022353557938,
+            "w1": 0.7230037606098592,
+            "criterion_value": 52.12108633645458,
+            "bin_index_vv": 50,
+            "bin_index_vh": 88
+          }
+        },
+        "statistics": {
+          "otsu_vv": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009971,
+            "candidate_water_cells": 287793,
+            "candidate_non_water_cells": 722178,
+            "indeterminate_cells": 0,
+            "nodata_cells": 68,
+            "candidate_water_pct_valid": 28.4952,
+            "candidate_water_pct_aoi": 28.4933,
+            "candidate_water_area_ha": 11511.72,
+            "candidate_water_area_km2": 115.1172
+          },
+          "otsu_vh": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993880,
+            "candidate_water_cells": 220105,
+            "candidate_non_water_cells": 773775,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16159,
+            "candidate_water_pct_valid": 22.146,
+            "candidate_water_pct_aoi": 21.7917,
+            "candidate_water_area_ha": 8804.2,
+            "candidate_water_area_km2": 88.042
+          },
+          "otsu_dual_and": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 210248,
+            "candidate_non_water_cells": 783625,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 21.1544,
+            "candidate_water_pct_aoi": 20.8158,
+            "candidate_water_area_ha": 8409.92,
+            "candidate_water_area_km2": 84.0992
+          },
+          "otsu_dual_or": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 281666,
+            "candidate_non_water_cells": 712207,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 28.3402,
+            "candidate_water_pct_aoi": 27.8866,
+            "candidate_water_area_ha": 11266.64,
+            "candidate_water_area_km2": 112.6664
+          },
+          "otsu_2d": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 218645,
+            "candidate_non_water_cells": 775228,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 21.9993,
+            "candidate_water_pct_aoi": 21.6472,
+            "candidate_water_area_ha": 8745.8,
+            "candidate_water_area_km2": 87.458
+          },
+          "otsu_cr": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 163642,
+            "candidate_non_water_cells": 830231,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 16.4651,
+            "candidate_water_pct_aoi": 16.2016,
+            "candidate_water_area_ha": 6545.68,
+            "candidate_water_area_km2": 65.4568
+          }
+        },
+        "mask_paths": {
+          "otsu_vv": "data/processed/phase3a/candidate_masks/june10_unfiltered_otsu_vv.tif",
+          "otsu_vh": "data/processed/phase3a/candidate_masks/june10_unfiltered_otsu_vh.tif",
+          "otsu_dual_and": "data/processed/phase3a/candidate_masks/june10_unfiltered_otsu_dual_and.tif",
+          "otsu_dual_or": "data/processed/phase3a/candidate_masks/june10_unfiltered_otsu_dual_or.tif",
+          "otsu_2d": "data/processed/phase3a/candidate_masks/june10_unfiltered_otsu_2d.tif",
+          "otsu_cr": "data/processed/phase3a/candidate_masks/june10_unfiltered_otsu_cr.tif"
+        }
+      },
+      "lee_3x3": {
+        "thresholds": {
+          "otsu_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -12.333353996276855,
+              "w0": 0.24357236789811165,
+              "w1": 0.7564276321018883,
+              "criterion_value": 15.924990291798242,
+              "bin_center": -12.333353996276855,
+              "bin_index": 97
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -21.764081954956055,
+              "w0": 0.22950819672131145,
+              "w1": 0.7704918032786885,
+              "criterion_value": 33.26809719342268,
+              "bin_center": -21.764081954956055,
+              "bin_index": 118
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -10.233800888061523,
+              "w0": 0.18736297293517384,
+              "w1": 0.8126370270648262,
+              "criterion_value": 7.368197083652032,
+              "bin_center": -10.233800888061523,
+              "bin_index": 140
+            }
+          },
+          "ki_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -14.107465744018555,
+              "w0": 0.2217959437473399,
+              "w1": 0.7782040562526601,
+              "cost_J": 3.878781129376175,
+              "var0": 3.18697272310186,
+              "var1": 7.455364686884884,
+              "criterion_value": 3.878781129376175
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -20.231441497802734,
+              "w0": 0.2433550363074557,
+              "w1": 0.7566449636925443,
+              "cost_J": 3.8701001746021735,
+              "var0": 17.67043300018463,
+              "var1": 4.066334734072797,
+              "criterion_value": 3.8701001746021735
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -12.261176109313965,
+              "w0": 0.10926245103750681,
+              "w1": 0.8907375489624931,
+              "cost_J": 3.2067869536288125,
+              "var0": 7.691620102699659,
+              "var1": 4.27445666237422,
+              "criterion_value": 3.2067869536288125
+            }
+          },
+          "otsu_2d": {
+            "status": "SUCCESS",
+            "threshold_vv": -12.644221533089876,
+            "threshold_vh": -20.74776337482035,
+            "w0": 0.2252208845077308,
+            "w1": 0.749789140775174,
+            "criterion_value": 47.26178334298609,
+            "bin_index_vv": 44,
+            "bin_index_vh": 72
+          }
+        },
+        "statistics": {
+          "otsu_vv": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009971,
+            "candidate_water_cells": 256338,
+            "candidate_non_water_cells": 753633,
+            "indeterminate_cells": 0,
+            "nodata_cells": 68,
+            "candidate_water_pct_valid": 25.3807,
+            "candidate_water_pct_aoi": 25.379,
+            "candidate_water_area_ha": 10253.52,
+            "candidate_water_area_km2": 102.5352
+          },
+          "otsu_vh": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993880,
+            "candidate_water_cells": 226988,
+            "candidate_non_water_cells": 766892,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16159,
+            "candidate_water_pct_valid": 22.8386,
+            "candidate_water_pct_aoi": 22.4732,
+            "candidate_water_area_ha": 9079.52,
+            "candidate_water_area_km2": 90.7952
+          },
+          "otsu_dual_and": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 220011,
+            "candidate_non_water_cells": 773862,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 22.1367,
+            "candidate_water_pct_aoi": 21.7824,
+            "candidate_water_area_ha": 8800.44,
+            "candidate_water_area_km2": 88.0044
+          },
+          "otsu_dual_or": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 247263,
+            "candidate_non_water_cells": 746610,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 24.8787,
+            "candidate_water_pct_aoi": 24.4805,
+            "candidate_water_area_ha": 9890.52,
+            "candidate_water_area_km2": 98.9052
+          },
+          "otsu_2d": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 223908,
+            "candidate_non_water_cells": 769965,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 22.5288,
+            "candidate_water_pct_aoi": 22.1683,
+            "candidate_water_area_ha": 8956.32,
+            "candidate_water_area_km2": 89.5632
+          },
+          "otsu_cr": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 181873,
+            "candidate_non_water_cells": 812000,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 18.2994,
+            "candidate_water_pct_aoi": 18.0065,
+            "candidate_water_area_ha": 7274.92,
+            "candidate_water_area_km2": 72.7492
+          }
+        },
+        "mask_paths": {
+          "otsu_vv": "data/processed/phase3a/candidate_masks/june10_lee_3x3_otsu_vv.tif",
+          "otsu_vh": "data/processed/phase3a/candidate_masks/june10_lee_3x3_otsu_vh.tif",
+          "otsu_dual_and": "data/processed/phase3a/candidate_masks/june10_lee_3x3_otsu_dual_and.tif",
+          "otsu_dual_or": "data/processed/phase3a/candidate_masks/june10_lee_3x3_otsu_dual_or.tif",
+          "otsu_2d": "data/processed/phase3a/candidate_masks/june10_lee_3x3_otsu_2d.tif",
+          "otsu_cr": "data/processed/phase3a/candidate_masks/june10_lee_3x3_otsu_cr.tif"
+        }
+      },
+      "lee_5x5": {
+        "thresholds": {
+          "otsu_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -12.457063674926758,
+              "w0": 0.23800022739323837,
+              "w1": 0.7619997726067617,
+              "criterion_value": 15.67224296047944,
+              "bin_center": -12.457063674926758,
+              "bin_index": 91
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -21.697208404541016,
+              "w0": 0.22750089800205864,
+              "w1": 0.7724991019979414,
+              "criterion_value": 32.6909224114687,
+              "bin_center": -21.697208404541016,
+              "bin_index": 102
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -10.181897163391113,
+              "w0": 0.18453162526801717,
+              "w1": 0.8154683747319829,
+              "criterion_value": 6.969286880405826,
+              "bin_center": -10.181897163391113,
+              "bin_index": 144
+            }
+          },
+          "ki_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -14.17788314819336,
+              "w0": 0.21964576963052623,
+              "w1": 0.7803542303694737,
+              "cost_J": 3.804309083266205,
+              "var0": 2.671178737852017,
+              "var1": 7.154947531490343,
+              "criterion_value": 3.804309083266205
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -19.863479614257812,
+              "w0": 0.2434304986653225,
+              "w1": 0.7565695013346775,
+              "cost_J": 3.7382713671345686,
+              "var0": 16.30670229866905,
+              "var1": 3.504213473312859,
+              "criterion_value": 3.7382713671345686
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -11.477447509765625,
+              "w0": 0.13227343936297697,
+              "w1": 0.867726560637023,
+              "cost_J": 3.0696019239311134,
+              "var0": 6.559234645283624,
+              "var1": 3.313118569907978,
+              "criterion_value": 3.0696019239311134
+            }
+          },
+          "otsu_2d": {
+            "status": "SUCCESS",
+            "threshold_vv": -12.553762387484312,
+            "threshold_vh": -20.555150808766484,
+            "w0": 0.2246041646674983,
+            "w1": 0.7526027909231864,
+            "criterion_value": 46.62095636742975,
+            "bin_index_vv": 43,
+            "bin_index_vh": 69
+          }
+        },
+        "statistics": {
+          "otsu_vv": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009971,
+            "candidate_water_cells": 251199,
+            "candidate_non_water_cells": 758772,
+            "indeterminate_cells": 0,
+            "nodata_cells": 68,
+            "candidate_water_pct_valid": 24.8719,
+            "candidate_water_pct_aoi": 24.8702,
+            "candidate_water_area_ha": 10047.96,
+            "candidate_water_area_km2": 100.4796
+          },
+          "otsu_vh": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993880,
+            "candidate_water_cells": 225113,
+            "candidate_non_water_cells": 768767,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16159,
+            "candidate_water_pct_valid": 22.6499,
+            "candidate_water_pct_aoi": 22.2876,
+            "candidate_water_area_ha": 9004.52,
+            "candidate_water_area_km2": 90.0452
+          },
+          "otsu_dual_and": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 218330,
+            "candidate_non_water_cells": 775543,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 21.9676,
+            "candidate_water_pct_aoi": 21.616,
+            "candidate_water_area_ha": 8733.2,
+            "candidate_water_area_km2": 87.332
+          },
+          "otsu_dual_or": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 241936,
+            "candidate_non_water_cells": 751937,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 24.3427,
+            "candidate_water_pct_aoi": 23.9531,
+            "candidate_water_area_ha": 9677.44,
+            "candidate_water_area_km2": 96.7744
+          },
+          "otsu_2d": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 223391,
+            "candidate_non_water_cells": 770482,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 22.4768,
+            "candidate_water_pct_aoi": 22.1171,
+            "candidate_water_area_ha": 8935.64,
+            "candidate_water_area_km2": 89.3564
+          },
+          "otsu_cr": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 993873,
+            "candidate_water_cells": 179530,
+            "candidate_non_water_cells": 814343,
+            "indeterminate_cells": 0,
+            "nodata_cells": 16166,
+            "candidate_water_pct_valid": 18.0637,
+            "candidate_water_pct_aoi": 17.7746,
+            "candidate_water_area_ha": 7181.2,
+            "candidate_water_area_km2": 71.812
+          }
+        },
+        "mask_paths": {
+          "otsu_vv": "data/processed/phase3a/candidate_masks/june10_lee_5x5_otsu_vv.tif",
+          "otsu_vh": "data/processed/phase3a/candidate_masks/june10_lee_5x5_otsu_vh.tif",
+          "otsu_dual_and": "data/processed/phase3a/candidate_masks/june10_lee_5x5_otsu_dual_and.tif",
+          "otsu_dual_or": "data/processed/phase3a/candidate_masks/june10_lee_5x5_otsu_dual_or.tif",
+          "otsu_2d": "data/processed/phase3a/candidate_masks/june10_lee_5x5_otsu_2d.tif",
+          "otsu_cr": "data/processed/phase3a/candidate_masks/june10_lee_5x5_otsu_cr.tif"
+        }
+      }
+    },
+    "july16": {
+      "unfiltered": {
+        "thresholds": {
+          "otsu_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -15.10185432434082,
+              "w0": 0.3932241019404978,
+              "w1": 0.6067758980595022,
+              "criterion_value": 47.581375511969895,
+              "bin_center": -15.10185432434082,
+              "bin_index": 147
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -22.271942138671875,
+              "w0": 0.4053279516440164,
+              "w1": 0.5946720483559835,
+              "criterion_value": 47.15701059100332,
+              "bin_center": -22.271942138671875,
+              "bin_index": 163
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -8.242599487304688,
+              "w0": 0.38163815401190676,
+              "w1": 0.6183618459880933,
+              "criterion_value": 9.036157930532951,
+              "bin_center": -8.242599487304688,
+              "bin_index": 139
+            }
+          },
+          "ki_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -15.10185432434082,
+              "w0": 0.3932241019404978,
+              "w1": 0.6067758980595022,
+              "cost_J": 4.883016261964841,
+              "var0": 15.808125366835952,
+              "var1": 11.039768325444221,
+              "criterion_value": 4.883016261964841
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -20.528953552246094,
+              "w0": 0.4387202379773511,
+              "w1": 0.5612797620226488,
+              "cost_J": 4.822087147084079,
+              "var0": 24.10847700625277,
+              "var1": 6.546391928801796,
+              "criterion_value": 4.822087147084079
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -18.899349212646484,
+              "w0": 0.01357338361172617,
+              "w1": 0.9864266163882738,
+              "cost_J": 3.788119648999507,
+              "var0": 14.284883951204733,
+              "var1": 14.072651942477087,
+              "criterion_value": 3.788119648999507
+            }
+          },
+          "otsu_2d": {
+            "status": "SUCCESS",
+            "threshold_vv": -14.435319054871798,
+            "threshold_vh": -22.05117898620665,
+            "w0": 0.3853191582429991,
+            "w1": 0.5734578922671927,
+            "criterion_value": 90.93494495885473,
+            "bin_index_vv": 62,
+            "bin_index_vh": 80
+          }
+        },
+        "statistics": {
+          "otsu_vv": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009988,
+            "candidate_water_cells": 394699,
+            "candidate_non_water_cells": 615289,
+            "indeterminate_cells": 0,
+            "nodata_cells": 51,
+            "candidate_water_pct_valid": 39.0796,
+            "candidate_water_pct_aoi": 39.0776,
+            "candidate_water_area_ha": 15787.96,
+            "candidate_water_area_km2": 157.8796
+          },
+          "otsu_vh": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009845,
+            "candidate_water_cells": 406144,
+            "candidate_non_water_cells": 603701,
+            "indeterminate_cells": 0,
+            "nodata_cells": 194,
+            "candidate_water_pct_valid": 40.2184,
+            "candidate_water_pct_aoi": 40.2107,
+            "candidate_water_area_ha": 16245.76,
+            "candidate_water_area_km2": 162.4576
+          },
+          "otsu_dual_and": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 379489,
+            "candidate_non_water_cells": 630355,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 37.579,
+            "candidate_water_pct_aoi": 37.5717,
+            "candidate_water_area_ha": 15179.56,
+            "candidate_water_area_km2": 151.7956
+          },
+          "otsu_dual_or": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 421211,
+            "candidate_non_water_cells": 588633,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 41.7105,
+            "candidate_water_pct_aoi": 41.7024,
+            "candidate_water_area_ha": 16848.44,
+            "candidate_water_area_km2": 168.4844
+          },
+          "otsu_2d": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 386704,
+            "candidate_non_water_cells": 623140,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 38.2934,
+            "candidate_water_pct_aoi": 38.286,
+            "candidate_water_area_ha": 15468.16,
+            "candidate_water_area_km2": 154.6816
+          },
+          "otsu_cr": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 362678,
+            "candidate_non_water_cells": 647166,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 35.9143,
+            "candidate_water_pct_aoi": 35.9073,
+            "candidate_water_area_ha": 14507.12,
+            "candidate_water_area_km2": 145.0712
+          }
+        },
+        "mask_paths": {
+          "otsu_vv": "data/processed/phase3a/candidate_masks/july16_unfiltered_otsu_vv.tif",
+          "otsu_vh": "data/processed/phase3a/candidate_masks/july16_unfiltered_otsu_vh.tif",
+          "otsu_dual_and": "data/processed/phase3a/candidate_masks/july16_unfiltered_otsu_dual_and.tif",
+          "otsu_dual_or": "data/processed/phase3a/candidate_masks/july16_unfiltered_otsu_dual_or.tif",
+          "otsu_2d": "data/processed/phase3a/candidate_masks/july16_unfiltered_otsu_2d.tif",
+          "otsu_cr": "data/processed/phase3a/candidate_masks/july16_unfiltered_otsu_cr.tif"
+        }
+      },
+      "lee_3x3": {
+        "thresholds": {
+          "otsu_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -15.06718635559082,
+              "w0": 0.3883520622987313,
+              "w1": 0.6116479377012687,
+              "criterion_value": 46.334960468639714,
+              "bin_center": -15.06718635559082,
+              "bin_index": 115
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -22.006847381591797,
+              "w0": 0.40253841187351713,
+              "w1": 0.5974615881264829,
+              "criterion_value": 44.148762263823464,
+              "bin_center": -22.006847381591797,
+              "bin_index": 126
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -8.06706428527832,
+              "w0": 0.35348529079739044,
+              "w1": 0.6465147092026096,
+              "criterion_value": 6.103124659858228,
+              "bin_center": -8.06706428527832,
+              "bin_index": 127
+            }
+          },
+          "ki_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -15.06718635559082,
+              "w0": 0.3883520622987313,
+              "w1": 0.6116479377012687,
+              "cost_J": 4.728109022142944,
+              "var0": 12.89792987733523,
+              "var1": 9.848859615251264,
+              "criterion_value": 4.728109022142944
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -20.297119140625,
+              "w0": 0.43219051655503227,
+              "w1": 0.5678094834449677,
+              "cost_J": 4.526668418360552,
+              "var0": 16.70288094060311,
+              "var1": 5.2536833802310525,
+              "criterion_value": 4.526668418360552
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -16.455970764160156,
+              "w0": 0.014488376422496941,
+              "w1": 0.9855116235775031,
+              "cost_J": 3.4155720347092133,
+              "var0": 5.108865095346346,
+              "var1": 9.712509367001651,
+              "criterion_value": 3.4155720347092133
+            }
+          },
+          "otsu_2d": {
+            "status": "SUCCESS",
+            "threshold_vv": -14.409934464842081,
+            "threshold_vh": -22.009801350533962,
+            "w0": 0.38276659094637105,
+            "w1": 0.5829564715999186,
+            "criterion_value": 87.6531042597419,
+            "bin_index_vv": 58,
+            "bin_index_vh": 72
+          }
+        },
+        "statistics": {
+          "otsu_vv": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009988,
+            "candidate_water_cells": 390604,
+            "candidate_non_water_cells": 619384,
+            "indeterminate_cells": 0,
+            "nodata_cells": 51,
+            "candidate_water_pct_valid": 38.6741,
+            "candidate_water_pct_aoi": 38.6722,
+            "candidate_water_area_ha": 15624.16,
+            "candidate_water_area_km2": 156.2416
+          },
+          "otsu_vh": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009845,
+            "candidate_water_cells": 404474,
+            "candidate_non_water_cells": 605371,
+            "indeterminate_cells": 0,
+            "nodata_cells": 194,
+            "candidate_water_pct_valid": 40.0531,
+            "candidate_water_pct_aoi": 40.0454,
+            "candidate_water_area_ha": 16178.96,
+            "candidate_water_area_km2": 161.7896
+          },
+          "otsu_dual_and": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 379973,
+            "candidate_non_water_cells": 629871,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 37.6269,
+            "candidate_water_pct_aoi": 37.6196,
+            "candidate_water_area_ha": 15198.92,
+            "candidate_water_area_km2": 151.9892
+          },
+          "otsu_dual_or": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 414961,
+            "candidate_non_water_cells": 594883,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 41.0916,
+            "candidate_water_pct_aoi": 41.0837,
+            "candidate_water_area_ha": 16598.44,
+            "candidate_water_area_km2": 165.9844
+          },
+          "otsu_2d": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 384822,
+            "candidate_non_water_cells": 625022,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 38.1071,
+            "candidate_water_pct_aoi": 38.0997,
+            "candidate_water_area_ha": 15392.88,
+            "candidate_water_area_km2": 153.9288
+          },
+          "otsu_cr": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 343346,
+            "candidate_non_water_cells": 666498,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 33.9999,
+            "candidate_water_pct_aoi": 33.9933,
+            "candidate_water_area_ha": 13733.84,
+            "candidate_water_area_km2": 137.3384
+          }
+        },
+        "mask_paths": {
+          "otsu_vv": "data/processed/phase3a/candidate_masks/july16_lee_3x3_otsu_vv.tif",
+          "otsu_vh": "data/processed/phase3a/candidate_masks/july16_lee_3x3_otsu_vh.tif",
+          "otsu_dual_and": "data/processed/phase3a/candidate_masks/july16_lee_3x3_otsu_dual_and.tif",
+          "otsu_dual_or": "data/processed/phase3a/candidate_masks/july16_lee_3x3_otsu_dual_or.tif",
+          "otsu_2d": "data/processed/phase3a/candidate_masks/july16_lee_3x3_otsu_2d.tif",
+          "otsu_cr": "data/processed/phase3a/candidate_masks/july16_lee_3x3_otsu_cr.tif"
+        }
+      },
+      "lee_5x5": {
+        "thresholds": {
+          "otsu_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -14.959856033325195,
+              "w0": 0.38735289807138545,
+              "w1": 0.6126471019286146,
+              "criterion_value": 45.9332236922998,
+              "bin_center": -14.959856033325195,
+              "bin_index": 105
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -21.82791519165039,
+              "w0": 0.4018353329821238,
+              "w1": 0.5981646670178762,
+              "criterion_value": 43.36288239501337,
+              "bin_center": -21.82791519165039,
+              "bin_index": 113
+            },
+            "cr": {
+              "status": "SUCCESS",
+              "threshold": -8.01618766784668,
+              "w0": 0.34880734053972695,
+              "w1": 0.651192659460273,
+              "criterion_value": 5.598520695615733,
+              "bin_center": -8.01618766784668,
+              "bin_index": 136
+            }
+          },
+          "ki_1d": {
+            "vv": {
+              "status": "SUCCESS",
+              "threshold": -14.959856033325195,
+              "w0": 0.38735289807138545,
+              "w1": 0.6126471019286146,
+              "cost_J": 4.695118527587567,
+              "var0": 12.416710743604654,
+              "var1": 9.578067143392992,
+              "criterion_value": 4.695118527587567
+            },
+            "vh": {
+              "status": "SUCCESS",
+              "threshold": -20.271381378173828,
+              "w0": 0.4285493600991835,
+              "w1": 0.5714506399008166,
+              "cost_J": 4.441171718534547,
+              "var0": 14.852686963324004,
+              "var1": 4.994317988911462,
+              "criterion_value": 4.441171718534547
+            },
+            "cr": {
+              "status": "FAILED",
+              "threshold": null,
+              "reason": "Minimum on boundary of valid occupancy (unimodal or non-convergent distribution)"
+            }
+          },
+          "otsu_2d": {
+            "status": "SUCCESS",
+            "threshold_vv": -14.418316345661879,
+            "threshold_vh": -21.838208477944136,
+            "w0": 0.38142450255742394,
+            "w1": 0.585058082603055,
+            "criterion_value": 86.61986785739602,
+            "bin_index_vv": 56,
+            "bin_index_vh": 68
+          }
+        },
+        "statistics": {
+          "otsu_vv": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009988,
+            "candidate_water_cells": 389659,
+            "candidate_non_water_cells": 620329,
+            "indeterminate_cells": 0,
+            "nodata_cells": 51,
+            "candidate_water_pct_valid": 38.5806,
+            "candidate_water_pct_aoi": 38.5786,
+            "candidate_water_area_ha": 15586.36,
+            "candidate_water_area_km2": 155.8636
+          },
+          "otsu_vh": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009845,
+            "candidate_water_cells": 404009,
+            "candidate_non_water_cells": 605836,
+            "indeterminate_cells": 0,
+            "nodata_cells": 194,
+            "candidate_water_pct_valid": 40.007,
+            "candidate_water_pct_aoi": 39.9993,
+            "candidate_water_area_ha": 16160.36,
+            "candidate_water_area_km2": 161.6036
+          },
+          "otsu_dual_and": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 379636,
+            "candidate_non_water_cells": 630208,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 37.5935,
+            "candidate_water_pct_aoi": 37.5863,
+            "candidate_water_area_ha": 15185.44,
+            "candidate_water_area_km2": 151.8544
+          },
+          "otsu_dual_or": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 413888,
+            "candidate_non_water_cells": 595956,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 40.9853,
+            "candidate_water_pct_aoi": 40.9774,
+            "candidate_water_area_ha": 16555.52,
+            "candidate_water_area_km2": 165.5552
+          },
+          "otsu_2d": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 383680,
+            "candidate_non_water_cells": 626164,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 37.994,
+            "candidate_water_pct_aoi": 37.9867,
+            "candidate_water_area_ha": 15347.2,
+            "candidate_water_area_km2": 153.472
+          },
+          "otsu_cr": {
+            "total_aoi_cells": 1010039,
+            "valid_cells": 1009844,
+            "candidate_water_cells": 340097,
+            "candidate_non_water_cells": 669747,
+            "indeterminate_cells": 0,
+            "nodata_cells": 195,
+            "candidate_water_pct_valid": 33.6782,
+            "candidate_water_pct_aoi": 33.6717,
+            "candidate_water_area_ha": 13603.88,
+            "candidate_water_area_km2": 136.0388
+          }
+        },
+        "mask_paths": {
+          "otsu_vv": "data/processed/phase3a/candidate_masks/july16_lee_5x5_otsu_vv.tif",
+          "otsu_vh": "data/processed/phase3a/candidate_masks/july16_lee_5x5_otsu_vh.tif",
+          "otsu_dual_and": "data/processed/phase3a/candidate_masks/july16_lee_5x5_otsu_dual_and.tif",
+          "otsu_dual_or": "data/processed/phase3a/candidate_masks/july16_lee_5x5_otsu_dual_or.tif",
+          "otsu_2d": "data/processed/phase3a/candidate_masks/july16_lee_5x5_otsu_2d.tif",
+          "otsu_cr": "data/processed/phase3a/candidate_masks/july16_lee_5x5_otsu_cr.tif"
+        }
+      }
+    }
+  }
+}

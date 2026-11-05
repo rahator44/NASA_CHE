@@ -1,0 +1,33 @@
+{
+  "audit_timestamp": "2026-11-05T16:01:30Z",
+  "project_name": "EarthPulse-SAR",
+  "audit_type": "PRE_UPLOAD_SECURITY_CREDENTIAL_AUDIT",
+  "repository_root": "/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR",
+  "scanned_files_count": 645,
+  "sensitive_extensions_checked": [
+    ".env",
+    "*.key",
+    "*.pem",
+    "*.token",
+    "*.p12",
+    "*.pfx",
+    "credentials.json",
+    "service_account.json",
+    "id_rsa",
+    "id_ed25519"
+  ],
+  "patterns_checked": [
+    "api_key / apikey assignment patterns",
+    "secret_key / secret assignment patterns",
+    "Bearer token patterns",
+    "GitHub personal access tokens (ghp_, github_pat_)",
+    "Private key blocks (RSA, EC, DSA, OPENSSH)",
+    "AWS access key and secret access key patterns"
+  ],
+  "hardcoded_secrets_found": 0,
+  "sensitive_files_found": 0,
+  "personal_credentials_found": 0,
+  "findings": [],
+  "status": "PASSED",
+  "summary": "Repository contains no sensitive credentials, API keys, private keys, or .env files. All test fixtures and configurations use synthetic, relative, or mock references. Safe for handoff."
+}

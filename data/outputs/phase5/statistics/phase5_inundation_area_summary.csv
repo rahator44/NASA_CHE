@@ -1,0 +1,6 @@
+Accounting_Domain,Metric,Value_Pixels,Value_km2,Value_ha
+Common Valid Domain (Valid Transitions),Gross Candidate Inundation,146992,58.7968,5879.68
+Common Valid Domain (Valid Transitions),Gross Candidate Recession,1634,0.6536,65.36
+Common Valid Domain (Valid Transitions),Net Candidate Water Change (Newly Inundated - Receded),145358,58.1432,5814.32
+Whole-Epoch Unmasked Extent,Whole-Epoch Net Candidate Water Difference,161306,64.5224,6452.24
+Reconciliation Gap,"Asymmetric Exclusions (Water in July, Indeterminate in June)",15948,6.3792,637.92

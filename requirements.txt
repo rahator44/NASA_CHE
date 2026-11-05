@@ -1,0 +1,32 @@
+# EarthPulse-SAR Dependencies
+# NASA Space Apps Challenge 2026 — Dancing with the SARs
+
+# Numerical & Geospatial Processing
+numpy>=1.26.0,<3.0.0
+scipy>=1.12.0
+pandas>=2.0.0
+GDAL>=3.6.0
+rasterio>=1.3.0
+shapely>=2.0.0
+geopandas>=0.14.0
+
+# Machine Learning & Explainable AI
+scikit-learn>=1.3.0
+joblib>=1.3.0
+
+# Visualization & Cartography
+matplotlib>=3.8.0
+pillow>=10.0.0
+
+# Configuration
+pyyaml>=6.0
+
+# Backend REST API & Services
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic>=2.5.0
+python-multipart>=0.0.9
+
+# Testing & Quality Assurance
+pytest>=8.0.0
+httpx>=0.27.0

@@ -1,0 +1,5 @@
+configuration,aoi_persistent_water_km2,aoi_newly_inundated_km2,aoi_receded_water_km2,aoi_persistent_non_water_km2,aoi_indeterminate_km2,aoi_nodata_km2,aoi_gross_expansion_km2,aoi_gross_recession_km2,aoi_net_area_change_km2,full_persistent_water_km2,full_newly_inundated_km2,full_receded_water_km2,full_persistent_non_water_km2,full_indeterminate_km2,full_nodata_km2,full_gross_expansion_km2,full_gross_recession_km2,full_net_area_change_km2
+primary,86.638,58.7968,0.6536,251.406,6.4968,0.0244,58.7968,0.6536,58.1432,100.3064,80.0844,0.858,363.1224,7.572,230.9228,80.0844,0.858,79.2264
+2d_otsu,88.5336,51.9604,0.2756,235.2472,27.9744,0.0244,51.9604,0.2756,51.6848,102.6044,72.2032,0.4432,340.8604,35.832,230.9228,72.2032,0.4432,71.76
+lee_3x3,87.0904,58.4832,0.8736,251.0472,6.4968,0.0244,58.4832,0.8736,57.6096,100.9036,79.754,1.1856,362.528,7.572,230.9228,79.754,1.1856,78.5684
+unfiltered,82.3812,63.0348,1.68,250.3984,6.4968,0.0244,63.0348,1.68,61.3548,95.3328,85.2508,2.214,361.5736,7.572,230.9228,85.2508,2.214,83.0368

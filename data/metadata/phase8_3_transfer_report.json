@@ -1,0 +1,68 @@
+{
+  "project_name": "EarthPulse-SAR",
+  "phase": "8.3",
+  "phase_title": "Automated GitHub & Google Drive Project Handoff",
+  "challenge": "NASA Space Apps Challenge 2026 — Dancing with the SARs",
+  "timestamp": "2026-11-05T16:19:00Z",
+  "git_repository": {
+    "target_url": "https://github.com/rahator44/NASA_CHE",
+    "ssh_remote": "git@github.com:rahator44/NASA_CHE.git",
+    "required_visibility": "PRIVATE",
+    "current_visibility": "PUBLIC",
+    "visibility_action_required": "Repository visibility must be toggled to PRIVATE by repository owner before public exposure",
+    "total_staged_files": 364,
+    "payload_size_bytes": 93494883,
+    "payload_size_mb": 89.16,
+    "maximum_single_file_mb": 9.58,
+    "commit_message": "Earth Pulse - Phase 8.1 verified scientific backend handoff"
+  },
+  "google_drive_storage": {
+    "target_account": "pillior44@gmail.com",
+    "staging_folder": "EarthPulse-SAR-Scientific-Data",
+    "total_staged_files": 233,
+    "payload_size_bytes": 5997635500,
+    "payload_size_gb": 5.59,
+    "subfolder_counts": {
+      "01_Sentinel1_Raw": 2,
+      "02_Sentinel2_Raw": 16,
+      "03_Processed_GeoTIFF": 173,
+      "04_Reference_Data": 0,
+      "05_Model_Artifacts": 1,
+      "06_Large_Scientific_Outputs": 1,
+      "07_Manifests_and_Checksums": 37,
+      "08_Backup_and_Restore": 3
+    }
+  },
+  "security_audit": {
+    "status": "PASSED",
+    "files_scanned": 645,
+    "secrets_found": 0,
+    "private_keys_found": 0,
+    "env_files_found": 0,
+    "audit_report": "data/metadata/phase8_3_security_audit.json"
+  },
+  "scientific_integrity": {
+    "test_suite_status": "PASSED",
+    "tests_passed": 315,
+    "tests_failed": 0,
+    "tests_warnings": 0,
+    "execution_time_seconds": 15.44,
+    "model_artifact_sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+    "backend_main_sha256": "8d2cbebb4b6cf2a0515a3736ba95ce7dc3fec13134e64ad2feb5bdb34f35e1ff",
+    "random_forest_sha256": "adbe913332ec601bd138f20d3d10a48a4b19353e763265fd3e2f0afc4deb9411",
+    "explainability_sha256": "82f593755259d779f575eff920a3af6c0230fc6bb6ae7c935302d6d12ecec0ea"
+  },
+  "restoration_tooling": {
+    "script": "tools/restore_earthpulse_data.py",
+    "staging_script": "tools/stage_earthpulse_drive_data.py",
+    "instructions": "EarthPulse-SAR-Scientific-Data/08_Backup_and_Restore/README_RESTORATION.md",
+    "verification_db": "data/outputs/phase8_3/checksum_verification.csv",
+    "verified_entries": 655
+  },
+  "reviewer_handoff": {
+    "review_document": "EARTH_PULSE_INDEPENDENT_REVIEW.md",
+    "target_reviewer": "ChatGPT / Independent Software Reviewer",
+    "known_issues_count": 8,
+    "blocking_issues_count": 0
+  }
+}

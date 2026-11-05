@@ -1,0 +1,71 @@
+# Earth Pulse Feature Schema Configuration: Dual-Pol SAR Water Detection
+feature_schema_version: "1.0.0"
+description: Standardized 6-feature dual-polarized SAR feature extraction pipeline for water detection
+sensor_compatibility:
+  - sentinel1
+
+features:
+  - name: vv_db
+    type: radiometric_copolarized
+    polarization: VV
+    unit: dB
+    valid_range: [-35.0, 15.0]
+    description: Copolarized backscatter in decibels (dB), Lee 5x5 filtered
+    extraction:
+      source_band: VV
+      calibration: sigma0
+      filter: Lee_5x5
+
+  - name: vh_db
+    type: radiometric_crosspolarized
+    polarization: VH
+    unit: dB
+    valid_range: [-40.0, 5.0]
+    description: Crosspolarized backscatter in decibels (dB), Lee 5x5 filtered
+    extraction:
+      source_band: VH
+      calibration: sigma0
+      filter: Lee_5x5
+
+  - name: vv_minus_vh_db
+    type: polarization_difference
+    polarization: dual
+    unit: dB
+    valid_range: [-10.0, 30.0]
+    description: Logarithmic cross-polarization difference (equivalent to log cross-pol ratio)
+    extraction:
+      formula: "vv_db - vh_db"
+
+  - name: cross_pol_ratio
+    type: power_ratio
+    polarization: dual
+    unit: dimensionless
+    valid_range: [0.0, 100.0]
+    description: Linear polarization power ratio (sigma0_VV / sigma0_VH), clipped [0, 100]
+    extraction:
+      formula: "clip(10 ** ((vv_db - vh_db) / 10.0), 0.0, 100.0)"
+
+  - name: texture_vv
+    type: spatial_texture
+    polarization: VV
+    unit: dB
+    valid_range: [0.0, 20.0]
+    description: Local spatial standard deviation of VV in a 5x5 pixel neighborhood (100m x 100m)
+    extraction:
+      window_size: 5
+      metric: standard_deviation
+
+  - name: texture_vh
+    type: spatial_texture
+    polarization: VH
+    unit: dB
+    valid_range: [0.0, 20.0]
+    description: Local spatial standard deviation of VH in a 5x5 pixel neighborhood (100m x 100m)
+    extraction:
+      window_size: 5
+      metric: standard_deviation
+
+excluded_features:
+  - name: local_incidence_angle
+    reason: Not preserved in ESA SNAP ellipsoid terrain correction Level-1 GRD outputs. Omitted to preserve strict empirical reproducibility.
+

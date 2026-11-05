@@ -1,0 +1,9 @@
+case_id,category,epoch,utm_x,utm_y,optical_reference_label,rf_prediction,rf_probability,base_value_phi0,sum_attributions,reconstructed_prediction,additivity_error,additivity_pass,largest_positive_driver,largest_negative_driver,case_description
+CASE_01_TRUE_POSITIVE,TRUE_POSITIVE,June,774585.65,2721989.18,1,1,0.724,0.4995,0.2245,0.724,7e-08,True,vv_db (+0.0790),cross_pol_ratio (-0.0028),Deep River Channel (Pre-Monsoon Low Flow)
+CASE_02_TRUE_POSITIVE,TRUE_POSITIVE,July,771105.65,2730309.18,1,1,0.6783,0.4995,0.1789,0.6783,2e-08,True,vh_db (+0.0682),cross_pol_ratio (-0.0057),Inundated Floodplain / Anabranch (Monsoon Crest)
+CASE_03_TRUE_NEGATIVE,TRUE_NEGATIVE,June,762905.65,2720929.18,0,0,0.0766,0.4995,-0.4229,0.0766,0.0,True,vv_minus_vh_db (+-0.0094),vv_db (-0.1395),Mainland Agricultural Field (Dry Bare Soil)
+CASE_04_TRUE_NEGATIVE,TRUE_NEGATIVE,July,767045.65,2727969.18,0,0,0.1484,0.4995,-0.3511,0.1484,2e-08,True,cross_pol_ratio (+0.0002),vv_db (-0.1343),High-Elevation Settlement Embankment
+CASE_05_OPTICAL_DISAGREEMENT_FP,OPTICAL_DISAGREEMENT_FP,June,775625.65,2740089.18,0,1,0.4956,0.4995,-0.0039,0.4956,4e-08,True,vv_db (+0.0169),texture_vh (-0.0267),Moist Char Sandbar (Smooth Specular Surface)
+CASE_06_OPTICAL_DISAGREEMENT_FP,OPTICAL_DISAGREEMENT_FP,July,775485.65,2735209.18,0,1,0.5978,0.4995,0.0984,0.5978,1.1e-07,True,vv_db (+0.0437),vv_minus_vh_db (-0.0079),Monsoon Waterlogged Agriculture (Low Backscatter)
+CASE_07_OPTICAL_DISAGREEMENT_FN,OPTICAL_DISAGREEMENT_FN,June,777185.65,2726409.18,1,0,0.2824,0.4995,-0.217,0.2824,2e-08,True,texture_vv (+0.0101),vv_db (-0.0949),Shallow Sandbar Channel (Rough / Mixed Pixel)
+CASE_08_OPTICAL_DISAGREEMENT_FN,OPTICAL_DISAGREEMENT_FN,July,774985.65,2734929.18,1,0,0.3174,0.4995,-0.182,0.3174,5e-08,True,texture_vh (+0.0646),vv_db (-0.1423),Turbid Flood Edge (Wind Roughened)

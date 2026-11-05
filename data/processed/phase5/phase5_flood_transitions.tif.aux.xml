@@ -1,0 +1,13 @@
+<PAMDataset>
+  <PAMRasterBand band="1">
+    <Description>Phase5_Flood_Transitions</Description>
+    <Metadata>
+      <MDI key="STATISTICS_APPROXIMATE">YES</MDI>
+      <MDI key="STATISTICS_MINIMUM">1</MDI>
+      <MDI key="STATISTICS_MAXIMUM">5</MDI>
+      <MDI key="STATISTICS_MEAN">3.0764171050426</MDI>
+      <MDI key="STATISTICS_STDDEV">1.3109547075029</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">73.3</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>

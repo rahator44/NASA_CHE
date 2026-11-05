@@ -1,0 +1,63 @@
+# Earth Pulse Sensor Configuration: Copernicus Sentinel-1 C-Band SAR
+sensor_id: sentinel1
+sensor_name: Copernicus Sentinel-1 SAR
+platform: Sentinel-1A / Sentinel-1B
+agency: European Space Agency (ESA) / Copernicus
+
+radar_properties:
+  band: C-band
+  center_frequency_ghz: 5.405
+  wavelength_cm: 5.546
+  polarizations:
+    - VV
+    - VH
+  supported_modes:
+    - IW   # Interferometric Wide Swath
+    - EW   # Extra Wide Swath
+  supported_product_types:
+    - GRD  # Ground Range Detected (High / Medium resolution)
+
+preprocessing_chain:
+  calibration_type: sigma0
+  terrain_correction: Range-Doppler / Ellipsoid
+  speckle_filtering:
+    algorithm: Lee
+    window_size: [5, 5]
+    damping_factor: 1.0
+  scale: decibels_dB
+
+physical_limits:
+  vv_db:
+    min: -35.0
+    max: 15.0
+    typical_water_range: [-25.0, -17.0]
+    typical_land_range: [-16.0, 0.0]
+  vh_db:
+    min: -40.0
+    max: 5.0
+    typical_water_range: [-32.0, -24.0]
+    typical_land_range: [-23.0, -8.0]
+  vv_minus_vh_db:
+    min: -10.0
+    max: 30.0
+  cross_pol_ratio:
+    min: 0.0
+    max: 100.0
+  texture_vv:
+    min: 0.0
+    max: 20.0
+  texture_vh:
+    min: 0.0
+    max: 20.0
+
+compatibility:
+  is_c_band: true
+  is_l_band: false
+  direct_feature_compatibility_with_other_sensors: false
+  cross_frequency_transfer_requires_recalibration: true
+  notes: >
+    C-band features (5.55 cm wavelength) interact primarily with surface roughness and small canopy leaves.
+    L-band features (e.g., NISAR, ALOS-2 at ~24 cm wavelength) penetrate deeper into vegetation canopies,
+    inducing distinct double-bounce backscatter mechanisms over flooded forests. C-band trained models
+    must never be applied to L-band without domain adaptation and recalibrated thresholding.
+

@@ -1,0 +1,8 @@
+comparison,count,pct
+Total Evaluated Pixels,6124,100.0
+Both Models Predict Water,1789,29.21
+Both Models Predict Non-Water,1123,18.34
+RF Predicts Water / Otsu Predicts Non-Water,3212,52.45
+RF Predicts Non-Water / Otsu Predicts Water,0,0.0
+Overall Spatial Agreement,2912,47.55
+Overall Spatial Disagreement,3212,52.45

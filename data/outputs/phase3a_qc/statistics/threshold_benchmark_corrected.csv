@@ -1,0 +1,19 @@
+date,filter,feature,method,status,diagnosis,threshold_db,w0_proportion,cost_J,variance_ratio,near_equal_variance,identical_to_otsu,dist_boundary_bins
+june10,unfiltered,VV,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-14.8962,0.2072,4.2534,1.761,False,False,24
+june10,unfiltered,VH,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-21.5685,0.2438,4.5213,6.135,False,False,29
+june10,unfiltered,CR,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-17.2655,0.0526,3.9416,2.879,False,False,22
+june10,lee_3x3,VV,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-14.1075,0.2218,3.8788,2.339,False,False,29
+june10,lee_3x3,VH,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-20.2314,0.2434,3.8701,4.346,False,False,41
+june10,lee_3x3,CR,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-12.2612,0.1093,3.2068,1.799,False,False,43
+june10,lee_5x5,VV,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-14.1779,0.2196,3.8043,2.679,False,False,28
+june10,lee_5x5,VH,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-19.8635,0.2434,3.7383,4.653,False,False,43
+june10,lee_5x5,CR,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-11.4774,0.1323,3.0696,1.98,False,False,45
+july16,unfiltered,VV,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-15.1019,0.3932,4.883,1.432,True,True,47
+july16,unfiltered,VH,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-20.529,0.4387,4.8221,3.683,False,False,31
+july16,unfiltered,CR,Kittler_Illingworth_Audited,UNSTABLE_NEAR_BOUNDARY,Artifactual optimum 2 bins from boundary with occupancy 1.36%,,0.0136,3.7881,1.015,True,False,2
+july16,lee_3x3,VV,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-15.0672,0.3884,4.7281,1.31,True,True,56
+july16,lee_3x3,VH,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-20.2971,0.4322,4.5267,3.179,False,False,41
+july16,lee_3x3,CR,Kittler_Illingworth_Audited,UNSTABLE_NEAR_BOUNDARY,Artifactual optimum 4 bins from boundary with occupancy 1.45%,,0.0145,3.4156,1.901,False,False,4
+july16,lee_5x5,VV,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-14.9599,0.3874,4.6951,1.296,True,True,59
+july16,lee_5x5,VH,Kittler_Illingworth_Audited,SUCCESS,Interior convergent minimum,-20.2714,0.4285,4.4412,2.974,False,False,45
+july16,lee_5x5,CR,Kittler_Illingworth_Audited,FAILED,Optimum on strict occupancy boundary (unimodal distribution),,0.0105,3.3338,2.046,False,False,0
