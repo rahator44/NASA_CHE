@@ -17,6 +17,7 @@ from src.backend.api.v1.endpoints import (
     tiles,
     reports,
     jobs,
+    dynamic_analysis,
 )
 
 api_v1_router = APIRouter()
@@ -34,4 +35,5 @@ api_v1_router.include_router(vectors.router)
 api_v1_router.include_router(tiles.router)
 api_v1_router.include_router(reports.router)
 api_v1_router.include_router(jobs.router)
+api_v1_router.include_router(dynamic_analysis.router)
 

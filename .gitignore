@@ -51,6 +51,11 @@ Thumbs.db
 
 # Large scientific rasters & raw satellite archives (Hosted on Google Drive)
 data/raw/
+data/runs/
+.packages/
+.earthdata-token
+.netrc
+*.env*
 data/reference/
 data/intermediate/
 *.tif
