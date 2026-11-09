@@ -162,6 +162,7 @@ class DynamicAnalysisService:
             "aoi_wkt": aoi_wkt,
             "start_date": start_date,
             "end_date": end_date,
+            "satellite_acquisitions": [start_date, end_date],
             "parameters": merged_params,
             "created_at": datetime.now(timezone.utc).isoformat(),
         }
@@ -352,6 +353,14 @@ class DynamicAnalysisService:
                 "time_series": time_series_res,
             }
 
+            # Generate map-ready preview PNGs and web manifest for visualization
+            from src.pipeline.visualization import ScientificVisualizer
+            preview_outputs = ScientificVisualizer.generate_all_run_previews(run_dir, summary)
+            manifest_path = run_dir / "visual_manifest.json"
+
+            summary["visual_manifest"] = str(manifest_path)
+            summary["previews"] = {k: str(v) for k, v in preview_outputs.items()}
+
             (run_dir / "summary.json").write_text(json.dumps(summary, indent=2))
 
             # Update SQLite to COMPLETED
@@ -366,8 +375,10 @@ class DynamicAnalysisService:
                     now_iso,
                     json.dumps({
                         "summary": str(run_dir / "summary.json"),
+                        "visual_manifest": str(manifest_path),
                         "transition_raster": str(trans_tif),
                         "vector_geojson": str(inun_geojson),
+                        "previews": {k: str(v) for k, v in preview_outputs.items()},
                     }),
                     json.dumps(summary),
                     run_id,
@@ -446,7 +457,8 @@ class DynamicAnalysisService:
         sample_size: int = 100,
     ) -> Dict[str, Any]:
         """
-        Execute experimental Random Forest probability prediction and Saabas XAI attributions.
+        Execute experimental Random Forest probability prediction, 2D continuous probability GeoTIFF,
+        and Saabas XAI attributions.
         """
         if not DEFAULT_MODEL_PATH.exists():
             return {"status": "SKIPPED", "reason": "Model artifact not found"}
@@ -460,7 +472,51 @@ class DynamicAnalysisService:
         )
 
         rf = RandomForestClassifier.load(DEFAULT_MODEL_PATH)
-        probs = rf.predict_proba(X_sample)
+        probs_sample = rf.predict_proba(X_sample)
+        # In binary classification, column 1 is water probability
+        sample_water_probs = probs_sample[:, 1] if probs_sample.ndim == 2 else probs_sample
+
+        # Generate full-raster continuous water probability GeoTIFF
+        mean_aoi_prob = float(np.mean(sample_water_probs))
+        try:
+            w, h = extracted["dimensions"]
+            gt = extracted["geotransform"]
+            proj = extracted["projection"]
+            valid_mask = extracted["valid_mask"]
+            feature_maps = extracted["feature_maps"]
+
+            valid_rows, valid_cols = np.where(valid_mask)
+            n_valid = len(valid_rows)
+
+            rf_prob_arr = np.full((h, w), -9999.0, dtype=np.float32)
+
+            if n_valid > 0:
+                FEATURE_NAMES = ["vv_db", "vh_db", "vv_minus_vh_db", "cross_pol_ratio", "texture_vv", "texture_vh"]
+                X_full = np.column_stack([feature_maps[feat][valid_mask] for feat in FEATURE_NAMES])
+
+                chunk_size = 25000
+                water_probs_full = np.empty(n_valid, dtype=np.float32)
+                for start in range(0, n_valid, chunk_size):
+                    end = min(start + chunk_size, n_valid)
+                    p = rf.predict_proba(X_full[start:end])
+                    water_probs_full[start:end] = p[:, 1] if p.ndim == 2 else p
+
+                rf_prob_arr[valid_mask] = water_probs_full
+                mean_aoi_prob = float(np.mean(water_probs_full))
+
+            out_prob_tif = run_dir / "rasters" / "rf_probability.tif"
+            driver = gdal.GetDriverByName("GTiff")
+            out_ds = driver.Create(str(out_prob_tif), w, h, 1, gdal.GDT_Float32, ["COMPRESS=DEFLATE"])
+            out_ds.SetGeoTransform(gt)
+            out_ds.SetProjection(proj)
+            b = out_ds.GetRasterBand(1)
+            b.SetNoDataValue(-9999.0)
+            b.WriteArray(rf_prob_arr)
+            b.FlushCache()
+            out_ds = None
+            logger.info("Saved RF continuous water probability raster to %s", out_prob_tif)
+        except Exception as e:
+            logger.warning("Failed to generate full-raster RF probability: %s", e)
 
         # Saabas tree-path explanations
         explainer = TreePathExplainer(rf)
@@ -478,7 +534,7 @@ class DynamicAnalysisService:
         ai_output = {
             "model_id": "phase7a_rf_jamuna_v1",
             "sample_evaluated": len(X_sample),
-            "mean_water_probability": float(np.mean(probs)),
+            "mean_water_probability": round(mean_aoi_prob, 4),
             "additivity_verified": additivity_verified,
             "sample_explanations": sample_explanations,
         }
@@ -502,6 +558,9 @@ class DynamicAnalysisService:
             "transitions": run_dir / "rasters" / "transition_classes.tif",
             "t1_water": run_dir / "rasters" / "t1_water_mask.tif",
             "t2_water": run_dir / "rasters" / "t2_water_mask.tif",
+            "t1_sar": run_dir / "rasters" / "t1_calibrated.tif",
+            "t2_sar": run_dir / "rasters" / "t2_calibrated.tif",
+            "rf_probability": run_dir / "rasters" / "rf_probability.tif",
             "inundation_frequency": run_dir / "rasters" / "inundation_frequency.tif",
         }
 
@@ -533,6 +592,10 @@ class DynamicAnalysisService:
         minx, miny = _to_3857(lon_deg_w, lat_deg_s)
         maxx, maxy = _to_3857(lon_deg_e, lat_deg_n)
 
+        # Select resampling algorithm
+        is_continuous = asset_id in ("t1_sar", "t2_sar", "rf_probability")
+        resample_alg = gdal.GRA_Bilinear if is_continuous else gdal.GRA_NearestNeighbour
+
         # Warp tile using GDAL VSI MEM
         warp_opts = gdal.WarpOptions(
             format="MEM",
@@ -540,7 +603,7 @@ class DynamicAnalysisService:
             height=256,
             outputBounds=[minx, miny, maxx, maxy],
             dstSRS="EPSG:3857",
-            resampleAlg=gdal.GRA_NearestNeighbour,
+            resampleAlg=resample_alg,
         )
 
         src_ds = gdal.Open(str(tif_path), gdal.GA_ReadOnly)
@@ -553,17 +616,58 @@ class DynamicAnalysisService:
             img.save(buf, format="PNG")
             return buf.getvalue()
 
-        arr = mem_ds.GetRasterBand(1).ReadAsArray()
-        mem_ds = None
-
-        # Apply palette
         rgba = np.zeros((256, 256, 4), dtype=np.uint8)
-        palette = TRANSITION_PALETTE if asset_id == "transitions" else WATER_MASK_PALETTE
 
-        for val, color in palette.items():
-            mask = (arr == val)
-            if np.any(mask):
-                rgba[mask] = color
+        if asset_id in ("t1_sar", "t2_sar"):
+            band_idx = 2 if mem_ds.RasterCount >= 2 else 1
+            arr = mem_ds.GetRasterBand(band_idx).ReadAsArray().astype(np.float32)
+            mem_ds = None
+
+            valid = (arr != -9999.0) & np.isfinite(arr) & (arr > 0)
+            is_linear = np.median(arr[valid]) < 2.0 if np.any(valid) else False
+
+            arr_db = np.full_like(arr, -9999.0, dtype=np.float32)
+            if is_linear:
+                arr_db[valid] = 10.0 * np.log10(arr[valid])
+            else:
+                arr_db[valid] = arr[valid]
+
+            norm = np.clip((arr_db - (-25.0)) / 25.0, 0.0, 1.0)
+            gray = (norm * 255).astype(np.uint8)
+
+            rgba[valid, 0] = gray[valid]
+            rgba[valid, 1] = gray[valid]
+            rgba[valid, 2] = gray[valid]
+            rgba[valid, 3] = 240
+
+        elif asset_id == "rf_probability":
+            arr = mem_ds.GetRasterBand(1).ReadAsArray().astype(np.float32)
+            mem_ds = None
+
+            valid = (arr >= 0.0) & (arr <= 1.0)
+            if np.any(valid):
+                from matplotlib import cm
+                c_vals = (cm.cividis(np.clip(arr[valid], 0.0, 1.0)) * 255).astype(np.uint8)
+                c_vals[:, 3] = 230
+                rgba[valid] = c_vals
+
+        elif asset_id == "inundation_frequency":
+            arr = mem_ds.GetRasterBand(1).ReadAsArray().astype(np.int32)
+            mem_ds = None
+
+            rgba[arr == 1] = [166, 206, 227, 220]
+            rgba[arr == 2] = [65, 182, 196, 230]
+            rgba[arr >= 3] = [8, 81, 156, 240]
+
+        else:
+            arr = mem_ds.GetRasterBand(1).ReadAsArray()
+            mem_ds = None
+
+            palette = TRANSITION_PALETTE if asset_id == "transitions" else WATER_MASK_PALETTE
+            for val, color in palette.items():
+                mask = (arr == val)
+                if np.any(mask):
+                    rgba[mask] = color
 
         img = Image.fromarray(rgba, "RGBA")
         buf = io.BytesIO()

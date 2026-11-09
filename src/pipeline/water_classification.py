@@ -376,3 +376,4 @@ class DynamicWaterClassifier:
             output_metadata_json.write_text(json.dumps(metadata, indent=2))
 
         return metadata
+

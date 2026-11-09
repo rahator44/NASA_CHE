@@ -43,3 +43,4 @@ class FeatureAnalyzer:
         for c, count in zip(classes, counts):
             weights[int(c)] = float(n_samples / (n_classes * count)) if count > 0 else 1.0
         return weights
+

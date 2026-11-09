@@ -159,8 +159,10 @@ def build_review_zip():
         "EarthPulse-SAR/src/pipeline/water_classification.py",
         "EarthPulse-SAR/src/pipeline/change_detection.py",
         "EarthPulse-SAR/src/pipeline/time_series.py",
+        "EarthPulse-SAR/src/pipeline/visualization.py",
         "EarthPulse-SAR/src/backend/api/v1/endpoints/dynamic_analysis.py",
         "EarthPulse-SAR/models/phase7a/phase7a_random_forest_model.joblib",
+        "EarthPulse-SAR/tests/test_scientific_visualization.py",
         "EarthPulse-SAR/docs/EARTH_PULSE_DYNAMIC_ANALYSIS_ARCHITECTURE.md",
         "EarthPulse-SAR/docs/EARTH_PULSE_DYNAMIC_SCIENTIFIC_VALIDATION.md",
         "EarthPulse-SAR/docs/EARTH_PULSE_DYNAMIC_BACKEND_HANDOFF.md",
@@ -173,3 +175,4 @@ def build_review_zip():
 
 if __name__ == "__main__":
     build_review_zip()
+

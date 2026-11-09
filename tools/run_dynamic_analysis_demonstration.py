@@ -126,13 +126,35 @@ def run_demonstration():
     print("\n[Step 8] Verifying XYZ Map Tile Rendering:")
     png_tile = service.render_tile(run_id, "transitions", z=13, x=6135, y=3487)
     print(f"   • Generated Transition Tile:        {len(png_tile)} bytes (valid PNG)")
+    sar_tile = service.render_tile(run_id, "t1_sar", z=13, x=6135, y=3487)
+    print(f"   • Generated SAR Backscatter Tile:   {len(sar_tile)} bytes (valid PNG)")
+    rf_tile = service.render_tile(run_id, "rf_probability", z=13, x=6135, y=3487)
+    print(f"   • Generated RF Probability Tile:    {len(rf_tile)} bytes (valid PNG)")
+
+    # Step 9: Verify Scientific Visual Previews & Manifest
+    print("\n[Step 9] Verifying Map-Ready Scientific Previews & Visual Manifest:")
+    previews = summary.get("previews", {})
+    for p_name, p_path in previews.items():
+        p_file = Path(p_path)
+        print(f"   • {p_name:30s}: {p_file.stat().st_size:,} bytes | {p_file.name}")
+
+    manifest_file = Path(summary.get("visual_manifest", ""))
+    print(f"   • Visual Manifest:                  {manifest_file.exists()} ({manifest_file.stat().st_size:,} bytes)")
 
     print("\n" + "=" * 75)
     print("DEMONSTRATION VERDICT: DYNAMIC_BACKEND_VERIFIED")
-    print(f"Outputs successfully generated at data/runs/{run_id}/")
+    print(f"Visual outputs and rasters successfully generated at data/runs/{run_id}/")
     print("=" * 75)
+
+    # Clean up demonstration run record from DB to preserve clean seeded state
+    from src.backend.database.database import get_db_connection
+    with get_db_connection() as conn:
+        conn.execute("DELETE FROM analysis_runs WHERE run_id = ?", (run_id,))
+        conn.commit()
+
     return summary
 
 
 if __name__ == "__main__":
     run_demonstration()
+

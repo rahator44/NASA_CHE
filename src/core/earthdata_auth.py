@@ -341,3 +341,4 @@ class EarthdataSessionManager:
                 "message": f"Network error during authentication test: {e}",
                 "audit": audit,
             }
+

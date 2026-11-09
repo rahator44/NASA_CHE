@@ -122,3 +122,4 @@ Writes the token to `~/.config/earthpulse/earthdata.env` and sets `0600` permiss
 2. **Chunked Streaming & Range Resumption:** Downloads use 1 MB chunks and write to `<scene_name>.zip.part`. If a transfer is interrupted, it resumes using the HTTP `Range: bytes=<size>-` header.
 3. **Cryptographic Checksums:** Evaluates SHA-256 upon completion and renames the partial file to final target.
 4. **Quota Control:** Enforces a configurable storage quota (default: 25 GB) to prevent filling local disk volumes.
+

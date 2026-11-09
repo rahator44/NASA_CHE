@@ -334,3 +334,4 @@ class DynamicChangeDetector:
         layer.CommitTransaction()
         json_ds = None
         mem_ds = None
+

@@ -57,3 +57,4 @@ class SpatialTemporalSplitter:
         test_indices = [i for i, d in enumerate(dates) if d == holdout_date]
 
         return train_indices, test_indices
+

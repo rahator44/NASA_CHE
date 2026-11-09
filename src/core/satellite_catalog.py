@@ -112,3 +112,4 @@ class SatelliteCatalogService:
                 "error": str(e),
                 "auth": auth_audit,
             }
+

@@ -192,3 +192,4 @@ class MultiDateTimeSeriesAnalyzer:
             output_metadata_json.write_text(json.dumps(result, indent=2))
 
         return result
+

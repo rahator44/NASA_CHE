@@ -37,6 +37,7 @@ The implementation strictly preserves the frozen reference model (`phase7a_rf_ja
 - `src/pipeline/riverbank_analysis.py`: Dynamic channel margin transects, char island submergence differentiation, and small AOI qualification/suppression.
 - `src/pipeline/feature_builder.py`: 6-feature SAR tensor extraction (`vv_db`, `vh_db`, `vv_minus_vh_db`, `cross_pol_ratio`, `texture_vv`, `texture_vh`) with physical bounds validation.
 - `src/pipeline/time_series.py`: Multi-date chronological sequence evaluation, step change detection, crest identification, and inundation frequency mapping.
+- `src/pipeline/visualization.py`: Authoritative scientific visualization engine generating map-ready visual preview PNGs, continuous Random Forest probability rasters, multi-temporal trajectory charts, and structured layer manifests for interactive web GIS clients.
 
 ### Machine Learning & Explainable AI (`src/ml/`)
 - `src/ml/training/dataset_splitter.py`: Spatial quadrant block partitioning and temporal holdout splitting.
@@ -45,13 +46,14 @@ The implementation strictly preserves the frozen reference model (`phase7a_rf_ja
 - `src/ml/explainability.py`: Integrated `TreePathExplainer` computing Saabas exact telescoping tree-path feature attributions.
 
 ### Backend API & SQLite Persistence (`src/backend/`)
-- `src/backend/services/dynamic_analysis_service.py`: Persistent long-running job orchestrator, per-run isolated storage under `data/runs/<run_id>/`, dynamic tile rendering, and GeoJSON vector generation.
-- `src/backend/api/v1/endpoints/dynamic_analysis.py`: 10 dynamic REST endpoints for search, job creation, status, summary, time-series, rasters, XYZ map tiles, vectors, and explanations.
+- `src/backend/services/dynamic_analysis_service.py`: Persistent long-running job orchestrator, per-run isolated storage under `data/runs/<run_id>/`, 2D continuous RF probability raster generation, dynamic XYZ tile rendering for all layers, and GeoJSON vector generation.
+- `src/backend/api/v1/endpoints/dynamic_analysis.py`: 13 dynamic REST endpoints for search, job creation, status, summary, time-series, rasters, XYZ map tiles, downloadable GeoTIFFs, preview PNGs, vector GeoJSONs, and visual manifests.
 - `src/backend/api/v1/router.py`: Aggregates dynamic routes while preserving all existing endpoints.
 
 ### Automated Test Suites (`tests/`)
 - `tests/test_acquisition_stage_a.py`: 5 tests for token parsing, 0600 permissions, comparability rules, caching, and SNAP canonical graphs.
 - `tests/test_dynamic_pipeline_stage_b_to_h.py`: 18 tests covering all dynamic requirements (new dates, sub-AOI scaling, error handling, time-series, AI inference, and XAI additivity).
+- `tests/test_scientific_visualization.py`: 11 tests verifying all 7 visualization requirements, preview PNG generation, GeoTIFF downloads, and XYZ map tile rendering.
 - `tools/run_dynamic_analysis_demonstration.py`: End-to-end demonstration script.
 
 ---
@@ -61,9 +63,10 @@ The implementation strictly preserves the frozen reference model (`phase7a_rf_ja
 | Test Module | Tests | Result | Execution Time |
 | :--- | :--- | :--- | :--- |
 | `tests/test_acquisition_stage_a.py` | 5 | 4 passed, 1 skipped* | 0.006s |
-| `tests/test_dynamic_pipeline_stage_b_to_h.py` | 18 | 18 passed | 2.193s |
-| Historical Regression Suites (Phase 1–8.9) | 365 | 365 passed | 44.59s |
-| **Complete Pytest Suite** | **388** | **387 passed, 1 skipped\*** | **46.79s** |
+| `tests/test_dynamic_pipeline_stage_b_to_h.py` | 18 | 18 passed | 6.64s |
+| `tests/test_scientific_visualization.py` | 11 | 11 passed | 91.88s |
+| Historical Regression Suites (Phase 1–8.9) | 365 | 365 passed | 42.05s |
+| **Complete Pytest Suite** | **399** | **398 passed, 1 skipped\*** | **140.57s** |
 
 *\*Note: The single skipped test in sandboxed environments is `test_05_snap_installation_and_canonical_graph_xml`, which checks the host path `/home/orr/esa-snap/bin/gpt` located outside sandbox mounts. When run unsandboxed with `BypassSandbox: true`, it passes 5/5.*
 
@@ -80,13 +83,29 @@ The implementation strictly preserves the frozen reference model (`phase7a_rf_ja
 | `GET` | `/api/v1/runs/{run_id}/summary` | Retrieve full scientific summary, area accounting, and transition metrics |
 | `GET` | `/api/v1/runs/{run_id}/timeseries` | Retrieve chronological time-series trajectory and inundation frequency |
 | `GET` | `/api/v1/runs/{run_id}/rasters` | List all generated GeoTIFF raster assets for the run |
+| `GET` | `/api/v1/runs/{run_id}/visual-manifest` | Retrieve map-ready layer specifications, coordinate bounds, and legends |
+| `GET` | `/api/v1/runs/{run_id}/previews/{asset_name}` | Retrieve high-resolution preview PNG image with legend and coordinates |
+| `GET` | `/api/v1/runs/{run_id}/download/{asset_name}` | Download georeferenced GeoTIFF raster file attachment |
 | `GET` | `/api/v1/runs/{run_id}/tiles/{asset_id}/{z}/{x}/{y}.png` | Dynamic 256x256 XYZ PNG map tile rendering |
 | `GET` | `/api/v1/runs/{run_id}/vectors/{asset_id}` | Retrieve vector GeoJSON of newly inundated flood clusters |
 | `GET` | `/api/v1/runs/{run_id}/explanations` | Retrieve Random Forest probabilities and Saabas XAI attributions |
 
 ---
 
-## 5. OPERATIONAL READINESS VERDICT
+## 5. SCIENTIFIC VISUALIZATION & MAP READINESS
+
+Every dynamic analysis run produces a full suite of map-ready visual assets under `data/runs/<run_id>/`:
+1. `preview_t1_sar.png` & `preview_t2_sar.png`: Stretched dB radar backscatter with colorbar and UTC timestamps.
+2. `preview_t1_water.png` & `preview_t2_water.png`: Dual-pol Lee 5x5 Otsu candidate water classification with quantitative area metrics.
+3. `preview_flood_transitions.png`: 6-class flood dynamics map with exact $\text{km}^2$ accounting and net delta.
+4. `preview_riverbank_migration.png`: River reach corridor highlighting external bank erosion and accretion.
+5. `preview_rf_probability.png`: Continuous Random Forest inundation probability heatmap with $\tau^* = 0.35$ decision threshold.
+6. `preview_timeseries_chart.png`: Multi-temporal water area trajectory curve.
+7. `visual_manifest.json`: Unified manifest with bounding boxes in EPSG:4326 and EPSG:32645, center coordinates, legend palettes, and tile URL templates for interactive web GIS frameworks (Leaflet, Mapbox, OpenLayers).
+
+---
+
+## 6. OPERATIONAL READINESS VERDICT
 
 ```text
 ===========================================================================
@@ -95,3 +114,4 @@ NASA Space Apps Challenge 2026 — Dancing with the SARs
 Earth Pulse Backend is Fully General, Statistically Validated & Production-Ready
 ===========================================================================
 ```
+

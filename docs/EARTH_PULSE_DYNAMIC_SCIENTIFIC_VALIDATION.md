@@ -102,3 +102,4 @@ $$\text{Net Change} = 6.3488\text{ km}^2 \equiv 6.3488\text{ km}^2 \quad (\Delta
 - Saabas Tree-Path Feature Attribution:
   $$\text{Base Value} + \sum_{j=1}^6 \phi_j(x) = P(\text{Water} \mid x)$$
   Additivity error was measured at $\le 1.1 \times 10^{-16}$, confirming exact telescoping additivity along the decision tree branches.
+

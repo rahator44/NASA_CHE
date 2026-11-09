@@ -77,3 +77,4 @@ The architecture features sensor-specific adapters (`src.ml.adapters.BaseSensorA
 1. **Frequency Discrepancy:** L-band (24 cm wavelength) penetrates vegetative canopies and exhibits significantly different surface dielectric scattering compared to Sentinel-1 C-band (5.6 cm). C-band and L-band features cannot be directly mixed or fed into C-band trained models.
 2. **Dedicated NISAR Adapters:** New adapters (`NISARAdapter`) will define L-band physical bounds and separate model registry entries (`rf_jamuna_nisar_lband_v1`).
 3. **Dual-Frequency Fusion:** Future architectures will support separate feature branches for C-band and L-band observations, evaluated through joint independent optical validation.
+

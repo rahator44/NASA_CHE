@@ -34,6 +34,11 @@ from src.pipeline.feature_builder import (
 from src.pipeline.time_series import (
     MultiDateTimeSeriesAnalyzer,
 )
+from src.pipeline.visualization import (
+    ScientificVisualizer,
+    COLOR_TRANSITIONS,
+    COLOR_WATER_MASK,
+)
 
 __all__ = [
     "Sentinel1Preprocessor",
@@ -55,4 +60,8 @@ __all__ = [
     "SARFeatureBuilder",
     "FEATURE_NAMES",
     "MultiDateTimeSeriesAnalyzer",
+    "ScientificVisualizer",
+    "COLOR_TRANSITIONS",
+    "COLOR_WATER_MASK",
 ]
+

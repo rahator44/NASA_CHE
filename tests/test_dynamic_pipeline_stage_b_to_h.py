@@ -296,20 +296,21 @@ class TestDynamicPipelineStagesBtoH(unittest.TestCase):
         )
         run_id = req["run_id"]
         res = self.dynamic_service.get_run_dir(run_id)
-        self.assertTrue(res.exists())
+        try:
+            self.assertTrue(res.exists())
 
-        cancel_res = self.dynamic_service.get_run_dir(run_id) / "error.json"
-        cancel_res.write_text('{"status": "CANCELLED"}')
-        self.assertTrue(cancel_res.exists())
-
-        # Clean up temporary test run so SQLite reflects clean seeded state
-        from src.backend.database.database import get_db_connection
-        with get_db_connection() as conn:
-            conn.execute("DELETE FROM analysis_runs WHERE run_id = ?", (run_id,))
-            conn.commit()
-        import shutil
-        if res.exists():
-            shutil.rmtree(res, ignore_errors=True)
+            cancel_res = self.dynamic_service.get_run_dir(run_id) / "error.json"
+            cancel_res.write_text('{"status": "CANCELLED"}')
+            self.assertTrue(cancel_res.exists())
+        finally:
+            # Clean up temporary test run so SQLite reflects clean seeded state
+            from src.backend.database.database import get_db_connection
+            with get_db_connection() as conn:
+                conn.execute("DELETE FROM analysis_runs WHERE run_id = ?", (run_id,))
+                conn.commit()
+            import shutil
+            if res.exists():
+                shutil.rmtree(res, ignore_errors=True)
 
 
 if __name__ == "__main__":

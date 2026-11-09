@@ -229,3 +229,88 @@ def get_run_explanations(run_id: str):
         raise HTTPException(status_code=404, detail=f"Explanations for run '{run_id}' not available.")
 
     return json.loads(exp_file.read_text())
+
+
+@router.get("/runs/{run_id}/visual-manifest")
+def get_visual_manifest(run_id: str):
+    """Retrieve map-ready layers, coordinate bounds, legends, and tile templates for interactive mapping."""
+    run_dir = service.get_run_dir(run_id)
+    manifest_path = run_dir / "visual_manifest.json"
+    if manifest_path.exists():
+        return json.loads(manifest_path.read_text())
+
+    summary_path = run_dir / "summary.json"
+    if not summary_path.exists():
+        raise HTTPException(status_code=404, detail=f"Visual manifest for run '{run_id}' not found.")
+
+    summary = json.loads(summary_path.read_text())
+    from src.pipeline.visualization import ScientificVisualizer
+    manifest = ScientificVisualizer.build_visual_manifest(run_dir, summary)
+    manifest_path.write_text(json.dumps(manifest, indent=2))
+    return manifest
+
+
+@router.get("/runs/{run_id}/previews/{asset_name}")
+def get_run_preview(run_id: str, asset_name: str):
+    """Retrieve map-ready preview PNG image with legend, coordinates, and scale."""
+    run_dir = service.get_run_dir(run_id)
+    previews_dir = run_dir / "previews"
+
+    base_name = asset_name.removesuffix(".png")
+    if not base_name.startswith("preview_"):
+        cand_name = f"preview_{base_name}.png"
+    else:
+        cand_name = f"{base_name}.png"
+
+    preview_file = previews_dir / cand_name
+    if not preview_file.exists():
+        preview_file = previews_dir / f"{base_name}.png"
+    if not preview_file.exists():
+        alias_map = {
+            "transitions": "preview_flood_transitions.png",
+            "flood_transitions": "preview_flood_transitions.png",
+            "riverbank": "preview_riverbank_migration.png",
+            "riverbank_migration": "preview_riverbank_migration.png",
+            "rf_probability": "preview_rf_probability.png",
+            "timeseries": "preview_timeseries_chart.png",
+            "timeseries_chart": "preview_timeseries_chart.png",
+        }
+        if base_name in alias_map:
+            preview_file = previews_dir / alias_map[base_name]
+
+    if not preview_file.exists():
+        raise HTTPException(status_code=404, detail=f"Preview image '{asset_name}' not found for run '{run_id}'.")
+
+    return Response(content=preview_file.read_bytes(), media_type="image/png")
+
+
+@router.get("/runs/{run_id}/download/{asset_name}")
+def download_run_geotiff(run_id: str, asset_name: str):
+    """Download georeferenced GeoTIFF raster asset."""
+    run_dir = service.get_run_dir(run_id)
+    rasters_dir = run_dir / "rasters"
+
+    base_name = asset_name.removesuffix(".tif")
+    alias_map = {
+        "t1_sar": "t1_calibrated.tif",
+        "t2_sar": "t2_calibrated.tif",
+        "t1_water": "t1_water_mask.tif",
+        "t2_water": "t2_water_mask.tif",
+        "transitions": "transition_classes.tif",
+        "flood_transitions": "transition_classes.tif",
+        "rf_probability": "rf_probability.tif",
+        "inundation_frequency": "inundation_frequency.tif",
+    }
+    target_name = alias_map.get(base_name, f"{base_name}.tif")
+    tif_file = rasters_dir / target_name
+
+    if not tif_file.exists():
+        raise HTTPException(status_code=404, detail=f"Raster asset '{asset_name}' not found for run '{run_id}'.")
+
+    filename = f"{run_id}_{tif_file.name}"
+    return Response(
+        content=tif_file.read_bytes(),
+        media_type="image/tiff",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+

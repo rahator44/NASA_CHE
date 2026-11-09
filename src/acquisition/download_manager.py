@@ -157,3 +157,4 @@ class DownloadManager:
                 time.sleep(2 * attempt)
 
         return {"success": False, "error": "Max retries exceeded"}
+

@@ -143,3 +143,4 @@ class SceneSelector:
                     })
 
         return valid_pairs
+
