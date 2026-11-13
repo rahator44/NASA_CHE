@@ -1,0 +1,308 @@
+{
+  "run_id": "run_20261111_164348_f3c2b8",
+  "status": "COMPLETED",
+  "completed_at": "2026-11-11T16:46:13.805001+00:00",
+  "study_aoi": {
+    "wkt": "POLYGON((89.60 24.60, 89.68 24.60, 89.68 24.68, 89.60 24.68, 89.60 24.60))",
+    "geometric_vector_area_km2": 71.8411,
+    "raster_polygon_area_km2": 71.8412,
+    "bounding_box_area_km2": 75.032,
+    "common_valid_domain_km2": 69.6116,
+    "pixel_area_km2": 0.0004,
+    "discretization_pct": 0.0001,
+    "area_definitions_note": "geometric_vector_area_km2: planar polygon area in UTM Zone 45N (OGR, pre-rasterisation). raster_polygon_area_km2: pixels inside cutline \u00d7 0.0004 km\u00b2 (20m pixel grid, classes 1-5). bounding_box_area_km2: all pixels in bounding-box extent (includes outside-polygon NoData). common_valid_domain_km2: pixels valid (class 0 or 1) in BOTH scenes simultaneously \u2014 the only scientifically comparable domain for water-change calculation.",
+    "analyzed_pixel_area_km2": 71.8412,
+    "total_area_km2": 71.8412,
+    "valid_comparison_km2": 69.6116
+  },
+  "observations": {
+    "baseline": {
+      "scene_name": "S1A_IW_GRDH_1SDV_20250112T120503_20250112T120528_057411_071139_E7C8",
+      "acquisition_time": "2025-01-12T12:05:03Z",
+      "water_area_km2": 12.794,
+      "independent_observed_water_km2": 12.794,
+      "common_domain_water_km2": 11.9852,
+      "threshold_vv_db": -14.345703125,
+      "threshold_vh_db": -22.080078125,
+      "note": "water_area_km2 and independent_observed_water_km2 are observed over this scene's valid mask."
+    },
+    "change": {
+      "scene_name": "S1A_IW_GRDH_1SDV_20250124T120502_20250124T120527_057586_07182D_A7FB",
+      "acquisition_time": "2025-01-24T12:05:02Z",
+      "water_area_km2": 14.231200000000001,
+      "independent_observed_water_km2": 14.2312,
+      "common_domain_water_km2": 13.0292,
+      "threshold_vv_db": -13.662109375,
+      "threshold_vh_db": -21.943359375,
+      "note": "water_area_km2 and independent_observed_water_km2 are observed over this scene's valid mask."
+    }
+  },
+  "flood_transitions_km2": {
+    "persistent_water": 11.4132,
+    "newly_inundated": 1.616,
+    "receded_water": 0.5720000000000001,
+    "persistent_non_water": 56.010400000000004,
+    "indeterminate_floor": 2.2296,
+    "raster_polygon_area": 71.8412,
+    "valid_comparison_area": 69.61160000000001,
+    "total_study_aoi": 75.03200000000001,
+    "bounding_box_area": 75.03200000000001,
+    "outside_polygon_nodata_area": 3.1908000000000003,
+    "net_candidate_water_change": 1.044,
+    "gross_inundation": 1.616,
+    "gross_recession": 0.5720000000000001
+  },
+  "flood_reconciliation": {
+    "net_equals_inundation_minus_recession": true,
+    "water_t1_pixels": 29963,
+    "water_t2_pixels": 32573,
+    "net_change_pixels": 2610
+  },
+  "comparability_reconciliation": {
+    "common_domain_net_change_km2": 1.044,
+    "common_domain_valid_area_km2": 69.6116,
+    "independent_extent_difference_km2": 1.4372,
+    "explanation": "The difference between single-date observed water extents (+1.4372 km\u00b2) and the common-domain transition result (+1.0440 km\u00b2, gap of 0.3932 km\u00b2) occurs because single-date water extents are measured independently within each scene's own valid pixels, which includes pixels that are indeterminate noise floor (2.2296 km\u00b2) or unobserved/NoData in the opposite acquisition. For scientific multi-temporal change detection, water transitions must be calculated strictly over the mutually valid common domain (69.6116 km\u00b2), giving the verified net candidate water change of +1.0440 km\u00b2 (1.6160 km\u00b2 newly inundated minus 0.5720 km\u00b2 receded)."
+  },
+  "riverbank_dynamics": {
+    "status": "ANALYSIS_SUCCESS",
+    "message": "Successfully evaluated 36 transects: 35 verified corresponding channel transects (1 unqualified/excluded).",
+    "channel_correspondence_status": "VERIFIED_CHANNEL_CORRESPONDENCE",
+    "evaluated_transects": 36,
+    "valid_migration_transects": 35,
+    "reliable_transects_count": 35,
+    "unqualified_transects_count": 1,
+    "external_bank_expansion_km2": 0.4276,
+    "internal_char_submergence_km2": 0.452,
+    "channel_water_km2": 11.4132,
+    "mean_left_bank_displacement_m": 45.71,
+    "mean_right_bank_displacement_m": 1.71,
+    "max_bank_displacement_m": 360.0,
+    "sample_transects": [
+      {
+        "transect_row": 12,
+        "northing_utm": 2731940.0,
+        "channel_width_baseline_m": 3360.0,
+        "channel_width_change_m": 3340.0,
+        "left_bank_displacement_m": -20.0,
+        "right_bank_displacement_m": 0.0,
+        "iou": 0.9941,
+        "has_detached_water": true,
+        "is_reliable": true
+      },
+      {
+        "transect_row": 24,
+        "northing_utm": 2731700.0,
+        "channel_width_baseline_m": 3080.0,
+        "channel_width_change_m": 3120.0,
+        "left_bank_displacement_m": 40.0,
+        "right_bank_displacement_m": 0.0,
+        "iou": 0.9873,
+        "has_detached_water": true,
+        "is_reliable": true
+      },
+      {
+        "transect_row": 36,
+        "northing_utm": 2731460.0,
+        "channel_width_baseline_m": 3000.0,
+        "channel_width_change_m": 3060.0,
+        "left_bank_displacement_m": 0.0,
+        "right_bank_displacement_m": 60.0,
+        "iou": 0.9805,
+        "has_detached_water": true,
+        "is_reliable": true
+      },
+      {
+        "transect_row": 48,
+        "northing_utm": 2731220.0,
+        "channel_width_baseline_m": 2520.0,
+        "channel_width_change_m": 2560.0,
+        "left_bank_displacement_m": 40.0,
+        "right_bank_displacement_m": 0.0,
+        "iou": 0.9845,
+        "has_detached_water": true,
+        "is_reliable": true
+      },
+      {
+        "transect_row": 60,
+        "northing_utm": 2730980.0,
+        "channel_width_baseline_m": 1840.0,
+        "channel_width_change_m": 2100.0,
+        "left_bank_displacement_m": 280.0,
+        "right_bank_displacement_m": -20.0,
+        "iou": 0.8598,
+        "has_detached_water": true,
+        "is_reliable": true
+      },
+      {
+        "transect_row": 72,
+        "northing_utm": 2730740.0,
+        "channel_width_baseline_m": 1520.0,
+        "channel_width_change_m": 1520.0,
+        "left_bank_displacement_m": 0.0,
+        "right_bank_displacement_m": 0.0,
+        "iou": 1.0,
+        "has_detached_water": true,
+        "is_reliable": true
+      },
+      {
+        "transect_row": 84,
+        "northing_utm": 2730500.0,
+        "channel_width_baseline_m": 1300.0,
+        "channel_width_change_m": 1320.0,
+        "left_bank_displacement_m": 20.0,
+        "right_bank_displacement_m": 0.0,
+        "iou": 0.9851,
+        "has_detached_water": true,
+        "is_reliable": true
+      },
+      {
+        "transect_row": 96,
+        "northing_utm": 2730260.0,
+        "channel_width_baseline_m": 1260.0,
+        "channel_width_change_m": 1240.0,
+        "left_bank_displacement_m": 0.0,
+        "right_bank_displacement_m": -20.0,
+        "iou": 0.9844,
+        "has_detached_water": true,
+        "is_reliable": true
+      },
+      {
+        "transect_row": 108,
+        "northing_utm": 2730020.0,
+        "channel_width_baseline_m": 1100.0,
+        "channel_width_change_m": 1120.0,
+        "left_bank_displacement_m": 20.0,
+        "right_bank_displacement_m": 0.0,
+        "iou": 0.9825,
+        "has_detached_water": true,
+        "is_reliable": true
+      },
+      {
+        "transect_row": 120,
+        "northing_utm": 2729780.0,
+        "channel_width_baseline_m": 1200.0,
+        "channel_width_change_m": 1260.0,
+        "left_bank_displacement_m": 40.0,
+        "right_bank_displacement_m": 20.0,
+        "iou": 0.9531,
+        "has_detached_water": true,
+        "is_reliable": true
+      }
+    ],
+    "unqualified_transects": [
+      {
+        "transect_row": 396,
+        "northing_utm": 2724260.0,
+        "reason": "POOR_CHANNEL_CORRESPONDENCE_OR_EXCESSIVE_DISPLACEMENT",
+        "channel_width_baseline_m": 660.0,
+        "channel_width_change_m": 1360.0,
+        "apparent_left_disp_m": 0.0,
+        "apparent_right_disp_m": 700.0,
+        "iou": 0.4928,
+        "has_detached_water": true,
+        "is_reliable": false
+      }
+    ]
+  },
+  "ai_evaluation": {
+    "model_id": "phase7a_rf_jamuna_v1",
+    "sample_evaluated": 100,
+    "mean_water_probability": 0.532,
+    "additivity_verified": true,
+    "sample_explanations": [
+      {
+        "base_value": 0.49945019285740677,
+        "prediction_probability": 0.4909419119358063,
+        "attributions": {
+          "vv_db": -0.06617529523341167,
+          "vh_db": 0.011758904549120366,
+          "vv_minus_vh_db": 0.004035253015851226,
+          "cross_pol_ratio": -0.010840901966225966,
+          "texture_vv": -0.024459868191004805,
+          "texture_vh": 0.07717361860173953
+        },
+        "sum_attributions": -0.00850828922393132,
+        "additivity_error": 8.302330822829163e-09,
+        "is_additive": true,
+        "baseline_mode": "ensemble_root"
+      },
+      {
+        "base_value": 0.49945019285740677,
+        "prediction_probability": 0.565492570400238,
+        "attributions": {
+          "vv_db": -0.06968092962826775,
+          "vh_db": 0.10415079747690037,
+          "vv_minus_vh_db": 0.011900808873113698,
+          "cross_pol_ratio": 0.019506567709060972,
+          "texture_vv": -0.044426547260758904,
+          "texture_vh": 0.04459172367099061
+        },
+        "sum_attributions": 0.066042420841039,
+        "additivity_error": 4.329820768589343e-08,
+        "is_additive": true,
+        "baseline_mode": "ensemble_root"
+      },
+      {
+        "base_value": 0.49945019285740677,
+        "prediction_probability": 0.6589978933334351,
+        "attributions": {
+          "vv_db": 0.07943853829008292,
+          "vh_db": 0.0459947123083783,
+          "vv_minus_vh_db": -0.012310700614988406,
+          "cross_pol_ratio": -0.007084752208961329,
+          "texture_vv": 0.020432547226489173,
+          "texture_vh": 0.03307742660787414
+        },
+        "sum_attributions": 0.1595477716088748,
+        "additivity_error": 7.11328465019534e-08,
+        "is_additive": true,
+        "baseline_mode": "ensemble_root"
+      },
+      {
+        "base_value": 0.49945019285740677,
+        "prediction_probability": 0.6484867930412292,
+        "attributions": {
+          "vv_db": 0.03795444312526495,
+          "vh_db": 0.049077056072309465,
+          "vv_minus_vh_db": 0.005440913839187803,
+          "cross_pol_ratio": 0.015985605752075648,
+          "texture_vv": -0.0053034968860924,
+          "texture_vh": 0.045882160176204986
+        },
+        "sum_attributions": 0.14903668207895046,
+        "additivity_error": 8.189512801237697e-08,
+        "is_additive": true,
+        "baseline_mode": "ensemble_root"
+      },
+      {
+        "base_value": 0.49945019285740677,
+        "prediction_probability": 0.6014338731765747,
+        "attributions": {
+          "vv_db": 0.04731028039031524,
+          "vh_db": 0.020588657278822677,
+          "vv_minus_vh_db": 0.0013843229990394238,
+          "cross_pol_ratio": -0.016562908173320116,
+          "texture_vv": -0.0013769021816723182,
+          "texture_vh": 0.05064030651188711
+        },
+        "sum_attributions": 0.10198375682507202,
+        "additivity_error": 7.65059040563898e-08,
+        "is_additive": true,
+        "baseline_mode": "ensemble_root"
+      }
+    ]
+  },
+  "time_series": null,
+  "visual_manifest": "/mnt/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/runs/run_20261111_164348_f3c2b8/visual_manifest.json",
+  "previews": {
+    "preview_t1_sar": "/mnt/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/runs/run_20261111_164348_f3c2b8/previews/preview_t1_sar.png",
+    "preview_t2_sar": "/mnt/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/runs/run_20261111_164348_f3c2b8/previews/preview_t2_sar.png",
+    "preview_t1_water": "/mnt/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/runs/run_20261111_164348_f3c2b8/previews/preview_t1_water.png",
+    "preview_t2_water": "/mnt/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/runs/run_20261111_164348_f3c2b8/previews/preview_t2_water.png",
+    "preview_flood_transitions": "/mnt/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/runs/run_20261111_164348_f3c2b8/previews/preview_flood_transitions.png",
+    "preview_riverbank_migration": "/mnt/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/runs/run_20261111_164348_f3c2b8/previews/preview_riverbank_migration.png",
+    "preview_rf_probability": "/mnt/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/runs/run_20261111_164348_f3c2b8/previews/preview_rf_probability.png",
+    "preview_timeseries_chart": "/mnt/NewVolume1/Nasa-chlla/EarthPulse-SAR/data/runs/run_20261111_164348_f3c2b8/previews/preview_timeseries_chart.png"
+  }
+}

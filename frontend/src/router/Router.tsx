@@ -13,12 +13,34 @@ interface RouterContextType {
 
 const RouterContext = createContext<RouterContextType | null>(null);
 
-export function normalizePath(path: string): string {
-  // Strip trailing slashes, keep root
-  if (path.length > 1 && path.endsWith('/')) {
-    return path.slice(0, -1);
+const rawBase =
+  (typeof import.meta !== 'undefined' && (import.meta as any)?.env?.BASE_URL) ||
+  '/';
+export const BASE_PATH = rawBase.replace(/\/+$/, '');
+
+export function stripBasePath(path: string): string {
+  if (BASE_PATH && (path === BASE_PATH || path.startsWith(`${BASE_PATH}/`))) {
+    const stripped = path.slice(BASE_PATH.length);
+    return stripped || '/';
   }
-  return path || '/';
+  return path;
+}
+
+export function withBasePath(path: string): string {
+  if (!BASE_PATH || path.startsWith(BASE_PATH) || /^https?:\/\//i.test(path)) {
+    return path;
+  }
+  const clean = path.startsWith('/') ? path : `/${path}`;
+  return `${BASE_PATH}${clean}`;
+}
+
+export function normalizePath(path: string): string {
+  const stripped = stripBasePath(path);
+  // Strip trailing slashes, keep root
+  if (stripped.length > 1 && stripped.endsWith('/')) {
+    return stripped.slice(0, -1);
+  }
+  return stripped || '/';
 }
 
 export const RouterProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -51,13 +73,14 @@ export const RouterProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const navigate = useCallback((to: string) => {
     const dest = mergeNavigationTarget(to, window.location.search);
     const url = new URL(dest, window.location.origin);
-    const newPath = normalizePath(url.pathname);
+    const inAppPath = normalizePath(url.pathname);
     const newSearch = url.search;
+    const historyPath = withBasePath(inAppPath);
 
-    if (window.location.pathname !== newPath || window.location.search !== newSearch) {
-      window.history.pushState(null, '', `${newPath}${newSearch}`);
+    if (window.location.pathname !== historyPath || window.location.search !== newSearch) {
+      window.history.pushState(null, '', `${historyPath}${newSearch}`);
     }
-    setCurrentPath(newPath);
+    setCurrentPath(inAppPath);
     setQueryParams(new URLSearchParams(newSearch));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -119,8 +142,9 @@ export const Link: React.FC<LinkProps> = ({
 }) => {
   const { currentPath, navigate } = useRouter();
   const dest = to || href || '/';
-  const targetPath = normalizePath(dest.split('?')[0]);
-  const isActive = currentPath === targetPath;
+  const inAppTarget = normalizePath(dest.split('?')[0]);
+  const isActive = currentPath === inAppTarget;
+  const hrefPath = withBasePath(dest);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
@@ -134,7 +158,7 @@ export const Link: React.FC<LinkProps> = ({
   const combinedClass = [className, isActive ? activeClassName : ''].filter(Boolean).join(' ');
 
   return (
-    <a href={dest} className={combinedClass} onClick={handleClick} {...rest}>
+    <a href={hrefPath} className={combinedClass} onClick={handleClick} {...rest}>
       {children}
     </a>
   );

@@ -14,6 +14,25 @@
 
 ---
 
+## 🌐 Try Earth Pulse Online
+
+**Live Web Demonstration:** **[https://rahator44.github.io/NASA_CHE/](https://rahator44.github.io/NASA_CHE/)**
+
+Explore Earth Pulse directly in your web browser 24/7 without installing dependencies or running a local server:
+
+- **Interactive Online Demonstration (GitHub Pages):**
+  - Instant access to all 6 application views: Mission Dashboard, Satellite Map Explorer, Flood Comparison, Explainable AI, Science & Data, and New Satellite Analysis workspace.
+  - Interactive WebGIS with genuine pre-rendered Sentinel-1 Web Mercator tiles, high-resolution scientific preview products, and full pan/zoom capabilities across the Jamuna corridor.
+  - Dual-epoch flood transition accounting and Saabas tree-path feature attributions for both the 2024 Monsoon Baseline and January 2025 Observation.
+  - Read-only demonstration mode: dynamically serves verified scientific records without cloud server dependencies.
+
+- **Downloadable Application (Local Linux / GitHub Release):**
+  - Download official release packages from the [GitHub Releases v1.0.0](https://github.com/rahator44/NASA_CHE/releases/tag/v1.0.0) page.
+  - Complete Python 3.10+ FastAPI backend with dynamic tile rendering engine, SQLite catalog, and mathematical verification suites.
+  - Optional authorized live SAR processing: configure your own NASA Earthdata Login credentials and ESA SNAP (`gpt`) engine for end-to-end ingestion and coregistration.
+
+---
+
 ## 1. Overview & Capabilities
 
 Earth Pulse is an end-to-end satellite radar intelligence web application and scientific processing pipeline designed for the NASA Space Apps Challenge 2026 (*Dancing with the SARs*). It monitors extreme monsoon flooding, riverbank migration, and channel morphodynamics along the dynamic braided Jamuna River using all-weather Copernicus Sentinel-1 Synthetic Aperture Radar (SAR) backscatter.

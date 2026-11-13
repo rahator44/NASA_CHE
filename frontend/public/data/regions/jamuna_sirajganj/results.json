@@ -1,0 +1,87 @@
+{
+  "total_results": 2,
+  "results": [
+    {
+      "run_id": "run_20261111_164348_f3c2b8",
+      "analysis_type": "dynamic_two_date_comparison",
+      "region_id": "jamuna_sirajganj",
+      "status": "COMPLETED",
+      "executed_at": "2026-11-11T16:43:48.122633+00:00",
+      "completed_at": "2026-11-11T16:46:13.805001+00:00",
+      "parameters": {
+        "run_id": "run_20261111_164348_f3c2b8",
+        "mode": "two_date_comparison",
+        "aoi_wkt": "POLYGON((89.60 24.60, 89.68 24.60, 89.68 24.68, 89.60 24.68, 89.60 24.60))",
+        "start_date": "2025-01-12",
+        "end_date": "2025-01-24",
+        "satellite_acquisitions": [
+          "2025-01-12",
+          "2025-01-24"
+        ]
+      },
+      "outputs": {
+        "summary": "data/runs/run_20261111_164348_f3c2b8/summary.json",
+        "visual_manifest": "data/runs/run_20261111_164348_f3c2b8/visual_manifest.json",
+        "transition_raster": "data/runs/run_20261111_164348_f3c2b8/rasters/transition_classes.tif",
+        "vector_geojson": "data/runs/run_20261111_164348_f3c2b8/vectors/newly_inundated.geojson",
+        "previews": {
+          "preview_t1_sar": "data/runs/run_20261111_164348_f3c2b8/previews/preview_t1_sar.png",
+          "preview_t2_sar": "data/runs/run_20261111_164348_f3c2b8/previews/preview_t2_sar.png",
+          "preview_t1_water": "data/runs/run_20261111_164348_f3c2b8/previews/preview_t1_water.png",
+          "preview_t2_water": "data/runs/run_20261111_164348_f3c2b8/previews/preview_t2_water.png",
+          "preview_flood_transitions": "data/runs/run_20261111_164348_f3c2b8/previews/preview_flood_transitions.png",
+          "preview_riverbank_migration": "data/runs/run_20261111_164348_f3c2b8/previews/preview_riverbank_migration.png",
+          "preview_rf_probability": "data/runs/run_20261111_164348_f3c2b8/previews/preview_rf_probability.png",
+          "preview_timeseries_chart": "data/runs/run_20261111_164348_f3c2b8/previews/preview_timeseries_chart.png"
+        }
+      },
+      "metadata": {
+        "run_id": "run_20261111_164348_f3c2b8",
+        "status": "COMPLETED",
+        "progress_pct": 100.0,
+        "net_candidate_water_change_km2": 1.044
+      }
+    },
+    {
+      "run_id": "run_20261110_221732_1f2e94",
+      "analysis_type": "dynamic_two_date_comparison",
+      "region_id": "jamuna_sirajganj",
+      "status": "COMPLETED",
+      "executed_at": "2026-11-10T22:17:32.877740+00:00",
+      "completed_at": "2026-11-10T22:17:38.983371+00:00",
+      "parameters": {
+        "run_id": "run_20261110_221732_1f2e94",
+        "mode": "two_date_comparison",
+        "aoi_wkt": "POLYGON((89.60 24.60, 89.68 24.60, 89.68 24.68, 89.60 24.68, 89.60 24.60))",
+        "start_date": "2024-06-10",
+        "end_date": "2024-07-16",
+        "satellite_acquisitions": [
+          "2024-06-10",
+          "2024-07-16"
+        ]
+      },
+      "outputs": {
+        "summary": "data/runs/run_20261110_221732_1f2e94/summary.json",
+        "visual_manifest": "data/runs/run_20261110_221732_1f2e94/visual_manifest.json",
+        "transition_raster": "data/runs/run_20261110_221732_1f2e94/rasters/transition_classes.tif",
+        "vector_geojson": "data/runs/run_20261110_221732_1f2e94/vectors/newly_inundated.geojson",
+        "previews": {
+          "preview_t1_sar": "data/runs/run_20261110_221732_1f2e94/previews/preview_t1_sar.png",
+          "preview_t2_sar": "data/runs/run_20261110_221732_1f2e94/previews/preview_t2_sar.png",
+          "preview_t1_water": "data/runs/run_20261110_221732_1f2e94/previews/preview_t1_water.png",
+          "preview_t2_water": "data/runs/run_20261110_221732_1f2e94/previews/preview_t2_water.png",
+          "preview_flood_transitions": "data/runs/run_20261110_221732_1f2e94/previews/preview_flood_transitions.png",
+          "preview_riverbank_migration": "data/runs/run_20261110_221732_1f2e94/previews/preview_riverbank_migration.png",
+          "preview_rf_probability": "data/runs/run_20261110_221732_1f2e94/previews/preview_rf_probability.png",
+          "preview_timeseries_chart": "data/runs/run_20261110_221732_1f2e94/previews/preview_timeseries_chart.png"
+        }
+      },
+      "metadata": {
+        "run_id": "run_20261110_221732_1f2e94",
+        "status": "COMPLETED",
+        "progress_pct": 100.0,
+        "net_candidate_water_change_km2": 5.8432
+      }
+    }
+  ]
+}

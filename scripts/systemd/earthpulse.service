@@ -1,0 +1,30 @@
+[Unit]
+Description=Earth Pulse — Satellite Radar Hydrology & Explainable AI (FastAPI WebGIS)
+After=network.target
+
+[Service]
+Type=simple
+User=orr
+Group=orr
+WorkingDirectory=/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR
+Environment="DEMO_MODE_RESTRICTED_EXECUTION=true"
+Environment="PORT=8000"
+Environment="HOST=127.0.0.1"
+Environment="PYTHONUNBUFFERED=1"
+ExecStart=/home/orr/NewVolume1/Nasa-chlla/EarthPulse-SAR/.venv/bin/uvicorn src.backend.main:app --host 127.0.0.1 --port 8000 --workers 2 --no-access-log
+Restart=on-failure
+RestartSec=5s
+
+# Security sandboxing
+NoNewPrivileges=true
+ProtectSystem=full
+PrivateTmp=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=earthpulse
+
+[Install]
+WantedBy=multi-user.target
+

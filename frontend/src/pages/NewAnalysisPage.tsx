@@ -5,6 +5,7 @@ import {
   createAnalysisRequest,
   getAnalysisJobStatus,
   cancelAnalysisJob,
+  isStaticDemo,
 } from '../api/client';
 import { ARCHIVED_CAMPAIGNS } from '../state/analysisSelection';
 import {
@@ -272,6 +273,51 @@ export const NewAnalysisPage: React.FC = () => {
         {/* Right Column: Workflow Steps & Controls */}
         <div className="analysis-controls-column">
           <div className="controls-scroll-wrapper">
+            {/* Offline / Local-Installation Guidance Banner */}
+            {isStaticDemo && (
+              <div className="workflow-card local-installation-notice-card" style={{
+                background: 'rgba(6, 182, 212, 0.08)',
+                border: '1px solid rgba(6, 182, 212, 0.3)',
+                borderRadius: '8px',
+                padding: '16px 20px',
+                marginBottom: '20px'
+              }}>
+                <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                  <span style={{ fontSize: '24px' }}>📡</span>
+                  <div>
+                    <h4 style={{ margin: '0 0 6px 0', color: '#38bdf8', fontSize: '15px', fontWeight: 600 }}>
+                      Online Demonstration Mode — Local Installation Guidance
+                    </h4>
+                    <p style={{ margin: '0 0 10px 0', fontSize: '13px', lineHeight: 1.5, color: '#cbd5e1' }}>
+                      You are viewing the interactive online demonstration of Earth Pulse hosted on GitHub Pages.
+                      Live satellite SAR ingestion, ESA SNAP graph execution, and custom AOI processing require the full downloadable application
+                      running on a local Linux computer with your own NASA Earthdata credentials.
+                    </p>
+                    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                      <a
+                        href="https://github.com/rahator44/NASA_CHE/releases/tag/v1.0.0"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-primary btn-sm"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                      >
+                        📦 Download Earth Pulse v1.0.0 Release
+                      </a>
+                      <a
+                        href="https://github.com/rahator44/NASA_CHE#installation"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-secondary btn-sm"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                      >
+                        📖 Installation &amp; SNAP Guide
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* STEP 1: Area of Interest Confirmation */}
             <div className="workflow-card">
               <div className="step-badge-row">
@@ -331,9 +377,9 @@ export const NewAnalysisPage: React.FC = () => {
                   type="button"
                   className="btn-preset"
                   onClick={() => applyPreset('2025_january')}
-                  title="Dry season live acquisition (January 2025)"
+                  title="Dry season archived acquisition (January 2025)"
                 >
-                  January 2025 Live
+                  January 2025 Archive
                 </button>
               </div>
 

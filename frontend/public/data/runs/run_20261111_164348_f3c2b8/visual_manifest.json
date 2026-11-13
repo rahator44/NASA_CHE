@@ -1,0 +1,375 @@
+{
+  "run_id": "run_20261111_164348_f3c2b8",
+  "status": "COMPLETED",
+  "completed_at": "2026-11-11T16:46:13.805001+00:00",
+  "geographic_bounds": {
+    "epsg4326": [
+      89.59815,
+      24.59855,
+      89.68179,
+      24.68155
+    ],
+    "epsg32645": [
+      763080.0,
+      2723140.0,
+      771380.0,
+      2732180.0
+    ],
+    "center": {
+      "lon": 89.63997,
+      "lat": 24.64005
+    }
+  },
+  "pixel_spacing_m": [
+    20.0,
+    20.0
+  ],
+  "observations": {
+    "baseline": {
+      "scene_name": "S1A_IW_GRDH_1SDV_20250112T120503_20250112T120528_057411_071139_E7C8",
+      "acquisition_time": "2025-01-12T12:05:03Z",
+      "water_area_km2": 12.794,
+      "independent_observed_water_km2": 12.794,
+      "common_domain_water_km2": 11.9852,
+      "threshold_vv_db": -14.345703125,
+      "threshold_vh_db": -22.080078125,
+      "note": "water_area_km2 and independent_observed_water_km2 are observed over this scene's valid mask."
+    },
+    "change": {
+      "scene_name": "S1A_IW_GRDH_1SDV_20250124T120502_20250124T120527_057586_07182D_A7FB",
+      "acquisition_time": "2025-01-24T12:05:02Z",
+      "water_area_km2": 14.231200000000001,
+      "independent_observed_water_km2": 14.2312,
+      "common_domain_water_km2": 13.0292,
+      "threshold_vv_db": -13.662109375,
+      "threshold_vh_db": -21.943359375,
+      "note": "water_area_km2 and independent_observed_water_km2 are observed over this scene's valid mask."
+    }
+  },
+  "layers": [
+    {
+      "layer_id": "t1_sar",
+      "title": "Baseline Sentinel-1 Radar Backscatter (VV)",
+      "type": "raster_continuous",
+      "observation_date": "2025-01-12T12:05:03Z",
+      "tile_url_template": "/api/v1/runs/run_20261111_164348_f3c2b8/tiles/t1_sar/{z}/{x}/{y}.png",
+      "preview_png_url": "/api/v1/runs/run_20261111_164348_f3c2b8/previews/t1_sar.png",
+      "download_geotiff_url": "/api/v1/runs/run_20261111_164348_f3c2b8/download/t1_calibrated.tif",
+      "legend": {
+        "type": "continuous",
+        "min_db": -25.0,
+        "max_db": 0.0,
+        "units": "dB"
+      }
+    },
+    {
+      "layer_id": "t2_sar",
+      "title": "Observation Sentinel-1 Radar Backscatter (VV)",
+      "type": "raster_continuous",
+      "observation_date": "2025-01-24T12:05:02Z",
+      "tile_url_template": "/api/v1/runs/run_20261111_164348_f3c2b8/tiles/t2_sar/{z}/{x}/{y}.png",
+      "preview_png_url": "/api/v1/runs/run_20261111_164348_f3c2b8/previews/t2_sar.png",
+      "download_geotiff_url": "/api/v1/runs/run_20261111_164348_f3c2b8/download/t2_calibrated.tif",
+      "legend": {
+        "type": "continuous",
+        "min_db": -25.0,
+        "max_db": 0.0,
+        "units": "dB"
+      }
+    },
+    {
+      "layer_id": "t1_water",
+      "title": "Baseline Candidate Water Classification",
+      "type": "raster_categorical",
+      "observation_date": "2025-01-12T12:05:03Z",
+      "tile_url_template": "/api/v1/runs/run_20261111_164348_f3c2b8/tiles/t1_water/{z}/{x}/{y}.png",
+      "preview_png_url": "/api/v1/runs/run_20261111_164348_f3c2b8/previews/t1_water.png",
+      "download_geotiff_url": "/api/v1/runs/run_20261111_164348_f3c2b8/download/t1_water_mask.tif",
+      "legend": {
+        "type": "categorical",
+        "classes": [
+          {
+            "value": 1,
+            "label": "Candidate Water",
+            "color": "#08519c",
+            "area_km2": 12.794
+          },
+          {
+            "value": 0,
+            "label": "Non-Water Land",
+            "color": "#d9d9d9"
+          },
+          {
+            "value": 2,
+            "label": "Indeterminate Noise Floor",
+            "color": "#a6cee3"
+          }
+        ]
+      }
+    },
+    {
+      "layer_id": "t2_water",
+      "title": "Observation Candidate Water Classification",
+      "type": "raster_categorical",
+      "observation_date": "2025-01-24T12:05:02Z",
+      "tile_url_template": "/api/v1/runs/run_20261111_164348_f3c2b8/tiles/t2_water/{z}/{x}/{y}.png",
+      "preview_png_url": "/api/v1/runs/run_20261111_164348_f3c2b8/previews/t2_water.png",
+      "download_geotiff_url": "/api/v1/runs/run_20261111_164348_f3c2b8/download/t2_water_mask.tif",
+      "legend": {
+        "type": "categorical",
+        "classes": [
+          {
+            "value": 1,
+            "label": "Candidate Water",
+            "color": "#08519c",
+            "area_km2": 14.231200000000001
+          },
+          {
+            "value": 0,
+            "label": "Non-Water Land",
+            "color": "#d9d9d9"
+          },
+          {
+            "value": 2,
+            "label": "Indeterminate Noise Floor",
+            "color": "#a6cee3"
+          }
+        ]
+      }
+    },
+    {
+      "layer_id": "transitions",
+      "title": "Flood Inundation & Transition Dynamics",
+      "type": "raster_categorical",
+      "tile_url_template": "/api/v1/runs/run_20261111_164348_f3c2b8/tiles/transitions/{z}/{x}/{y}.png",
+      "preview_png_url": "/api/v1/runs/run_20261111_164348_f3c2b8/previews/flood_transitions.png",
+      "download_geotiff_url": "/api/v1/runs/run_20261111_164348_f3c2b8/download/transition_classes.tif",
+      "legend": {
+        "type": "categorical",
+        "classes": [
+          {
+            "value": 1,
+            "label": "Persistent Water",
+            "color": "#08519c",
+            "area_km2": 11.4132
+          },
+          {
+            "value": 2,
+            "label": "Newly Inundated (Expansion)",
+            "color": "#41b6c4",
+            "area_km2": 1.616
+          },
+          {
+            "value": 3,
+            "label": "Receded Water (Recession)",
+            "color": "#fe9929",
+            "area_km2": 0.5720000000000001
+          },
+          {
+            "value": 4,
+            "label": "Persistent Non-Water Land",
+            "color": "#cccccc",
+            "area_km2": 56.010400000000004
+          },
+          {
+            "value": 5,
+            "label": "Indeterminate Noise Floor",
+            "color": "#a6cee3",
+            "area_km2": null
+          },
+          {
+            "value": 6,
+            "label": "Outside AOI / NoData",
+            "color": "#00000000",
+            "area_km2": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "layer_id": "rf_probability",
+      "title": "Random Forest Continuous Water Probability",
+      "type": "raster_continuous",
+      "tile_url_template": "/api/v1/runs/run_20261111_164348_f3c2b8/tiles/rf_probability/{z}/{x}/{y}.png",
+      "preview_png_url": "/api/v1/runs/run_20261111_164348_f3c2b8/previews/rf_probability.png",
+      "download_geotiff_url": "/api/v1/runs/run_20261111_164348_f3c2b8/download/rf_probability.tif",
+      "legend": {
+        "type": "continuous",
+        "min": 0.0,
+        "max": 1.0,
+        "decision_threshold": 0.35,
+        "colormap": "cividis"
+      }
+    },
+    {
+      "layer_id": "riverbank_migration",
+      "title": "Riverbank Migration & Channel Dynamics",
+      "type": "vector_or_raster",
+      "preview_png_url": "/api/v1/runs/run_20261111_164348_f3c2b8/previews/riverbank_migration.png",
+      "metrics": {
+        "status": "ANALYSIS_SUCCESS",
+        "message": "Successfully evaluated 36 transects: 35 verified corresponding channel transects (1 unqualified/excluded).",
+        "channel_correspondence_status": "VERIFIED_CHANNEL_CORRESPONDENCE",
+        "evaluated_transects": 36,
+        "valid_migration_transects": 35,
+        "reliable_transects_count": 35,
+        "unqualified_transects_count": 1,
+        "external_bank_expansion_km2": 0.4276,
+        "internal_char_submergence_km2": 0.452,
+        "channel_water_km2": 11.4132,
+        "mean_left_bank_displacement_m": 45.71,
+        "mean_right_bank_displacement_m": 1.71,
+        "max_bank_displacement_m": 360.0,
+        "sample_transects": [
+          {
+            "transect_row": 12,
+            "northing_utm": 2731940.0,
+            "channel_width_baseline_m": 3360.0,
+            "channel_width_change_m": 3340.0,
+            "left_bank_displacement_m": -20.0,
+            "right_bank_displacement_m": 0.0,
+            "iou": 0.9941,
+            "has_detached_water": true,
+            "is_reliable": true
+          },
+          {
+            "transect_row": 24,
+            "northing_utm": 2731700.0,
+            "channel_width_baseline_m": 3080.0,
+            "channel_width_change_m": 3120.0,
+            "left_bank_displacement_m": 40.0,
+            "right_bank_displacement_m": 0.0,
+            "iou": 0.9873,
+            "has_detached_water": true,
+            "is_reliable": true
+          },
+          {
+            "transect_row": 36,
+            "northing_utm": 2731460.0,
+            "channel_width_baseline_m": 3000.0,
+            "channel_width_change_m": 3060.0,
+            "left_bank_displacement_m": 0.0,
+            "right_bank_displacement_m": 60.0,
+            "iou": 0.9805,
+            "has_detached_water": true,
+            "is_reliable": true
+          },
+          {
+            "transect_row": 48,
+            "northing_utm": 2731220.0,
+            "channel_width_baseline_m": 2520.0,
+            "channel_width_change_m": 2560.0,
+            "left_bank_displacement_m": 40.0,
+            "right_bank_displacement_m": 0.0,
+            "iou": 0.9845,
+            "has_detached_water": true,
+            "is_reliable": true
+          },
+          {
+            "transect_row": 60,
+            "northing_utm": 2730980.0,
+            "channel_width_baseline_m": 1840.0,
+            "channel_width_change_m": 2100.0,
+            "left_bank_displacement_m": 280.0,
+            "right_bank_displacement_m": -20.0,
+            "iou": 0.8598,
+            "has_detached_water": true,
+            "is_reliable": true
+          },
+          {
+            "transect_row": 72,
+            "northing_utm": 2730740.0,
+            "channel_width_baseline_m": 1520.0,
+            "channel_width_change_m": 1520.0,
+            "left_bank_displacement_m": 0.0,
+            "right_bank_displacement_m": 0.0,
+            "iou": 1.0,
+            "has_detached_water": true,
+            "is_reliable": true
+          },
+          {
+            "transect_row": 84,
+            "northing_utm": 2730500.0,
+            "channel_width_baseline_m": 1300.0,
+            "channel_width_change_m": 1320.0,
+            "left_bank_displacement_m": 20.0,
+            "right_bank_displacement_m": 0.0,
+            "iou": 0.9851,
+            "has_detached_water": true,
+            "is_reliable": true
+          },
+          {
+            "transect_row": 96,
+            "northing_utm": 2730260.0,
+            "channel_width_baseline_m": 1260.0,
+            "channel_width_change_m": 1240.0,
+            "left_bank_displacement_m": 0.0,
+            "right_bank_displacement_m": -20.0,
+            "iou": 0.9844,
+            "has_detached_water": true,
+            "is_reliable": true
+          },
+          {
+            "transect_row": 108,
+            "northing_utm": 2730020.0,
+            "channel_width_baseline_m": 1100.0,
+            "channel_width_change_m": 1120.0,
+            "left_bank_displacement_m": 20.0,
+            "right_bank_displacement_m": 0.0,
+            "iou": 0.9825,
+            "has_detached_water": true,
+            "is_reliable": true
+          },
+          {
+            "transect_row": 120,
+            "northing_utm": 2729780.0,
+            "channel_width_baseline_m": 1200.0,
+            "channel_width_change_m": 1260.0,
+            "left_bank_displacement_m": 40.0,
+            "right_bank_displacement_m": 20.0,
+            "iou": 0.9531,
+            "has_detached_water": true,
+            "is_reliable": true
+          }
+        ],
+        "unqualified_transects": [
+          {
+            "transect_row": 396,
+            "northing_utm": 2724260.0,
+            "reason": "POOR_CHANNEL_CORRESPONDENCE_OR_EXCESSIVE_DISPLACEMENT",
+            "channel_width_baseline_m": 660.0,
+            "channel_width_change_m": 1360.0,
+            "apparent_left_disp_m": 0.0,
+            "apparent_right_disp_m": 700.0,
+            "iou": 0.4928,
+            "has_detached_water": true,
+            "is_reliable": false
+          }
+        ]
+      }
+    },
+    {
+      "layer_id": "timeseries_chart",
+      "title": "Multi-Temporal Water Area Trajectory",
+      "type": "chart",
+      "preview_png_url": "/api/v1/runs/run_20261111_164348_f3c2b8/previews/timeseries_chart.png",
+      "data_url": "/api/v1/runs/run_20261111_164348_f3c2b8/timeseries"
+    }
+  ],
+  "vectors": [
+    {
+      "vector_id": "newly_inundated",
+      "title": "Newly Inundated Flood Polygons",
+      "geojson_url": "/api/v1/runs/run_20261111_164348_f3c2b8/vectors/newly_inundated"
+    }
+  ],
+  "scientific_provenance": {
+    "mission": "Copernicus Sentinel-1 C-SAR IW GRD",
+    "calibration_standard": "Radiometric calibration to Sigma0 (dB) + Lee 5x5 filtering",
+    "water_classification": "Automated Dual-Pol Otsu thresholding + logical AND fusion",
+    "machine_learning": "Pure-NumPy Random Forest (phase7a_rf_jamuna_v1, 6 physical features)",
+    "coordinate_reference_system": "EPSG:32645 (WGS 84 / UTM Zone 45N)",
+    "pixel_spacing": "20.0 m",
+    "challenge": "NASA Space Apps Challenge 2026: Dancing with the SARs"
+  }
+}

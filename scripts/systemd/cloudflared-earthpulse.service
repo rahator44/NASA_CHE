@@ -1,0 +1,27 @@
+[Unit]
+Description=Cloudflare Zero Trust Tunnel for Earth Pulse
+After=network.target earthpulse.service
+
+[Service]
+Type=simple
+User=orr
+Group=orr
+# Runs cloudflared with the configured tunnel (or token)
+# Option A (Named Tunnel with config.yml):
+ExecStart=/usr/local/bin/cloudflared tunnel --config /home/orr/.cloudflared/config.yml run
+# Option B (Using Cloudflare Dashboard Token):
+# ExecStart=/usr/local/bin/cloudflared tunnel run --token <YOUR_CLOUDFLARE_TUNNEL_TOKEN>
+Restart=on-failure
+RestartSec=5s
+
+# Security
+NoNewPrivileges=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cloudflared-earthpulse
+
+[Install]
+WantedBy=multi-user.target
+

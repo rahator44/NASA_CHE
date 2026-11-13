@@ -119,9 +119,12 @@ if FRONTEND_DIST.exists() and (FRONTEND_DIST / "index.html").exists():
     async def spa_fallback(full_path: str):
         if full_path.startswith("api/") or full_path in ("docs", "redoc", "openapi.json", "health"):
             raise HTTPException(status_code=404, detail=f"Endpoint '{full_path}' not found")
-        target = FRONTEND_DIST / full_path
-        if target.is_file():
-            return FileResponse(target)
+        try:
+            target = (FRONTEND_DIST / full_path).resolve()
+            if target.is_file() and target.is_relative_to(FRONTEND_DIST.resolve()):
+                return FileResponse(target)
+        except (ValueError, RuntimeError):
+            pass
         return FileResponse(FRONTEND_DIST / "index.html")
 
 

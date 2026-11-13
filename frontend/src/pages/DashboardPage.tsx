@@ -1,6 +1,7 @@
 import React from 'react';
 import { LoadedRun } from '../api/types';
 import { Link } from '../router/Router';
+import { getPreviewUrl } from '../api/client';
 
 interface DashboardPageProps {
   loadedRun: LoadedRun | null;
@@ -136,10 +137,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         </p>
 
         <div className="campaigns-grid">
-          {/* Campaign 1: 2025 Live SAR Run */}
+          {/* Campaign 1: January 2025 Observation */}
           <div className={`campaign-card ${is2025 ? 'selected' : ''}`}>
             <div className="campaign-card-header">
-              <span className="campaign-type-badge live">2025 LIVE OBSERVATION</span>
+              <span className="campaign-type-badge live">JANUARY 2025 ARCHIVED OBSERVATION</span>
               {is2025 && <span className="active-tag">Active in View</span>}
             </div>
             <h4 className="campaign-title">January 2025 Braided Reach Dynamic Monitoring</h4>
@@ -249,7 +250,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
           <div className="showcase-preview">
             <img
-              src={`/api/v1/runs/${selectedRunId}/previews/preview_flood_transitions.png`}
+              src={getPreviewUrl(selectedRunId, 'preview_flood_transitions.png')}
               alt="Preview of Sentinel-1 Flood Transition Classes"
               className="preview-img"
               loading="lazy"

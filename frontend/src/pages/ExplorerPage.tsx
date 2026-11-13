@@ -50,7 +50,7 @@ export const ExplorerPage: React.FC<ExplorerPageProps> = ({
         <div className="explorer-title-group">
           <h2 className="page-heading">Satellite Map Explorer</h2>
           <span className="campaign-badge">
-            {is2025 ? '2025 Live Observation' : '2024 Monsoon Baseline'}
+            {is2025 ? 'January 2025 Observation (Archived)' : 'Summer 2024 Monsoon Baseline (Archived)'}
           </span>
           <span className="reach-location-tag">Kazipur / Sirajganj Reach, Jamuna River</span>
         </div>

@@ -91,7 +91,7 @@ export const SciencePage: React.FC = () => {
           </div>
           <p className="footnote-text">
             For 2024 Monsoon Baseline: +5.8432 km² net water change.<br />
-            For January 2025 Live SAR Run: +1.0440 km² net candidate water change.
+            For January 2025 SAR Observation: +1.0440 km² net candidate water change.
           </p>
         </div>
 
@@ -181,7 +181,7 @@ export const SciencePage: React.FC = () => {
             🐙 GitHub Source Repository
           </a>
           <a
-            href="https://github.com/rahator44/NASA_CHE/releases"
+            href="https://github.com/rahator44/NASA_CHE/releases/tag/v1.0.0"
             target="_blank"
             rel="noreferrer"
             className="btn btn-secondary"

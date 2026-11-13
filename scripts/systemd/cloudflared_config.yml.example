@@ -1,0 +1,18 @@
+# ==============================================================================
+# Cloudflare Named Tunnel Configuration Example for Earth Pulse
+# Target path: ~/.cloudflared/config.yml
+# ==============================================================================
+tunnel: <YOUR_TUNNEL_UUID>
+credentials-file: /home/orr/.cloudflared/<YOUR_TUNNEL_UUID>.json
+
+ingress:
+  # Hostname routed to local Earth Pulse FastAPI WebGIS
+  - hostname: earthpulse.yourdomain.com
+    service: http://127.0.0.1:8000
+    originRequest:
+      connectTimeout: 30s
+      noTLSVerify: false
+
+  # Fallback: catch-all 404
+  - service: http_status:404
+

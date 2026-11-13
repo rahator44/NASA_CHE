@@ -27,8 +27,21 @@ const envBase =
 export const API_BASE = envBase.replace(/\/$/, '');
 export const API_PREFIX = `${API_BASE}/api/v1`;
 
+// Static demo detection (for GitHub Pages or standalone static builds)
+export const isStaticDemo =
+  (typeof import.meta !== 'undefined' && (import.meta as any)?.env?.VITE_STATIC_DEMO === 'true') ||
+  (typeof globalThis !== 'undefined' && (globalThis as any)?.process?.env?.VITE_STATIC_DEMO === 'true');
+
+const appBase =
+  (typeof import.meta !== 'undefined' && (import.meta as any)?.env?.BASE_URL) ||
+  '/';
+const cleanAppBase = appBase.endsWith('/') ? appBase : `${appBase}/`;
+
 export async function fetchRunSummary(runId: string, signal?: AbortSignal): Promise<RunSummary> {
-  const url = `${API_PREFIX}/runs/${encodeURIComponent(runId)}/summary`;
+  const url = isStaticDemo
+    ? `${cleanAppBase}data/runs/${encodeURIComponent(runId)}/summary.json`
+    : `${API_PREFIX}/runs/${encodeURIComponent(runId)}/summary`;
+
   const res = await fetch(url, { signal });
   if (!res.ok) {
     throw new Error(`Failed to load scientific summary for ${runId} (HTTP ${res.status})`);
@@ -42,7 +55,10 @@ export async function fetchRunSummary(runId: string, signal?: AbortSignal): Prom
 }
 
 export async function fetchVisualManifest(runId: string, signal?: AbortSignal): Promise<VisualManifest> {
-  const url = `${API_PREFIX}/runs/${encodeURIComponent(runId)}/visual-manifest`;
+  const url = isStaticDemo
+    ? `${cleanAppBase}data/runs/${encodeURIComponent(runId)}/visual_manifest.json`
+    : `${API_PREFIX}/runs/${encodeURIComponent(runId)}/visual-manifest`;
+
   const res = await fetch(url, { signal });
   if (!res.ok) {
     throw new Error(`Failed to load visual manifest for ${runId} (HTTP ${res.status})`);
@@ -56,7 +72,10 @@ export async function fetchVisualManifest(runId: string, signal?: AbortSignal): 
 }
 
 export async function fetchRunExplanations(runId: string, signal?: AbortSignal): Promise<ExplanationsResponse> {
-  const url = `${API_PREFIX}/runs/${encodeURIComponent(runId)}/explanations`;
+  const url = isStaticDemo
+    ? `${cleanAppBase}data/runs/${encodeURIComponent(runId)}/explanations.json`
+    : `${API_PREFIX}/runs/${encodeURIComponent(runId)}/explanations`;
+
   const res = await fetch(url, { signal });
   if (!res.ok) {
     throw new Error(`Failed to load explanations for ${runId} (HTTP ${res.status})`);
@@ -84,7 +103,10 @@ export async function fetchRegionAnalysisResults(
   regionId = 'jamuna_sirajganj',
   signal?: AbortSignal
 ): Promise<AnalysisRunRecord[]> {
-  const url = `${API_PREFIX}/regions/${encodeURIComponent(regionId)}/results`;
+  const url = isStaticDemo
+    ? `${cleanAppBase}data/regions/${encodeURIComponent(regionId)}/results.json`
+    : `${API_PREFIX}/regions/${encodeURIComponent(regionId)}/results`;
+
   const res = await fetch(url, { signal });
   if (!res.ok) {
     throw new Error(`Failed to load analysis records for ${regionId} (HTTP ${res.status})`);
@@ -105,13 +127,18 @@ export async function fetchRegionAnalysisResults(
 }
 
 /**
- * Safely resolves a tile URL template provided by visual_manifest.json against API origin.
+ * Safely resolves a tile URL template provided by visual_manifest.json against API origin or static demo base.
  * Preserves Leaflet placeholders {z}, {x}, and {y}.
  * Rejects unexpected hosts and external untrusted domains.
  */
 export function resolveTileUrl(tileUrlTemplate: string): string {
   if (!tileUrlTemplate || typeof tileUrlTemplate !== 'string') {
     throw new Error('Tile URL template is empty or invalid');
+  }
+
+  if (isStaticDemo) {
+    const cleanPath = tileUrlTemplate.replace(/^\/?(api\/v1\/|data\/)/, 'data/');
+    return `${cleanAppBase}${cleanPath.replace(/^\/+/, '')}`;
   }
 
   // Handle absolute URLs
@@ -156,9 +183,11 @@ export function resolveTileUrl(tileUrlTemplate: string): string {
 }
 
 export function getPreviewUrl(runId: string, assetName: string): string {
+  if (isStaticDemo) {
+    return `${cleanAppBase}data/runs/${encodeURIComponent(runId)}/previews/${encodeURIComponent(assetName)}`;
+  }
   return `${API_PREFIX}/runs/${encodeURIComponent(runId)}/previews/${encodeURIComponent(assetName)}`;
 }
-
 
 /**
  * Queries NASA ASF / Copernicus Sentinel-1 catalog for IW GRD observations matching AOI and date range.
@@ -167,6 +196,132 @@ export async function searchSentinel1Catalog(
   req: CatalogSearchRequest,
   signal?: AbortSignal
 ): Promise<CatalogSearchResponse> {
+  if (isStaticDemo) {
+    const is2024 = req.start_date.includes('2024');
+    if (is2024) {
+      return {
+        total_scenes: 2,
+        scenes: [],
+        compatible_pairs_count: 1,
+        compatible_pairs: [
+          {
+            baseline: {
+              scene_name: 'S1A_IW_GRDH_1SDV_20240610T115840_20240610T115905_054260_069B78_A4D1',
+              platform: 'Sentinel-1A',
+              acquisition_time: '2024-06-10T11:58:40Z',
+              orbit_direction: 'DESCENDING',
+              relative_orbit: 143,
+              polarization: 'VV+VH',
+              beam_mode: 'IW',
+              processing_level: 'GRD_HD',
+              aoi_coverage_pct: 100.0,
+            },
+            change: {
+              scene_name: 'S1A_IW_GRDH_1SDV_20240716T115842_20240716T115907_054785_06AD45_C8E9',
+              platform: 'Sentinel-1A',
+              acquisition_time: '2024-07-16T11:58:42Z',
+              orbit_direction: 'DESCENDING',
+              relative_orbit: 143,
+              polarization: 'VV+VH',
+              beam_mode: 'IW',
+              processing_level: 'GRD_HD',
+              aoi_coverage_pct: 100.0,
+            },
+            temporal_baseline_days: 36,
+            metrics: {
+              flight_direction_match: true,
+              track_match: true,
+              polarization_match: true,
+              beam_mode_match: true,
+              processing_level_match: true,
+              temporal_baseline_days: 36,
+              coverage_baseline_pct: 100.0,
+              coverage_change_pct: 100.0,
+            },
+          },
+        ],
+      };
+    }
+
+    return {
+      total_scenes: 4,
+      scenes: [],
+      compatible_pairs_count: 2,
+      compatible_pairs: [
+        {
+          baseline: {
+            scene_name: 'S1A_IW_GRDH_1SDV_20250112T120503_20250112T120528_057411_071139_E7C8',
+            platform: 'Sentinel-1A',
+            acquisition_time: '2025-01-12T12:05:03Z',
+            orbit_direction: 'ASCENDING',
+            relative_orbit: 114,
+            polarization: 'VV+VH',
+            beam_mode: 'IW',
+            processing_level: 'GRD_HD',
+            aoi_coverage_pct: 100.0,
+          },
+          change: {
+            scene_name: 'S1A_IW_GRDH_1SDV_20250124T120502_20250124T120527_057586_07182D_A7FB',
+            platform: 'Sentinel-1A',
+            acquisition_time: '2025-01-24T12:05:02Z',
+            orbit_direction: 'ASCENDING',
+            relative_orbit: 114,
+            polarization: 'VV+VH',
+            beam_mode: 'IW',
+            processing_level: 'GRD_HD',
+            aoi_coverage_pct: 100.0,
+          },
+          temporal_baseline_days: 12,
+          metrics: {
+            flight_direction_match: true,
+            track_match: true,
+            polarization_match: true,
+            beam_mode_match: true,
+            processing_level_match: true,
+            temporal_baseline_days: 12,
+            coverage_baseline_pct: 100.0,
+            coverage_change_pct: 100.0,
+          },
+        },
+        {
+          baseline: {
+            scene_name: 'S1A_IW_GRDH_1SDV_20250114T235601_20250114T235626_057447_07129E_B55B',
+            platform: 'Sentinel-1A',
+            acquisition_time: '2025-01-14T23:56:01Z',
+            orbit_direction: 'DESCENDING',
+            relative_orbit: 150,
+            polarization: 'VV+VH',
+            beam_mode: 'IW',
+            processing_level: 'GRD_HD',
+            aoi_coverage_pct: 100.0,
+          },
+          change: {
+            scene_name: 'S1A_IW_GRDH_1SDV_20250126T235601_20250126T235626_057622_071996_9443',
+            platform: 'Sentinel-1A',
+            acquisition_time: '2025-01-26T23:56:01Z',
+            orbit_direction: 'DESCENDING',
+            relative_orbit: 150,
+            polarization: 'VV+VH',
+            beam_mode: 'IW',
+            processing_level: 'GRD_HD',
+            aoi_coverage_pct: 100.0,
+          },
+          temporal_baseline_days: 12,
+          metrics: {
+            flight_direction_match: true,
+            track_match: true,
+            polarization_match: true,
+            beam_mode_match: true,
+            processing_level_match: true,
+            temporal_baseline_days: 12,
+            coverage_baseline_pct: 100.0,
+            coverage_change_pct: 100.0,
+          },
+        },
+      ],
+    };
+  }
+
   const url = `${API_PREFIX}/catalog/sentinel1/search`;
   const res = await fetch(url, {
     method: 'POST',
@@ -197,12 +352,21 @@ export async function searchSentinel1Catalog(
 
 /**
  * Submits dynamic analysis request.
- * In public demo mode, server returns HTTP 403 to protect host compute.
+ * In public demo mode, server returns HTTP 403 or client informs user to download local app.
  */
 export async function createAnalysisRequest(
   req: AnalysisCreateRequest,
   signal?: AbortSignal
 ): Promise<{ run_id: string; status: string; is_demo_restricted?: boolean; message?: string }> {
+  if (isStaticDemo) {
+    return {
+      run_id: '',
+      status: 'RESTRICTED',
+      is_demo_restricted: true,
+      message: 'Dynamic satellite ingestion and ESA SNAP execution require local processing with your own NASA Earthdata credentials. Download Earth Pulse v1.0.0 from GitHub to run on your own machine.',
+    };
+  }
+
   const url = `${API_PREFIX}/analysis-requests`;
   const res = await fetch(url, {
     method: 'POST',

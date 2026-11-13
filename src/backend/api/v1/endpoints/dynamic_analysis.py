@@ -451,6 +451,13 @@ def get_run_preview(run_id: str, asset_name: str):
     if not preview_file.exists():
         raise HTTPException(status_code=404, detail=f"Preview image '{asset_name}' not found for run '{run_id}'.")
 
+    try:
+        resolved_previews = previews_dir.resolve()
+        if not preview_file.resolve().is_relative_to(resolved_previews):
+            raise HTTPException(status_code=400, detail="Invalid preview asset name.")
+    except (ValueError, RuntimeError):
+        raise HTTPException(status_code=400, detail="Invalid preview asset name.")
+
     return Response(content=preview_file.read_bytes(), media_type="image/png")
 
 
@@ -476,6 +483,13 @@ def download_run_geotiff(run_id: str, asset_name: str):
 
     if not tif_file.exists():
         raise HTTPException(status_code=404, detail=f"Raster asset '{asset_name}' not found for run '{run_id}'.")
+
+    try:
+        resolved_rasters = rasters_dir.resolve()
+        if not tif_file.resolve().is_relative_to(resolved_rasters):
+            raise HTTPException(status_code=400, detail="Invalid raster asset name.")
+    except (ValueError, RuntimeError):
+        raise HTTPException(status_code=400, detail="Invalid raster asset name.")
 
     filename = f"{run_id}_{tif_file.name}"
     return Response(
