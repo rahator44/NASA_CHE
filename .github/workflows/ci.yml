@@ -82,7 +82,7 @@ jobs:
         run: |
           echo "Scanning tracked files for potential secret leaks..."
           # Reject any tracked private credentials, .netrc files, or private keys
-          if grep -rn --exclude-dir={.git,node_modules,.venv,dist} -E "(BEGIN (RSA|EC|OPENSSH) PRIVATE KEY|urs.earthdata.nasa.gov.*password)" .; then
+          if grep -rn --exclude-dir={.git,node_modules,.venv,dist,.github} -E "(BEGIN (RSA|EC|OPENSSH) PRIVATE KEY|urs.earthdata.nasa.gov.*password)" .; then
             echo "::error::Potential sensitive secret or private credential detected in repository files!"
             exit 1
           fi

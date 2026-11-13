@@ -9,8 +9,13 @@ import {
 } from '../api/validation';
 
 const REPO_ROOT = path.resolve(process.cwd(), '..');
-const RUN_2025_DIR = path.join(REPO_ROOT, 'data/runs/run_20261111_164348_f3c2b8');
-const RUN_2024_DIR = path.join(REPO_ROOT, 'data/runs/run_20261110_221732_1f2e94');
+const RUN_2025_LOCAL = path.join(REPO_ROOT, 'data/runs/run_20261111_164348_f3c2b8');
+const RUN_2025_PUBLIC = path.join(process.cwd(), 'public/data/runs/run_20261111_164348_f3c2b8');
+const RUN_2025_DIR = fs.existsSync(RUN_2025_LOCAL) ? RUN_2025_LOCAL : RUN_2025_PUBLIC;
+
+const RUN_2024_LOCAL = path.join(REPO_ROOT, 'data/runs/run_20261110_221732_1f2e94');
+const RUN_2024_PUBLIC = path.join(process.cwd(), 'public/data/runs/run_20261110_221732_1f2e94');
+const RUN_2024_DIR = fs.existsSync(RUN_2024_LOCAL) ? RUN_2024_LOCAL : RUN_2024_PUBLIC;
 
 describe('Scientific Contract Validation Suite', () => {
   it('should validate real 2025 run summary and confirm exact scientific invariants', () => {
