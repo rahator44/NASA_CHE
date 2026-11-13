@@ -44,3 +44,4 @@ for (const route of routes) {
 }
 
 console.log('GitHub Pages dist preparation complete.');
+

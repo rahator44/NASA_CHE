@@ -27,19 +27,48 @@ const envBase =
 export const API_BASE = envBase.replace(/\/$/, '');
 export const API_PREFIX = `${API_BASE}/api/v1`;
 
-// Static demo detection (for GitHub Pages or standalone static builds)
-export const isStaticDemo =
-  (typeof import.meta !== 'undefined' && (import.meta as any)?.env?.VITE_STATIC_DEMO === 'true') ||
-  (typeof globalThis !== 'undefined' && (globalThis as any)?.process?.env?.VITE_STATIC_DEMO === 'true');
+// Bulletproof static demo detection (for GitHub Pages or standalone static builds)
+export function getIsStaticDemo(): boolean {
+  if (typeof __STATIC_DEMO__ !== 'undefined') {
+    return Boolean(__STATIC_DEMO__);
+  }
+  try {
+    if (import.meta.env.VITE_STATIC_DEMO === 'true') return true;
+  } catch {}
+  if (typeof window !== 'undefined') {
+    if (
+      window.location.hostname.endsWith('github.io') ||
+      window.location.pathname.startsWith('/NASA_CHE')
+    ) {
+      return true;
+    }
+  }
+  if (typeof globalThis !== 'undefined' && (globalThis as any)?.process?.env?.VITE_STATIC_DEMO === 'true') {
+    return true;
+  }
+  return false;
+}
 
-const appBase =
-  (typeof import.meta !== 'undefined' && (import.meta as any)?.env?.BASE_URL) ||
-  '/';
-const cleanAppBase = appBase.endsWith('/') ? appBase : `${appBase}/`;
+export const isStaticDemo = getIsStaticDemo();
+
+export function getStaticBase(): string {
+  if (typeof __BASE_PATH__ !== 'undefined' && __BASE_PATH__) {
+    const b = __BASE_PATH__;
+    return b.endsWith('/') ? b : `${b}/`;
+  }
+  try {
+    const b = import.meta.env.BASE_URL;
+    if (b && b !== '/') return b.endsWith('/') ? b : `${b}/`;
+  } catch {}
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/NASA_CHE')) {
+    return '/NASA_CHE/';
+  }
+  return '/';
+}
 
 export async function fetchRunSummary(runId: string, signal?: AbortSignal): Promise<RunSummary> {
-  const url = isStaticDemo
-    ? `${cleanAppBase}data/runs/${encodeURIComponent(runId)}/summary.json`
+  const url = getIsStaticDemo()
+    ? `${getStaticBase()}data/runs/${encodeURIComponent(runId)}/summary.json`
     : `${API_PREFIX}/runs/${encodeURIComponent(runId)}/summary`;
 
   const res = await fetch(url, { signal });
@@ -55,8 +84,8 @@ export async function fetchRunSummary(runId: string, signal?: AbortSignal): Prom
 }
 
 export async function fetchVisualManifest(runId: string, signal?: AbortSignal): Promise<VisualManifest> {
-  const url = isStaticDemo
-    ? `${cleanAppBase}data/runs/${encodeURIComponent(runId)}/visual_manifest.json`
+  const url = getIsStaticDemo()
+    ? `${getStaticBase()}data/runs/${encodeURIComponent(runId)}/visual_manifest.json`
     : `${API_PREFIX}/runs/${encodeURIComponent(runId)}/visual-manifest`;
 
   const res = await fetch(url, { signal });
@@ -72,8 +101,8 @@ export async function fetchVisualManifest(runId: string, signal?: AbortSignal): 
 }
 
 export async function fetchRunExplanations(runId: string, signal?: AbortSignal): Promise<ExplanationsResponse> {
-  const url = isStaticDemo
-    ? `${cleanAppBase}data/runs/${encodeURIComponent(runId)}/explanations.json`
+  const url = getIsStaticDemo()
+    ? `${getStaticBase()}data/runs/${encodeURIComponent(runId)}/explanations.json`
     : `${API_PREFIX}/runs/${encodeURIComponent(runId)}/explanations`;
 
   const res = await fetch(url, { signal });
@@ -103,8 +132,8 @@ export async function fetchRegionAnalysisResults(
   regionId = 'jamuna_sirajganj',
   signal?: AbortSignal
 ): Promise<AnalysisRunRecord[]> {
-  const url = isStaticDemo
-    ? `${cleanAppBase}data/regions/${encodeURIComponent(regionId)}/results.json`
+  const url = getIsStaticDemo()
+    ? `${getStaticBase()}data/regions/${encodeURIComponent(regionId)}/results.json`
     : `${API_PREFIX}/regions/${encodeURIComponent(regionId)}/results`;
 
   const res = await fetch(url, { signal });
@@ -136,9 +165,9 @@ export function resolveTileUrl(tileUrlTemplate: string): string {
     throw new Error('Tile URL template is empty or invalid');
   }
 
-  if (isStaticDemo) {
+  if (getIsStaticDemo()) {
     const cleanPath = tileUrlTemplate.replace(/^\/?(api\/v1\/|data\/)/, 'data/');
-    return `${cleanAppBase}${cleanPath.replace(/^\/+/, '')}`;
+    return `${getStaticBase()}${cleanPath.replace(/^\/+/, '')}`;
   }
 
   // Handle absolute URLs
@@ -183,8 +212,8 @@ export function resolveTileUrl(tileUrlTemplate: string): string {
 }
 
 export function getPreviewUrl(runId: string, assetName: string): string {
-  if (isStaticDemo) {
-    return `${cleanAppBase}data/runs/${encodeURIComponent(runId)}/previews/${encodeURIComponent(assetName)}`;
+  if (getIsStaticDemo()) {
+    return `${getStaticBase()}data/runs/${encodeURIComponent(runId)}/previews/${encodeURIComponent(assetName)}`;
   }
   return `${API_PREFIX}/runs/${encodeURIComponent(runId)}/previews/${encodeURIComponent(assetName)}`;
 }
@@ -196,7 +225,7 @@ export async function searchSentinel1Catalog(
   req: CatalogSearchRequest,
   signal?: AbortSignal
 ): Promise<CatalogSearchResponse> {
-  if (isStaticDemo) {
+  if (getIsStaticDemo()) {
     const is2024 = req.start_date.includes('2024');
     if (is2024) {
       return {
@@ -358,7 +387,7 @@ export async function createAnalysisRequest(
   req: AnalysisCreateRequest,
   signal?: AbortSignal
 ): Promise<{ run_id: string; status: string; is_demo_restricted?: boolean; message?: string }> {
-  if (isStaticDemo) {
+  if (getIsStaticDemo()) {
     return {
       run_id: '',
       status: 'RESTRICTED',

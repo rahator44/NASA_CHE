@@ -8,6 +8,12 @@ const base = isStaticDemo ? '/NASA_CHE/' : '/';
 // https://vitejs.dev/config/
 export default defineConfig({
   base,
+  define: {
+    __STATIC_DEMO__: JSON.stringify(isStaticDemo),
+    __BASE_PATH__: JSON.stringify(base),
+    'import.meta.env.VITE_STATIC_DEMO': JSON.stringify(isStaticDemo ? 'true' : 'false'),
+    'import.meta.env.BASE_URL': JSON.stringify(base),
+  },
   plugins: [react()],
   server: {
     port: 5173,

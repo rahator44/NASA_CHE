@@ -13,25 +13,41 @@ interface RouterContextType {
 
 const RouterContext = createContext<RouterContextType | null>(null);
 
-const rawBase =
-  (typeof import.meta !== 'undefined' && (import.meta as any)?.env?.BASE_URL) ||
-  '/';
-export const BASE_PATH = rawBase.replace(/\/+$/, '');
+function resolveBasePath(): string {
+  if (typeof __BASE_PATH__ !== 'undefined' && __BASE_PATH__) {
+    return __BASE_PATH__.replace(/\/+$/, '');
+  }
+  try {
+    const vBase = import.meta.env.BASE_URL;
+    if (vBase && vBase !== '/') return vBase.replace(/\/+$/, '');
+  } catch {}
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/NASA_CHE')) {
+    return '/NASA_CHE';
+  }
+  return '';
+}
+
+export const BASE_PATH = resolveBasePath();
 
 export function stripBasePath(path: string): string {
   if (BASE_PATH && (path === BASE_PATH || path.startsWith(`${BASE_PATH}/`))) {
     const stripped = path.slice(BASE_PATH.length);
     return stripped || '/';
   }
+  if (path === '/NASA_CHE' || path.startsWith('/NASA_CHE/')) {
+    const stripped = path.slice('/NASA_CHE'.length);
+    return stripped || '/';
+  }
   return path;
 }
 
 export function withBasePath(path: string): string {
-  if (!BASE_PATH || path.startsWith(BASE_PATH) || /^https?:\/\//i.test(path)) {
+  const base = BASE_PATH || (typeof window !== 'undefined' && window.location.pathname.startsWith('/NASA_CHE') ? '/NASA_CHE' : '');
+  if (!base || path.startsWith(base) || /^https?:\/\//i.test(path)) {
     return path;
   }
   const clean = path.startsWith('/') ? path : `/${path}`;
-  return `${BASE_PATH}${clean}`;
+  return `${base}${clean}`;
 }
 
 export function normalizePath(path: string): string {
