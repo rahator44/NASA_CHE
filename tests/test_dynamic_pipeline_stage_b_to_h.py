@@ -26,6 +26,7 @@ Validates all 18 dynamic requirements:
 import os
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 import numpy as np
 from osgeo import gdal, ogr, osr
@@ -55,6 +56,54 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SMALL_SUB_AOI_WKT = "POLYGON((89.60 24.60, 89.68 24.60, 89.68 24.68, 89.60 24.68, 89.60 24.60))"
 TINY_AOI_WKT = "POLYGON((89.65 24.65, 89.66 24.65, 89.66 24.66, 89.65 24.66, 89.65 24.65))"
 
+FIXTURE_SCENES = [
+    {
+        "scene_name": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69",
+        "platform": "Sentinel-1A",
+        "sensor": "C-SAR",
+        "acquisition_time": "2024-06-10T12:05:08Z",
+        "orbit_direction": "ASCENDING",
+        "relative_orbit": 40,
+        "polarization": "VV+VH",
+        "beam_mode": "IW",
+        "processing_level": "GRD_HD",
+        "download_url": "https://datapool.asf.alaska.edu/GRD_HD/SA/S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.zip",
+        "size_mb": 990.5,
+        "wkt_geometry": "POLYGON((89.0 24.0, 90.0 24.0, 90.0 25.0, 89.0 25.0, 89.0 24.0))",
+        "aoi_coverage_pct": 100.0,
+    },
+    {
+        "scene_name": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511",
+        "platform": "Sentinel-1A",
+        "sensor": "C-SAR",
+        "acquisition_time": "2024-07-16T12:05:07Z",
+        "orbit_direction": "ASCENDING",
+        "relative_orbit": 40,
+        "polarization": "VV+VH",
+        "beam_mode": "IW",
+        "processing_level": "GRD_HD",
+        "download_url": "https://datapool.asf.alaska.edu/GRD_HD/SA/S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.zip",
+        "size_mb": 995.2,
+        "wkt_geometry": "POLYGON((89.0 24.0, 90.0 24.0, 90.0 25.0, 89.0 25.0, 89.0 24.0))",
+        "aoi_coverage_pct": 100.0,
+    },
+    {
+        "scene_name": "S1A_IW_GRDH_1SDV_20240728T120507_20240728T120532_054961_06B1F2_99A1",
+        "platform": "Sentinel-1A",
+        "sensor": "C-SAR",
+        "acquisition_time": "2024-07-28T12:05:07Z",
+        "orbit_direction": "ASCENDING",
+        "relative_orbit": 40,
+        "polarization": "VV+VH",
+        "beam_mode": "IW",
+        "processing_level": "GRD_HD",
+        "download_url": "https://datapool.asf.alaska.edu/GRD_HD/SA/S1A_IW_GRDH_1SDV_20240728T120507_20240728T120532_054961_06B1F2_99A1.zip",
+        "size_mb": 992.8,
+        "wkt_geometry": "POLYGON((89.0 24.0, 90.0 24.0, 90.0 25.0, 89.0 25.0, 89.0 24.0))",
+        "aoi_coverage_pct": 100.0,
+    },
+]
+
 
 class TestDynamicPipelineStagesBtoH(unittest.TestCase):
     @classmethod
@@ -63,19 +112,20 @@ class TestDynamicPipelineStagesBtoH(unittest.TestCase):
         cls.dynamic_service = DynamicAnalysisService()
 
     def test_01_two_new_dates_search_and_discovery(self):
-        """1. Search returns actual observations and metadata for given date window."""
-        scenes = self.catalog.search_sentinel1_scenes(
-            wkt_polygon=JAMUNA_DEFAULT_AOI_WKT,
-            start_date="2024-06-01",
-            end_date="2024-07-31",
-            max_results=10,
-        )
-        self.assertGreaterEqual(len(scenes), 2)
-        for s in scenes:
-            self.assertIn("scene_name", s)
-            self.assertIn("acquisition_time", s)
-            self.assertIn("relative_orbit", s)
-            self.assertIn("orbit_direction", s)
+        """1. Search returns actual observations and metadata for given date window using test fixture."""
+        with patch.object(self.catalog.asf_client, "search_scenes", return_value=FIXTURE_SCENES):
+            scenes = self.catalog.search_sentinel1_scenes(
+                wkt_polygon=JAMUNA_DEFAULT_AOI_WKT,
+                start_date="2024-06-01",
+                end_date="2024-07-31",
+                max_results=10,
+            )
+            self.assertGreaterEqual(len(scenes), 2)
+            for s in scenes:
+                self.assertIn("scene_name", s)
+                self.assertIn("acquisition_time", s)
+                self.assertIn("relative_orbit", s)
+                self.assertIn("orbit_direction", s)
 
     def test_02_dates_with_no_acquisitions(self):
         """2. When dates have no acquisitions, system raises informative error without fabricating results."""
@@ -90,16 +140,17 @@ class TestDynamicPipelineStagesBtoH(unittest.TestCase):
 
     def test_03_dates_with_multiple_candidate_acquisitions(self):
         """3. Multi-scene search discovers compatible pairs with matching orbit track."""
-        pairs = self.catalog.discover_compatible_pairs(
-            wkt_polygon=JAMUNA_DEFAULT_AOI_WKT,
-            start_date="2024-06-01",
-            end_date="2024-07-31",
-        )
-        self.assertIsInstance(pairs, list)
-        if pairs:
-            p0 = pairs[0]
-            self.assertEqual(p0["baseline"]["relative_orbit"], p0["change"]["relative_orbit"])
-            self.assertEqual(p0["baseline"]["orbit_direction"], p0["change"]["orbit_direction"])
+        with patch.object(self.catalog.asf_client, "search_scenes", return_value=FIXTURE_SCENES):
+            pairs = self.catalog.discover_compatible_pairs(
+                wkt_polygon=JAMUNA_DEFAULT_AOI_WKT,
+                start_date="2024-06-01",
+                end_date="2024-07-31",
+            )
+            self.assertIsInstance(pairs, list)
+            if pairs:
+                p0 = pairs[0]
+                self.assertEqual(p0["baseline"]["relative_orbit"], p0["change"]["relative_orbit"])
+                self.assertEqual(p0["baseline"]["orbit_direction"], p0["change"]["orbit_direction"])
 
     def test_04_smaller_jamuna_polygon_clipping(self):
         """4. Sub-AOI extraction recalculates dynamic valid area denominator, not hardcoded 404 km2."""
@@ -163,10 +214,14 @@ class TestDynamicPipelineStagesBtoH(unittest.TestCase):
 
     def test_10_repeated_identical_requests(self):
         """10. Repeated download query finds local cached file and avoids re-download."""
+        import zipfile
         with tempfile.TemporaryDirectory() as tmp_dir:
             dm = DownloadManager(cache_dir=Path(tmp_dir))
             fake_name = "S1A_IW_GRDH_CACHE_TEST"
-            (Path(tmp_dir) / f"{fake_name}.zip").write_bytes(b"1" * 150_000)
+            fake_zip = Path(tmp_dir) / f"{fake_name}.zip"
+            with zipfile.ZipFile(fake_zip, "w") as zf:
+                zf.writestr("manifest.safe", b"<safe></safe>")
+                zf.writestr("data.bin", b"1" * 150_000)
             cached_path = dm.get_local_cached_file(fake_name)
             self.assertIsNotNone(cached_path)
 
@@ -187,33 +242,57 @@ class TestDynamicPipelineStagesBtoH(unittest.TestCase):
             self.assertGreater(meta["area_measurements"]["water_area_km2"], 0.0)
 
     def test_12_multi_date_timeseries_three_observations(self):
-        """12. MultiDateTimeSeriesAnalyzer evaluates sequence across >= 2 dates and builds frequency raster."""
+        """12. MultiDateTimeSeriesAnalyzer evaluates sequence across >= 3 dates and builds frequency raster."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             source_1 = PROJECT_ROOT / "data/processed/aligned/june10_aligned.tif"
             source_2 = PROJECT_ROOT / "data/processed/aligned/july16_aligned.tif"
 
             sub_1 = Path(tmp_dir) / "sub1.tif"
             sub_2 = Path(tmp_dir) / "sub2.tif"
+            sub_3 = Path(tmp_dir) / "sub3.tif"
             Sentinel1Preprocessor.extract_sub_aoi(source_1, sub_1, SMALL_SUB_AOI_WKT)
             Sentinel1Preprocessor.extract_sub_aoi(source_2, sub_2, SMALL_SUB_AOI_WKT)
+
+            # Create third distinct observation raster by modulating backscatter
+            ds_ref = gdal.Open(str(sub_2), gdal.GA_ReadOnly)
+            drv = gdal.GetDriverByName("GTiff")
+            ds_3 = drv.Create(str(sub_3), ds_ref.RasterXSize, ds_ref.RasterYSize, 2, gdal.GDT_Float32)
+            ds_3.SetGeoTransform(ds_ref.GetGeoTransform())
+            ds_3.SetProjection(ds_ref.GetProjection())
+            for b in [1, 2]:
+                arr = ds_ref.GetRasterBand(b).ReadAsArray()
+                valid = (arr != -9999.0)
+                arr_mod = arr.copy()
+                arr_mod[valid] = arr_mod[valid] * 1.15
+                band = ds_3.GetRasterBand(b)
+                band.SetNoDataValue(-9999.0)
+                band.WriteArray(arr_mod)
+            ds_3.FlushCache()
+            ds_3 = None
+            ds_ref = None
 
             classifier = DynamicWaterClassifier()
             m1 = Path(tmp_dir) / "m1.tif"
             m2 = Path(tmp_dir) / "m2.tif"
+            m3 = Path(tmp_dir) / "m3.tif"
             classifier.classify_scene(sub_1, m1)
             classifier.classify_scene(sub_2, m2)
+            classifier.classify_scene(sub_3, m3)
 
             records = [
                 {"acquisition_time": "2024-06-10T12:05:08Z", "mask_tif": m1},
                 {"acquisition_time": "2024-07-16T12:05:07Z", "mask_tif": m2},
+                {"acquisition_time": "2024-07-28T12:05:07Z", "mask_tif": m3},
             ]
             freq_tif = Path(tmp_dir) / "freq.tif"
             res = MultiDateTimeSeriesAnalyzer.analyze_sequence(records, output_frequency_tif=freq_tif)
 
             self.assertTrue(freq_tif.exists())
-            self.assertEqual(res["observation_count"], 2)
+            self.assertEqual(res["observation_count"], 3)
             self.assertIn("timeline", res)
+            self.assertEqual(len(res["timeline"]), 3)
             self.assertIn("step_changes", res)
+            self.assertEqual(len(res["step_changes"]), 2)
             self.assertIn("regimes_km2", res)
 
     def test_13_invalid_aoi_geometry_rejection(self):
@@ -290,7 +369,7 @@ class TestDynamicPipelineStagesBtoH(unittest.TestCase):
     def test_18_run_cancellation(self):
         """18. Cancellation of dynamic analysis marks run as CANCELLED."""
         req = self.dynamic_service.create_analysis_request(
-            aoi_wkt=JAMUNA_DEFAULT_AOI_WKT,
+            aoi_wkt=SMALL_SUB_AOI_WKT,
             start_date="2024-06-10",
             end_date="2024-07-16",
         )
@@ -302,6 +381,10 @@ class TestDynamicPipelineStagesBtoH(unittest.TestCase):
             cancel_res = self.dynamic_service.get_run_dir(run_id) / "error.json"
             cancel_res.write_text('{"status": "CANCELLED"}')
             self.assertTrue(cancel_res.exists())
+
+            # Verification: cooperative cancellation stops the run execution immediately
+            result = self.dynamic_service.execute_analysis_run(run_id)
+            self.assertEqual(result.get("status"), "CANCELLED")
         finally:
             # Clean up temporary test run so SQLite reflects clean seeded state
             from src.backend.database.database import get_db_connection

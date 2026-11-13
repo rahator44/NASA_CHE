@@ -1,0 +1,29 @@
+version: '3.8'
+
+# ==============================================================================
+# Earth Pulse — Docker Compose Service Definition
+# NASA Space Apps Challenge 2026: Dancing with the SARs
+# ==============================================================================
+
+services:
+  earthpulse:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: earthpulse-app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DEMO_MODE_RESTRICTED_EXECUTION=true
+      - PORT=8000
+      - HOST=0.0.0.0
+    volumes:
+      # Mount persistent scientific data & sqlite catalog
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+

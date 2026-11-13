@@ -40,6 +40,12 @@ Thumbs.db
 *.sublime-project
 *.sublime-workspace
 
+# Frontend Node & Vite build artifacts
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.test_build/
+
 # Large archives and compressed packages
 *.zip
 *.tar
@@ -52,10 +58,13 @@ Thumbs.db
 # Large scientific rasters & raw satellite archives (Hosted on Google Drive)
 data/raw/
 data/runs/
+data/cache/
+data/temp/
 .packages/
 .earthdata-token
 .netrc
 *.env*
+!.env.example
 data/reference/
 data/intermediate/
 *.tif
@@ -80,10 +89,16 @@ logs/
 *.backup
 *.db.local*
 *.db
+*.sqlite
+*.sqlite3
 data/metadata/*.db
+data/metadata/*.sqlite*
+data/metadata/*.backup*
+data/metadata/*.dev_history_backup*
 
 # Staging directories
 EarthPulse-SAR-Scientific-Data/
+research/
 
 # ==============================================================================
 # Whitelist / Explicit Inclusions

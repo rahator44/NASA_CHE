@@ -98,78 +98,184 @@ class DynamicRiverbankAnalyzer:
         # A. Fill holes inside the persistent water channel to locate char islands
         from scipy.ndimage import binary_fill_holes, binary_dilation
 
-        # Channel footprint = persistent water + receded water
+        # Channel footprint = persistent water + receded water (Baseline)
+        # Comparison footprint = persistent water + newly inundated (Comparison)
         baseline_water = is_persist_water | is_receded
-        filled_channel = binary_fill_holes(baseline_water)
-        chars_mask = filled_channel & (~baseline_water)
+        comparison_water = is_persist_water | is_newly_inun
 
-        # Internal char submergence: newly inundated pixels located on pre-existing char islands
+        # Spatial connectivity & connected-component analysis:
+        # Separate principal continuous river channel components from detached floodplain pools/ponds.
+        from scipy.ndimage import label, binary_fill_holes, binary_dilation
+
+        lbl_t1, n_comp_t1 = label(baseline_water)
+        lbl_t2, n_comp_t2 = label(comparison_water)
+
+        sizes_t1 = np.bincount(lbl_t1.ravel()) if n_comp_t1 > 0 else np.array([0])
+        sizes_t2 = np.bincount(lbl_t2.ravel()) if n_comp_t2 > 0 else np.array([0])
+
+        max_s1 = np.max(sizes_t1[1:]) if len(sizes_t1) > 1 else 0
+        max_s2 = np.max(sizes_t2[1:]) if len(sizes_t2) > 1 else 0
+
+        # Channel components must have substantial size and mutual temporal overlap
+        channel_t1 = np.zeros_like(baseline_water, dtype=bool)
+        channel_t2 = np.zeros_like(comparison_water, dtype=bool)
+
+        for i in range(1, n_comp_t1 + 1):
+            if sizes_t1[i] >= 200 and sizes_t1[i] >= 0.05 * max_s1:
+                # Require spatial overlap with comparison water reach
+                if np.sum((lbl_t1 == i) & comparison_water) >= 50:
+                    channel_t1 |= (lbl_t1 == i)
+
+        for j in range(1, n_comp_t2 + 1):
+            if sizes_t2[j] >= 200 and sizes_t2[j] >= 0.05 * max_s2:
+                if np.sum((lbl_t2 == j) & baseline_water) >= 50:
+                    channel_t2 |= (lbl_t2 == j)
+
+        # Fallback to largest component if thresholding isolated everything
+        if not np.any(channel_t1) and max_s1 > 0:
+            channel_t1 = (lbl_t1 == (np.argmax(sizes_t1[1:]) + 1))
+        if not np.any(channel_t2) and max_s2 > 0:
+            channel_t2 = (lbl_t2 == (np.argmax(sizes_t2[1:]) + 1))
+
+        # Differentiate internal char submergence from external bank expansion on the main channel:
+        filled_channel = binary_fill_holes(channel_t1)
+        chars_mask = filled_channel & (~channel_t1)
+
         char_submergence_mask = is_newly_inun & chars_mask
         n_char_submergence = int(np.sum(char_submergence_mask))
         char_submergence_km2 = float(n_char_submergence * PIXEL_AREA_KM2)
 
-        # External bank expansion: newly inundated pixels adjacent to outer river boundary
-        # Dilate filled channel by 3 pixels (~60m buffer)
         outer_buffer = binary_dilation(filled_channel, iterations=3) & (~filled_channel)
         external_expansion_mask = is_newly_inun & outer_buffer
         n_external_expansion = int(np.sum(external_expansion_mask))
         external_expansion_km2 = float(n_external_expansion * PIXEL_AREA_KM2)
 
-        # Generate synthetic transects across Y-dimension (e.g. latitude lines across north-south river reach)
+        # Generate transects across Y-dimension
         step_px = max(5, int(transect_spacing_m / abs(gt[5])))
+        pixel_spacing_m = abs(gt[1])
         evaluated_transects = 0
-        valid_transects = 0
-        transect_metrics = []
+        reliable_transects = []
+        unqualified_transects = []
 
         for r in range(step_px, h - step_px, step_px):
-            row_water = np.where(baseline_water[r, :])[0]
-            if len(row_water) >= 5:  # Channel crossed
-                evaluated_transects += 1
-                left_edge_t1 = float(row_water[0])
-                right_edge_t1 = float(row_water[-1])
-                width_t1_m = (right_edge_t1 - left_edge_t1) * abs(gt[1])
+            evaluated_transects += 1
+            row_c1 = np.where(channel_t1[r, :])[0]
+            row_c2 = np.where(channel_t2[r, :])[0]
 
-                row_t2_water = np.where(is_persist_water[r, :] | is_newly_inun[r, :])[0]
-                if len(row_t2_water) >= 5:
-                    valid_transects += 1
-                    left_edge_t2 = float(row_t2_water[0])
-                    right_edge_t2 = float(row_t2_water[-1])
-                    width_t2_m = (right_edge_t2 - left_edge_t2) * abs(gt[1])
+            row_all1 = np.where(baseline_water[r, :])[0]
+            row_all2 = np.where(comparison_water[r, :])[0]
 
-                    # Displacements in meters (positive = outward expansion/erosion)
-                    left_disp_m = (left_edge_t1 - left_edge_t2) * abs(gt[1])
-                    right_disp_m = (right_edge_t2 - right_edge_t1) * abs(gt[1])
+            has_detached = (len(row_all1) > len(row_c1)) or (len(row_all2) > len(row_c2))
 
-                    transect_metrics.append({
-                        "transect_row": r,
-                        "northing_utm": float(gt[3] + r * gt[5]),
-                        "channel_width_baseline_m": width_t1_m,
-                        "channel_width_change_m": width_t2_m,
-                        "left_bank_displacement_m": left_disp_m,
-                        "right_bank_displacement_m": right_disp_m,
-                    })
+            # Channel crossing check: require at least 5 pixels of main channel water
+            if len(row_c1) < 5 or len(row_c2) < 5:
+                unqualified_transects.append({
+                    "transect_row": r,
+                    "northing_utm": float(gt[3] + r * gt[5]),
+                    "reason": "INSUFFICIENT_CHANNEL_WIDTH_OR_CROSSING",
+                    "t1_channel_pixels": int(len(row_c1)),
+                    "t2_channel_pixels": int(len(row_c2)),
+                    "has_detached_water": has_detached,
+                    "is_reliable": False,
+                })
+                continue
 
-        if valid_transects < MIN_TRANSECTS_FOR_ANALYSIS:
-            status = "PARTIAL_LIMITED_TRANSECTS"
-            msg = f"Only {valid_transects} valid channel transects could be modeled; results should be interpreted with caution."
+            left_edge_t1 = float(row_c1[0])
+            right_edge_t1 = float(row_c1[-1])
+            left_edge_t2 = float(row_c2[0])
+            right_edge_t2 = float(row_c2[-1])
+
+            width_t1_m = (right_edge_t1 - left_edge_t1) * pixel_spacing_m
+            width_t2_m = (right_edge_t2 - left_edge_t2) * pixel_spacing_m
+
+            left_disp_m = (left_edge_t1 - left_edge_t2) * pixel_spacing_m
+            right_disp_m = (right_edge_t2 - right_edge_t1) * pixel_spacing_m
+
+            # Channel correspondence check:
+            # 1. Spatial overlap / IoU along channel reach
+            span1 = set(range(int(left_edge_t1), int(right_edge_t1) + 1))
+            span2 = set(range(int(left_edge_t2), int(right_edge_t2) + 1))
+            inter = len(span1 & span2)
+            union = len(span1 | span2)
+            iou = inter / union if union > 0 else 0.0
+
+            # 2. Plausibility gate:
+            # Riverbank migration across short observation cycles cannot physically exceed 500m.
+            # Multi-kilometer edge jumps indicate disconnected floodplain water or major side-channel cutoff.
+            is_valid_correspondence = (iou >= 0.30) and (abs(left_disp_m) <= 500.0) and (abs(right_disp_m) <= 500.0)
+
+            if is_valid_correspondence:
+                reliable_transects.append({
+                    "transect_row": r,
+                    "northing_utm": float(gt[3] + r * gt[5]),
+                    "channel_width_baseline_m": round(width_t1_m, 2),
+                    "channel_width_change_m": round(width_t2_m, 2),
+                    "left_bank_displacement_m": round(left_disp_m, 2),
+                    "right_bank_displacement_m": round(right_disp_m, 2),
+                    "iou": round(iou, 4),
+                    "has_detached_water": has_detached,
+                    "is_reliable": True,
+                })
+            else:
+                unqualified_transects.append({
+                    "transect_row": r,
+                    "northing_utm": float(gt[3] + r * gt[5]),
+                    "reason": "POOR_CHANNEL_CORRESPONDENCE_OR_EXCESSIVE_DISPLACEMENT",
+                    "channel_width_baseline_m": round(width_t1_m, 2),
+                    "channel_width_change_m": round(width_t2_m, 2),
+                    "apparent_left_disp_m": round(left_disp_m, 2),
+                    "apparent_right_disp_m": round(right_disp_m, 2),
+                    "iou": round(iou, 4),
+                    "has_detached_water": has_detached,
+                    "is_reliable": False,
+                })
+
+        valid_count = len(reliable_transects)
+
+        if valid_count < MIN_TRANSECTS_FOR_ANALYSIS:
+            status = "QUALIFIED_UNRELIABLE_TRANSECTS"
+            msg = (
+                f"Only {valid_count} of {evaluated_transects} evaluated transects met conservative "
+                f"channel correspondence quality standards ({len(unqualified_transects)} unqualified/unreliable). "
+                "Quantitative bank-displacement metrics are suppressed to prevent misleading scientific interpretation."
+            )
+            mean_left_disp = None
+            mean_right_disp = None
+            max_bank_disp = None
         else:
             status = "ANALYSIS_SUCCESS"
-            msg = f"Successfully evaluated {evaluated_transects} transects ({valid_transects} valid channel crossings)."
-
-        mean_left_disp = float(np.mean([t["left_bank_displacement_m"] for t in transect_metrics])) if transect_metrics else 0.0
-        mean_right_disp = float(np.mean([t["right_bank_displacement_m"] for t in transect_metrics])) if transect_metrics else 0.0
+            msg = (
+                f"Successfully evaluated {evaluated_transects} transects: {valid_count} verified corresponding channel "
+                f"transects ({len(unqualified_transects)} unqualified/excluded)."
+            )
+            mean_left_disp = round(float(np.mean([t["left_bank_displacement_m"] for t in reliable_transects])), 2)
+            mean_right_disp = round(float(np.mean([t["right_bank_displacement_m"] for t in reliable_transects])), 2)
+            max_bank_disp = round(
+                float(max(
+                    max(abs(t["left_bank_displacement_m"]) for t in reliable_transects),
+                    max(abs(t["right_bank_displacement_m"]) for t in reliable_transects),
+                )),
+                2,
+            )
 
         result = {
             "status": status,
             "message": msg,
+            "channel_correspondence_status": (
+                "VERIFIED_CHANNEL_CORRESPONDENCE" if valid_count >= MIN_TRANSECTS_FOR_ANALYSIS else "QUALIFIED_UNRELIABLE_TRANSECTS"
+            ),
             "evaluated_transects": evaluated_transects,
-            "valid_migration_transects": valid_transects,
-            "external_bank_expansion_km2": external_expansion_km2,
-            "internal_char_submergence_km2": char_submergence_km2,
-            "channel_water_km2": channel_water_km2,
+            "valid_migration_transects": valid_count,
+            "reliable_transects_count": valid_count,
+            "unqualified_transects_count": len(unqualified_transects),
+            "external_bank_expansion_km2": round(external_expansion_km2, 4),
+            "internal_char_submergence_km2": round(char_submergence_km2, 4),
+            "channel_water_km2": round(channel_water_km2, 4),
             "mean_left_bank_displacement_m": mean_left_disp,
             "mean_right_bank_displacement_m": mean_right_disp,
-            "sample_transects": transect_metrics[:10],
+            "max_bank_displacement_m": max_bank_disp,
+            "sample_transects": reliable_transects[:10],
+            "unqualified_transects": unqualified_transects[:10],
         }
 
         if output_metadata_json:

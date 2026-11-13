@@ -35,15 +35,56 @@ from src.pipeline.visualization import (
 )
 from src.core.satellite_catalog import JAMUNA_DEFAULT_AOI_WKT
 
+from unittest.mock import patch
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+FIXTURE_SCENES = [
+    {
+        "scene_name": "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69",
+        "platform": "Sentinel-1A",
+        "sensor": "C-SAR",
+        "acquisition_time": "2024-06-10T12:05:08Z",
+        "orbit_direction": "ASCENDING",
+        "relative_orbit": 40,
+        "polarization": "VV+VH",
+        "beam_mode": "IW",
+        "processing_level": "GRD_HD",
+        "download_url": "https://datapool.asf.alaska.edu/GRD_HD/SA/S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69.zip",
+        "size_mb": 990.5,
+        "wkt_geometry": "POLYGON((89.0 24.0, 90.0 24.0, 90.0 25.0, 89.0 25.0, 89.0 24.0))",
+        "aoi_coverage_pct": 100.0,
+    },
+    {
+        "scene_name": "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511",
+        "platform": "Sentinel-1A",
+        "sensor": "C-SAR",
+        "acquisition_time": "2024-07-16T12:05:07Z",
+        "orbit_direction": "ASCENDING",
+        "relative_orbit": 40,
+        "polarization": "VV+VH",
+        "beam_mode": "IW",
+        "processing_level": "GRD_HD",
+        "download_url": "https://datapool.asf.alaska.edu/GRD_HD/SA/S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511.zip",
+        "size_mb": 995.2,
+        "wkt_geometry": "POLYGON((89.0 24.0, 90.0 24.0, 90.0 25.0, 89.0 25.0, 89.0 24.0))",
+        "aoi_coverage_pct": 100.0,
+    },
+]
 
 
 class TestScientificVisualization(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        cls.patcher = patch("src.acquisition.asf_client.ASFClient.search_scenes", return_value=FIXTURE_SCENES)
+        cls.patcher.start()
         cls.client = TestClient(app)
         cls.service = DynamicAnalysisService()
         cls.test_aoi = "POLYGON((89.60 24.62, 89.66 24.62, 89.66 24.68, 89.60 24.68, 89.60 24.62))"
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.patcher.stop()
 
     def test_01_sar_backscatter_preview_generation(self):
         """1. Generate high-dynamic-range calibrated radar backscatter preview PNG with dB colorbar."""
@@ -373,6 +414,66 @@ class TestScientificVisualization(unittest.TestCase):
                 img = Image.open(io.BytesIO(resp.content))
                 self.assertEqual(img.size, (256, 256))
                 self.assertEqual(img.format, "PNG")
+
+        finally:
+            from src.backend.database.database import get_db_connection
+            with get_db_connection() as conn:
+                conn.execute("DELETE FROM analysis_runs WHERE run_id = ?", (run_id,))
+                conn.commit()
+            if run_dir.exists():
+                shutil.rmtree(run_dir, ignore_errors=True)
+
+    def test_12_dynamic_tile_missing_asset_returns_404(self):
+        """12. API GET /api/v1/runs/{run_id}/tiles/{missing_asset}/... returns HTTP 404 (Directive 8)."""
+        req = self.service.create_analysis_request(
+            aoi_wkt=self.test_aoi,
+            start_date="2024-06-10",
+            end_date="2024-07-16",
+        )
+        run_id = req["run_id"]
+        run_dir = self.service.get_run_dir(run_id)
+
+        try:
+            self.service.execute_analysis_run(run_id)
+
+            # Request non-existent asset
+            resp = self.client.get(f"/api/v1/runs/{run_id}/tiles/non_existent_layer/11/1533/879.png")
+            self.assertEqual(resp.status_code, 404)
+
+        finally:
+            from src.backend.database.database import get_db_connection
+            with get_db_connection() as conn:
+                conn.execute("DELETE FROM analysis_runs WHERE run_id = ?", (run_id,))
+                conn.commit()
+            if run_dir.exists():
+                shutil.rmtree(run_dir, ignore_errors=True)
+
+    def test_13_inside_vs_outside_aoi_tile_rendering(self):
+        """13. Inside-AOI tile has non-transparent pixels; outside-AOI tile is fully transparent (Directive 8)."""
+        req = self.service.create_analysis_request(
+            aoi_wkt=self.test_aoi,
+            start_date="2024-06-10",
+            end_date="2024-07-16",
+        )
+        run_id = req["run_id"]
+        run_dir = self.service.get_run_dir(run_id)
+
+        try:
+            self.service.execute_analysis_run(run_id)
+
+            # Inside AOI tile (Jamuna center at z=11: 1533, 879)
+            resp_in = self.client.get(f"/api/v1/runs/{run_id}/tiles/transitions/11/1533/879.png")
+            self.assertEqual(resp_in.status_code, 200)
+            img_in = Image.open(io.BytesIO(resp_in.content))
+            arr_in = np.array(img_in)
+            self.assertGreater(np.sum(arr_in[:, :, 3] > 0), 100, "Inside-AOI tile should contain visible alpha pixels")
+
+            # Outside AOI tile (Far away: Pacific ocean at z=11, x=100, y=100)
+            resp_out = self.client.get(f"/api/v1/runs/{run_id}/tiles/transitions/11/100/100.png")
+            self.assertEqual(resp_out.status_code, 200)
+            img_out = Image.open(io.BytesIO(resp_out.content))
+            arr_out = np.array(img_out)
+            self.assertEqual(np.sum(arr_out[:, :, 3] > 0), 0, "Outside-AOI tile must be completely transparent")
 
         finally:
             from src.backend.database.database import get_db_connection

@@ -47,7 +47,7 @@
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <sourceBands>Intensity_VH,Intensity_VV</sourceBands>
-      <region>${geoRegion}</region>
+      <geoRegion>${geoRegion}</geoRegion>
       <copyMetadata>true</copyMetadata>
     </parameters>
   </node>
@@ -58,7 +58,7 @@
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <sourceBands>Intensity_VH,Intensity_VV</sourceBands>
-      <auxFile>Product Auxiliary</auxFile>
+      <auxFile>Product Auxiliary File</auxFile>
       <externalAuxFile/>
       <outputImageInComplex>false</outputImageInComplex>
       <outputImageScaleInDb>false</outputImageScaleInDb>

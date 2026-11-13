@@ -134,6 +134,11 @@ class DynamicChangeDetector:
         area_valid_comparison_km2 = float(n_valid_comparison * PIXEL_AREA_KM2)
         area_total_aoi_km2 = float(n_total_pixels * PIXEL_AREA_KM2)
 
+        # Actual inside-polygon pixel count and area (independent of common valid comparison domain)
+        # Includes all pixels whose centroid falls inside the polygon cutline (Classes 1-5, excluding Class 6 NoData)
+        n_inside_polygon = n_total_pixels - n_nodata
+        area_raster_polygon_km2 = float(n_inside_polygon * PIXEL_AREA_KM2)
+
         # Reconciled Net Change
         net_change_pixels = n_newly_inundated - n_receded_water
         net_change_km2 = float(net_change_pixels * PIXEL_AREA_KM2)
@@ -214,6 +219,7 @@ class DynamicChangeDetector:
                 "persistent_non_water": n_persist_nonwater,
                 "indeterminate_floor": n_indeterminate,
                 "nodata_invalid": n_nodata,
+                "inside_polygon": n_inside_polygon,
                 "valid_comparison": n_valid_comparison,
                 "total_pixels": n_total_pixels,
             },
@@ -223,8 +229,11 @@ class DynamicChangeDetector:
                 "receded_water": area_receded_water_km2,
                 "persistent_non_water": area_persist_nonwater_km2,
                 "indeterminate_floor": area_indeterminate_km2,
+                "raster_polygon_area": area_raster_polygon_km2,
                 "valid_comparison_area": area_valid_comparison_km2,
                 "total_study_aoi": area_total_aoi_km2,
+                "bounding_box_area": area_total_aoi_km2,
+                "outside_polygon_nodata_area": float(n_nodata * PIXEL_AREA_KM2),
                 "net_candidate_water_change": net_change_km2,
                 "gross_inundation": gross_inundation_km2,
                 "gross_recession": gross_recession_km2,

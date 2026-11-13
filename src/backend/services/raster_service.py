@@ -204,7 +204,7 @@ class RasterService:
             if region_id and info.get("region_id") != region_id:
                 continue
 
-            full_path = settings.PROJECT_ROOT_DIR / info["relative_path"]
+            full_path = settings.resolve_data_path(info["relative_path"])
             if not full_path.exists():
                 continue
 
@@ -290,7 +290,7 @@ class RasterService:
             return None
         resolved_id, info = lookup
 
-        full_path = settings.PROJECT_ROOT_DIR / info["relative_path"]
+        full_path = settings.resolve_data_path(info["relative_path"])
         if not full_path.exists():
             return None
 
@@ -334,7 +334,7 @@ class RasterService:
             return None
         resolved_id, info = lookup
 
-        full_path = settings.PROJECT_ROOT_DIR / info["relative_path"]
+        full_path = settings.resolve_data_path(info["relative_path"])
         if not full_path.exists():
             return None
 
@@ -385,7 +385,7 @@ class RasterService:
             raise ValueError(f"Raster asset '{asset_id}' not found in catalog.")
         resolved_id, info = lookup
 
-        full_path = settings.PROJECT_ROOT_DIR / info["relative_path"]
+        full_path = settings.resolve_data_path(info["relative_path"])
         if not full_path.exists():
             raise FileNotFoundError(f"Raster asset file for '{asset_id}' not found at {full_path}")
 

@@ -1,0 +1,33 @@
+# Earth Pulse — Portable Scientific Demo Data Installation
+# NASA Space Apps Challenge 2026: Dancing with the SARs
+
+## Overview
+This archive provides precomputed satellite radar products and explainable AI
+outputs for two verified Sentinel-1 SAR runs over the Jamuna River study area:
+  1. 2024 Historical Monsoon (2024-06-10 -> 2024-07-16): +5.8432 km² net water change
+  2. 2025 Live SAR Analysis  (2025-01-12 -> 2025-01-24): +1.0440 km² net water change
+
+## Extraction Instructions
+Extract this archive directly inside your EarthPulse-SAR project directory:
+
+  cd /path/to/EarthPulse-SAR
+  unzip /path/to/EARTH_PULSE_PORTABLE_DEMO_DATA.zip -d .
+
+This populates:
+  data/runs/run_20261110_221732_1f2e94/   (2024 monsoon analysis rasters, vectors, previews)
+  data/runs/run_20261111_164348_f3c2b8/   (2025 live analysis rasters, vectors, previews)
+  docs/DEMO_DATA_MANIFEST.json            (Cryptographic manifest & SHA-256 checksums)
+  INSTALL.txt                             (This installation guide)
+
+## Verification
+Confirm the two run directories exist directly under data/runs/:
+  ls -d data/runs/run_*
+
+Run the automated demo-readiness test suite:
+  pytest tests/test_stage3_demo_readiness.py
+
+## Zero External Dependencies for Demo Mode
+- No ESA SNAP installation required
+- No NASA Earthdata credentials required
+- No developer machine path dependencies (fully portable)
+

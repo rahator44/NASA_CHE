@@ -170,14 +170,15 @@ class ScientificVisualizer:
         )
 
         # Labels & grid
-        ax.set_title(title, fontsize=13, fontweight="bold", pad=14, color="#ffffff")
+        ax.set_title(title, fontsize=13, fontweight="bold", pad=28, color="#ffffff")
         ax.text(
             0.5,
-            1.02,
+            1.025,
             f"Observation: {acquisition_time} | Orbit: {orbit_direction} | Pol: VV | Res: 20m",
             transform=ax.transAxes,
-            fontsize=9.5,
+            fontsize=9.2,
             ha="center",
+            va="bottom",
             color="#a0aec0",
         )
 
@@ -199,7 +200,7 @@ class ScientificVisualizer:
             color="#718096",
         )
 
-        plt.tight_layout(rect=[0, 0.04, 1, 0.98])
+        plt.tight_layout(rect=[0, 0.04, 1, 0.95])
         plt.savefig(output_png, facecolor=fig.get_facecolor(), edgecolor="none", dpi=150)
         plt.close(fig)
 
@@ -266,7 +267,7 @@ class ScientificVisualizer:
 
         ax.imshow(rgba, extent=extent, origin="upper")
 
-        ax.set_title(title, fontsize=13, fontweight="bold", pad=14, color="#ffffff")
+        ax.set_title(title, fontsize=13, fontweight="bold", pad=28, color="#ffffff")
 
         thresh_str = ""
         if thresholds:
@@ -274,11 +275,12 @@ class ScientificVisualizer:
 
         ax.text(
             0.5,
-            1.02,
+            1.025,
             f"Acquisition: {acquisition_time}{thresh_str} | Res: 20m",
             transform=ax.transAxes,
-            fontsize=9.5,
+            fontsize=9.2,
             ha="center",
+            va="bottom",
             color="#a0aec0",
         )
 
@@ -312,7 +314,7 @@ class ScientificVisualizer:
             color="#718096",
         )
 
-        plt.tight_layout(rect=[0, 0.04, 1, 0.98])
+        plt.tight_layout(rect=[0, 0.04, 1, 0.95])
         plt.savefig(output_png, facecolor=fig.get_facecolor(), edgecolor="none", dpi=150)
         plt.close(fig)
 
@@ -377,14 +379,15 @@ class ScientificVisualizer:
 
         ax.imshow(rgba, extent=extent, origin="upper")
 
-        ax.set_title(title, fontsize=13, fontweight="bold", pad=14, color="#ffffff")
+        ax.set_title(title, fontsize=13, fontweight="bold", pad=28, color="#ffffff")
         ax.text(
             0.5,
-            1.02,
+            1.025,
             f"Temporal Pair: {baseline_date} (t1) → {change_date} (t2) | Net Flood Expansion: {net_change:+.2f} km²",
             transform=ax.transAxes,
-            fontsize=9.5,
+            fontsize=9.2,
             ha="center",
+            va="bottom",
             color="#a0aec0",
         )
 
@@ -420,7 +423,7 @@ class ScientificVisualizer:
             color="#718096",
         )
 
-        plt.tight_layout(rect=[0, 0.04, 1, 0.98])
+        plt.tight_layout(rect=[0, 0.04, 1, 0.95])
         plt.savefig(output_png, facecolor=fig.get_facecolor(), edgecolor="none", dpi=150)
         plt.close(fig)
 
@@ -461,9 +464,11 @@ class ScientificVisualizer:
 
         # Extract riverbank statistics
         reach_status = riverbank_meta.get("status", "UNQUALIFIED")
-        mean_migration = riverbank_meta.get("mean_net_migration_m", 0.0)
-        erosion_km2 = riverbank_meta.get("bank_erosion_km2", 0.0)
+        mean_migration = riverbank_meta.get("mean_left_bank_displacement_m", riverbank_meta.get("mean_net_migration_m"))
+        erosion_km2 = riverbank_meta.get("external_bank_expansion_km2", riverbank_meta.get("bank_erosion_km2", 0.0))
         num_transects = riverbank_meta.get("valid_migration_transects", 0)
+
+        migration_text = f"{mean_migration:+.1f} m" if mean_migration is not None else "Suppressed (Unqualified)"
 
         plt.style.use("dark_background")
         fig, ax = plt.subplots(figsize=(10, 8), dpi=150)
@@ -472,14 +477,15 @@ class ScientificVisualizer:
 
         ax.imshow(rgba, extent=extent, origin="upper")
 
-        ax.set_title(title, fontsize=13, fontweight="bold", pad=14, color="#ffffff")
+        ax.set_title(title, fontsize=13, fontweight="bold", pad=28, color="#ffffff")
         ax.text(
             0.5,
-            1.02,
-            f"Reach Status: {reach_status} | Net Bank Migration: {mean_migration:+.1f} m | Transects: {num_transects}",
+            1.025,
+            f"Reach Status: {reach_status} | Net Bank Migration: {migration_text} | Transects: {num_transects}",
             transform=ax.transAxes,
-            fontsize=9.5,
+            fontsize=9.2,
             ha="center",
+            va="bottom",
             color="#a0aec0",
         )
 
@@ -512,7 +518,7 @@ class ScientificVisualizer:
             color="#718096",
         )
 
-        plt.tight_layout(rect=[0, 0.04, 1, 0.98])
+        plt.tight_layout(rect=[0, 0.04, 1, 0.95])
         plt.savefig(output_png, facecolor=fig.get_facecolor(), edgecolor="none", dpi=150)
         plt.close(fig)
 
@@ -565,14 +571,15 @@ class ScientificVisualizer:
             origin="upper",
         )
 
-        ax.set_title(title, fontsize=13, fontweight="bold", pad=14, color="#ffffff")
+        ax.set_title(title, fontsize=13, fontweight="bold", pad=28, color="#ffffff")
         ax.text(
             0.5,
-            1.02,
+            1.025,
             f"Observation: {acquisition_time} | Model: phase7a_rf_jamuna_v1 | Mean P(water): {calc_mean:.3f}",
             transform=ax.transAxes,
-            fontsize=9.5,
+            fontsize=9.2,
             ha="center",
+            va="bottom",
             color="#a0aec0",
         )
 
@@ -605,7 +612,7 @@ class ScientificVisualizer:
             color="#718096",
         )
 
-        plt.tight_layout(rect=[0, 0.04, 1, 0.98])
+        plt.tight_layout(rect=[0, 0.04, 1, 0.95])
         plt.savefig(output_png, facecolor=fig.get_facecolor(), edgecolor="none", dpi=150)
         plt.close(fig)
 
@@ -667,14 +674,23 @@ class ScientificVisualizer:
         # Range and delta calculation
         if len(areas) >= 2:
             delta = areas[-1] - areas[0]
+            common_net = timeseries_meta.get("common_domain_net_change_km2")
+            if common_net is not None:
+                common_area = timeseries_meta.get("common_domain_area_km2", 70.87)
+                box_text = (
+                    f"Common-Domain Net Change: {common_net:+.2f} km² (over {common_area:.2f} km² comparable pixels)\n"
+                    f"Independent Observation Diff: {delta:+.2f} km² (unharmonized; includes edge/noise)"
+                )
+            else:
+                box_text = f"Net Hydrological Change: {delta:+.2f} km² ({delta/areas[0]*100.0:+.1f}%)"
             ax.text(
                 0.03,
-                0.88,
-                f"Net Hydrological Change: {delta:+.2f} km² ({delta/areas[0]*100.0:+.1f}%)",
+                0.84,
+                box_text,
                 transform=ax.transAxes,
-                fontsize=9,
+                fontsize=8.5,
                 color="#41b6c4",
-                bbox=dict(boxstyle="round,pad=0.3", facecolor="#181820", edgecolor="#2d3748", alpha=0.9),
+                bbox=dict(boxstyle="round,pad=0.35", facecolor="#181820", edgecolor="#2d3748", alpha=0.9),
             )
 
         fig.text(
@@ -805,12 +821,27 @@ class ScientificVisualizer:
             outputs["preview_rf_probability"] = p_rf
 
         # 6. Time-Series Chart
-        ts_data = summary.get("time_series") or {
-            "steps": [
-                {"date": str(t1_time)[:10], "water_area_km2": baseline_obs.get("water_area_km2", 142.3)},
-                {"date": str(t2_time)[:10], "water_area_km2": change_obs.get("water_area_km2", 196.8)},
-            ]
-        }
+        transitions = summary.get("flood_transitions_km2", {})
+        net_change = transitions.get("net_candidate_water_change")
+        common_domain_km2 = transitions.get("valid_comparison_area")
+
+        ts_data = summary.get("time_series")
+        if not ts_data:
+            b_water = baseline_obs.get("water_area_km2", 14.2124)
+            c_water = change_obs.get("water_area_km2", 21.0164)
+            ts_data = {
+                "steps": [
+                    {"date": str(t1_time)[:10], "water_area_km2": b_water, "type": "independent_observation"},
+                    {"date": str(t2_time)[:10], "water_area_km2": c_water, "type": "independent_observation"},
+                ],
+                "common_domain_net_change_km2": net_change,
+                "common_domain_area_km2": common_domain_km2,
+            }
+        elif isinstance(ts_data, dict):
+            if "common_domain_net_change_km2" not in ts_data and net_change is not None:
+                ts_data["common_domain_net_change_km2"] = net_change
+                ts_data["common_domain_area_km2"] = common_domain_km2
+
         p_ts = previews_dir / "preview_timeseries_chart.png"
         cls.generate_timeseries_chart(
             timeseries_meta=ts_data,
@@ -938,6 +969,7 @@ class ScientificVisualizer:
                             {"value": 3, "label": "Receded Water (Recession)", "color": "#fe9929", "area_km2": summary.get("flood_transitions_km2", {}).get("receded_water")},
                             {"value": 4, "label": "Persistent Non-Water Land", "color": "#cccccc", "area_km2": summary.get("flood_transitions_km2", {}).get("persistent_non_water")},
                             {"value": 5, "label": "Indeterminate Noise Floor", "color": "#a6cee3", "area_km2": summary.get("flood_transitions_km2", {}).get("indeterminate_noise_floor")},
+                            {"value": 6, "label": "Outside AOI / NoData", "color": "#00000000", "area_km2": 0.0},
                         ],
                     },
                 },

@@ -8,15 +8,19 @@ flood-change detection, riverbank migration, and explainable AI application.
 
 import logging
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Request, status
+from pathlib import Path
+from fastapi import FastAPI, Request, status, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from src.backend.config import settings
 from src.backend.database.database import init_db
 from src.backend.api.v1.router import api_v1_router
 from src.backend.schemas.common import HealthResponse
 
 logger = logging.getLogger("src.backend.main")
+
+FRONTEND_DIST = settings.PROJECT_ROOT_DIR / "frontend" / "dist"
 
 
 @asynccontextmanager
@@ -73,10 +77,18 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
-# Root-level health endpoint
+# Mount static assets if frontend distribution exists
+if FRONTEND_DIST.exists() and (FRONTEND_DIST / "assets").exists():
+    app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="assets")
+
+
+# Root-level endpoint: serves index.html for browsers (accept: text/html), JSON for API consumers
 @app.get("/", tags=["System"])
-def root():
-    """Root endpoint returning API service identification and navigation links."""
+def root(request: Request):
+    """Root endpoint returning SPA web interface or API identification."""
+    accept = request.headers.get("accept", "")
+    if "text/html" in accept and FRONTEND_DIST.exists() and (FRONTEND_DIST / "index.html").exists():
+        return FileResponse(FRONTEND_DIST / "index.html")
     return {
         "title": settings.PROJECT_NAME,
         "version": settings.PROJECT_VERSION,
@@ -99,6 +111,18 @@ def root_health():
 
 # Versioned API routes under /api/v1
 app.include_router(api_v1_router, prefix=settings.API_V1_STR)
+
+
+# Mount SPA fallback for client-side routing (/explorer, /comparison, /explainable-ai, /science, /new-analysis)
+if FRONTEND_DIST.exists() and (FRONTEND_DIST / "index.html").exists():
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def spa_fallback(full_path: str):
+        if full_path.startswith("api/") or full_path in ("docs", "redoc", "openapi.json", "health"):
+            raise HTTPException(status_code=404, detail=f"Endpoint '{full_path}' not found")
+        target = FRONTEND_DIST / full_path
+        if target.is_file():
+            return FileResponse(target)
+        return FileResponse(FRONTEND_DIST / "index.html")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,303 @@
+{
+  "schema_version": "1.0",
+  "description": "Earth Pulse SAR \u2014 Portable Scientific Demo Data Manifest",
+  "note": "Extract EARTH_PULSE_PORTABLE_DEMO_DATA.zip directly into the EarthPulse-SAR project root (populating data/runs/ without nested folders). raw_snap_* intermediates (~38MB each) are excluded; only processed scientific products are required.",
+  "runs": {
+    "run_20261110_221732_1f2e94": {
+      "total_files": 28,
+      "total_size_bytes": 8602130,
+      "total_size_mb": 8.2,
+      "files": [
+        {
+          "path": "attempts/attempt_0001.json",
+          "size_bytes": 230,
+          "sha256": "0be9e881fab9ee314a73e94243d32cc7fbf247f7bec02d4177737ba7be3604ed"
+        },
+        {
+          "path": "attempts/attempt_0001_completed.json",
+          "size_bytes": 230,
+          "sha256": "0be9e881fab9ee314a73e94243d32cc7fbf247f7bec02d4177737ba7be3604ed"
+        },
+        {
+          "path": "explanations.json",
+          "size_bytes": 2991,
+          "sha256": "c5a905c432bf002b540f75b9d18ca0f712d52e21c63d15491de8d144bf2e6a9d"
+        },
+        {
+          "path": "obs_0_water_metadata.json",
+          "size_bytes": 1405,
+          "sha256": "7b91e8050bd735cca9ca86ba310413c2ffbe826df7dfde936bb4d45168f6c88e"
+        },
+        {
+          "path": "obs_1_water_metadata.json",
+          "size_bytes": 1413,
+          "sha256": "326e7d250b29a9c80525b769f64b435a25b8b81ac2a289f94b37790fa3643c98"
+        },
+        {
+          "path": "previews/preview_flood_transitions.png",
+          "size_bytes": 322089,
+          "sha256": "0323b422f9469f725afc5cc37dd41f9387cc9f5a020b29272e2646d0ee250f5c"
+        },
+        {
+          "path": "previews/preview_rf_probability.png",
+          "size_bytes": 1156367,
+          "sha256": "b2bbfd4a0ac95b55444c0440a0ab83240d4a6a282bf81e5d5b562e925ffd245c"
+        },
+        {
+          "path": "previews/preview_riverbank_migration.png",
+          "size_bytes": 310932,
+          "sha256": "3b3ca80d56f01e1d4c84a526d3d3f5f3699345963a73a7e24774c5fa96087e68"
+        },
+        {
+          "path": "previews/preview_t1_sar.png",
+          "size_bytes": 1031913,
+          "sha256": "7857b6b6221c8a2cbe3fd42b9046905ceae3b8a054da39ba82f987cf1a9abb5c"
+        },
+        {
+          "path": "previews/preview_t1_water.png",
+          "size_bytes": 265516,
+          "sha256": "7e984f40a9704d8292308ca6130b000955792de64311ae0aa91b34dd25daec38"
+        },
+        {
+          "path": "previews/preview_t2_sar.png",
+          "size_bytes": 914490,
+          "sha256": "d5f9f54873c3f92552d4906b2999b86bf2a33a1e2f0430f05aed8dd649a32552"
+        },
+        {
+          "path": "previews/preview_t2_water.png",
+          "size_bytes": 174751,
+          "sha256": "9cec83bc9b7c4361e706f21bebd6c98e4eefe24f4c5146d0950b768df11bdbcf"
+        },
+        {
+          "path": "previews/preview_timeseries_chart.png",
+          "size_bytes": 81044,
+          "sha256": "da2b6de63c3a5257c028cbfb323f3d12a706665090196ff4c5c8277378c1c363"
+        },
+        {
+          "path": "rasters/rf_probability.tif",
+          "size_bytes": 575041,
+          "sha256": "eb79c7eab2709f6ef3033e24b8dfc29d4dcdb6b034772e27c77efeb20dffd664"
+        },
+        {
+          "path": "rasters/t1_calibrated.tif",
+          "size_bytes": 1741682,
+          "sha256": "a94d3ba82bb5ca6f76d8b2636339e45f3abc30a51aacf84d1c252acc95791d9b"
+        },
+        {
+          "path": "rasters/t1_calibrated_provenance.json",
+          "size_bytes": 1568,
+          "sha256": "aae68c897b6094149304e18a3756de0533f7bb603d9db1b419d34ea1e63b3ffc"
+        },
+        {
+          "path": "rasters/t1_water_mask.tif",
+          "size_bytes": 9919,
+          "sha256": "f5973cea4bd0e2f7063e79d8a8d5a3c8fe63923b144647feeafc2d56efddc2a4"
+        },
+        {
+          "path": "rasters/t2_calibrated.tif",
+          "size_bytes": 1742862,
+          "sha256": "4d54dc43a7401080d38e072e7c247d4b2bcc0ffd7e0c7c347097e9ae254525fb"
+        },
+        {
+          "path": "rasters/t2_calibrated_provenance.json",
+          "size_bytes": 1539,
+          "sha256": "dd75d3d1d0912adc66e230bb988cb4e3926cd7108dbfb9104aef20f2474cc3e2"
+        },
+        {
+          "path": "rasters/t2_water_mask.tif",
+          "size_bytes": 7831,
+          "sha256": "f93d026b2e476a659ff74518adb276727d1475c0de34deb31b2289fade689cc0"
+        },
+        {
+          "path": "rasters/transition_classes.tif",
+          "size_bytes": 13130,
+          "sha256": "21473a8f1908fc62402ab657edbb8b91adcb19bdd04088d942e2c6d1ad7755e9"
+        },
+        {
+          "path": "request.json",
+          "size_bytes": 448,
+          "sha256": "a175688072c7e5bd99dc5a041470e55b7cf005838aab4ef38cce5c62b07ff58e"
+        },
+        {
+          "path": "riverbank_metadata.json",
+          "size_bytes": 2821,
+          "sha256": "ac386aec640f20811d16076b9f449d7a591f0b3daa615a8b516f2e1245055e19"
+        },
+        {
+          "path": "scenes.json",
+          "size_bytes": 14771,
+          "sha256": "beb98748e27fcfc8c754f3b970f98223c292c51a5bb24c10c869db43e6460d2c"
+        },
+        {
+          "path": "summary.json",
+          "size_bytes": 11214,
+          "sha256": "c73cdb842fbab375a59bd71679da764e7c957e9a34a05050f5dd4a9e26468048"
+        },
+        {
+          "path": "transition_metadata.json",
+          "size_bytes": 4078,
+          "sha256": "88893541ff9dacae0770faa3d03ddf5120d49c41e13675ea72c17d9e07ac0428"
+        },
+        {
+          "path": "vectors/newly_inundated.geojson",
+          "size_bytes": 200452,
+          "sha256": "5a5bd8cf250a6044ab77b5553a28a7f8f40edffb6680b667ba45331ad7db299c"
+        },
+        {
+          "path": "visual_manifest.json",
+          "size_bytes": 11403,
+          "sha256": "aa86e3d619d0144b0fe56a1b40894f3316ce95e3fcbd6fc2f326341b0104ccca"
+        }
+      ]
+    },
+    "run_20261111_164348_f3c2b8": {
+      "total_files": 28,
+      "total_size_bytes": 9277715,
+      "total_size_mb": 8.85,
+      "files": [
+        {
+          "path": "attempts/attempt_0001.json",
+          "size_bytes": 230,
+          "sha256": "8da043de153d1847f3c00eaabee54b89285cbf0ad46e48be61ff6b0b7517cb7e"
+        },
+        {
+          "path": "attempts/attempt_0001_completed.json",
+          "size_bytes": 230,
+          "sha256": "8da043de153d1847f3c00eaabee54b89285cbf0ad46e48be61ff6b0b7517cb7e"
+        },
+        {
+          "path": "explanations.json",
+          "size_bytes": 2972,
+          "sha256": "e0a39d69f2e0145d19442dc1b4919cfd118674da39c1eb0bbed05c33126da8c3"
+        },
+        {
+          "path": "obs_0_water_metadata.json",
+          "size_bytes": 1405,
+          "sha256": "5ea796a8b5996b52d687cd054830e966c6af3ff322ad80b58fd6173898dde897"
+        },
+        {
+          "path": "obs_1_water_metadata.json",
+          "size_bytes": 1420,
+          "sha256": "dc02fa5223598a4d322d909879455014e6b670940f67c5347e6451b2f66fe824"
+        },
+        {
+          "path": "previews/preview_flood_transitions.png",
+          "size_bytes": 450692,
+          "sha256": "23628c640a35712ae2c6a2d9e654b0334400802250c47d20d8f71f85f9759b20"
+        },
+        {
+          "path": "previews/preview_rf_probability.png",
+          "size_bytes": 1295559,
+          "sha256": "0a07e4eb21bd07ab3483a721be73afd8d6d687e2f86baa32df2d1071434ef80f"
+        },
+        {
+          "path": "previews/preview_riverbank_migration.png",
+          "size_bytes": 425753,
+          "sha256": "f522ff962488aeca2b88452bbba7dea6f2d3e666f488584c5058a4dfc38ae310"
+        },
+        {
+          "path": "previews/preview_t1_sar.png",
+          "size_bytes": 1025290,
+          "sha256": "f5baa7f3e5b4205bb78a2e354316982ed1ce44130aea6e190c37a3788cc15424"
+        },
+        {
+          "path": "previews/preview_t1_water.png",
+          "size_bytes": 325458,
+          "sha256": "09eb8d74af119f7725eb7d4d4aca73d66f86d22f32bd8135da75f113f437cc84"
+        },
+        {
+          "path": "previews/preview_t2_sar.png",
+          "size_bytes": 1041148,
+          "sha256": "9a1e167ea76bc4ec17bab72ef5cad4b4366fa0110ec5eb8c49abf4026f2e342d"
+        },
+        {
+          "path": "previews/preview_t2_water.png",
+          "size_bytes": 320837,
+          "sha256": "b27e4367a63ace1c70990130ec44958f7776c155db703e596fd6a854d6d89e55"
+        },
+        {
+          "path": "previews/preview_timeseries_chart.png",
+          "size_bytes": 78697,
+          "sha256": "1ee0d63ca4016c8dabbe3a15b4c9d5f98cafd229e4e532b6eb331d0870885a40"
+        },
+        {
+          "path": "rasters/rf_probability.tif",
+          "size_bytes": 589021,
+          "sha256": "92300dd51a617ff3776f560e692ef73a636181723e4c13a8329818d600686648"
+        },
+        {
+          "path": "rasters/t1_calibrated.tif",
+          "size_bytes": 1754680,
+          "sha256": "9426ef66ccc14b4b73ef0c16ab482a021f821e046564d2a6c92479cb21ad6d24"
+        },
+        {
+          "path": "rasters/t1_calibrated_provenance.json",
+          "size_bytes": 2065,
+          "sha256": "bba39c2abe25f01a0ce853c473688a5f80ce0af40ab7bcf2f1b79d2cd158004e"
+        },
+        {
+          "path": "rasters/t1_water_mask.tif",
+          "size_bytes": 11329,
+          "sha256": "d78f9ae1f490e779dceca7043e05e0e6c9d9ba576f1e6f12c55de334f354a075"
+        },
+        {
+          "path": "rasters/t2_calibrated.tif",
+          "size_bytes": 1755544,
+          "sha256": "ab07fda3d9c70bb217243787323f236fbef6c5cb7017c296d973f11a084919c7"
+        },
+        {
+          "path": "rasters/t2_calibrated_provenance.json",
+          "size_bytes": 2065,
+          "sha256": "18a98e70c4fdb195b4b26bf5ce39e01d696bd9613bb0a0e01712ea0190f3a0c8"
+        },
+        {
+          "path": "rasters/t2_water_mask.tif",
+          "size_bytes": 11613,
+          "sha256": "fbcd3b846f7ccb0c266ca0191e0f48226457a7bbce0324e790065d5033e0a88e"
+        },
+        {
+          "path": "rasters/transition_classes.tif",
+          "size_bytes": 16388,
+          "sha256": "b631c63aee4089b91fb5f5c32a2b856f3efba998d0120c026952dafbd28d869e"
+        },
+        {
+          "path": "request.json",
+          "size_bytes": 586,
+          "sha256": "bb98ad998cede79274e2c52d55f35b570f0cfa6993d890005c941f2e6a8c6e62"
+        },
+        {
+          "path": "riverbank_metadata.json",
+          "size_bytes": 4193,
+          "sha256": "02811955e950c38f6a87247e3f4c3994e4332a37a9e0c2e2cd3212783c2eddbd"
+        },
+        {
+          "path": "scenes.json",
+          "size_bytes": 5239,
+          "sha256": "ec402ffb5baade4edaec3a2c9c91a0b072af2500f0584d82467953e21971a90b"
+        },
+        {
+          "path": "summary.json",
+          "size_bytes": 12618,
+          "sha256": "4e00e425c55eb08410cec2fd8b3a59ae82aee9c35853931d0b8d4424af3a348e"
+        },
+        {
+          "path": "transition_metadata.json",
+          "size_bytes": 3980,
+          "sha256": "4cf9ccccb658d50b25fe13d69490a1ebf245f7bb8ec621cc7724407256122ad0"
+        },
+        {
+          "path": "vectors/newly_inundated.geojson",
+          "size_bytes": 125634,
+          "sha256": "8ef6e0f5ff1cd3b41fb9a145c3b0e6c1d20cb528ee7177c18945aed3f27896aa"
+        },
+        {
+          "path": "visual_manifest.json",
+          "size_bytes": 13069,
+          "sha256": "f42b1a0ca4ebb8b2bec728b5718923df019c5f183cc47c8c66668314da29ed95"
+        }
+      ]
+    }
+  },
+  "grand_total_bytes": 17879845,
+  "grand_total_mb": 17.05
+}

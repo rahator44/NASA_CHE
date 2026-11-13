@@ -1,0 +1,63 @@
+{
+  "release_version": "1.0.0",
+  "compatible_application_version": "^1.0.0",
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-11-13T15:20:00Z",
+  "git_revision": "daaee170179c723c5fccd736874602453c23c35b",
+  "scientific_core_integrity": {
+    "frozen_random_forest": {
+      "relative_path": "models/phase7a/phase7a_random_forest_model.joblib",
+      "sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+      "expected_sha256": "85038f0fbd832acc373706d7e262a7464142c0c86b4c3ffb1ac1839edf5b53ad",
+      "description": "Frozen pure-NumPy 40-tree Random Forest candidate water model"
+    },
+    "canonical_snap_graph": {
+      "relative_path": "graphs/s1_grd_calibration_terrain_correction.xml",
+      "sha256": "c239c2691ebcf45b778e171553c1656f9ce4d4a1dded160d929fa8e73cf316a0",
+      "expected_sha256": "c239c2691ebcf45b778e171553c1656f9ce4d4a1dded160d929fa8e73cf316a0",
+      "description": "Standard ESA SNAP Level-1 GRD calibration and Range-Doppler terrain correction graph"
+    }
+  },
+  "release_archives": {
+    "portable_demo_data": {
+      "filename": "EARTH_PULSE_PORTABLE_DEMO_DATA.zip",
+      "size_bytes": 16991726,
+      "sha256": "032a9b3e605d734aa39ed1e00c36a7adf52520945f560a4a95616e7040903462",
+      "description": "Verified scientific demonstration dataset covering 2024 and 2025 Sentinel-1 Jamuna campaigns"
+    },
+    "complete_app_source": {
+      "filename": "EARTH_PULSE_COMPLETE_APP_SOURCE_REVIEW.zip",
+      "size_bytes": 3710122,
+      "sha256": "1c31b7c1381d00c4e45bb9e3614fa11d9c42d85c3279abb4e469369f5d40e497",
+      "description": "Complete clean source repository package excluding raw data and build caches"
+    }
+  },
+  "authoritative_campaigns": {
+    "run_20261111_164348_f3c2b8": {
+      "label": "January 2025 Jamuna Live SAR Observation",
+      "baseline_date": "2025-01-12",
+      "change_date": "2025-01-24",
+      "net_candidate_water_change_km2": 1.044,
+      "evaluated_transects": 36,
+      "reliable_correspondence_transects": 35,
+      "unqualified_transects": 1,
+      "spatial_quality_gated": true,
+      "track": 114,
+      "orbit_direction": "ASCENDING",
+      "polarization": "VV+VH",
+      "target_crs": "EPSG:32645"
+    },
+    "run_20261110_221732_1f2e94": {
+      "label": "Summer 2024 Jamuna Monsoon Baseline",
+      "baseline_date": "2024-06-10",
+      "change_date": "2024-07-16",
+      "net_candidate_water_change_km2": 5.8432,
+      "evaluated_transects": 36,
+      "spatial_quality_gated": false,
+      "track": 114,
+      "orbit_direction": "ASCENDING",
+      "polarization": "VV+VH",
+      "target_crs": "EPSG:32645"
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "page_1_dashboard": {
+    "title": "Earth Pulse \u2014 Dancing with the SARs",
+    "heroTitle": "All-Weather Radar Hydrology & Explainable AI for the Braided Jamuna River",
+    "has2024": true,
+    "has2025": true,
+    "selectedRun": "",
+    "bodySnippet": "\ud83d\udef0\ufe0f\nEarth Pulse\n\nSatellite Radar Hydrology & Explainable AI\n\nActive Campaign:\nJanuary 2025 (Genuine Sentinel-1 Live Processing) (2025-01-12 \u2192 2025-01-24)\nSummer 2024 (Historical Monsoon Flood Baseline) (2024-06-10 \u2192 2024-07-16)\nPublic Demo Mode\n\ud83d\udcca\nDashboard\n\ud83d\uddfa\ufe0f\nMap Explorer\n\u2696\ufe0f\nFlood Comparison\n\ud83e\udde0\nExplainable AI\n\ud83d\udd2c\nScience & Data\n\ud83d\udce1\nNew Analysis\n\ud83d\udef0\ufe0f Sentinel-1 Synthetic Aperture Radar (SAR)\nAll-Wea"
+  },
+  "page_2_explorer": {
+    "initial_state": {
+      "hasCanvas": true,
+      "canvasW": 1060,
+      "canvasH": 673,
+      "tilesLoaded": 40,
+      "sampleTileUrl": "https://tile.openstreetmap.org/13/6135/3516.png",
+      "layerButtons": [
+        "Baseline Sentinel-1 Radar Backscatter (VV)\nRASTER_CONTINUOUS",
+        "Observation Sentinel-1 Radar Backscatter (VV)\nRASTER_CONTINUOUS",
+        "Baseline Candidate Water Classification\nRASTER_CATEGORICAL",
+        "Observation Candidate Water Classification\nRASTER_CATEGORICAL",
+        "Flood Inundation & Transition Dynamics\nRASTER_CATEGORICAL",
+        "Random Forest Continuous Water Probability\nRASTER_CONTINUOUS"
+      ],
+      "hasOpacitySlider": true,
+      "hasFocusBtn": true,
+      "coordsBadge": "AOI: Kazipur / Sirajganj (89.60\u00b0\u201389.68\u00b0 E, 24.60\u00b0\u201324.68\u00b0 N)\nHover map for coordinates",
+      "hasLegend": true
+    },
+    "campaign_2024_switch": {
+      "has2024Metric": false,
+      "hasLegacyNotice": false
+    }
+  },
+  "page_3_new_analysis": {
+    "initial_state": {
+      "hasBoxBtn": true,
+      "hasPolyBtn": true,
+      "hasDemoBtn": true,
+      "hasClearBtn": true,
+      "hasSearchBtn": true,
+      "hasPresetMonsoon": true,
+      "hasPresetJan": true,
+      "bodyPreview": "\ud83d\udef0\ufe0f\nEarth Pulse\n\nSatellite Radar Hydrology & Explainable AI\n\nActive Campaign:\nJanuary 2025 (Genuine Sentinel-1 Live Processing) (2025-01-12 \u2192 2025-01-24)\nSummer 2024 (Historical Monsoon Flood Baseline) (2024-06-10 \u2192 2024-07-16)\nPublic Demo Mode\n\ud83d\udcca\nDashboard\n\ud83d\uddfa\ufe0f\nMap Explorer\n\u2696\ufe0f\nFlood Comparison\n\ud83e\udde0\nEx"
+    },
+    "catalog_results": {
+      "hasMatchesTitle": false,
+      "hasScenesCount": true,
+      "hasPairsCount": true,
+      "dropdownOptions": 11,
+      "hasDetailCard": true,
+      "hasSubmitBtn": true
+    },
+    "demo_protection": {
+      "hasProtectionCard": true,
+      "hasCampaignLinks": true
+    }
+  },
+  "page_4_comparison": {
+    "title": true,
+    "mapCanvases": 2,
+    "hasT1": true,
+    "hasT2": true,
+    "hasTransitionsTable": true,
+    "hasMorphoGate": true,
+    "netChangeConfirmed": true
+  },
+  "page_5_explainable_ai": {
+    "hasFormula": true,
+    "has40Trees": true,
+    "hasTreePathTerminology": true,
+    "hasAdditivityBadge": true,
+    "hasNaN": false,
+    "hasFeaturesList": true
+  },
+  "page_6_science": {
+    "hasSarPhysics": true,
+    "hasSnapCalibration": true,
+    "hasLeeFilter": true,
+    "hasWaterClass": false,
+    "hasMorpho": true,
+    "hasSaabas": false,
+    "hasProviders": true
+  },
+  "console_logs_count": 0,
+  "console_errors": [],
+  "network_failures": [
+    {
+      "url": "https://integrating-telephone-wise-newman.trycloudflare.com/api/v1/analysis-requests",
+      "status": 403
+    }
+  ]
+}

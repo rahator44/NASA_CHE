@@ -15,9 +15,11 @@ Coordinates:
 
 import os
 import io
+import re
 import json
 import time
 import uuid
+import hashlib
 import logging
 import joblib
 from datetime import datetime, timezone
@@ -33,7 +35,19 @@ gdal.UseExceptions()
 from src.backend.config import settings
 from src.backend.database.database import get_db_connection
 from src.core.satellite_catalog import SatelliteCatalogService, JAMUNA_DEFAULT_AOI_WKT
-from src.pipeline.sentinel1_preprocess import Sentinel1Preprocessor, validate_sar_raster
+from src.acquisition.download_manager import DownloadManager
+from src.acquisition.scene_selector import SceneSelector
+from src.pipeline.sentinel1_preprocess import (
+    Sentinel1Preprocessor,
+    validate_sar_raster,
+    verify_calibrated_raster_provenance,
+    AUTHORITATIVE_BASELINE_GRANULES,
+    AUTHORITATIVE_CHANGE_GRANULES,
+    GRANULE_PROVENANCE,
+    HISTORICAL_REFERENCE_REGISTRY,
+    CANONICAL_GRAPH_XML,
+    CANONICAL_GRAPH_SHA256,
+)
 from src.pipeline.water_classification import DynamicWaterClassifier
 from src.pipeline.change_detection import DynamicChangeDetector
 from src.pipeline.riverbank_analysis import DynamicRiverbankAnalyzer
@@ -46,6 +60,68 @@ logger = logging.getLogger("EarthPulse.DynamicAnalysisService")
 
 RUNS_BASE_DIR = settings.DATA_DIR / "runs"
 DEFAULT_MODEL_PATH = settings.MODELS_DIR / "phase7a" / "phase7a_random_forest_model.joblib"
+
+# Authoritative State Model & Legal Transitions
+NON_TERMINAL_STATES = {
+    "CREATED",
+    "QUEUED",
+    "SEARCHING_SCENES",
+    "DOWNLOADING",
+    "PREPROCESSING",
+    "QUALITY_CHECKING",
+    "CLASSIFYING",
+    "CHANGE_ANALYSIS",
+    "AI_ANALYSIS",
+    "PUBLISHING_RESULTS",
+}
+
+TERMINAL_STATES = {
+    "COMPLETED",
+    "FAILED",
+    "CANCELLED",
+}
+
+ALL_VALID_STATES = NON_TERMINAL_STATES | TERMINAL_STATES
+
+VALID_STATE_TRANSITIONS = {
+    "CREATED": {"QUEUED", "SEARCHING_SCENES", "FAILED", "CANCELLED"},
+    "QUEUED": {"SEARCHING_SCENES", "DOWNLOADING", "FAILED", "CANCELLED"},
+    "SEARCHING_SCENES": {"QUEUED", "DOWNLOADING", "PREPROCESSING", "FAILED", "CANCELLED"},
+    "DOWNLOADING": {"PREPROCESSING", "FAILED", "CANCELLED"},
+    "PREPROCESSING": {"QUALITY_CHECKING", "CLASSIFYING", "FAILED", "CANCELLED"},
+    "QUALITY_CHECKING": {"CLASSIFYING", "FAILED", "CANCELLED"},
+    "CLASSIFYING": {"CHANGE_ANALYSIS", "FAILED", "CANCELLED"},
+    "CHANGE_ANALYSIS": {"AI_ANALYSIS", "PUBLISHING_RESULTS", "FAILED", "CANCELLED"},
+    "AI_ANALYSIS": {"PUBLISHING_RESULTS", "FAILED", "CANCELLED"},
+    "PUBLISHING_RESULTS": {"COMPLETED", "FAILED", "CANCELLED"},
+    "FAILED": {"QUEUED", "SEARCHING_SCENES", "DOWNLOADING", "PREPROCESSING"},  # On retry
+    "CANCELLED": set(),  # Terminal
+    "COMPLETED": set(),  # Terminal
+}
+
+
+class IllegalStateTransitionError(ValueError):
+    """Raised when an illegal, invalid, or out-of-order state transition is attempted."""
+    pass
+
+
+def atomic_write_json(file_path: Path, data: Any, indent: int = 2) -> None:
+    """Write JSON data to a temporary file in the same directory and atomically replace."""
+    file_path = Path(file_path).resolve()
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = file_path.parent / f".tmp_{file_path.name}_{uuid.uuid4().hex[:6]}"
+    try:
+        content = json.dumps(data, indent=indent, default=str)
+        tmp_path.write_text(content, encoding="utf-8")
+        tmp_path.replace(file_path)
+    except Exception:
+        if tmp_path.exists():
+            try:
+                tmp_path.unlink()
+            except OSError:
+                pass
+        raise
+
 
 # Color Palettes for Dynamic Tile Rendering
 TRANSITION_PALETTE = {
@@ -74,11 +150,14 @@ class DynamicAnalysisService:
 
     def __init__(self):
         self.catalog = SatelliteCatalogService()
-        RUNS_BASE_DIR.mkdir(parents=True, exist_ok=True)
+        self.download_manager = DownloadManager()
+        settings.resolve_data_path("runs").mkdir(parents=True, exist_ok=True)
 
     @classmethod
     def get_run_dir(cls, run_id: str) -> Path:
-        return RUNS_BASE_DIR / run_id
+        if ".." in run_id or "/" in run_id or "\\" in run_id:
+            raise ValueError(f"Invalid run_id '{run_id}': path traversal forbidden.")
+        return settings.resolve_data_path(f"runs/{run_id}")
 
     def search_scenes(
         self,
@@ -122,14 +201,39 @@ class DynamicAnalysisService:
     ) -> Dict[str, Any]:
         """
         Create a new persistent dynamic analysis run.
+        Validates AOI geometry, size, and geographic intersection with the Jamuna study region
+        BEFORE creating any run directory or database record (Correction E).
         """
-        # Validate AOI
+        # Validate AOI — parse and check geometry validity
         try:
             geom = ogr.CreateGeometryFromWkt(aoi_wkt)
             if geom is None or not geom.IsValid():
                 raise ValueError("Invalid AOI polygon geometry WKT.")
         except Exception as e:
             raise ValueError(f"Failed to parse AOI WKT: {e}")
+
+        # Enforce actual Jamuna geographic containment (Correction 3)
+        study_geom = ogr.CreateGeometryFromWkt(settings.JAMUNA_STUDY_REGION_WKT)
+        if study_geom is not None and not study_geom.Contains(geom):
+            raise ValueError(
+                "The submitted AOI polygon is not completely contained within the supported Jamuna study region "
+                f"({settings.JAMUNA_STUDY_REGION_WKT}). Earth Pulse requires the entire AOI to lie within "
+                "the Sirajganj / Kazipur reach of the Jamuna River, Bangladesh. Polygons extending partially "
+                "or completely beyond this boundary are rejected."
+            )
+
+        # Correction E — validate AOI area against configurable limit
+        try:
+            aoi_area_km2 = Sentinel1Preprocessor.get_polygon_area_km2(aoi_wkt)
+        except Exception as e:
+            raise ValueError(f"Could not compute AOI area: {e}")
+        if aoi_area_km2 > settings.AOI_MAX_AREA_KM2:
+            raise ValueError(
+                f"AOI area {aoi_area_km2:.2f} km² exceeds the maximum allowed area of "
+                f"{settings.AOI_MAX_AREA_KM2:.2f} km². Submit a smaller polygon."
+            )
+        if aoi_area_km2 <= 0:
+            raise ValueError("AOI area is zero or negative — degenerate geometry.")
 
         # Validate date ordering
         if start_date > end_date:
@@ -167,7 +271,7 @@ class DynamicAnalysisService:
             "created_at": datetime.now(timezone.utc).isoformat(),
         }
 
-        (run_dir / "request.json").write_text(json.dumps(req_config, indent=2))
+        atomic_write_json(run_dir / "request.json", req_config)
 
         # Record in SQLite analysis_runs table
         with get_db_connection() as conn:
@@ -196,6 +300,7 @@ class DynamicAnalysisService:
     def execute_analysis_run(self, run_id: str) -> Dict[str, Any]:
         """
         Execute the full dynamic pipeline for an analysis run through all verified stages.
+        Derives state authoritatively, manages execution attempts, and performs atomic artifact completion.
         """
         run_dir = self.get_run_dir(run_id)
         if not run_dir.exists():
@@ -211,25 +316,194 @@ class DynamicAnalysisService:
         end_date = req_config["end_date"]
         mode = req_config.get("mode", "two_date_comparison")
 
+        # 1. Authoritative check: do not re-execute or overwrite an already COMPLETED run
+        with get_db_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT status, metadata, completed_at FROM analysis_runs WHERE run_id = ?", (run_id,))
+            db_row = cursor.fetchone()
+
+        db_status = db_row["status"] if db_row else None
+        if db_status == "COMPLETED":
+            summary_path = run_dir / "summary.json"
+            if summary_path.exists():
+                try:
+                    existing_summary = json.loads(summary_path.read_text())
+                    if existing_summary.get("status") == "COMPLETED":
+                        logger.info("Run %s is already COMPLETED with verified summary. Returning existing results.", run_id)
+                        return existing_summary
+                except Exception:
+                    pass
+
+        # 2. Establish attempt tracking under attempts/
+        attempts_dir = run_dir / "attempts"
+        attempts_dir.mkdir(parents=True, exist_ok=True)
+        existing_indices = []
+        for p in attempts_dir.iterdir():
+            m = re.match(r"^attempt_(\d{4})\.json$", p.name)
+            if m:
+                existing_indices.append(int(m.group(1)))
+        attempt_idx = max(existing_indices, default=0) + 1
+
+        # Check for pre-execution cancellation vs stale failure from a prior attempt
+        old_err = run_dir / "error.json"
+        if old_err.exists():
+            try:
+                old_err_data = json.loads(old_err.read_text())
+                if old_err_data.get("status") == "CANCELLED":
+                    logger.info("Run %s was cancelled before execution.", run_id)
+                    with get_db_connection() as conn:
+                        cursor = conn.cursor()
+                        cursor.execute("""
+                            UPDATE analysis_runs
+                            SET status = ?, metadata = ?
+                            WHERE run_id = ?
+                        """, ("CANCELLED", json.dumps({"status": "CANCELLED", "error": old_err_data.get("error", "Analysis run was cancelled.")}), run_id))
+                        conn.commit()
+                    return {"run_id": run_id, "status": "CANCELLED", "error": old_err_data.get("error", "Analysis run was cancelled.")}
+
+                old_idx = attempt_idx - 1 if attempt_idx > 1 else 1
+                archived_name = f"attempt_{old_idx:04d}_error.json"
+                atomic_write_json(attempts_dir / archived_name, old_err_data)
+                old_err.unlink()
+            except Exception as e:
+                logger.warning("Could not process error.json: %s", e)
+
+        attempt_record = {
+            "attempt_index": attempt_idx,
+            "started_at": datetime.now(timezone.utc).isoformat(),
+            "status": "RUNNING",
+            "mode": mode,
+        }
+        atomic_write_json(attempts_dir / f"attempt_{attempt_idx:04d}.json", attempt_record)
+
+        def _check_cancellation():
+            cancel_file = run_dir / "error.json"
+            if cancel_file.exists():
+                try:
+                    data = json.loads(cancel_file.read_text())
+                    if data.get("status") == "CANCELLED":
+                        raise InterruptedError("Analysis run was cancelled by user request.")
+                except json.JSONDecodeError:
+                    pass
+            with get_db_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT status FROM analysis_runs WHERE run_id = ?", (run_id,))
+                row = cursor.fetchone()
+                if row and row[0] == "CANCELLED":
+                    raise InterruptedError("Analysis run was cancelled by user request.")
+
         def _update_stage(status: str, progress: float, metadata: Optional[Dict[str, Any]] = None):
+            _check_cancellation()
+            # Validate state transition against legal state machine
+            with get_db_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT status FROM analysis_runs WHERE run_id = ?", (run_id,))
+                cur_row = cursor.fetchone()
+                cur_status = cur_row[0] if cur_row else "CREATED"
+
+            if cur_status in ("COMPLETED", "CANCELLED"):
+                raise IllegalStateTransitionError(
+                    f"Cannot transition run {run_id} from terminal state '{cur_status}' to '{status}'"
+                )
+
+            allowed = VALID_STATE_TRANSITIONS.get(cur_status, set())
+            if status not in allowed and cur_status != status:
+                raise IllegalStateTransitionError(
+                    f"Illegal state transition for run {run_id}: '{cur_status}' -> '{status}'. "
+                    f"Registered allowed transitions from '{cur_status}': {allowed}"
+                )
+
+            meta_dict = dict(metadata or {})
+            meta_dict["progress_pct"] = round(float(progress), 1)
+            meta_dict["stage"] = status
+            meta_dict["current_attempt"] = attempt_idx
             with get_db_connection() as conn:
                 cursor = conn.cursor()
                 cursor.execute("""
                     UPDATE analysis_runs
                     SET status = ?, metadata = ?
-                    WHERE run_id = ?
-                """, (status, json.dumps(metadata) if metadata else None, run_id))
+                    WHERE run_id = ? AND status = ?
+                """, (status, json.dumps(meta_dict), run_id, cur_status))
+                if cursor.rowcount == 0:
+                    raise RuntimeError(
+                        f"Concurrent state conflict on run {run_id}: expected current status '{cur_status}' "
+                        f"prior to transitioning to '{status}', but the database row was modified concurrently."
+                    )
                 conn.commit()
-            logger.info("Run %s transitioned to %s (%.1f%%)", run_id, status, progress)
+            logger.info("Run %s (attempt %d) transitioned to %s (%.1f%%)", run_id, attempt_idx, status, progress)
 
         try:
             # Stage 1: SEARCHING_SCENES
             _update_stage("SEARCHING_SCENES", 15.0)
             scenes = self.search_scenes(aoi_wkt=aoi_wkt, start_date=start_date, end_date=end_date)
 
+            # Intra-run resumption check: if an earlier attempt of THIS EXACT run already selected scenes,
+            # we may reuse them only if they strictly validate against the requested date window, granule identity,
+            # metadata contract, and AOI spatial coverage.
+            # Cross-run scene substitution across different run directories is strictly forbidden (P0 safety requirement).
+            cached_scenes_path = run_dir / "scenes.json"
+            if len(scenes) < 2 and cached_scenes_path.exists():
+                try:
+                    cached_data = json.loads(cached_scenes_path.read_text())
+                    cached_b = cached_data.get("selected_baseline")
+                    cached_c = cached_data.get("selected_change")
+                    if isinstance(cached_b, dict) and isinstance(cached_c, dict):
+                        b_name = str(cached_b.get("scene_name", "")).strip()
+                        c_name = str(cached_c.get("scene_name", "")).strip()
+                        b_acq = cached_b.get("acquisition_time", "")[:10]
+                        c_acq = cached_c.get("acquisition_time", "")[:10]
+                        req_start = start_date[:10]
+                        req_end = end_date[:10]
+                        
+                        # Validate distinct granule identity and date window against immutable request
+                        if b_name and c_name and b_name != c_name and req_start <= b_acq <= req_end and req_start <= c_acq <= req_end and b_acq != c_acq:
+                            # Positional metadata validation via SceneSelector (no extra keyword arguments)
+                            rej_b = SceneSelector.validate_scene_metadata(cached_b)
+                            rej_c = SceneSelector.validate_scene_metadata(cached_c)
+
+                            # Recompute and enforce AOI spatial coverage against run request geometry
+                            # Require actual parseable scene footprint geometry for both scenes (fail closed on missing or invalid footprints)
+                            from src.acquisition.asf_client import parse_geometry, _compute_aoi_coverage_pct
+
+                            geom_b = cached_b.get("footprint_geojson") or cached_b.get("footprint_wkt") or cached_b.get("geometry")
+                            if geom_b is None:
+                                rej_b.append("Cached baseline scene is missing mandatory footprint geometry")
+                            else:
+                                parsed_b = parse_geometry(geom_b)
+                                if parsed_b is None or not parsed_b.IsValid():
+                                    rej_b.append("Cached baseline scene footprint geometry is invalid or unparseable")
+                                else:
+                                    cov_b = _compute_aoi_coverage_pct(aoi_wkt, geom_b)
+                                    if cov_b < 95.0:
+                                        rej_b.append(f"Recomputed AOI coverage {cov_b:.2f}% is below 95.0% threshold")
+
+                            geom_c = cached_c.get("footprint_geojson") or cached_c.get("footprint_wkt") or cached_c.get("geometry")
+                            if geom_c is None:
+                                rej_c.append("Cached change scene is missing mandatory footprint geometry")
+                            else:
+                                parsed_c = parse_geometry(geom_c)
+                                if parsed_c is None or not parsed_c.IsValid():
+                                    rej_c.append("Cached change scene footprint geometry is invalid or unparseable")
+                                else:
+                                    cov_c = _compute_aoi_coverage_pct(aoi_wkt, geom_c)
+                                    if cov_c < 95.0:
+                                        rej_c.append(f"Recomputed AOI coverage {cov_c:.2f}% is below 95.0% threshold")
+
+                            if not rej_b and not rej_c:
+                                scenes = [cached_b, cached_c]
+                                logger.info("Reusing %d validated intra-run scene(s) from %s", len(scenes), cached_scenes_path)
+                            else:
+                                logger.warning("Intra-run cached scenes failed validation: %s / %s", rej_b, rej_c)
+                        else:
+                            logger.warning(
+                                "Intra-run cached scenes failed identity or date check against request [%s, %s]: b=%s (%s), c=%s (%s)",
+                                req_start, req_end, b_name, b_acq, c_name, c_acq
+                            )
+                except Exception as e:
+                    logger.warning("Failed to load intra-run cached scenes from %s: %s", cached_scenes_path, e)
+
+            # Strict scientific failure: if fewer than 2 valid scenes exist for this query, fail explicitly
             if len(scenes) < 2:
-                # Check if this run is analyzing existing local products or historical observations
-                # If no scenes found online and offline test fallback needed
                 raise RuntimeError(
                     f"Insufficient Sentinel-1 scenes found between {start_date} and {end_date} for specified AOI. "
                     f"Found {len(scenes)} observation(s); at least 2 comparable acquisitions required."
@@ -237,48 +511,165 @@ class DynamicAnalysisService:
 
             # Stage 2: PAIRING / SCENE_SELECTION
             _update_stage("QUEUED", 25.0, {"candidate_scene_count": len(scenes)})
-            pairs = self.discover_pairs(aoi_wkt=aoi_wkt, start_date=start_date, end_date=end_date)
+            
+            # Discard cached serialized all_compatible_pairs as authoritative input (Fix 1 requirement)
+            # Recompute compatibility strictly using SceneSelector.find_all_compatible_pairs()
+            pairs = SceneSelector.find_all_compatible_pairs(
+                scenes=scenes,
+                wkt_polygon=aoi_wkt,
+            )
 
-            if not pairs and mode == "two_date_comparison":
-                raise RuntimeError("No scientifically comparable observation pair (matching track and flight direction) found.")
+            if not pairs:
+                raise RuntimeError("No scientifically comparable observation pair (matching track, flight direction, and dual polarization) found.")
 
-            selected_pair = pairs[0] if pairs else {"baseline": scenes[0], "change": scenes[1]}
+            # Select pair closest to the requested start_date and end_date
+            min_dist = float("inf")
+            req_t1_date = start_date[:10]
+            req_t2_date = end_date[:10]
+            selected_pair = pairs[0]
+            for p in pairs:
+                t1_str = p["baseline"].get("acquisition_time", "")[:10]
+                t2_str = p["change"].get("acquisition_time", "")[:10]
+                try:
+                    d1 = abs((datetime.fromisoformat(t1_str) - datetime.fromisoformat(req_t1_date)).total_seconds())
+                    d2 = abs((datetime.fromisoformat(t2_str) - datetime.fromisoformat(req_t2_date)).total_seconds())
+                    dist = d1 + d2
+                    if dist < min_dist:
+                        min_dist = dist
+                        selected_pair = p
+                except Exception:
+                    pass
+
             scene_t1 = selected_pair["baseline"]
             scene_t2 = selected_pair["change"]
 
             # Save scenes selection
-            (run_dir / "scenes.json").write_text(json.dumps({
+            atomic_write_json(run_dir / "scenes.json", {
                 "selected_baseline": scene_t1,
                 "selected_change": scene_t2,
                 "all_compatible_pairs": pairs,
-            }, indent=2))
+            })
+
+            # Determine observations to process
+            if mode == "multi_date_timeseries":
+                other_scenes = []
+                for s in scenes:
+                    if s.get("scene_name") in (scene_t1.get("scene_name"), scene_t2.get("scene_name")):
+                        continue
+                    is_compat, reasons, _ = SceneSelector.evaluate_pair_comparability(scene_t1, s, aoi_wkt)
+                    if is_compat:
+                        other_scenes.append(s)
+                    else:
+                        logger.info("Excluding scene %s from multi-date series: %s", s.get("scene_name"), "; ".join(reasons))
+                raw_list = [scene_t1, scene_t2] + other_scenes
+                if len(raw_list) < 3:
+                    raise RuntimeError(
+                        f"Insufficient scientifically compatible observations for multi-date time series between {start_date} and {end_date}. "
+                        f"Found {len(raw_list)} compatible scene(s); at least 3 mutually comparable observations (matching relative orbit track, "
+                        "flight direction, and dual polarization) are required."
+                    )
+                raw_list = raw_list[:5]
+            else:
+                raw_list = [scene_t1, scene_t2]
+
+            # Chronological sort ensuring t0 < t1 < t2 ...
+            def _parse_acq_dt(sc: Dict[str, Any]) -> datetime:
+                t_str = sc.get("acquisition_time", "")
+                try:
+                    return datetime.fromisoformat(t_str.replace("Z", "+00:00"))
+                except Exception:
+                    return datetime.min.replace(tzinfo=timezone.utc)
+
+            scenes_to_process = sorted(raw_list, key=_parse_acq_dt)
+            scene_t1 = scenes_to_process[0]
+            scene_t2 = scenes_to_process[1]
 
             # Stage 3: DOWNLOADING / ACQUIRING
             _update_stage("DOWNLOADING", 40.0)
-            # In a real run, check local cache or download archives
-            # For demonstration and test runs, preprocessed calibrated rasters or cached archives are resolved
-            # We locate calibrated rasters for the scenes:
-            t1_calibrated_tif = self._resolve_or_extract_calibrated_raster(scene_t1, aoi_wkt, run_dir, "t1_calibrated.tif")
-            t2_calibrated_tif = self._resolve_or_extract_calibrated_raster(scene_t2, aoi_wkt, run_dir, "t2_calibrated.tif")
+            calibrated_observations = []
+            for s_idx, sc in enumerate(scenes_to_process):
+                _check_cancellation()
+                out_name = "t1_calibrated.tif" if s_idx == 0 else ("t2_calibrated.tif" if s_idx == 1 else f"obs_{s_idx}_calibrated.tif")
+                cal_tif = self._resolve_or_extract_calibrated_raster(sc, aoi_wkt, run_dir, out_name)
+                calibrated_observations.append({
+                    "scene": sc,
+                    "calibrated_tif": cal_tif,
+                    "out_name": out_name,
+                })
 
             # Stage 4: PREPROCESSING & QUALITY CHECKING
             _update_stage("PREPROCESSING", 55.0)
-            t1_meta = validate_sar_raster(t1_calibrated_tif)
-            t2_meta = validate_sar_raster(t2_calibrated_tif)
+            obs_meta = []
+            for s_idx, item in enumerate(calibrated_observations):
+                _check_cancellation()
+                m = validate_sar_raster(item["calibrated_tif"])
+                obs_meta.append(m)
 
-            _update_stage("QUALITY_CHECKING", 65.0, {"t1_meta": t1_meta, "t2_meta": t2_meta})
+                # Verify spatial alignment against baseline
+                # NOTE: validate_sar_raster() returns "epsg", "width", "height" (not "crs", "x_size", "y_size")
+                if s_idx > 0:
+                    base_m = obs_meta[0]
+                    if m.get("epsg") != base_m.get("epsg"):
+                        raise ValueError(
+                            f"Raster CRS mismatch between {item['out_name']} (EPSG:{m.get('epsg')}) "
+                            f"and baseline (EPSG:{base_m.get('epsg')})"
+                        )
+                    if (m.get("width"), m.get("height")) != (base_m.get("width"), base_m.get("height")):
+                        raise ValueError(
+                            f"Raster dimension mismatch between {item['out_name']} "
+                            f"({m.get('width')}×{m.get('height')}) and baseline "
+                            f"({base_m.get('width')}×{base_m.get('height')})"
+                        )
+                    base_gt = base_m.get("geotransform", [])
+                    curr_gt = m.get("geotransform", [])
+                    if len(base_gt) == 6 and len(curr_gt) == 6:
+                        # Validate rotation/skew terms are strictly zero
+                        if abs(curr_gt[2]) > 1e-6 or abs(curr_gt[4]) > 1e-6:
+                            raise ValueError(
+                                f"Raster {item['out_name']} has non-zero rotation or shearing: geotransform={curr_gt}"
+                            )
+                        # Validate pixel area against 20m standard
+                        pix_area = abs(curr_gt[1] * curr_gt[5])
+                        if abs(pix_area - 400.0) > 2.0:
+                            raise ValueError(
+                                f"Raster {item['out_name']} pixel area {pix_area:.2f} m² deviates from 20m standard (400 m²)"
+                            )
+                        # Strict coordinate equality (rtol=0.0, atol=1e-6)
+                        if not np.allclose(curr_gt, base_gt, rtol=0.0, atol=1e-6):
+                            raise ValueError(
+                                f"Raster geotransform mismatch between {item['out_name']} ({curr_gt}) "
+                                f"and baseline ({base_gt})"
+                            )
+
+            t1_meta = obs_meta[0]
+            t2_meta = obs_meta[1]
+            _update_stage("QUALITY_CHECKING", 65.0, {"t1_meta": t1_meta, "t2_meta": t2_meta, "total_observations": len(obs_meta)})
 
             # Stage 5: CLASSIFYING WATER
             _update_stage("CLASSIFYING", 75.0)
             classifier = DynamicWaterClassifier(filter_size=5, fusion_strategy="dual_and")
 
-            mask1_tif = run_dir / "rasters" / "t1_water_mask.tif"
-            mask1_meta_json = run_dir / "t1_water_metadata.json"
-            mask1_res = classifier.classify_scene(t1_calibrated_tif, mask1_tif, mask1_meta_json)
+            obs_records = []
+            for s_idx, item in enumerate(calibrated_observations):
+                _check_cancellation()
+                mask_name = "t1_water_mask.tif" if s_idx == 0 else ("t2_water_mask.tif" if s_idx == 1 else f"obs_{s_idx}_water_mask.tif")
+                mask_tif = run_dir / "rasters" / mask_name
+                meta_json = run_dir / f"obs_{s_idx}_water_metadata.json"
+                m_res = classifier.classify_scene(item["calibrated_tif"], mask_tif, meta_json)
+                obs_records.append({
+                    "scene": item["scene"],
+                    "calibrated_tif": item["calibrated_tif"],
+                    "mask_tif": mask_tif,
+                    "meta": m_res,
+                    "acquisition_time": item["scene"].get("acquisition_time", f"obs_{s_idx}"),
+                })
 
-            mask2_tif = run_dir / "rasters" / "t2_water_mask.tif"
-            mask2_meta_json = run_dir / "t2_water_metadata.json"
-            mask2_res = classifier.classify_scene(t2_calibrated_tif, mask2_tif, mask2_meta_json)
+            t1_calibrated_tif = obs_records[0]["calibrated_tif"]
+            t2_calibrated_tif = obs_records[1]["calibrated_tif"]
+            mask1_tif = obs_records[0]["mask_tif"]
+            mask2_tif = obs_records[1]["mask_tif"]
+            mask1_res = obs_records[0]["meta"]
+            mask2_res = obs_records[1]["meta"]
 
             # Stage 6: CHANGE ANALYSIS
             _update_stage("CHANGE_ANALYSIS", 85.0)
@@ -306,10 +697,15 @@ class DynamicAnalysisService:
 
             # Stage 8: TIME-SERIES TRAJECTORY
             time_series_res = None
-            if mode == "multi_date_timeseries" or len(scenes) >= 3:
+            if mode == "multi_date_timeseries" and len(obs_records) >= 3:
+                _check_cancellation()
                 mask_records = [
-                    {"acquisition_time": scene_t1.get("acquisition_time", "2024-06-10T12:05:08Z"), "mask_tif": mask1_tif},
-                    {"acquisition_time": scene_t2.get("acquisition_time", "2024-07-16T12:05:07Z"), "mask_tif": mask2_tif},
+                    {
+                        "acquisition_time": rec["acquisition_time"],
+                        "scene_name": rec["scene"].get("scene_name", ""),
+                        "mask_tif": rec["mask_tif"],
+                    }
+                    for rec in obs_records
                 ]
                 freq_tif = run_dir / "rasters" / "inundation_frequency.tif"
                 time_series_res = MultiDateTimeSeriesAnalyzer.analyze_sequence(
@@ -321,37 +717,120 @@ class DynamicAnalysisService:
             # Stage 9: PUBLISHING RESULTS & SUMMARY
             _update_stage("PUBLISHING_RESULTS", 95.0)
             now_iso = datetime.now(timezone.utc).isoformat()
+            geom_vector_area_km2 = round(Sentinel1Preprocessor.get_polygon_area_km2(aoi_wkt), 4)
+            # Correction 1: Derive raster_polygon_area_km2 from actual inside-polygon pixels (Classes 1-5)
+            # independent of common valid comparison domain (Classes 1-4)
+            raster_polygon_area_km2 = round(
+                change_res["area_metrics_km2"].get("raster_polygon_area", change_res["area_metrics_km2"]["valid_comparison_area"]), 4
+            )
+            bounding_box_area_km2 = round(change_res["area_metrics_km2"]["total_study_aoi"], 4)
+            common_valid_domain_km2 = round(change_res["area_metrics_km2"]["valid_comparison_area"], 4)
+            diff_pct = (
+                abs(raster_polygon_area_km2 - geom_vector_area_km2) / geom_vector_area_km2 * 100.0
+                if geom_vector_area_km2 > 0 else 0.0
+            )
+
+            # Correction H & V4-1 — four distinct area definitions calculated independently:
+            #   1. geometric_vector_area_km2 — planar polygon area in UTM Zone 45N projection
+            #      (source: OGR, computed directly from submitted WKT before any rasterisation)
+            #   2. raster_polygon_area_km2 — count of pixels whose centroid falls inside the
+            #      cutline polygon × (20m × 20m) pixel area (all non-NoData pixels in transition raster).
+            #      The raster-to-vector difference is due to 20m pixel-boundary inclusion rules.
+            #   3. bounding_box_area_km2 — all pixels in the axis-aligned bounding box extent
+            #      (includes pixels outside the polygon assigned Class 6 NoData).
+            #   4. common_valid_domain_km2 — pixels classified as 0 or 1 in BOTH baseline and change
+            #      scenes simultaneously (Classes 1-4). Excludes indeterminate noise floor (Class 5).
+
             summary = {
                 "run_id": run_id,
                 "status": "COMPLETED",
                 "completed_at": now_iso,
                 "study_aoi": {
                     "wkt": aoi_wkt,
-                    "total_area_km2": change_res["area_metrics_km2"]["total_study_aoi"],
-                    "valid_comparison_km2": change_res["area_metrics_km2"]["valid_comparison_area"],
+                    # Correction H & V4-1: all four area definitions present and independently derived
+                    "geometric_vector_area_km2": geom_vector_area_km2,
+                    "raster_polygon_area_km2": raster_polygon_area_km2,
+                    "bounding_box_area_km2": bounding_box_area_km2,
+                    "common_valid_domain_km2": common_valid_domain_km2,
+                    "pixel_area_km2": 0.0004,  # 20m × 20m pixel
+                    "discretization_pct": round(diff_pct, 4),
+                    "area_definitions_note": (
+                        "geometric_vector_area_km2: planar polygon area in UTM Zone 45N (OGR, pre-rasterisation). "
+                        "raster_polygon_area_km2: pixels inside cutline × 0.0004 km² (20m pixel grid, classes 1-5). "
+                        "bounding_box_area_km2: all pixels in bounding-box extent (includes outside-polygon NoData). "
+                        "common_valid_domain_km2: pixels valid (class 0 or 1) in BOTH scenes simultaneously — "
+                        "the only scientifically comparable domain for water-change calculation."
+                    ),
+                    # Legacy keys preserved for backward compatibility
+                    "analyzed_pixel_area_km2": raster_polygon_area_km2,
+                    "total_area_km2": raster_polygon_area_km2,
+                    "valid_comparison_km2": common_valid_domain_km2,
                 },
                 "observations": {
                     "baseline": {
                         "scene_name": scene_t1.get("scene_name", "Baseline_Observation"),
                         "acquisition_time": scene_t1.get("acquisition_time", "2024-06-10"),
                         "water_area_km2": mask1_res["area_measurements"]["water_area_km2"],
+                        "independent_observed_water_km2": round(mask1_res["area_measurements"]["water_area_km2"], 4),
+                        "common_domain_water_km2": round(
+                            change_res["area_metrics_km2"]["persistent_water"] + change_res["area_metrics_km2"]["receded_water"], 4
+                        ),
                         "threshold_vv_db": mask1_res["thresholds"]["vv_db"],
                         "threshold_vh_db": mask1_res["thresholds"]["vh_db"],
+                        "note": "water_area_km2 and independent_observed_water_km2 are observed over this scene's valid mask.",
                     },
                     "change": {
                         "scene_name": scene_t2.get("scene_name", "Change_Observation"),
                         "acquisition_time": scene_t2.get("acquisition_time", "2024-07-16"),
                         "water_area_km2": mask2_res["area_measurements"]["water_area_km2"],
+                        "independent_observed_water_km2": round(mask2_res["area_measurements"]["water_area_km2"], 4),
+                        "common_domain_water_km2": round(
+                            change_res["area_metrics_km2"]["persistent_water"] + change_res["area_metrics_km2"]["newly_inundated"], 4
+                        ),
                         "threshold_vv_db": mask2_res["thresholds"]["vv_db"],
                         "threshold_vh_db": mask2_res["thresholds"]["vh_db"],
+                        "note": "water_area_km2 and independent_observed_water_km2 are observed over this scene's valid mask.",
                     },
                 },
                 "flood_transitions_km2": change_res["area_metrics_km2"],
                 "flood_reconciliation": change_res["reconciliation"],
+                "comparability_reconciliation": {
+                    "common_domain_net_change_km2": round(change_res["area_metrics_km2"]["net_candidate_water_change"], 4),
+                    "common_domain_valid_area_km2": round(change_res["area_metrics_km2"]["valid_comparison_area"], 4),
+                    "independent_extent_difference_km2": round(
+                        mask2_res["area_measurements"]["water_area_km2"] - mask1_res["area_measurements"]["water_area_km2"], 4
+                    ),
+                    "explanation": (
+                        f"The difference between single-date observed water extents ({round(mask2_res['area_measurements']['water_area_km2'] - mask1_res['area_measurements']['water_area_km2'], 4):+.4f} km²) "
+                        f"and the common-domain transition result ({round(change_res['area_metrics_km2']['net_candidate_water_change'], 4):+.4f} km², gap of {round(abs((mask2_res['area_measurements']['water_area_km2'] - mask1_res['area_measurements']['water_area_km2']) - change_res['area_metrics_km2']['net_candidate_water_change']), 4):.4f} km²) "
+                        "occurs because single-date water extents are measured independently within each scene's own valid pixels, "
+                        f"which includes pixels that are indeterminate noise floor ({round(change_res['area_metrics_km2']['indeterminate_floor'], 4):.4f} km²) or unobserved/NoData "
+                        "in the opposite acquisition. For scientific multi-temporal change detection, "
+                        f"water transitions must be calculated strictly over the mutually valid common domain "
+                        f"({round(change_res['area_metrics_km2']['valid_comparison_area'], 4):.4f} km²), giving the verified net candidate water change of {round(change_res['area_metrics_km2']['net_candidate_water_change'], 4):+.4f} km² "
+                        f"({round(change_res['area_metrics_km2']['newly_inundated'], 4):.4f} km² newly inundated minus {round(change_res['area_metrics_km2']['receded_water'], 4):.4f} km² receded)."
+                    ),
+                },
                 "riverbank_dynamics": riverbank_res,
                 "ai_evaluation": ai_res.get("summary", {}),
                 "time_series": time_series_res,
             }
+
+            # Validate required output rasters before publication
+            required_rasters = [
+                run_dir / "rasters" / "t1_calibrated.tif",
+                run_dir / "rasters" / "t2_calibrated.tif",
+                run_dir / "rasters" / "t1_water_mask.tif",
+                run_dir / "rasters" / "t2_water_mask.tif",
+                run_dir / "rasters" / "transition_classes.tif",
+            ]
+            for rf in required_rasters:
+                if not rf.exists():
+                    raise FileNotFoundError(f"Required analysis output raster missing: {rf}")
+                ds = gdal.Open(str(rf), gdal.GA_ReadOnly)
+                if ds is None:
+                    raise ValueError(f"Corrupt or unreadable output raster: {rf}")
+                ds = None
 
             # Generate map-ready preview PNGs and web manifest for visualization
             from src.pipeline.visualization import ScientificVisualizer
@@ -361,7 +840,21 @@ class DynamicAnalysisService:
             summary["visual_manifest"] = str(manifest_path)
             summary["previews"] = {k: str(v) for k, v in preview_outputs.items()}
 
-            (run_dir / "summary.json").write_text(json.dumps(summary, indent=2))
+            atomic_write_json(run_dir / "summary.json", summary)
+
+            # Record attempt completion
+            attempt_file = attempts_dir / f"attempt_{attempt_idx:04d}.json"
+            attempt_completed_file = attempts_dir / f"attempt_{attempt_idx:04d}_completed.json"
+            completed_record = {
+                "attempt_index": attempt_idx,
+                "started_at": attempt_record.get("started_at"),
+                "completed_at": now_iso,
+                "status": "COMPLETED",
+                "mode": mode,
+                "run_id": run_id,
+            }
+            atomic_write_json(attempt_file, completed_record)
+            atomic_write_json(attempt_completed_file, completed_record)
 
             # Update SQLite to COMPLETED
             with get_db_connection() as conn:
@@ -369,7 +862,7 @@ class DynamicAnalysisService:
                 cursor.execute("""
                     UPDATE analysis_runs
                     SET status = ?, completed_at = ?, outputs = ?, metadata = ?
-                    WHERE run_id = ?
+                    WHERE run_id = ? AND status NOT IN ('COMPLETED', 'CANCELLED')
                 """, (
                     "COMPLETED",
                     now_iso,
@@ -388,23 +881,66 @@ class DynamicAnalysisService:
             logger.info("Run %s completed successfully!", run_id)
             return summary
 
-        except Exception as e:
-            logger.error("Analysis run %s failed: %s", run_id, e, exc_info=True)
-            err_msg = str(e)
+        except InterruptedError as ie:
+            logger.info("Analysis run %s was cancelled: %s", run_id, ie)
+            err_msg = str(ie)
+            now_iso = datetime.now(timezone.utc).isoformat()
             with get_db_connection() as conn:
                 cursor = conn.cursor()
                 cursor.execute("""
                     UPDATE analysis_runs
                     SET status = ?, metadata = ?
-                    WHERE run_id = ?
+                    WHERE run_id = ? AND status NOT IN ('COMPLETED', 'CANCELLED')
+                """, ("CANCELLED", json.dumps({"status": "CANCELLED", "error": err_msg}), run_id))
+                conn.commit()
+
+            atomic_write_json(run_dir / "error.json", {
+                "status": "CANCELLED",
+                "error": err_msg,
+                "timestamp": now_iso,
+                "attempt_index": attempt_idx,
+            })
+            cancelled_record = {
+                "attempt_index": attempt_idx,
+                "started_at": attempt_record.get("started_at"),
+                "cancelled_at": now_iso,
+                "status": "CANCELLED",
+                "error": err_msg,
+                "run_id": run_id,
+            }
+            atomic_write_json(attempts_dir / f"attempt_{attempt_idx:04d}.json", cancelled_record)
+            atomic_write_json(attempts_dir / f"attempt_{attempt_idx:04d}_cancelled.json", cancelled_record)
+            return {"run_id": run_id, "status": "CANCELLED", "error": err_msg}
+
+        except Exception as e:
+            logger.error("Analysis run %s failed: %s", run_id, e, exc_info=True)
+            err_msg = str(e)
+            now_iso = datetime.now(timezone.utc).isoformat()
+            with get_db_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    UPDATE analysis_runs
+                    SET status = ?, metadata = ?
+                    WHERE run_id = ? AND status NOT IN ('COMPLETED', 'CANCELLED')
                 """, ("FAILED", json.dumps({"error": err_msg}), run_id))
                 conn.commit()
 
-            (run_dir / "error.json").write_text(json.dumps({
+            atomic_write_json(run_dir / "error.json", {
                 "status": "FAILED",
                 "error": err_msg,
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-            }, indent=2))
+                "timestamp": now_iso,
+                "attempt_index": attempt_idx,
+            })
+            failed_record = {
+                "attempt_index": attempt_idx,
+                "started_at": attempt_record.get("started_at"),
+                "failed_at": now_iso,
+                "status": "FAILED",
+                "error": err_msg,
+                "run_id": run_id,
+            }
+            atomic_write_json(attempts_dir / f"attempt_{attempt_idx:04d}.json", failed_record)
+            atomic_write_json(attempts_dir / f"attempt_{attempt_idx:04d}_failed.json", failed_record)
             raise
 
     def _resolve_or_extract_calibrated_raster(
@@ -416,38 +952,269 @@ class DynamicAnalysisService:
     ) -> Path:
         """
         Resolves calibrated SAR raster for scene.
-        Extracts sub-AOI if existing calibrated scene is available.
+        Extracts sub-AOI with cutline masking if existing calibrated scene is available.
+        Otherwise downloads archive and runs ESA SNAP GPT preprocessing.
+        Fails with clear error if data cannot be located or acquired (no historical substitution).
+        Writes per-granule provenance.json to rasters/ documenting the specific granule-to-raster mapping.
         """
         target_tif = run_dir / "rasters" / out_filename
         scene_name = scene.get("scene_name", "")
+        acq_time = scene.get("acquisition_time", "")
 
-        # Look in data/processed/aligned/ or data/processed/phase2b/
+        # 1. Authoritative verified historical granules for 2024 Jamuna campaign
+        # Exact granule identity matching ONLY - arbitrary date matching or alternate ID reuse is strictly forbidden.
+        AUTHORITATIVE_BASELINE_GRANULES = {
+            "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69",
+            "june10_aligned",
+        }
+        AUTHORITATIVE_CHANGE_GRANULES = {
+            "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511",
+            "july16_aligned",
+        }
+
+        # Correction C & V4-2 — per-granule provenance metadata
+        # Documents which granule ID was processed to which raster, and verification status.
+        # Only verified granules with documented SNAP processing chains are permitted to reuse historical rasters.
+        GRANULE_PROVENANCE = {
+            "S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69": {
+                "preprocessed_raster": "data/processed/aligned/june10_aligned.tif",
+                "processing_chain": "ESA SNAP GPT s1_grd_calibration_terrain_correction.xml",
+                "processing_reference": "configs/regions/jamuna_sirajganj.yaml#acquisitions.june10",
+                "verification_status": "VERIFIED",
+                "notes": "Primary granule. Documented in Jamuna region YAML. Processing chain independently verified.",
+            },
+            "june10_aligned": {
+                "preprocessed_raster": "data/processed/aligned/june10_aligned.tif",
+                "processing_chain": "ESA SNAP GPT s1_grd_calibration_terrain_correction.xml",
+                "processing_reference": "configs/regions/jamuna_sirajganj.yaml#acquisitions.june10",
+                "verification_status": "VERIFIED",
+                "notes": "Shorthand alias for june10 baseline raster.",
+            },
+            "S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511": {
+                "preprocessed_raster": "data/processed/aligned/july16_aligned.tif",
+                "processing_chain": "ESA SNAP GPT s1_grd_calibration_terrain_correction.xml",
+                "processing_reference": "configs/regions/jamuna_sirajganj.yaml#acquisitions.july16",
+                "verification_status": "VERIFIED",
+                "notes": "Primary change-date granule. Documented in Jamuna region YAML.",
+            },
+            "july16_aligned": {
+                "preprocessed_raster": "data/processed/aligned/july16_aligned.tif",
+                "processing_chain": "ESA SNAP GPT s1_grd_calibration_terrain_correction.xml",
+                "processing_reference": "configs/regions/jamuna_sirajganj.yaml#acquisitions.july16",
+                "verification_status": "VERIFIED",
+                "notes": "Shorthand alias for july16 change-date raster.",
+            },
+        }
+
         candidate_sources = [
             settings.DATA_DIR / "processed" / "aligned" / "june10_aligned.tif",
             settings.DATA_DIR / "processed" / "aligned" / "july16_aligned.tif",
         ]
-        # Check matching date
         source_tif = None
-        if "20240610" in scene_name or "2024-06-10" in scene.get("acquisition_time", ""):
+        provenance_entry = None
+        clean_scene = Path(scene_name).name.replace(".zip", "").replace(".SAFE", "")
+
+        if clean_scene in AUTHORITATIVE_BASELINE_GRANULES:
             source_tif = candidate_sources[0]
-        elif "20240716" in scene_name or "2024-07-16" in scene.get("acquisition_time", ""):
+            provenance_entry = GRANULE_PROVENANCE.get(clean_scene)
+        elif clean_scene in AUTHORITATIVE_CHANGE_GRANULES:
             source_tif = candidate_sources[1]
+            provenance_entry = GRANULE_PROVENANCE.get(clean_scene)
         else:
-            # Check other processed rasters
+            # Check for exact matching preprocessed raster in processed directory (no date guessing)
             processed_dir = settings.DATA_DIR / "processed" / "aligned"
-            matching = list(processed_dir.glob(f"*{scene_name}*.tif"))
-            if matching:
-                source_tif = matching[0]
+            exact_aligned = processed_dir / f"{clean_scene}_aligned.tif"
+            if exact_aligned.exists():
+                source_tif = exact_aligned
             else:
-                # Use source 0 as base for spatial clipping if available
-                source_tif = candidate_sources[0]
+                exact_raw = processed_dir / f"{clean_scene}.tif"
+                if exact_raw.exists():
+                    source_tif = exact_raw
 
-        if not source_tif.exists():
-            raise FileNotFoundError(f"Calibrated source raster not found: {source_tif}")
+        if source_tif and source_tif.exists():
+            # Compute source_raster SHA-256 and verify historical reference checksum
+            h_src = hashlib.sha256()
+            with open(source_tif, "rb") as f:
+                while chunk := f.read(65536):
+                    h_src.update(chunk)
+            source_sha256 = h_src.hexdigest().lower()
 
-        # Extract sub-AOI
-        Sentinel1Preprocessor.extract_sub_aoi(source_tif, target_tif, aoi_wkt)
-        return target_tif
+            if clean_scene in HISTORICAL_REFERENCE_REGISTRY:
+                expected_src_sha = HISTORICAL_REFERENCE_REGISTRY[clean_scene]["sha256"].lower()
+                if source_sha256 != expected_src_sha:
+                    raise ValueError(
+                        f"Historical reference raster '{source_tif.name}' failed registered checksum validation: "
+                        f"expected {expected_src_sha}, got {source_sha256}. "
+                        "Forged or tampered historical reference rasters are strictly rejected."
+                    )
+
+            # Identify source polarization bands mapping
+            _, _, band_mapping = Sentinel1Preprocessor.identify_polarization_bands(source_tif)
+
+            # Extract and cutline-mask sub-AOI
+            Sentinel1Preprocessor.extract_sub_aoi(source_tif, target_tif, aoi_wkt)
+
+            # Compute output target raster SHA-256
+            target_sha256 = None
+            if target_tif.exists():
+                h = hashlib.sha256()
+                with open(target_tif, "rb") as f:
+                    while chunk := f.read(65536):
+                        h.update(chunk)
+                target_sha256 = h.hexdigest().lower()
+
+            # Verify that provenance exists for this raster (no arbitrary unverified reuse)
+            if provenance_entry is None:
+                cand_prov = source_tif.with_name(f"{source_tif.stem}_provenance.json")
+                if cand_prov.exists():
+                    try:
+                        cand_data = json.loads(cand_prov.read_text())
+                        provenance_entry = cand_data.get("provenance")
+                    except Exception:
+                        pass
+
+            if provenance_entry is None:
+                raise ValueError(
+                    f"Unverified raster: scene '{clean_scene}' ({source_tif}) has no documented calibration provenance. "
+                    "Arbitrary raster reuse or unverified substitution is strictly prohibited."
+                )
+
+            graph_xml = CANONICAL_GRAPH_XML
+            graph_sha256 = CANONICAL_GRAPH_SHA256
+            if graph_xml.exists():
+                hg = hashlib.sha256()
+                with open(graph_xml, "rb") as f:
+                    while chunk := f.read(65536):
+                        hg.update(chunk)
+                graph_sha256 = hg.hexdigest().lower()
+
+            provenance_record = {
+                "granule_id": clean_scene,
+                "scene_name": scene_name,
+                "acquisition_time": acq_time,
+                "source_raster": str(source_tif),
+                "source_raster_sha256": source_sha256,
+                "output_raster": str(target_tif),
+                "output_sha256": target_sha256,
+                "source_band_mapping": band_mapping,
+                "graph_reference": "graphs/s1_grd_calibration_terrain_correction.xml",
+                "graph_sha256": graph_sha256,
+                "processing_parameters": {
+                    "radiometric_quantity": "Sigma0",
+                    "radiometric_domain": "linear_power",
+                    "terrain_correction": "Range-Doppler",
+                    "output_bands": ["Sigma0_VH", "Sigma0_VV"],
+                    "expected_crs": "EPSG:32645",
+                    "pixel_spacing_m": 20.0,
+                },
+                "resolution": "matched_from_whitelist",
+                "provenance": provenance_entry,
+                "recorded_at": datetime.now(timezone.utc).isoformat(),
+            }
+            provenance_path = run_dir / "rasters" / f"{Path(out_filename).stem}_provenance.json"
+            atomic_write_json(provenance_path, provenance_record)
+
+            # Stage B verification (fails closed if unverified)
+            if target_tif.exists():
+                verify_calibrated_raster_provenance(target_tif, provenance_path, scene_name=clean_scene)
+            logger.info("Provenance record verified for granule %s → %s", clean_scene, provenance_path)
+            return target_tif
+
+        # 2. Check local raw cache or attempt download via DownloadManager
+        cached_archive = self.download_manager.get_local_cached_file(scene_name)
+        download_url = scene.get("download_url")
+
+        if not cached_archive and download_url:
+            logger.info("Attempting download for scene %s from %s", scene_name, download_url)
+            dl_res = self.download_manager.download_product(download_url, scene_name)
+            if dl_res.get("success") and dl_res.get("local_path"):
+                cached_archive = Path(dl_res["local_path"])
+
+        if cached_archive and cached_archive.exists():
+            # Archive is present; attempt ESA SNAP GPT preprocessing
+            preprocessor = Sentinel1Preprocessor()
+            if preprocessor.is_snap_available:
+                intermediate_tif = run_dir / "rasters" / f"raw_snap_{out_filename}"
+                logger.info("Running ESA SNAP GPT on archive %s", cached_archive)
+                snap_res = preprocessor.run_snap_gpt(cached_archive, intermediate_tif, wkt_polygon=aoi_wkt)
+                actual_intermediate = Path(snap_res.get("output_path", intermediate_tif))
+                Sentinel1Preprocessor.extract_sub_aoi(actual_intermediate, target_tif, aoi_wkt)
+
+                # Compute source archive SHA-256
+                h_arch = hashlib.sha256()
+                with open(cached_archive, "rb") as f:
+                    while chunk := f.read(65536):
+                        h_arch.update(chunk)
+                archive_sha256 = h_arch.hexdigest().lower()
+
+                # Compute output target raster SHA-256
+                h = hashlib.sha256()
+                with open(target_tif, "rb") as f:
+                    while chunk := f.read(65536):
+                        h.update(chunk)
+                target_sha256 = h.hexdigest().lower()
+
+                # Identify output band mapping
+                _, _, band_mapping = Sentinel1Preprocessor.identify_polarization_bands(target_tif)
+
+                graph_xml = CANONICAL_GRAPH_XML
+                graph_sha256 = CANONICAL_GRAPH_SHA256
+                if graph_xml.exists():
+                    hg = hashlib.sha256()
+                    with open(graph_xml, "rb") as f:
+                        while chunk := f.read(65536):
+                            hg.update(chunk)
+                    graph_sha256 = hg.hexdigest().lower()
+
+                # Write provenance for freshly preprocessed scene
+                provenance_record = {
+                    "granule_id": clean_scene,
+                    "scene_name": scene_name,
+                    "acquisition_time": acq_time,
+                    "source_archive": str(cached_archive),
+                    "source_archive_sha256": archive_sha256,
+                    "intermediate_raster": str(actual_intermediate),
+                    "output_raster": str(target_tif),
+                    "output_sha256": target_sha256,
+                    "source_band_mapping": band_mapping,
+                    "graph_reference": "graphs/s1_grd_calibration_terrain_correction.xml",
+                    "graph_sha256": graph_sha256,
+                    "processing_parameters": {
+                        "radiometric_quantity": "Sigma0",
+                        "radiometric_domain": "linear_power",
+                        "terrain_correction": "Range-Doppler",
+                        "output_bands": ["Sigma0_VH", "Sigma0_VV"],
+                        "expected_crs": "EPSG:32645",
+                        "pixel_spacing_m": 20.0,
+                    },
+                    "resolution": "snap_preprocessed",
+                    "provenance": {
+                        "preprocessed_raster": str(target_tif),
+                        "processing_chain": "ESA SNAP GPT s1_grd_calibration_terrain_correction.xml",
+                        "processing_reference": "graphs/s1_grd_calibration_terrain_correction.xml",
+                        "verification_status": "FRESHLY_PREPROCESSED",
+                        "notes": "Processed from raw archive using canonical SNAP graph.",
+                    },
+                    "recorded_at": datetime.now(timezone.utc).isoformat(),
+                }
+                provenance_path = run_dir / "rasters" / f"{Path(out_filename).stem}_provenance.json"
+                atomic_write_json(provenance_path, provenance_record)
+
+                # Stage B verification
+                verify_calibrated_raster_provenance(target_tif, provenance_path, scene_name=clean_scene)
+                return target_tif
+            else:
+                raise RuntimeError(
+                    f"Sentinel-1 archive for scene '{scene_name}' ({acq_time}) was located at '{cached_archive}', "
+                    "but ESA SNAP 'gpt' binary is not accessible on the host to execute radiometric calibration and terrain correction. "
+                    "Configure SNAP_GPT_PATH to enable automatic preprocessing of new acquisitions."
+                )
+
+        # 3. Neither preprocessed raster nor raw archive available
+        raise FileNotFoundError(
+            f"Calibrated SAR raster or satellite archive for scene '{scene_name}' ({acq_time}) "
+            "could not be located or acquired. Historical data substitution is strictly disabled."
+        )
 
     def _run_ai_inference_and_explanations(
         self,
@@ -556,21 +1323,23 @@ class DynamicAnalysisService:
         run_dir = self.get_run_dir(run_id)
         asset_map = {
             "transitions": run_dir / "rasters" / "transition_classes.tif",
+            "transition_classes": run_dir / "rasters" / "transition_classes.tif",
+            "flood_transitions": run_dir / "rasters" / "transition_classes.tif",
             "t1_water": run_dir / "rasters" / "t1_water_mask.tif",
+            "t1_water_mask": run_dir / "rasters" / "t1_water_mask.tif",
             "t2_water": run_dir / "rasters" / "t2_water_mask.tif",
+            "t2_water_mask": run_dir / "rasters" / "t2_water_mask.tif",
             "t1_sar": run_dir / "rasters" / "t1_calibrated.tif",
+            "t1_calibrated": run_dir / "rasters" / "t1_calibrated.tif",
             "t2_sar": run_dir / "rasters" / "t2_calibrated.tif",
+            "t2_calibrated": run_dir / "rasters" / "t2_calibrated.tif",
             "rf_probability": run_dir / "rasters" / "rf_probability.tif",
             "inundation_frequency": run_dir / "rasters" / "inundation_frequency.tif",
         }
 
         tif_path = asset_map.get(asset_id)
         if not tif_path or not tif_path.exists():
-            # Return transparent tile
-            img = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
-            buf = io.BytesIO()
-            img.save(buf, format="PNG")
-            return buf.getvalue()
+            raise FileNotFoundError(f"Raster asset '{asset_id}' not found for run '{run_id}' at path: {tif_path}")
 
         # Compute Web Mercator (EPSG:3857) bounds of the tile
         n = 2.0 ** z

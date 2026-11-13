@@ -199,6 +199,8 @@ class TestPhase87ScientificCorrections(unittest.TestCase):
         conn = get_db_connection()
         try:
             runs = conn.execute("SELECT run_id, executed_at, parameters FROM analysis_runs").fetchall()
+            self.assertTrue(len(runs) > 0)
+            seeded_found = False
             for run in runs:
                 exec_time = run["executed_at"]
                 params = json.loads(run["parameters"]) if run["parameters"] else {}
@@ -208,9 +210,13 @@ class TestPhase87ScientificCorrections(unittest.TestCase):
                     exec_time.startswith("2026-11-") or exec_time == "UNKNOWN",
                     f"Unexpected executed_at {exec_time} for run {run['run_id']}",
                 )
-                # Satellite acquisitions should be 2024-06-10 / 2024-07-16
-                self.assertIn("2024-06-10", acquisitions)
-                self.assertIn("2024-07-16", acquisitions)
+                self.assertTrue(len(acquisitions) >= 2)
+                # Seeded historical runs should be 2024-06-10 / 2024-07-16
+                if run["run_id"].startswith("run_phase"):
+                    seeded_found = True
+                    self.assertIn("2024-06-10", acquisitions)
+                    self.assertIn("2024-07-16", acquisitions)
+            self.assertTrue(seeded_found)
         finally:
             conn.close()
 

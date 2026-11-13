@@ -16,11 +16,12 @@ Features:
 
 import json
 import logging
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 
 import numpy as np
-from osgeo import gdal
+from osgeo import gdal, osr
 
 gdal.UseExceptions()
 
@@ -55,6 +56,21 @@ class MultiDateTimeSeriesAnalyzer:
         if len(mask_records) < 2:
             raise ValueError(f"At least 2 observations required for time-series analysis, got {len(mask_records)}")
 
+        # Validate acquisition timestamps and ensure no duplicates
+        parsed_times = []
+        for r in mask_records:
+            t_str = str(r.get("acquisition_time", "")).strip()
+            if not t_str:
+                raise ValueError("Observation in time series is missing 'acquisition_time'.")
+            try:
+                dt = datetime.fromisoformat(t_str.replace("Z", "+00:00"))
+            except Exception as e:
+                raise ValueError(f"Invalid acquisition timestamp in time series: '{t_str}': {e}")
+            parsed_times.append(dt)
+
+        if len(set(parsed_times)) < len(parsed_times):
+            raise ValueError("Duplicate acquisition timestamps detected in time-series sequence.")
+
         # Sort chronologically by acquisition_time
         sorted_records = sorted(mask_records, key=lambda x: str(x.get("acquisition_time", "")))
 
@@ -67,6 +83,25 @@ class MultiDateTimeSeriesAnalyzer:
         w, h = ds_init.RasterXSize, ds_init.RasterYSize
         gt = ds_init.GetGeoTransform()
         proj = ds_init.GetProjection()
+
+        if not proj:
+            raise ValueError(f"Reference mask '{first_path.name}' lacks a spatial reference system (CRS).")
+
+        ref_srs = osr.SpatialReference()
+        if ref_srs.ImportFromWkt(proj) != 0 or not ref_srs.IsProjected():
+            raise ValueError(f"Reference mask '{first_path.name}' has non-projected or invalid CRS.")
+
+        # Verify reference grid orientation, pixel resolution, and rotation/skew
+        if abs(gt[2]) > 1e-6 or abs(gt[4]) > 1e-6:
+            raise ValueError(f"Reference mask '{first_path.name}' has non-zero rotation/skew affine terms: {gt}")
+
+        pixel_area_m2 = abs(gt[1] * gt[5])
+        if abs(pixel_area_m2 - 400.0) > 2.0:
+            raise ValueError(
+                f"Reference mask '{first_path.name}' resolution ({abs(gt[1])}m x {abs(gt[5])}m) "
+                f"does not conform to Earth Pulse 20m grid standard (expected 400.0 m², got {pixel_area_m2:.2f} m²)."
+            )
+
         ds_init = None
 
         n_obs = len(sorted_records)
@@ -74,6 +109,11 @@ class MultiDateTimeSeriesAnalyzer:
         valid_counts = np.zeros((h, w), dtype=np.uint16)
 
         timeline = []
+        # Store per-observation boolean arrays for common-domain calculation
+        obs_water_arrays: List[np.ndarray] = []
+        obs_valid_arrays: List[np.ndarray] = []
+
+        allowed_categories = {MASK_NON_WATER, MASK_CANDIDATE_WATER, MASK_INDETERMINATE, MASK_NODATA_INVALID}
 
         for idx, rec in enumerate(sorted_records):
             p = Path(rec["mask_tif"]).resolve()
@@ -81,14 +121,62 @@ class MultiDateTimeSeriesAnalyzer:
             if ds is None:
                 raise FileNotFoundError(f"Cannot open mask in sequence: {p}")
 
+            # Strict spatial alignment validation inside time-series processing
+            curr_w, curr_h = ds.RasterXSize, ds.RasterYSize
+            if (curr_w, curr_h) != (w, h):
+                raise ValueError(
+                    f"Raster dimension mismatch in time series: mask '{p.name}' ({curr_w}x{curr_h}) "
+                    f"does not match sequence reference ({w}x{h})"
+                )
+
+            curr_gt = ds.GetGeoTransform()
+            # Strict absolute tolerance comparison (rtol=0.0, atol=1e-6)
+            # Prevents 1m - 5m origin displacements from being accepted by NumPy's default rtol=1e-5
+            if not np.allclose(curr_gt, gt, rtol=0.0, atol=1e-6):
+                raise ValueError(
+                    f"Raster geotransform mismatch in time series: mask '{p.name}' grid does not align with reference grid "
+                    f"(curr_gt={curr_gt}, ref_gt={gt})"
+                )
+
+            if abs(curr_gt[2]) > 1e-6 or abs(curr_gt[4]) > 1e-6:
+                raise ValueError(f"Mask '{p.name}' has non-zero rotation/skew affine terms: {curr_gt}")
+
+            curr_proj = ds.GetProjection()
+            if not curr_proj:
+                raise ValueError(f"Mask '{p.name}' is missing CRS projection.")
+
+            curr_srs = osr.SpatialReference()
+            if curr_srs.ImportFromWkt(curr_proj) != 0 or not curr_srs.IsProjected():
+                raise ValueError(f"Mask '{p.name}' has non-projected or unparseable CRS.")
+
+            if not ref_srs.IsSame(curr_srs):
+                ref_code = ref_srs.GetAuthorityCode(None)
+                curr_code = curr_srs.GetAuthorityCode(None)
+                if ref_code is None or curr_code is None or str(ref_code) != str(curr_code):
+                    raise ValueError(
+                        f"Raster CRS mismatch in time series: mask '{p.name}' (EPSG:{curr_code}) "
+                        f"does not match sequence reference (EPSG:{ref_code})"
+                    )
+
             arr = ds.GetRasterBand(1).ReadAsArray()
             ds = None
+
+            # Validate categorical mask values
+            unique_vals = set(np.unique(arr))
+            if not unique_vals.issubset(allowed_categories):
+                raise ValueError(
+                    f"Mask '{p.name}' contains invalid categorical values: {unique_vals - allowed_categories}. "
+                    f"Expected subset of {allowed_categories}."
+                )
 
             is_water = (arr == MASK_CANDIDATE_WATER)
             is_valid = (arr == MASK_NON_WATER) | is_water
 
             water_counts[is_water] += 1
             valid_counts[is_valid] += 1
+
+            obs_water_arrays.append(is_water)
+            obs_valid_arrays.append(is_valid)
 
             n_water = int(np.sum(is_water))
             n_valid = int(np.sum(is_valid))
@@ -103,29 +191,70 @@ class MultiDateTimeSeriesAnalyzer:
                 "mask_tif": str(p),
                 "water_pixels": n_water,
                 "valid_pixels": n_valid,
+                # Independent observation: water area within THIS scene's own valid mask
                 "water_area_ha": water_ha,
                 "water_area_km2": water_km2,
+                "water_extent_independent_km2": water_km2,
                 "water_pct_of_valid": pct_valid,
+                "metric_note": (
+                    "water_extent_independent_km2: water area over this scene's own valid pixels only. "
+                    "Common-domain comparisons are in step_changes[].change_common_domain_km2."
+                ),
             })
 
         # Calculate step changes between consecutive observations
+        # IMPORTANT: Two distinct metrics are computed and labelled separately:
+        #   1. water_extent_independent_km2  — each scene's water area within its own valid mask (independent observation)
+        #   2. water_extent_common_domain_km2 — each scene's water area restricted to pixels valid in BOTH scenes simultaneously
+        #   3. change_common_domain_km2       — Δwater over the common valid domain (comparable to transition raster result)
+        # This distinction is scientifically necessary because each scene's valid mask differs,
+        # so naive subtraction of independent water extents does not equal the common-domain change.
         step_changes = []
         for i in range(1, len(timeline)):
             t_prev = timeline[i - 1]
             t_curr = timeline[i]
-            delta_km2 = t_curr["water_area_km2"] - t_prev["water_area_km2"]
+
+            # Independent-observation difference (scenes have different valid masks, so this is NOT
+            # the same as the common-domain pixel-transition count)
+            delta_independent_km2 = t_curr["water_extent_independent_km2"] - t_prev["water_extent_independent_km2"]
+
+            # Common-domain change: restrict to pixels valid in BOTH scenes simultaneously.
+            # This is the scientifically correct comparison and matches the transition-raster result.
+            common_valid = obs_valid_arrays[i - 1] & obs_valid_arrays[i]
+            common_valid_pixels = int(np.sum(common_valid))
+            common_valid_km2 = float(common_valid_pixels * PIXEL_AREA_KM2)
+
+            water_prev_common = int(np.sum(obs_water_arrays[i - 1] & common_valid))
+            water_curr_common = int(np.sum(obs_water_arrays[i] & common_valid))
+            change_common_km2 = float((water_curr_common - water_prev_common) * PIXEL_AREA_KM2)
+
             delta_pct = t_curr["water_pct_of_valid"] - t_prev["water_pct_of_valid"]
 
             event_type = "STABLE"
-            if delta_km2 > 5.0:
+            if change_common_km2 > 5.0:
                 event_type = "RAPID_EXPANSION"
-            elif delta_km2 < -5.0:
+            elif change_common_km2 < -5.0:
                 event_type = "RAPID_RECESSION"
 
             step_changes.append({
                 "from_date": t_prev["acquisition_time"],
                 "to_date": t_curr["acquisition_time"],
-                "delta_water_km2": float(delta_km2),
+                # Independent observation metric (labeled to prevent confusion)
+                "delta_independent_observation_km2": float(delta_independent_km2),
+                "delta_independent_observation_label": (
+                    "Independent-observation difference: each scene's water extent minus previous, "
+                    "each measured over its own valid mask. NOT a pixel-exact transition count."
+                ),
+                # Common-domain metric (scientifically rigorous)
+                "common_valid_domain_pixels": common_valid_pixels,
+                "common_valid_domain_km2": common_valid_km2,
+                "water_prev_common_domain_km2": float(water_prev_common * PIXEL_AREA_KM2),
+                "water_curr_common_domain_km2": float(water_curr_common * PIXEL_AREA_KM2),
+                "change_common_domain_km2": change_common_km2,
+                "change_common_domain_label": (
+                    "Change computed only over pixels valid in BOTH scenes simultaneously. "
+                    "Matches transition-raster newly-inundated minus receded pixel count."
+                ),
                 "delta_pct_points": float(delta_pct),
                 "event_type": event_type,
             })

@@ -49,7 +49,10 @@ class DatasetService:
             }
 
         rel_path = target.get("relative_path") or target.get("source_path") or ""
-        full_path = settings.PROJECT_ROOT_DIR / rel_path if rel_path else None
+        try:
+            full_path = settings.resolve_data_path(rel_path) if rel_path else None
+        except ValueError:
+            full_path = None
 
         if not full_path or not full_path.exists():
             return {
@@ -191,7 +194,10 @@ class DatasetService:
 
             did = item["dataset_id"]
             rel_path = item.get("relative_path") or item.get("source_path") or ""
-            full_path = settings.PROJECT_ROOT_DIR / rel_path if rel_path else None
+            try:
+                full_path = settings.resolve_data_path(rel_path) if rel_path else None
+            except ValueError:
+                full_path = None
 
             chk_verified, q_status = cls._get_verification_status(did, item, full_path)
 
@@ -223,7 +229,10 @@ class DatasetService:
             did = item.get("dataset_id", "")
             if did == dataset_id:  # Strict exact match only
                 rel_path = item.get("relative_path") or item.get("source_path") or ""
-                full_path = settings.PROJECT_ROOT_DIR / rel_path if rel_path else None
+                try:
+                    full_path = settings.resolve_data_path(rel_path) if rel_path else None
+                except ValueError:
+                    full_path = None
 
                 chk_verified, q_status = cls._get_verification_status(did, item, full_path)
 

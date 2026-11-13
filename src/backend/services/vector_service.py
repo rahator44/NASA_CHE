@@ -90,7 +90,7 @@ class VectorService:
             if region_id and info["region_id"] != region_id:
                 continue
 
-            full_path = settings.PROJECT_ROOT_DIR / info["relative_path"]
+            full_path = settings.resolve_data_path(info["relative_path"])
             if not full_path.exists():
                 continue
 
@@ -128,7 +128,7 @@ class VectorService:
             return None
         resolved_id, info = lookup
 
-        full_path = settings.PROJECT_ROOT_DIR / info["relative_path"]
+        full_path = settings.resolve_data_path(info["relative_path"])
         if not full_path.exists():
             return None
 

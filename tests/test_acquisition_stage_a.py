@@ -118,13 +118,16 @@ class TestAcquisitionStageA(unittest.TestCase):
 
     def test_04_download_manager_local_cache_bypass(self):
         """Download manager detects existing local archives and bypasses redundant downloads."""
+        import zipfile
         with tempfile.TemporaryDirectory() as tmp_dir:
             dm = DownloadManager(cache_dir=Path(tmp_dir))
 
-            # Create fake existing archive
+            # Create fake existing archive with valid zip structure
             fake_scene = "S1A_IW_GRDH_1SDV_20240610_TEST"
             fake_zip = Path(tmp_dir) / f"{fake_scene}.zip"
-            fake_zip.write_bytes(b"0" * 200_000)
+            with zipfile.ZipFile(fake_zip, "w") as zf:
+                zf.writestr("manifest.safe", b"<xfdu:XFDU></xfdu:XFDU>")
+                zf.writestr("data.dat", b"0" * 150_000)
 
             # Query download
             res = dm.download_product(
@@ -156,7 +159,7 @@ class TestAcquisitionStageA(unittest.TestCase):
             self.assertIn(f'<node id="{node}">', content)
 
         # 2. ESA SNAP gpt executable exists on system
-        snap_gpt_path = Path(os.environ.get("SNAP_GPT_PATH", "/home/orr/esa-snap/bin/gpt"))
+        snap_gpt_path = Path(os.environ.get("SNAP_GPT_PATH", Path.home() / "esa-snap" / "bin" / "gpt"))
         if not snap_gpt_path.exists():
             import shutil
             gpt_in_path = shutil.which("gpt")

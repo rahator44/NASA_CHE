@@ -43,7 +43,7 @@ class ModelService:
     @classmethod
     def validate_model_path(cls, path: Path) -> Path:
         """Ensures a model path resolves strictly within the trusted models/phase7a directory."""
-        trusted_dir = (settings.PROJECT_ROOT_DIR / "models/phase7a").resolve()
+        trusted_dir = (settings.MODELS_DIR / "phase7a").resolve()
         resolved = Path(path).resolve()
         if not str(resolved).startswith(str(trusted_dir)):
             raise ValueError(
@@ -60,7 +60,8 @@ class ModelService:
             raise ValueError(f"Model '{model_id}' is not registered in model catalog.")
 
         rel_path = model_info["artifact_path"]
-        artifact_path = cls.validate_model_path(settings.PROJECT_ROOT_DIR / rel_path)
+        clean_rel = rel_path.removeprefix("models/").removeprefix("/")
+        artifact_path = cls.validate_model_path(settings.MODELS_DIR / clean_rel)
 
         if not artifact_path.exists():
             raise FileNotFoundError(f"Model artifact file missing at {artifact_path}.")
