@@ -1,4 +1,4 @@
-import { describe, it } from 'node:test';
+import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   polygonToWkt,
@@ -9,6 +9,7 @@ import {
   JAMUNA_STUDY_REGION_WKT,
 } from '../utils/wkt';
 import { CatalogSearchResponse, CompatiblePair } from '../api/types';
+import { searchSentinel1Catalog } from '../api/client';
 
 describe('New Analysis & AOI Validation Suite', () => {
   it('should correctly format polygon coordinates into standard WKT string', () => {
@@ -157,5 +158,76 @@ describe('New Analysis & AOI Validation Suite', () => {
     assert.equal(pair.metrics.flight_direction_match, true);
     assert.equal(pair.metrics.polarization_match, true);
     assert.equal(pair.baseline.relative_orbit, pair.change.relative_orbit);
+  });
+
+  describe('Static Demonstration Catalogue Search Fidelity', () => {
+    before(() => {
+      (globalThis as any).__STATIC_DEMO__ = true;
+    });
+
+    after(() => {
+      delete (globalThis as any).__STATIC_DEMO__;
+    });
+
+    it('should return authentic 2024 campaign pair when querying Summer 2024 window in Jamuna corridor', async () => {
+      const res = await searchSentinel1Catalog({
+        aoi_wkt: DEMO_STUDY_AOI_WKT,
+        start_date: '2024-06-01',
+        end_date: '2024-07-31',
+      });
+
+      assert.equal(res.compatible_pairs_count, 1);
+      assert.equal(res.scenes.length, 2);
+      const pair = res.compatible_pairs[0];
+      assert.equal(pair.baseline.scene_name, 'S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69');
+      assert.equal(pair.change.scene_name, 'S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511');
+      assert.equal(pair.temporal_baseline_days, 36);
+      assert.equal(pair.baseline.orbit_direction, 'ASCENDING');
+      assert.equal(pair.baseline.relative_orbit, 114);
+    });
+
+    it('should return authentic 2025 campaign pair when querying January 2025 window in Jamuna corridor', async () => {
+      const res = await searchSentinel1Catalog({
+        aoi_wkt: DEMO_STUDY_AOI_WKT,
+        start_date: '2025-01-01',
+        end_date: '2025-01-31',
+      });
+
+      assert.equal(res.compatible_pairs_count, 1);
+      assert.equal(res.scenes.length, 2);
+      const pair = res.compatible_pairs[0];
+      assert.equal(pair.baseline.scene_name, 'S1A_IW_GRDH_1SDV_20250112T120503_20250112T120528_057411_071139_E7C8');
+      assert.equal(pair.change.scene_name, 'S1A_IW_GRDH_1SDV_20250124T120502_20250124T120527_057586_07182D_A7FB');
+      assert.equal(pair.temporal_baseline_days, 12);
+      assert.equal(pair.baseline.orbit_direction, 'ASCENDING');
+      assert.equal(pair.baseline.relative_orbit, 114);
+    });
+
+    it('should return empty results (0 scenes / 0 pairs) for arbitrary dates outside archived campaigns', async () => {
+      const res = await searchSentinel1Catalog({
+        aoi_wkt: DEMO_STUDY_AOI_WKT,
+        start_date: '2023-03-01',
+        end_date: '2023-04-30',
+      });
+
+      assert.equal(res.compatible_pairs_count, 0);
+      assert.equal(res.total_scenes, 0);
+      assert.equal(res.scenes.length, 0);
+      assert.equal(res.compatible_pairs.length, 0);
+    });
+
+    it('should return empty results (0 scenes / 0 pairs) for arbitrary locations outside Jamuna corridor', async () => {
+      const distantAoi = 'POLYGON((91.50 22.00, 91.55 22.00, 91.55 22.05, 91.50 22.05, 91.50 22.00))';
+      const res = await searchSentinel1Catalog({
+        aoi_wkt: distantAoi,
+        start_date: '2024-06-01',
+        end_date: '2024-07-31',
+      });
+
+      assert.equal(res.compatible_pairs_count, 0);
+      assert.equal(res.total_scenes, 0);
+      assert.equal(res.scenes.length, 0);
+      assert.equal(res.compatible_pairs.length, 0);
+    });
   });
 });

@@ -117,7 +117,9 @@ export const NewAnalysisPage: React.FC = () => {
       setSelectedPairIndex(0);
       if (resp.total_scenes === 0) {
         setCatalogError(
-          `No Sentinel-1 IW GRD observations found intersecting the selected AOI between ${startDate} and ${endDate}. Consider widening the date window to match the 12-day orbital repeat cycle.`
+          isStaticDemo
+            ? `In this static demonstration, satellite exploration is limited to the two verified archived Jamuna River campaigns (Summer 2024 Monsoon: 2024-06-10 to 2024-07-16, and January 2025 Archive: 2025-01-12 to 2025-01-24). Arbitrary dates or locations outside the Jamuna corridor are not pre-packaged. Live NASA ASF / Copernicus catalogue searching and on-demand processing of arbitrary areas require the full FastAPI application.`
+            : `No Sentinel-1 IW GRD observations found intersecting the selected AOI between ${startDate} and ${endDate}. Consider widening the date window to match the 12-day orbital repeat cycle.`
         );
       }
     } catch (err) {
@@ -419,9 +421,9 @@ export const NewAnalysisPage: React.FC = () => {
               )}
 
               <p className="educational-note">
-                ℹ️ <strong>Sentinel-1 Revisit Notice:</strong> The Copernicus Sentinel-1 constellation operates on a
-                12-day orbital repeat cycle (6 days with both S1A &amp; S1B active). Observations occur at distinct orbit tracks,
-                not daily continuous sweeps.
+                ℹ️ <strong>Sentinel-1 Revisit &amp; Static Demo Notice:</strong> The Copernicus Sentinel-1 constellation operates on a
+                12-day orbital repeat cycle. In this static demonstration, exploration is calibrated for the two authentic archived
+                Jamuna River campaigns (Summer 2024 and January 2025). Live catalogue searching and new satellite processing require the full FastAPI application.
               </p>
 
               {/* Action Button: Search Satellite Data */}
@@ -524,6 +526,21 @@ export const NewAnalysisPage: React.FC = () => {
                             <span>Δt = {selectedPair.temporal_baseline_days} days</span>
                           </div>
                         </div>
+
+                        {isStaticDemo && (
+                          <div style={{ marginTop: '14px', padding: '10px 14px', background: 'rgba(56, 189, 248, 0.08)', borderRadius: '6px', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+                            <div style={{ fontSize: '13px', color: '#cbd5e1', marginBottom: '8px' }}>
+                              🛰️ <strong>Archived Campaign Match:</strong> This authentic Sentinel-1 acquisition pair corresponds to the verified <strong>{selectedPair.temporal_baseline_days === 36 ? 'Summer 2024 Monsoon Baseline' : 'January 2025 Jamuna Archive'}</strong>.
+                            </div>
+                            <Link
+                              to={`/explorer?run=${selectedPair.temporal_baseline_days === 36 ? 'run_20261110_221732_1f2e94' : 'run_20261111_164348_f3c2b8'}`}
+                              className="btn btn-secondary btn-sm"
+                              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                            >
+                              🗺️ Explore Processed Satellite Maps &rarr;
+                            </Link>
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
@@ -536,20 +553,31 @@ export const NewAnalysisPage: React.FC = () => {
 
                 {/* STEP 4: Processing Action */}
                 <div className="processing-action-section">
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-submit-job"
-                    onClick={handleStartAnalysis}
-                    disabled={isSubmitting || !aoiValidation.isValid || Boolean(activeJob && activeJob.status === 'RUNNING') || Boolean(demoRestrictedNotice)}
-                  >
-                    {isSubmitting ? ( /* show spinner while submitting */
-                      <>
-                        <span className="spinner-inline" /> Submitting Request...
-                      </>
-                    ) : (
-                      '⚡ Request Satellite Analysis'
-                    )}
-                  </button>
+                  {isStaticDemo ? (
+                    <div style={{ padding: '14px 18px', background: 'rgba(234, 179, 8, 0.08)', border: '1px solid rgba(234, 179, 8, 0.3)', borderRadius: '8px' }}>
+                      <div style={{ fontWeight: 600, color: '#facc15', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span>⚡</span> Live SAR Processing Requires Local Backend
+                      </div>
+                      <p style={{ margin: 0, fontSize: '13px', color: '#cbd5e1', lineHeight: 1.5 }}>
+                        Executing new ESA SNAP calibration, terrain correction, and AI inference on custom observation pairs requires the full FastAPI application with authenticated NASA Earthdata credentials. Download the Earth Pulse v1.0.0 release to run dynamic processing locally.
+                      </p>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-submit-job"
+                      onClick={handleStartAnalysis}
+                      disabled={isSubmitting || !aoiValidation.isValid || Boolean(activeJob && activeJob.status === 'RUNNING') || Boolean(demoRestrictedNotice)}
+                    >
+                      {isSubmitting ? ( /* show spinner while submitting */
+                        <>
+                          <span className="spinner-inline" /> Submitting Request...
+                        </>
+                      ) : (
+                        '⚡ Request Satellite Analysis'
+                      )}
+                    </button>
+                  )}
                 </div>
               </div>
             )}

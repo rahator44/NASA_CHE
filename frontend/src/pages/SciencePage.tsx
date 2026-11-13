@@ -122,8 +122,23 @@ export const SciencePage: React.FC = () => {
             The frozen 40-tree Random Forest (maximum depth 6, minimum leaf size 10) is an experimental candidate-probability layer. Its registry is limited to the Jamuna training region; the primary operational water baseline remains adaptive Lee 5×5 dual-polarization Otsu.
           </p>
           <div className="science-callout">
+            <strong>Model Feature Vector (6 Registered Inputs):</strong>
+            <p className="mt-1 mb-2">
+              The Random Forest classifier operates strictly on six radar physical and GLCM textural features:
+            </p>
+            <ul className="pipeline-steps mb-3">
+              <li><strong>1. <code>vv_db</code>:</strong> Calibrated copolarized backscatter intensity (dB). Smooth water produces specular reflection (&lt; -18 dB).</li>
+              <li><strong>2. <code>vh_db</code>:</strong> Calibrated cross-polarized backscatter intensity (dB). Sensitive to volume scattering in emergent vegetation.</li>
+              <li><strong>3. <code>vv_minus_vh_db</code>:</strong> Polarization difference (VV − VH in dB), separating wind-roughened open water from soil.</li>
+              <li><strong>4. <code>cross_pol_ratio</code>:</strong> Cross-to-copolarized intensity ratio (linear), providing dielectric surface discrimination.</li>
+              <li><strong>5. <code>texture_vv</code>:</strong> Local spatial texture contrast (GLCM) on VV, measuring homogeneity.</li>
+              <li><strong>6. <code>texture_vh</code>:</strong> Local spatial texture contrast (GLCM) on VH, capturing structural vegetation heterogeneity.</li>
+            </ul>
+            <p className="footnote-text mb-3">
+              <em>Note on SAR Geometry:</em> Satellite local incidence angle is used exclusively for Range-Doppler terrain correction and radiometric normalization inside ESA SNAP preprocessing. Incidence angle is explicitly <strong>not</strong> an input feature to the Random Forest model.
+            </p>
             <strong>Mathematical Conservation:</strong>
-            <p>
+            <p className="mt-1">
               Feature attributions are calculated using the exact tree-path decomposition of Saabas (2014):
             </p>
             <code>f(x) = E[f(x)] + Σ_i φ_i(x)</code>

@@ -8,6 +8,7 @@ import {
   ExplanationsResponse,
   CatalogSearchRequest,
   CatalogSearchResponse,
+  CompatiblePair,
   AnalysisCreateRequest,
   AnalysisJobStatus,
   AnalysisRunRecord,
@@ -18,6 +19,7 @@ import {
   validateExplanations,
 } from './validation';
 import { explanationsBelongToRun } from '../state/analysisSelection';
+import { parseWktPolygon, validateAoiGeometry } from '../utils/wkt';
 
 // Configurable base URL: uses VITE_API_BASE_URL if set, or defaults to relative path for Vite dev proxy
 const envBase =
@@ -226,128 +228,119 @@ export async function searchSentinel1Catalog(
   signal?: AbortSignal
 ): Promise<CatalogSearchResponse> {
   if (getIsStaticDemo()) {
-    const is2024 = req.start_date.includes('2024');
-    if (is2024) {
+    // Validate AOI spatial coverage against supported Jamuna corridor
+    const aoiCoords = parseWktPolygon(req.aoi_wkt);
+    const aoiValidation = aoiCoords.length >= 3 ? validateAoiGeometry(aoiCoords) : null;
+    const isJamunaCorridor = aoiValidation ? aoiValidation.isContainedInStudyRegion : false;
+
+    // In static demo mode, catalogue exploration is restricted strictly to the two authentic archived campaigns.
+    // If the selected AOI is outside the Jamuna corridor, return empty results (do not return fake / predetermined pairs).
+    if (!isJamunaCorridor) {
       return {
-        total_scenes: 2,
+        total_scenes: 0,
         scenes: [],
-        compatible_pairs_count: 1,
-        compatible_pairs: [
-          {
-            baseline: {
-              scene_name: 'S1A_IW_GRDH_1SDV_20240610T115840_20240610T115905_054260_069B78_A4D1',
-              platform: 'Sentinel-1A',
-              acquisition_time: '2024-06-10T11:58:40Z',
-              orbit_direction: 'DESCENDING',
-              relative_orbit: 143,
-              polarization: 'VV+VH',
-              beam_mode: 'IW',
-              processing_level: 'GRD_HD',
-              aoi_coverage_pct: 100.0,
-            },
-            change: {
-              scene_name: 'S1A_IW_GRDH_1SDV_20240716T115842_20240716T115907_054785_06AD45_C8E9',
-              platform: 'Sentinel-1A',
-              acquisition_time: '2024-07-16T11:58:42Z',
-              orbit_direction: 'DESCENDING',
-              relative_orbit: 143,
-              polarization: 'VV+VH',
-              beam_mode: 'IW',
-              processing_level: 'GRD_HD',
-              aoi_coverage_pct: 100.0,
-            },
-            temporal_baseline_days: 36,
-            metrics: {
-              flight_direction_match: true,
-              track_match: true,
-              polarization_match: true,
-              beam_mode_match: true,
-              processing_level_match: true,
-              temporal_baseline_days: 36,
-              coverage_baseline_pct: 100.0,
-              coverage_change_pct: 100.0,
-            },
-          },
-        ],
+        compatible_pairs_count: 0,
+        compatible_pairs: [],
       };
     }
 
+    const startDate = req.start_date;
+    const endDate = req.end_date;
+
+    const compatible_pairs: CompatiblePair[] = [];
+    const scenes: CompatiblePair['baseline'][] = [];
+
+    // Authentic Summer 2024 Jamuna Monsoon Baseline Observation Pair (run_20261110_221732_1f2e94)
+    // T1 Baseline: 2024-06-10T12:05:08Z | T2 Observation: 2024-07-16T12:05:07Z | Orbit 114 ASCENDING (Δt = 36 days)
+    const covers2024 = startDate <= '2024-06-10' && endDate >= '2024-07-16';
+    if (covers2024) {
+      const pair2024: CompatiblePair = {
+        baseline: {
+          scene_name: 'S1A_IW_GRDH_1SDV_20240610T120508_20240610T120533_054261_06999F_7B69',
+          platform: 'Sentinel-1A',
+          acquisition_time: '2024-06-10T12:05:08Z',
+          orbit_direction: 'ASCENDING',
+          relative_orbit: 114,
+          polarization: 'VV+VH',
+          beam_mode: 'IW',
+          processing_level: 'GRD_HD',
+          aoi_coverage_pct: 100.0,
+        },
+        change: {
+          scene_name: 'S1A_IW_GRDH_1SDV_20240716T120507_20240716T120532_054786_06ABD2_6511',
+          platform: 'Sentinel-1A',
+          acquisition_time: '2024-07-16T12:05:07Z',
+          orbit_direction: 'ASCENDING',
+          relative_orbit: 114,
+          polarization: 'VV+VH',
+          beam_mode: 'IW',
+          processing_level: 'GRD_HD',
+          aoi_coverage_pct: 100.0,
+        },
+        temporal_baseline_days: 36,
+        metrics: {
+          flight_direction_match: true,
+          track_match: true,
+          polarization_match: true,
+          beam_mode_match: true,
+          processing_level_match: true,
+          temporal_baseline_days: 36,
+          coverage_baseline_pct: 100.0,
+          coverage_change_pct: 100.0,
+        },
+      };
+      compatible_pairs.push(pair2024);
+      scenes.push(pair2024.baseline, pair2024.change);
+    }
+
+    // Authentic January 2025 Jamuna Dry-Season / Low-Water Observation Pair (run_20261111_164348_f3c2b8)
+    // T1 Baseline: 2025-01-12T12:05:03Z | T2 Observation: 2025-01-24T12:05:02Z | Orbit 114 ASCENDING (Δt = 12 days)
+    const covers2025 = startDate <= '2025-01-12' && endDate >= '2025-01-24';
+    if (covers2025) {
+      const pair2025: CompatiblePair = {
+        baseline: {
+          scene_name: 'S1A_IW_GRDH_1SDV_20250112T120503_20250112T120528_057411_071139_E7C8',
+          platform: 'Sentinel-1A',
+          acquisition_time: '2025-01-12T12:05:03Z',
+          orbit_direction: 'ASCENDING',
+          relative_orbit: 114,
+          polarization: 'VV+VH',
+          beam_mode: 'IW',
+          processing_level: 'GRD_HD',
+          aoi_coverage_pct: 100.0,
+        },
+        change: {
+          scene_name: 'S1A_IW_GRDH_1SDV_20250124T120502_20250124T120527_057586_07182D_A7FB',
+          platform: 'Sentinel-1A',
+          acquisition_time: '2025-01-24T12:05:02Z',
+          orbit_direction: 'ASCENDING',
+          relative_orbit: 114,
+          polarization: 'VV+VH',
+          beam_mode: 'IW',
+          processing_level: 'GRD_HD',
+          aoi_coverage_pct: 100.0,
+        },
+        temporal_baseline_days: 12,
+        metrics: {
+          flight_direction_match: true,
+          track_match: true,
+          polarization_match: true,
+          beam_mode_match: true,
+          processing_level_match: true,
+          temporal_baseline_days: 12,
+          coverage_baseline_pct: 100.0,
+          coverage_change_pct: 100.0,
+        },
+      };
+      compatible_pairs.push(pair2025);
+      scenes.push(pair2025.baseline, pair2025.change);
+    }
+
     return {
-      total_scenes: 4,
-      scenes: [],
-      compatible_pairs_count: 2,
-      compatible_pairs: [
-        {
-          baseline: {
-            scene_name: 'S1A_IW_GRDH_1SDV_20250112T120503_20250112T120528_057411_071139_E7C8',
-            platform: 'Sentinel-1A',
-            acquisition_time: '2025-01-12T12:05:03Z',
-            orbit_direction: 'ASCENDING',
-            relative_orbit: 114,
-            polarization: 'VV+VH',
-            beam_mode: 'IW',
-            processing_level: 'GRD_HD',
-            aoi_coverage_pct: 100.0,
-          },
-          change: {
-            scene_name: 'S1A_IW_GRDH_1SDV_20250124T120502_20250124T120527_057586_07182D_A7FB',
-            platform: 'Sentinel-1A',
-            acquisition_time: '2025-01-24T12:05:02Z',
-            orbit_direction: 'ASCENDING',
-            relative_orbit: 114,
-            polarization: 'VV+VH',
-            beam_mode: 'IW',
-            processing_level: 'GRD_HD',
-            aoi_coverage_pct: 100.0,
-          },
-          temporal_baseline_days: 12,
-          metrics: {
-            flight_direction_match: true,
-            track_match: true,
-            polarization_match: true,
-            beam_mode_match: true,
-            processing_level_match: true,
-            temporal_baseline_days: 12,
-            coverage_baseline_pct: 100.0,
-            coverage_change_pct: 100.0,
-          },
-        },
-        {
-          baseline: {
-            scene_name: 'S1A_IW_GRDH_1SDV_20250114T235601_20250114T235626_057447_07129E_B55B',
-            platform: 'Sentinel-1A',
-            acquisition_time: '2025-01-14T23:56:01Z',
-            orbit_direction: 'DESCENDING',
-            relative_orbit: 150,
-            polarization: 'VV+VH',
-            beam_mode: 'IW',
-            processing_level: 'GRD_HD',
-            aoi_coverage_pct: 100.0,
-          },
-          change: {
-            scene_name: 'S1A_IW_GRDH_1SDV_20250126T235601_20250126T235626_057622_071996_9443',
-            platform: 'Sentinel-1A',
-            acquisition_time: '2025-01-26T23:56:01Z',
-            orbit_direction: 'DESCENDING',
-            relative_orbit: 150,
-            polarization: 'VV+VH',
-            beam_mode: 'IW',
-            processing_level: 'GRD_HD',
-            aoi_coverage_pct: 100.0,
-          },
-          temporal_baseline_days: 12,
-          metrics: {
-            flight_direction_match: true,
-            track_match: true,
-            polarization_match: true,
-            beam_mode_match: true,
-            processing_level_match: true,
-            temporal_baseline_days: 12,
-            coverage_baseline_pct: 100.0,
-            coverage_change_pct: 100.0,
-          },
-        },
-      ],
+      total_scenes: scenes.length,
+      scenes,
+      compatible_pairs_count: compatible_pairs.length,
+      compatible_pairs,
     };
   }
 

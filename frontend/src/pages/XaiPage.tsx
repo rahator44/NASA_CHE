@@ -153,6 +153,10 @@ export const XaiPage: React.FC<XaiPageProps> = ({
             </p>
           </div>
         </div>
+
+        <div style={{ marginTop: '16px', padding: '12px 16px', background: 'rgba(255, 255, 255, 0.03)', borderTop: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '4px', fontSize: '13px', color: '#94a3b8', lineHeight: 1.5 }}>
+          ℹ️ <strong>Input Feature Specification:</strong> The Random Forest model input vector consists strictly of the 6 physical SAR features listed above. Local incidence angle is utilized during ESA SNAP Range-Doppler terrain correction and radiometric calibration, and is explicitly <strong>not</strong> an input feature to the classifier.
+        </div>
       </div>
     </div>
   );
